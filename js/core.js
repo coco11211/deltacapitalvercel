@@ -89,6 +89,7 @@
       { name: 'System Architecture', path: '/architecture.html', shortcut: 'A' },
       { name: 'Insights', path: '/insights.html', shortcut: 'I' },
       { name: 'Principles', path: '/principles.html', shortcut: 'P' },
+      { name: 'Screener', path: '/screener.html', shortcut: 'S' },
       { name: 'Disclosures', path: '/disclosures.html', shortcut: 'D' },
       { name: 'Common Questions', path: '/faq.html', shortcut: 'Q' },
       { name: 'Contact', path: '/contact.html', shortcut: 'C' }
@@ -343,6 +344,14 @@
     });
   }
 
+  // --- Load Market Data (ticker on all pages) ---
+  function loadMarket() {
+    if (document.querySelector('script[src*="market.js"]')) return;
+    var s = document.createElement('script');
+    s.src = '/js/market.js';
+    document.body.appendChild(s);
+  }
+
   // --- Init ---
   document.addEventListener('DOMContentLoaded', function () {
     initLetterReveal();
@@ -352,5 +361,6 @@
     initScrollProgress();
     initAmbientCanvas();
     initCursorTrail();
+    loadMarket();
   });
 })();
