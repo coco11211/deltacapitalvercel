@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research &mdash; Delta Capital</title>
+  <meta name="description" content="Delta Capital — Research & Methodology">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Header -->
+    <section class="section section--full">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Research &amp; Methodology</span>
+          <div class="divider"></div>
+          <h1 class="letter-reveal">Quantitative Rigor</h1>
+          <p style="margin-top: 3vh;">
+            Our research process is built on a foundation of mathematical formalism
+            and empirical validation. We pursue alpha through systematic methods,
+            not discretionary judgment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modeling Philosophy -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="grid-2">
+          <div class="reveal">
+            <span class="section-label">01 &mdash; Modeling Philosophy</span>
+            <div class="divider"></div>
+            <h2>Models as Hypotheses</h2>
+            <p style="margin-top: 2vh;">
+              Every model we deploy represents a testable hypothesis about market structure.
+              We reject the notion of permanent models. Instead, we maintain an ensemble
+              of competing approaches, each subject to continuous out-of-sample validation.
+            </p>
+          </div>
+          <div class="reveal" style="transition-delay: 0.15s;">
+            <div class="disclosure-block">
+              <h3>Ensemble Architecture</h3>
+              <p>
+                Multiple model families contribute weighted predictions. Weights are dynamic,
+                adjusted by rolling validation performance across regimes.
+              </p>
+              <div class="disclosure-hint">Read more</div>
+              <div class="disclosure-content">
+                <p>
+                  Our ensemble combines gradient-boosted trees, regularized linear models,
+                  and neural architectures. Each model family captures different aspects of
+                  market microstructure. The weighting mechanism ensures that model
+                  contributions shift as market conditions evolve, preventing regime-dependent
+                  overfitting.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signal Construction -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">02 &mdash; Signal Construction</span>
+          <div class="divider"></div>
+          <h2 class="letter-reveal">From Noise to Conviction</h2>
+        </div>
+        <div class="grid-3 reveal-stagger" style="margin-top: 6vh;">
+          <div class="content-block disclosure-block">
+            <h3><span class="hover-underline">Feature Engineering</span></h3>
+            <p>
+              Raw market data is transformed into a rich feature space capturing
+              momentum, mean-reversion, volatility regimes, and cross-asset relationships.
+            </p>
+            <div class="disclosure-hint">Read more</div>
+            <div class="disclosure-content">
+              <p>
+                Features are constructed from price dynamics, volume patterns, and
+                derived statistical measures. Each feature undergoes rigorous testing
+                for predictive power, stability, and independence before inclusion
+                in the production feature set.
+              </p>
+            </div>
+          </div>
+          <div class="content-block disclosure-block">
+            <h3><span class="hover-underline">Signal Aggregation</span></h3>
+            <p>
+              Individual signals are combined through a principled framework that
+              accounts for correlation structure and signal decay characteristics.
+            </p>
+            <div class="disclosure-hint">Read more</div>
+            <div class="disclosure-content">
+              <p>
+                Signals are not naively averaged. We employ covariance-aware combination
+                methods that maximize information content while minimizing redundancy.
+                Signal half-lives are estimated empirically and used to determine
+                optimal rebalancing frequencies.
+              </p>
+            </div>
+          </div>
+          <div class="content-block disclosure-block">
+            <h3><span class="hover-underline">Regime Awareness</span></h3>
+            <p>
+              Market regimes are identified through statistical methods, allowing
+              adaptive model selection and position sizing.
+            </p>
+            <div class="disclosure-hint">Read more</div>
+            <div class="disclosure-content">
+              <p>
+                Hidden Markov models and changepoint detection algorithms identify
+                shifts in volatility regimes, correlation structures, and liquidity
+                conditions. This regime awareness feeds directly into both model
+                weighting and risk parameter calibration.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Construction -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="grid-2">
+          <div class="reveal">
+            <span class="section-label">03 &mdash; Portfolio Construction</span>
+            <div class="divider"></div>
+            <h2>Optimization Under Constraint</h2>
+          </div>
+          <div class="reveal" style="transition-delay: 0.15s;">
+            <p>
+              Portfolio construction is a constrained optimization problem. We balance
+              expected return against multiple risk dimensions: variance, tail risk,
+              drawdown, and concentration.
+            </p>
+            <p style="margin-top: 1.5rem;">
+              The optimization framework incorporates transaction costs, market impact
+              estimates, and realistic turnover constraints to ensure that theoretical
+              portfolios are implementable in practice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Validation -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">04 &mdash; Validation</span>
+          <div class="divider"></div>
+          <h2 class="letter-reveal">Trust Nothing Untested</h2>
+          <p style="margin-top: 3vh; max-width: 600px;">
+            Every strategy undergoes walk-forward analysis, Monte Carlo stress testing,
+            and out-of-sample validation before deployment. We are deliberately skeptical
+            of our own results. The cost of a false positive far exceeds the cost of
+            delayed deployment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="section section--compact" style="text-align: center;">
+      <div class="section-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="reveal">
+          <p style="font-style: italic; font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--fg-faint); max-width: 460px; line-height: 1.7;">
+            The best model is the one that knows<br>what it does not know.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="index.html">Philosophy</a>
+        <a href="research.html" class="active">Research</a>
+        <a href="risk.html">Risk</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="disclosures.html">Disclosures</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/core.js"></script>
+</body>
+</html>

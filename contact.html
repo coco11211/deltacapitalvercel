@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact &mdash; Delta Capital</title>
+  <meta name="description" content="Delta Capital — Contact">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Contact -->
+    <section class="section section--full">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Contact</span>
+          <div class="divider"></div>
+          <h1>Correspondence</h1>
+          <p style="margin-top: 3vh; margin-bottom: 4vh;">
+            For inquiries regarding Delta Capital, its strategies,
+            or potential collaboration, direct all correspondence
+            to the team below.
+          </p>
+        </div>
+
+        <!-- Team -->
+        <div class="reveal" style="margin-top: 8vh; transition-delay: 0.2s;">
+          <span class="section-label">Team</span>
+          <div class="divider"></div>
+          <div class="contact-list">
+            <div class="contact-person">
+              <span class="name">Cole Wysopal</span>
+              <a href="mailto:colewysopal@deltacapitaltrading.com" class="email">colewysopal@deltacapitaltrading.com</a>
+            </div>
+            <div class="contact-person">
+              <span class="name">Yonatan Shichor</span>
+              <a href="mailto:yonatan.shichor@deltacapitaltrading.com" class="email">yonatan.shichor@deltacapitaltrading.com</a>
+            </div>
+            <div class="contact-person">
+              <span class="name">Noah Rubin</span>
+              <a href="mailto:noah.rubin@deltacapitaltrading.com" class="email">noah.rubin@deltacapitaltrading.com</a>
+            </div>
+            <div class="contact-person">
+              <span class="name">Ethan Lopez-Levy</span>
+              <a href="mailto:ethan.lopez-levy@deltacapital.com" class="email">ethan.lopez-levy@deltacapital.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secure Message Form -->
+        <div class="reveal" style="margin-top: 8vh; transition-delay: 0.4s;">
+          <span class="section-label">Secure Message</span>
+          <div class="divider"></div>
+          <form class="secure-form" onsubmit="return false;">
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              <input type="text" id="contact-subject" name="subject" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="5"></textarea>
+            </div>
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="index.html">Philosophy</a>
+        <a href="research.html">Research</a>
+        <a href="risk.html">Risk</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="disclosures.html">Disclosures</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/core.js"></script>
+</body>
+</html>

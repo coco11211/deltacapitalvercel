@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta Capital</title>
+  <meta name="description" content="Delta Capital — Quantitative Investment Management">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="page-loader">
+    <div class="delta-mark">&Delta;</div>
+  </div>
+
+  <!-- Ambient Background -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"></div>
+
+  <!-- Navigation Trigger -->
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Command Palette -->
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <!-- Keyboard Hint -->
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <!-- Page Content -->
+  <div class="page-container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-delta delta-breathe">&Delta;</div>
+      <div class="hero-wordmark">Delta Capital</div>
+      <p class="hero-philosophy">Systematic conviction through<br>mathematical discipline</p>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="grid-2">
+          <div class="reveal">
+            <span class="section-label">Philosophy</span>
+            <div class="divider"></div>
+            <h2>Precision is not a method.<br>It is a disposition.</h2>
+          </div>
+          <div class="reveal" style="transition-delay: 0.2s">
+            <p>
+              We construct portfolios through rigorous quantitative analysis,
+              treating every assumption as a hypothesis to be tested and every
+              position as a controlled expression of conviction.
+            </p>
+            <p style="margin-top: 1.5rem">
+              Our process is deliberately systematic. Markets reward those
+              who separate signal from noise with patience and discipline.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Principles</span>
+          <div class="divider"></div>
+        </div>
+        <div class="grid-3 reveal-stagger">
+          <div class="content-block">
+            <h3>Evidence Over Intuition</h3>
+            <p>Every decision is grounded in statistical evidence. We do not speculate; we model, test, and validate.</p>
+          </div>
+          <div class="content-block">
+            <h3>Risk as Foundation</h3>
+            <p>Risk is not managed as an afterthought. It is the foundation upon which every allocation is constructed.</p>
+          </div>
+          <div class="content-block">
+            <h3>Continuous Validation</h3>
+            <p>Models are not static artifacts. They are living systems subject to continuous scrutiny and adaptation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiet Signal -->
+    <section class="section section--full" style="text-align: center;">
+      <div class="section-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="reveal">
+          <p style="font-style: italic; font-size: clamp(1.2rem, 2vw, 1.6rem); color: var(--fg-faint); max-width: 480px; line-height: 1.7;">
+            The distance between noise and signal<br>
+            is measured in discipline.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="index.html" class="active">Philosophy</a>
+        <a href="research.html">Research</a>
+        <a href="risk.html">Risk</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="disclosures.html">Disclosures</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/core.js"></script>
+</body>
+</html>

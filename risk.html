@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Risk &mdash; Delta Capital</title>
+  <meta name="description" content="Delta Capital — Risk & Controls">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="risk-page">
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Header -->
+    <section class="section section--full">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Risk &amp; Controls</span>
+          <div class="divider"></div>
+          <h1>Risk is not managed.<br>It is understood.</h1>
+          <p style="margin-top: 3vh;">
+            Risk management is not a function within our process.
+            It is the process. Every model output, every allocation decision,
+            every execution parameter is evaluated through the lens of
+            controlled exposure.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Risk Philosophy -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="grid-2">
+          <div class="reveal">
+            <span class="section-label">Framework</span>
+            <div class="divider"></div>
+            <h2>Failure-First Design</h2>
+            <p style="margin-top: 2vh;">
+              We design systems assuming they will fail. Every risk parameter
+              is calibrated not for expected conditions, but for the conditions
+              that would be most destructive. This asymmetric framing is
+              deliberate.
+            </p>
+          </div>
+          <div class="reveal" style="transition-delay: 0.15s;">
+            <p>
+              Our risk framework operates across multiple horizons and
+              granularities: position-level, strategy-level, and portfolio-level.
+              Limits are enforced programmatically, without override capability
+              during live trading.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Risk Measures -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Measurement</span>
+          <div class="divider"></div>
+          <h2>Quantifying the Left Tail</h2>
+        </div>
+        <div class="grid-2 reveal-stagger" style="margin-top: 6vh;">
+          <div class="content-block">
+            <h3><span class="hover-underline">Value at Risk</span></h3>
+            <p>
+              Portfolio-level VaR is computed using parametric, historical simulation,
+              and Monte Carlo methods. Divergence between methods serves as an
+              additional risk signal.
+            </p>
+          </div>
+          <div class="content-block">
+            <h3><span class="hover-underline">Conditional Value at Risk</span></h3>
+            <p>
+              CVaR captures expected loss beyond the VaR threshold, providing a
+              coherent measure of tail exposure that informs position sizing
+              and hedging decisions.
+            </p>
+          </div>
+          <div class="content-block">
+            <h3><span class="hover-underline">Maximum Drawdown</span></h3>
+            <p>
+              Real-time drawdown monitoring with automated deleveraging triggers.
+              Historical drawdown profiles are used to calibrate strategy-level
+              capital allocation.
+            </p>
+          </div>
+          <div class="content-block">
+            <h3><span class="hover-underline">Stress Testing</span></h3>
+            <p>
+              Systematic stress scenarios are applied continuously, not episodically.
+              Scenarios include historical crises, hypothetical dislocations,
+              and reverse stress tests.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="grid-2">
+          <div class="reveal">
+            <span class="section-label">Controls</span>
+            <div class="divider"></div>
+            <h2>Programmatic Discipline</h2>
+          </div>
+          <div class="reveal-stagger" style="transition-delay: 0.1s;">
+            <div class="content-block">
+              <h3>Pre-Trade Validation</h3>
+              <p>
+                Every order passes through position limits, concentration limits,
+                margin requirements, and regulatory compliance checks before
+                reaching the execution layer.
+              </p>
+            </div>
+            <div class="content-block">
+              <h3>Real-Time Monitoring</h3>
+              <p>
+                Continuous monitoring of exposure, P&amp;L, liquidity metrics,
+                and system health. Anomaly detection triggers automated
+                protective actions.
+              </p>
+            </div>
+            <div class="content-block">
+              <h3>Immutable Audit Trail</h3>
+              <p>
+                Every action&mdash;order, fill, cancellation, risk check,
+                parameter change&mdash;is logged with microsecond precision
+                in append-only storage.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statement -->
+    <section class="section section--compact" style="text-align: center;">
+      <div class="section-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="reveal">
+          <p style="font-style: italic; font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--fg-faint); max-width: 480px; line-height: 1.7;">
+            The firm that thinks about failure first<br>
+            is the firm that endures.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="index.html">Philosophy</a>
+        <a href="research.html">Research</a>
+        <a href="risk.html" class="active">Risk</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="disclosures.html">Disclosures</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/core.js"></script>
+</body>
+</html>

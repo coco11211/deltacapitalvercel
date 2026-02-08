@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture &mdash; Delta Capital</title>
+  <meta name="description" content="Delta Capital — System Architecture">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Header -->
+    <section class="section section--full">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">System Architecture</span>
+          <div class="divider"></div>
+          <h1 class="letter-reveal">Infrastructure as Conviction</h1>
+          <p style="margin-top: 3vh;">
+            Our system architecture reflects the same discipline we apply
+            to portfolio construction: every component has a clear purpose,
+            defined boundaries, and measurable performance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Flow — Scroll-Driven Assembly -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Data Flow</span>
+          <div class="divider"></div>
+          <h2>System Topology</h2>
+          <p style="margin-top: 2vh; margin-bottom: 4vh;">
+            Scroll to observe the system assemble. Each node represents
+            a distinct computational domain. Connections represent
+            data flow and dependency.
+          </p>
+        </div>
+
+        <!-- Scroll-Driven Canvas -->
+        <canvas id="arch-canvas"></canvas>
+      </div>
+    </section>
+
+    <!-- Architecture Nodes — Sequential Reveal -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Components</span>
+          <div class="divider"></div>
+          <h2 class="letter-reveal">Pipeline Architecture</h2>
+        </div>
+
+        <div style="margin-top: 6vh;">
+          <div class="arch-node">
+            <h4>01 &mdash; Data Ingestion</h4>
+            <p>
+              Multi-source aggregation via WebSocket and REST connections.
+              Real-time and historical data pipelines with integrity validation
+              and caching layers.
+            </p>
+          </div>
+          <div class="arch-connector"></div>
+
+          <div class="arch-node">
+            <h4>02 &mdash; Feature Engineering</h4>
+            <p>
+              Raw market data is transformed into a structured feature space.
+              Technical indicators, statistical measures, and derived signals
+              are computed with strict versioning.
+            </p>
+          </div>
+          <div class="arch-connector"></div>
+
+          <div class="arch-node">
+            <h4>03 &mdash; Model Ensemble</h4>
+            <p>
+              Multiple model families generate predictions independently.
+              An ensemble layer combines outputs using performance-weighted
+              aggregation with regime-conditional adjustments.
+            </p>
+          </div>
+          <div class="arch-connector"></div>
+
+          <div class="arch-node">
+            <h4>04 &mdash; Risk Engine</h4>
+            <p>
+              Real-time risk computation across positions, strategies, and
+              the aggregate portfolio. Limit enforcement is programmatic
+              and operates without manual override during live sessions.
+            </p>
+          </div>
+          <div class="arch-connector"></div>
+
+          <div class="arch-node">
+            <h4>05 &mdash; Portfolio Optimizer</h4>
+            <p>
+              Constrained optimization incorporating risk budgets, transaction
+              costs, and market impact estimates. Outputs target weights
+              that balance conviction with implementability.
+            </p>
+          </div>
+          <div class="arch-connector"></div>
+
+          <div class="arch-node">
+            <h4>06 &mdash; Execution Layer</h4>
+            <p>
+              Order management with smart routing, fill tracking, and
+              slippage monitoring. Broker integration supports both
+              paper and live trading environments.
+            </p>
+          </div>
+          <div class="arch-connector"></div>
+
+          <div class="arch-node">
+            <h4>07 &mdash; Monitoring &amp; Compliance</h4>
+            <p>
+              Continuous system health monitoring, regulatory compliance
+              enforcement, and automated audit trail generation. Every
+              state change is recorded immutably.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Design Principles -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Design Principles</span>
+          <div class="divider"></div>
+        </div>
+        <div class="grid-3 reveal-stagger" style="margin-top: 4vh;">
+          <div class="content-block">
+            <h3>Deterministic</h3>
+            <p>Given identical inputs, every component produces identical outputs. Reproducibility is a system invariant.</p>
+          </div>
+          <div class="content-block">
+            <h3>Observable</h3>
+            <p>Every computation is logged, measurable, and auditable. The system does not operate in shadows.</p>
+          </div>
+          <div class="content-block">
+            <h3>Resilient</h3>
+            <p>Component failure triggers graceful degradation, not cascade failure. The system is designed to fail safely.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="index.html">Philosophy</a>
+        <a href="research.html">Research</a>
+        <a href="risk.html">Risk</a>
+        <a href="architecture.html" class="active">Architecture</a>
+        <a href="disclosures.html">Disclosures</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/core.js"></script>
+  <script src="js/architecture.js"></script>
+</body>
+</html>
