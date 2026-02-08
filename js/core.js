@@ -252,6 +252,94 @@
     });
   }
 
+  // --- Cursor Trail (Brownian Motion) ---
+  function initCursorTrail() {
+    // Skip on touch devices
+    if ('ontouchstart' in window) return;
+
+    var canvas = document.createElement('canvas');
+    canvas.id = 'cursor-trail';
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9990;opacity:0.12;';
+    document.body.appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+    var w, h;
+    var mouseX = -100, mouseY = -100;
+    var trail = [];
+    var maxLen = 24;
+    var animId;
+
+    function resize() {
+      var dpr = window.devicePixelRatio || 1;
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.scale(dpr, dpr);
+    }
+
+    document.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function addPoint() {
+      if (mouseX < 0) return;
+      // Brownian offset from cursor
+      var last = trail.length > 0 ? trail[trail.length - 1] : { x: mouseX, y: mouseY };
+      var dx = (mouseX - last.x) * 0.3;
+      var dy = (mouseY - last.y) * 0.3;
+      // Small random walk perpendicular to motion
+      var angle = Math.atan2(dy, dx) + Math.PI / 2;
+      var jitter = (Math.random() - 0.5) * 8;
+      trail.push({
+        x: last.x + dx + Math.cos(angle) * jitter,
+        y: last.y + dy + Math.sin(angle) * jitter
+      });
+      if (trail.length > maxLen) trail.shift();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      addPoint();
+
+      if (trail.length < 2) {
+        animId = requestAnimationFrame(draw);
+        return;
+      }
+
+      for (var i = 1; i < trail.length; i++) {
+        var alpha = i / trail.length;
+        ctx.beginPath();
+        ctx.moveTo(trail[i - 1].x, trail[i - 1].y);
+        ctx.lineTo(trail[i].x, trail[i].y);
+        ctx.strokeStyle = 'rgba(0, 0, 0, ' + (alpha * 0.6) + ')';
+        ctx.lineWidth = alpha * 1.2;
+        ctx.stroke();
+      }
+
+      // Tiny dot at head
+      var head = trail[trail.length - 1];
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+      ctx.fill();
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    draw();
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) cancelAnimationFrame(animId);
+      else draw();
+    });
+  }
+
   // --- Init ---
   document.addEventListener('DOMContentLoaded', function () {
     initLetterReveal();
@@ -260,5 +348,6 @@
     initCommandPalette();
     initScrollProgress();
     initAmbientCanvas();
+    initCursorTrail();
   });
 })();
