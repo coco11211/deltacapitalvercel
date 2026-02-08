@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta Capital — Brand Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: #fafafa;
+      color: #111;
+      line-height: 1.7;
+      padding: 40px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 40px;
+    }
+    h1 { font-size: 3.5rem; font-weight: 300; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .subtitle { color: #555; font-size: 1.2rem; }
+    .delta-mark { font-size: 4rem; color: #111; margin-bottom: 20px; }
+
+    section {
+      margin-bottom: 80px;
+      page-break-inside: avoid;
+    }
+    h2 {
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 30px;
+      color: #111;
+      letter-spacing: -0.01em;
+      border-bottom: 2px solid #111;
+      padding-bottom: 15px;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .color-swatch {
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .color-box {
+      height: 140px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .color-info {
+      padding: 20px;
+      background: #f3f3f3;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+    .color-name { font-weight: bold; margin-bottom: 5px; }
+    .color-code { color: #555; }
+
+    .typography-example {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-left: 3px solid #111;
+      background: #f3f3f3;
+    }
+    .typography-example h3 {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 10px;
+      font-weight: normal;
+    }
+    .serif-text { font-family: 'Cormorant Garamond', serif; }
+    .mono-text { font-family: 'JetBrains Mono', monospace; }
+
+    .size-example {
+      margin-bottom: 20px;
+    }
+    .size-example .label {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .logo-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .logo-demo {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 40px;
+      text-align: center;
+      border-radius: 4px;
+    }
+    .delta-mark-large {
+      font-size: 6rem;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    .tone-list {
+      list-style: none;
+    }
+    .tone-list li {
+      padding: 15px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .tone-list strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #111;
+    }
+    .tone-list span {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .do-dont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .do, .dont {
+      padding: 20px;
+      border-radius: 4px;
+    }
+    .do {
+      background: #f0f8f0;
+      border: 1px solid #d0e8d0;
+    }
+    .dont {
+      background: #f8f0f0;
+      border: 1px solid #e8d0d0;
+    }
+    .do h4, .dont h4 {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .do h4::before { content: "✓ "; color: #2d5a2d; }
+    .dont h4::before { content: "✗ "; color: #8b3a3a; }
+
+    .print-note {
+      background: #f3f3f3;
+      padding: 20px;
+      border-radius: 4px;
+      margin-bottom: 40px;
+      font-size: 0.95rem;
+    }
+
+    @media print {
+      body { padding: 20px; }
+      section { page-break-inside: avoid; }
+      h2 { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="delta-mark">Δ</div>
+      <h1>Delta Capital</h1>
+      <p class="subtitle">Brand Identity Guidelines</p>
+      <p style="color: #999; margin-top: 20px; font-size: 0.9rem;">Version 1.0 — February 2026</p>
+    </header>
+
+    <!-- Introduction -->
+    <section>
+      <h2>Brand Philosophy</h2>
+      <p style="font-size: 1.1rem; color: #111; margin-bottom: 20px;">
+        Delta Capital represents systematic conviction through mathematical discipline. Our brand reflects institutional sophistication, analytical rigor, and refined minimalism.
+      </p>
+      <p style="color: #555;">
+        The delta symbol (Δ) represents change and precision—core to our methodology. Our visual language is deliberately restrained: black, white, and clarity. We communicate through substance, not decoration.
+      </p>
+    </section>
+
+    <!-- Color Palette -->
+    <section>
+      <h2>Color Palette</h2>
+      <p style="margin-bottom: 40px; color: #555;">
+        Delta Capital uses a sophisticated monochromatic palette with precise grays. These colors create visual hierarchy while maintaining institutional elegance.
+      </p>
+
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="color-box" style="background: #111;">Black</div>
+          <div class="color-info">
+            <div class="color-name">Primary Black</div>
+            <div class="color-code">#111111</div>
+            <div style="margin-top: 8px; font-size: 0.8rem; color: #999;">Headlines, primary text, core elements</div>
+          </div>
+        </div>
+
+        <div class="color-swatch">
+          <div class="color-box" style="background: #555;">Dark Gray</div>
+          <div class="color-info">
+            <div class="color-name">Dark Gray (Muted)</div>
+            <div class="color-code">#555555</div>
+            <div style="margin-top: 8px; font-size: 0.8rem; color: #999;">Body text, secondary content</div>
+          </div>
+        </div>
+
+        <div class="color-swatch">
+          <div class="color-box" style="background: #999;">Light Gray</div>
+          <div class="color-info">
+            <div class="color-name">Light Gray (Faint)</div>
+            <div class="color-code">#999999</div>
+            <div style="margin-top: 8px; font-size: 0.8rem; color: #999;">Tertiary text, captions</div>
+          </div>
+        </div>
+
+        <div class="color-swatch">
+          <div class="color-box" style="background: #e0e0e0; color: #111;">Borders</div>
+          <div class="color-info">
+            <div class="color-name">Border Gray</div>
+            <div class="color-code">#e0e0e0</div>
+            <div style="margin-top: 8px; font-size: 0.8rem; color: #999;">Lines, dividers, subtle separations</div>
+          </div>
+        </div>
+
+        <div class="color-swatch">
+          <div class="color-box" style="background: #f3f3f3; color: #111;">Background</div>
+          <div class="color-info">
+            <div class="color-name">Light Background</div>
+            <div class="color-code">#f3f3f3</div>
+            <div style="margin-top: 8px; font-size: 0.8rem; color: #999;">Secondary backgrounds, containers</div>
+          </div>
+        </div>
+
+        <div class="color-swatch">
+          <div class="color-box" style="background: #fafafa; color: #111;">White</div>
+          <div class="color-info">
+            <div class="color-name">Primary White</div>
+            <div class="color-code">#fafafa</div>
+            <div style="margin-top: 8px; font-size: 0.8rem; color: #999;">Primary background, clean space</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section>
+      <h2>Typography</h2>
+
+      <div style="margin-bottom: 50px;">
+        <h3 style="font-size: 1.3rem; margin-bottom: 20px; color: #111;">Serif: Cormorant Garamond</h3>
+        <p style="color: #555; margin-bottom: 20px;">
+          Our primary typeface. Refined, institutional, and elegant. Used for all headlines, body text, and primary communication.
+        </p>
+
+        <div class="typography-example">
+          <h3>Heading 1 (3.5rem, weight 300)</h3>
+          <p class="serif-text" style="font-size: 3.5rem; font-weight: 300; line-height: 1.2; margin: 0;">Delta Capital</p>
+        </div>
+
+        <div class="typography-example">
+          <h3>Heading 2 (2rem, weight 400)</h3>
+          <p class="serif-text" style="font-size: 2rem; font-weight: 400; margin: 0;">Brand Guidelines</p>
+        </div>
+
+        <div class="typography-example">
+          <h3>Heading 3 (1.3rem, weight 400)</h3>
+          <p class="serif-text" style="font-size: 1.3rem; font-weight: 400; margin: 0;">Typography</p>
+        </div>
+
+        <div class="typography-example">
+          <h3>Body Text (1rem, weight 400, line-height 1.7)</h3>
+          <p class="serif-text" style="font-size: 1rem; font-weight: 400; line-height: 1.7; margin: 0;">
+            This is standard body text. Use this for all primary content and narrative communication. Maintain line-height of 1.7 for optimal readability.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 20px; color: #111;">Monospace: JetBrains Mono</h3>
+        <p style="color: #555; margin-bottom: 20px;">
+          Used for technical content, data, labels, and emphasis. Provides contrast and draws attention to precise information.
+        </p>
+
+        <div class="typography-example">
+          <h3>Monospace (0.85rem, uppercase)</h3>
+          <p class="mono-text" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; margin: 0; color: #555;">
+            MARKET DATA • ANALYSIS • REAL-TIME
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo & Symbol -->
+    <section>
+      <h2>Logo & Symbol</h2>
+      <p style="margin-bottom: 40px; color: #555;">
+        The delta symbol (Δ) is the primary visual identifier for Delta Capital. It represents mathematical precision and change.
+      </p>
+
+      <div class="logo-section">
+        <div class="logo-demo">
+          <div class="delta-mark-large">Δ</div>
+          <p style="font-size: 0.9rem; color: #555;">Primary Logo Mark<br>Use without modification</p>
+        </div>
+        <div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #111;">Usage Guidelines</h3>
+          <ul class="tone-list">
+            <li>
+              <strong>Minimum Size</strong>
+              <span>Never display smaller than 32px</span>
+            </li>
+            <li>
+              <strong>Color</strong>
+              <span>Use #111111 (black) on light backgrounds. Reverse to white on dark backgrounds.</span>
+            </li>
+            <li>
+              <strong>Spacing</strong>
+              <span>Maintain clear space around the mark equal to its height</span>
+            </li>
+            <li>
+              <strong>Modifications</strong>
+              <span>Never rotate, distort, or add effects. Maintain geometric integrity.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Imagery & Visual Style -->
+    <section>
+      <h2>Imagery & Visual Style</h2>
+      <p style="margin-bottom: 30px; color: #555;">
+        Our visual approach is minimal and intentional. We favor clean geometry, precision, and purposeful information design over decoration.
+      </p>
+
+      <ul class="tone-list">
+        <li>
+          <strong>Data Visualization</strong>
+          <span>Charts, graphs, and data displays use our monochromatic palette. Lines are clean, labels are clear, and unnecessary elements are removed.</span>
+        </li>
+        <li>
+          <strong>Photography</strong>
+          <span>When photography is used, favor institutional, professional contexts. High contrast, clear subjects. No lifestyle imagery.</span>
+        </li>
+        <li>
+          <strong>Patterns & Textures</strong>
+          <span>Minimal use. Prefer solid colors and negative space. If patterns are used, they should be mathematical and geometric.</span>
+        </li>
+        <li>
+          <strong>Animation & Motion</strong>
+          <span>Smooth, purposeful animations that guide the eye or provide feedback. No decorative motion. Duration: 0.6–1.4 seconds.</span>
+        </li>
+        <li>
+          <strong>Whitespace</strong>
+          <span>Generous. Whitespace is not empty—it's an active design element that creates clarity and focuses attention.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Tone of Voice -->
+    <section>
+      <h2>Tone of Voice</h2>
+      <p style="margin-bottom: 30px; color: #555;">
+        Our communication is professional, precise, and confident. We speak to sophisticated audiences with respect for their intelligence.
+      </p>
+
+      <ul class="tone-list">
+        <li>
+          <strong>Institutional</strong>
+          <span>We represent systematic conviction and mathematical discipline. Our language reflects professionalism and rigor.</span>
+        </li>
+        <li>
+          <strong>Precise</strong>
+          <span>We are exact in our language. No hyperbole, no vague claims. Data speaks for itself.</span>
+        </li>
+        <li>
+          <strong>Confident</strong>
+          <span>We stand behind our methodology. No hedging or qualifiers unless data requires it.</span>
+        </li>
+        <li>
+          <strong>Accessible</strong>
+          <span>Complexity is explained clearly. We assume intelligence, not background knowledge. Technical terms are introduced naturally.</span>
+        </li>
+        <li>
+          <strong>Respectful</strong>
+          <span>We value our audience's time and attention. Every word earns its place.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Do's and Don'ts -->
+    <section>
+      <h2>Do's and Don'ts</h2>
+
+      <div class="do-dont">
+        <div class="do">
+          <h4>Do This</h4>
+          <ul style="list-style: none; color: #555;">
+            <li>✓ Use clean, geometric layouts</li>
+            <li>✓ Prioritize legibility and clarity</li>
+            <li>✓ Use ample whitespace</li>
+            <li>✓ Show data and numbers</li>
+            <li>✓ Maintain consistent spacing</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Avoid This</h4>
+          <ul style="list-style: none; color: #555;">
+            <li>✗ Decorative elements without purpose</li>
+            <li>✗ Bright colors or gradients</li>
+            <li>✗ Overly casual or trendy language</li>
+            <li>✗ Decorative fonts or script</li>
+            <li>✗ Crowded layouts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Print Info -->
+    <section>
+      <div class="print-note">
+        <strong>Print This Document</strong><br>
+        This brand kit is designed to be printed. Use your browser's print function (Ctrl+P or Cmd+P) and select "Print Background Graphics" for full color palette display. Save as PDF for archival.
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

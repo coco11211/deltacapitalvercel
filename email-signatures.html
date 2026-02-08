@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta Capital — Email Signatures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: #fafafa;
+      color: #111;
+      padding: 40px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 300; }
+    .subtitle { color: #555; font-size: 1.1rem; margin-bottom: 40px; }
+
+    .signatures {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .signature-box {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 30px;
+      border-radius: 4px;
+    }
+
+    .signature-box h2 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #555;
+      font-weight: 400;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    /* Signature Styles */
+    .sig-delta {
+      font-size: 1.4rem;
+      color: #111;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .sig-name {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #111;
+      margin-bottom: 3px;
+    }
+
+    .sig-title {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .sig-contact {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 15px;
+    }
+
+    .sig-contact a {
+      color: #111;
+      text-decoration: none;
+    }
+
+    .sig-website {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .sig-website a {
+      color: #111;
+      text-decoration: none;
+    }
+
+    /* Copy Section */
+    .copy-instruction {
+      background: #f3f3f3;
+      padding: 15px 20px;
+      border-radius: 4px;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      color: #555;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .copy-button {
+      background: #111;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .copy-button:hover {
+      background: #555;
+    }
+
+    .instructions {
+      background: #f3f3f3;
+      padding: 30px;
+      border-radius: 4px;
+      margin-top: 40px;
+    }
+
+    .instructions h3 {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      color: #111;
+    }
+
+    .instructions ol {
+      margin-left: 20px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .instructions li {
+      margin-bottom: 10px;
+    }
+
+    .code-block {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      overflow-x: auto;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Delta Capital</h1>
+    <p class="subtitle">Email Signature Templates</p>
+
+    <div class="signatures">
+      <!-- Cole Wysopal -->
+      <div class="signature-box">
+        <h2>Cole Wysopal</h2>
+
+        <!-- HTML Signature -->
+        <div id="sig-cole" style="background: #fafafa; padding: 20px; border-radius: 4px; margin-bottom: 15px;">
+          <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Cormorant Garamond', serif; width: 100%;">
+            <tr>
+              <td>
+                <div style="font-size: 18px; color: #111; margin-bottom: 10px; letter-spacing: 2px;">Δ</div>
+                <div style="font-size: 16px; font-weight: normal; color: #111; margin-bottom: 3px;">Cole Wysopal</div>
+                <div style="font-size: 14px; color: #555; margin-bottom: 12px; font-style: italic;">Managing Partner</div>
+                <div style="font-size: 13px; color: #555; line-height: 1.6;">
+                  <a href="mailto:cole.wysopal@deltacapitaltrading.com" style="color: #111; text-decoration: none;">cole.wysopal@deltacapitaltrading.com</a><br>
+                  <a href="https://deltacapital.io" style="color: #111; text-decoration: none;">deltacapital.io</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="copy-instruction">
+          Click to select all and copy (Ctrl+C / Cmd+C)
+        </div>
+        <button class="copy-button" onclick="copySig('sig-cole')">Copy HTML</button>
+      </div>
+
+      <!-- Yonatan Shichor -->
+      <div class="signature-box">
+        <h2>Yonatan Shichor</h2>
+
+        <!-- HTML Signature -->
+        <div id="sig-yonatan" style="background: #fafafa; padding: 20px; border-radius: 4px; margin-bottom: 15px;">
+          <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Cormorant Garamond', serif; width: 100%;">
+            <tr>
+              <td>
+                <div style="font-size: 18px; color: #111; margin-bottom: 10px; letter-spacing: 2px;">Δ</div>
+                <div style="font-size: 16px; font-weight: normal; color: #111; margin-bottom: 3px;">Yonatan Shichor</div>
+                <div style="font-size: 14px; color: #555; margin-bottom: 12px; font-style: italic;">Quantitative Analyst</div>
+                <div style="font-size: 13px; color: #555; line-height: 1.6;">
+                  <a href="mailto:yonatan.shichor@deltacapitaltrading.com" style="color: #111; text-decoration: none;">yonatan.shichor@deltacapitaltrading.com</a><br>
+                  <a href="https://deltacapital.io" style="color: #111; text-decoration: none;">deltacapital.io</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="copy-instruction">
+          Click to select all and copy (Ctrl+C / Cmd+C)
+        </div>
+        <button class="copy-button" onclick="copySig('sig-yonatan')">Copy HTML</button>
+      </div>
+
+      <!-- Noah Rubin -->
+      <div class="signature-box">
+        <h2>Noah Rubin</h2>
+
+        <!-- HTML Signature -->
+        <div id="sig-noah" style="background: #fafafa; padding: 20px; border-radius: 4px; margin-bottom: 15px;">
+          <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Cormorant Garamond', serif; width: 100%;">
+            <tr>
+              <td>
+                <div style="font-size: 18px; color: #111; margin-bottom: 10px; letter-spacing: 2px;">Δ</div>
+                <div style="font-size: 16px; font-weight: normal; color: #111; margin-bottom: 3px;">Noah Rubin</div>
+                <div style="font-size: 14px; color: #555; margin-bottom: 12px; font-style: italic;">Risk Manager</div>
+                <div style="font-size: 13px; color: #555; line-height: 1.6;">
+                  <a href="mailto:noah.rubin@deltacapitaltrading.com" style="color: #111; text-decoration: none;">noah.rubin@deltacapitaltrading.com</a><br>
+                  <a href="https://deltacapital.io" style="color: #111; text-decoration: none;">deltacapital.io</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="copy-instruction">
+          Click to select all and copy (Ctrl+C / Cmd+C)
+        </div>
+        <button class="copy-button" onclick="copySig('sig-noah')">Copy HTML</button>
+      </div>
+
+      <!-- Ethan Lopez-Levy -->
+      <div class="signature-box">
+        <h2>Ethan Lopez-Levy</h2>
+
+        <!-- HTML Signature -->
+        <div id="sig-ethan" style="background: #fafafa; padding: 20px; border-radius: 4px; margin-bottom: 15px;">
+          <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Cormorant Garamond', serif; width: 100%;">
+            <tr>
+              <td>
+                <div style="font-size: 18px; color: #111; margin-bottom: 10px; letter-spacing: 2px;">Δ</div>
+                <div style="font-size: 16px; font-weight: normal; color: #111; margin-bottom: 3px;">Ethan Lopez-Levy</div>
+                <div style="font-size: 14px; color: #555; margin-bottom: 12px; font-style: italic;">Business Development</div>
+                <div style="font-size: 13px; color: #555; line-height: 1.6;">
+                  <a href="mailto:ethan.lopez-levy@deltacapital.com" style="color: #111; text-decoration: none;">ethan.lopez-levy@deltacapital.com</a><br>
+                  <a href="https://deltacapital.io" style="color: #111; text-decoration: none;">deltacapital.io</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="copy-instruction">
+          Click to select all and copy (Ctrl+C / Cmd+C)
+        </div>
+        <button class="copy-button" onclick="copySig('sig-ethan')">Copy HTML</button>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+      <h3>How to Use These Email Signatures</h3>
+      <ol>
+        <li>
+          <strong>Click "Copy HTML" button</strong> to copy the signature code
+        </li>
+        <li>
+          <strong>Gmail:</strong> Go to Settings → Forwarding and POP/IMAP → Signature. Paste into the signature field.
+        </li>
+        <li>
+          <strong>Outlook:</strong> Go to File → Options → Mail → Signatures. Click "New" and paste the HTML code.
+        </li>
+        <li>
+          <strong>Apple Mail:</strong> Go to Mail → Preferences → Signatures. Create new signature and paste.
+        </li>
+        <li>
+          <strong>Important:</strong> Make sure your email client supports HTML signatures. All major providers do.
+        </li>
+      </ol>
+
+      <h3 style="margin-top: 25px;">Direct HTML Code</h3>
+      <p style="color: #555; margin-bottom: 15px;">You can also manually copy the HTML code below:</p>
+
+      <div class="code-block">
+&lt;table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Cormorant Garamond', serif;"&gt;<br>
+&nbsp;&nbsp;&lt;tr&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div style="font-size: 18px; color: #111; margin-bottom: 10px; letter-spacing: 2px;"&gt;Δ&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div style="font-size: 16px; color: #111; margin-bottom: 3px;"&gt;[NAME]&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div style="font-size: 14px; color: #555; margin-bottom: 12px; font-style: italic;"&gt;[TITLE]&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div style="font-size: 13px; color: #555; line-height: 1.6;"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="mailto:[EMAIL]" style="color: #111; text-decoration: none;"&gt;[EMAIL]&lt;/a&gt;&lt;br&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="https://deltacapital.io" style="color: #111; text-decoration: none;"&gt;deltacapital.io&lt;/a&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br>
+&nbsp;&nbsp;&lt;/tr&gt;<br>
+&lt;/table&gt;
+      </div>
+
+      <p style="color: #555; margin-top: 15px; font-size: 0.95rem;">
+        Replace [NAME], [TITLE], and [EMAIL] with appropriate information. Keep the styling consistent across all team signatures.
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    function copySig(elementId) {
+      const element = document.getElementById(elementId);
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      document.execCommand('copy');
+
+      // Visual feedback
+      const button = event.target;
+      const originalText = button.textContent;
+      button.textContent = 'Copied!';
+      setTimeout(() => {
+        button.textContent = originalText;
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
