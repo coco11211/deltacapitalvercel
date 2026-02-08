@@ -1,102 +1,58 @@
-/*
-    NARRATIVE.JS
-    ---
-    Module for the scroll-driven narrative 3D object on the Research page.
-*/
-
-export function initNarrative(canvas, container) {
-    if (!canvas || !container) return;
-
+export function initNarrative(canvas) {
+    if (!canvas) return;
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.set(5, 4, 5);
-    camera.lookAt(0, 0, 0);
+    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
 
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.setClearColor(0x000000, 0);
 
-    // The geometric surface
-    const geometry = new THREE.PlaneGeometry(10, 10, 100, 100);
-    const material = new THREE.MeshBasicMaterial({
-        color: 0x000000,
-        wireframe: true,
-        opacity: 0.5,
-        transparent: true,
-    });
-    const plane = new THREE.Mesh(geometry, material);
-    plane.rotation.x = -Math.PI / 2;
-    scene.add(plane);
+    let shape;
 
-    const originalPositions = new Float32Array(geometry.attributes.position.array);
-    const noise = new THREE.SimplexNoise();
+    // Create an initial shape (e.g., a line)
+    const geometry = new THREE.BufferGeometry();
+    const material = new THREE.LineBasicMaterial({ color: 0xffffff });
+    const points = new Float32Array(300 * 3); // 100 points, 3 vertices each
+    geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
+    shape = new THREE.Line(geometry, material);
+    scene.add(shape);
 
-    let scrollProgress = 0;
+    camera.position.z = 5;
 
-    // Scroll listener to update progress
-    window.addEventListener('scroll', () => {
-        const rect = container.getBoundingClientRect();
-        const scrollableHeight = container.scrollHeight - window.innerHeight;
-        const scrollTop = -rect.top;
-
-        if (scrollTop >= 0 && scrollTop <= scrollableHeight) {
-            scrollProgress = scrollTop / scrollableHeight;
+    function updateShape(progress) {
+        const positions = shape.geometry.attributes.position.array;
+        for (let i = 0; i < positions.length; i += 3) {
+            const t = (i / positions.length) * Math.PI * 4; 
+            // Morph from a line to a sine wave based on scroll progress
+            positions[i] = (i / positions.length - 0.5) * 10;
+            positions[i + 1] = Math.sin(t * progress) * progress; // y
+            positions[i + 2] = 0; // z
         }
-    });
-
-    function gaussian(x, z, amplitude, cx, cz, sigma) {
-        return amplitude * Math.exp(-(
-            (Math.pow(x - cx, 2) / (2 * Math.pow(sigma, 2))) +
-            (Math.pow(z - cz, 2) / (2 * Math.pow(sigma, 2)))
-        ));
+        shape.geometry.attributes.position.needsUpdate = true;
     }
 
     function animate() {
-        requestAnimationFrame(animate);
-
-        const t = scrollProgress;
-        const positions = geometry.attributes.position.array;
-
-        // Define animation stages based on t
-        const peak1_amplitude = Math.min(1.0, t * 4) * 1.5;
-        const noise_amplitude = t > 0.25 ? Math.min(1.0, (t - 0.25) * 4) * 0.1 : 0;
-        const peak2_amplitude = t > 0.5 ? Math.min(1.0, (t - 0.5) * 4) * 1.2 : 0;
-        const camera_pullback = t > 0.75 ? (t - 0.75) * 4 * 3 : 0;
-
-        for (let i = 0; i < positions.length; i += 3) {
-            const ox = originalPositions[i];
-            const oz = originalPositions[i + 2];
-
-            let y = 0;
-
-            // Stage 1: Main peak
-            y += gaussian(ox, oz, peak1_amplitude, 0, 0, 1.5);
-
-            // Stage 2: Noise
-            if (noise_amplitude > 0) {
-                 y += noise.noise2d(ox * 2, oz * 2) * noise_amplitude;
-            }
-
-            // Stage 3: Second peak
-            if (peak2_amplitude > 0) {
-                y += gaussian(ox, oz, peak2_amplitude, 3, -2, 1);
-            }
-            
-            positions[i + 1] = y;
-        }
-
-        geometry.attributes.position.needsUpdate = true;
-        camera.position.z = 5 + camera_pullback;
-        camera.position.y = 4 + camera_pullback;
-        camera.lookAt(0,0,0);
-
         renderer.render(scene, camera);
     }
 
-    animate();
+    window.addEventListener('scroll', () => {
+        const narrativeSection = document.getElementById('narrative-section');
+        if (!narrativeSection) return;
+        const scrollableHeight = narrativeSection.scrollHeight - window.innerHeight;
+        const scrollTop = window.scrollY - narrativeSection.offsetTop;
+        const progress = Math.max(0, Math.min(1, scrollTop / scrollableHeight));
+
+        updateShape(progress);
+        animate();
+    });
 
     window.addEventListener('resize', () => {
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
         camera.updateProjectionMatrix();
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        animate();
     });
+
+    updateShape(0);
+    animate();
 }

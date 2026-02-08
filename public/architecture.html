@@ -3,48 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Architecture — Delta Capital</title>
+    <title>Delta Capital - Architecture</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div class="viz-container">
-        <canvas id="ambient-canvas"></canvas>
-    </div>
-
-    <div class="container">
-        <h1 class="page-title">System Architecture</h1>
-        <div class="section">
-             <p>Our infrastructure is engineered for resilience, scale, and low-latency performance. We view our technology not merely as a support function, but as a core pillar of our competitive advantage. The following visualization illustrates the conceptual flow of our system, from data ingestion to execution.</p>
-        </div>
-    </div>
-
-    <div id="assembly-container">
-        <div class="assembly-sticky-parent">
-            <canvas id="assembly-canvas"></canvas>
-        </div>
-        <div class="container" style="pointer-events: none;">
-            <div style="height: 100vh;"></div>
-            <div class="assembly-trigger" data-trigger-phase="0"></div>
-            <div style="height: 100vh;"></div>
-            <div class="assembly-trigger" data-trigger-phase="1"></div>
-            <div style="height: 100vh;"></div>
-            <div class="assembly-trigger" data-trigger-phase="2"></div>
-             <div style="height: 100vh;"></div>
-            <div class="assembly-trigger" data-trigger-phase="3"></div>
-            <div style="height: 100vh;"></div>
-            <div class="assembly-trigger" data-trigger-phase="4"></div>
-        </div>
-    </div>
-
-     <div class="container">
-        <div class="section">
-            <h2>System Principles</h2>
-            <p><strong>Modularity:</strong> Each component of our system is designed as a discrete, independently-verifiable service, allowing for rapid development and robust testing.</p>
-            <p><strong>Redundancy:</strong> Critical systems have multiple layers of redundancy to ensure high availability and fault tolerance, from data feeds to execution gateways.</p>
-            <p><strong>Security:</strong> We employ a defense-in-depth security posture, with multiple layers of access control, encryption, and continuous monitoring to protect our intellectual property and operational integrity.</p>
-        </div>
+    <!-- The canvas for the assembly visualization will take up the full viewport -->
+    <div class="viewport" id="assembly-section" style="min-height: 300vh;">
+        <canvas id="assembly-canvas" class="system-canvas"></canvas>
     </div>
 
     <div id="command-palette" class="command-palette">
@@ -53,7 +18,10 @@
             <ul id="command-list"></ul>
         </div>
     </div>
-
     <script type="module" src="/js/app.js"></script>
+    <script type="module">
+        import { initAssembly } from './js/modules/assembly.js';
+        initAssembly(document.getElementById('assembly-canvas'));
+    </script>
 </body>
 </html>

@@ -3,46 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Methodology — Delta Capital</title>
+    <title>Research & Methodology - Delta Capital</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div class="viz-container">
-        <canvas id="ambient-canvas"></canvas>
-    </div>
-
-    <div class="container">
-        <h1 class="page-title">Methodology</h1>
-
-        <div class="section">
-            <h2>Model Validation</h2>
-            <p>Our research process is predicated on a commitment to out-of-sample validation and the prevention of overfitting. Models are subjected to a battery of tests, including walk-forward validation and Monte Carlo stress testing, to ensure their robustness across a wide range of potential market regimes.</p>
-             <p>A model is not considered for production unless it demonstrates statistical significance after accounting for transaction costs, execution slippage, and data-mining bias.</p>
-        </div>
-    </div>
-
-    <div id="narrative-container">
-        <div class="narrative-sticky-parent">
-            <canvas id="narrative-canvas"></canvas>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="section">
-            <h2>Ensemble Approach</h2>
-            <p>We do not rely on a single monolithic model. Instead, we deploy an ensemble of diverse, uncorrelated predictive models. This approach reduces model-specific risk and creates a more resilient portfolio. Signals are generated from a variety of sources and combined using a proprietary weighting algorithm that considers both the model's historical performance and its recent predictive accuracy.</p>
-        </div>
-    </div>
-    
-    <div id="command-palette" class="command-palette">
-        <div class="command-palette-content">
-            <input type="text" id="command-input" placeholder="Navigate...">
-            <ul id="command-list"></ul>
-        </div>
-    </div>
-
-    <script type="module" src="/js/app.js"></script>
+    <header>
+        <div class="logo">Δ</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/research.html">Research & Methodology</a>
+            <a href="/risk.html">Risk & Controls</a>
+            <a href="/architecture.html">System Architecture</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Research Philosophy</h1>
+            <p>Our research approach is grounded in skepticism and iteration. Models are treated as provisional tools, not truths, and are evaluated based on how they behave across time, regimes, and market conditions.</p>
+            <p>We prioritize robustness, interpretability, and empirical validation over theoretical elegance.</p>
+        </section>
+        <section>
+            <h1>Modeling Approach</h1>
+            <p>We employ a range of quantitative techniques, including statistical models and machine-learning methods, depending on the problem being addressed.</p>
+            <p>No single model or technique is relied upon exclusively. Where appropriate, ensembles and diversified approaches are used to reduce sensitivity to individual assumptions.</p>
+        </section>
+        <section>
+            <h1>Validation Discipline</h1>
+            <p>Validation is a central part of our research process.</p>
+            <p>We emphasize:</p>
+            <ul>
+                <li>Out-of-sample testing</li>
+                <li>Walk-forward evaluation</li>
+                <li>Stress testing across market regimes</li>
+                <li>Sensitivity analysis</li>
+            </ul>
+            <p>Results that do not persist outside the training environment are not deployed.</p>
+        </section>
+        <section>
+            <h1>Ongoing Evaluation</h1>
+            <p>Research does not stop at deployment. Models are continuously monitored for performance drift, behavioral changes, and regime sensitivity. Strategies may be adjusted, paused, or retired when their behavior diverges from expectations.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Delta Capital. All rights reserved. | <a href="/disclosures.html">Disclosures</a></p>
+    </footer>
+    <script src="/js/app.js"></script>
 </body>
 </html>
