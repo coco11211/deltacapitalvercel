@@ -116,6 +116,19 @@
             </p>
           </div>
         </div>
+
+        <!-- Risk Visualizations -->
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-var"></canvas>
+        </div>
+        <div class="viz-row">
+          <div class="viz-container reveal">
+            <canvas id="viz-montecarlo"></canvas>
+          </div>
+          <div class="viz-container reveal" style="transition-delay: 0.15s;">
+            <canvas id="viz-drawdown"></canvas>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -188,5 +201,6 @@
   </div>
 
   <script src="/js/core.js"></script>
+  <script src="/js/visualizations.js"></script>
 </body>
 </html>

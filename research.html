@@ -144,6 +144,37 @@
       </div>
     </section>
 
+    <!-- Neural Network Architecture -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Model Architecture</span>
+          <div class="divider"></div>
+        </div>
+        <div class="viz-container reveal">
+          <canvas id="viz-neural"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signal Decay + Correlation -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Signal Analysis</span>
+          <div class="divider"></div>
+        </div>
+        <div class="viz-row">
+          <div class="viz-container reveal">
+            <canvas id="viz-signaldecay"></canvas>
+          </div>
+          <div class="viz-container reveal" style="transition-delay: 0.15s;">
+            <canvas id="viz-correlation"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Portfolio Construction -->
     <section class="section">
       <div class="section-inner">
@@ -166,6 +197,17 @@
             </p>
           </div>
         </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-frontier"></canvas>
+        </div>
+        <div class="viz-row" style="margin-top: 2vh;">
+          <div class="viz-container reveal">
+            <canvas id="viz-riskparity"></canvas>
+          </div>
+          <div class="viz-container reveal" style="transition-delay: 0.15s;">
+            <canvas id="viz-sharpe"></canvas>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -182,6 +224,9 @@
             of our own results. The cost of a false positive far exceeds the cost of
             delayed deployment.
           </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-walkforward"></canvas>
         </div>
       </div>
     </section>
@@ -215,5 +260,6 @@
   </div>
 
   <script src="/js/core.js"></script>
+  <script src="/js/visualizations.js"></script>
 </body>
 </html>

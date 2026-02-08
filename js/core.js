@@ -17,7 +17,7 @@
 
   // --- Scroll Reveal ---
   function initScrollReveal() {
-    var els = document.querySelectorAll('.reveal, .reveal-stagger, .letter-reveal, .arch-node, .arch-connector, #arch-canvas');
+    var els = document.querySelectorAll('.reveal, .reveal-stagger, .letter-reveal, .arch-node, .arch-connector, .viz-container, #arch-canvas');
     if (!els.length) return;
 
     var observer = new IntersectionObserver(function (entries) {

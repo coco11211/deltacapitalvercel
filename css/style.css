@@ -710,6 +710,36 @@ p {
   }
 }
 
+/* --- Visualization Canvases --- */
+.viz-container {
+  width: 100%;
+  margin: 4vh 0;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.viz-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.viz-container canvas {
+  display: block;
+  width: 100%;
+}
+
+.viz-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4vw;
+  margin: 4vh 0;
+}
+
+@media (max-width: 900px) {
+  .viz-row { grid-template-columns: 1fr; }
+}
+
 /* --- Delta Breathe --- */
 .delta-breathe {
   animation: breathe 8s var(--ease-in-out) infinite;
