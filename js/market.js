@@ -97,7 +97,7 @@
   // --- Micro tick simulation with real data ---
   function tickPrices() {
     STOCKS.forEach(function (stock) {
-      var cached = MarketDataProvider.getCached(stock.symbol);
+      var cached = (typeof MarketDataProvider !== 'undefined') ? MarketDataProvider.getCached(stock.symbol) : null;
       if (cached && cached.price) {
         // Use real API data
         stock.currentPrice = cached.price;
@@ -367,22 +367,24 @@
     render();
 
     // Fetch real sentiment data and re-render
-    MarketDataProvider.fetchSentiment(function (sentiment) {
-      if (sentiment) {
-        realSentiment = sentiment;
-        render();
-      }
-    });
-
-    // Update sentiment every 5 minutes
-    setInterval(function () {
+    if (typeof MarketDataProvider !== 'undefined') {
       MarketDataProvider.fetchSentiment(function (sentiment) {
         if (sentiment) {
           realSentiment = sentiment;
           render();
         }
       });
-    }, 300000);
+
+      // Update sentiment every 5 minutes
+      setInterval(function () {
+        MarketDataProvider.fetchSentiment(function (sentiment) {
+          if (sentiment) {
+            realSentiment = sentiment;
+            render();
+          }
+        });
+      }, 300000);
+    }
   }
 
 
