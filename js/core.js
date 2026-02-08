@@ -83,12 +83,12 @@
     if (!palette || !overlay) return;
 
     var pages = [
-      { name: 'Philosophy', path: 'index.html', shortcut: '/' },
-      { name: 'Research & Methodology', path: 'research.html', shortcut: 'R' },
-      { name: 'Risk & Controls', path: 'risk.html', shortcut: 'K' },
-      { name: 'System Architecture', path: 'architecture.html', shortcut: 'A' },
-      { name: 'Disclosures', path: 'disclosures.html', shortcut: 'D' },
-      { name: 'Contact', path: 'contact.html', shortcut: 'C' }
+      { name: 'Philosophy', path: '/', shortcut: '/' },
+      { name: 'Research & Methodology', path: '/research.html', shortcut: 'R' },
+      { name: 'Risk & Controls', path: '/risk.html', shortcut: 'K' },
+      { name: 'System Architecture', path: '/architecture.html', shortcut: 'A' },
+      { name: 'Disclosures', path: '/disclosures.html', shortcut: 'D' },
+      { name: 'Contact', path: '/contact.html', shortcut: 'C' }
     ];
 
     var selectedIndex = 0;
