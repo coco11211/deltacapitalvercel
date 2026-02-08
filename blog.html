@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Delta Capital</title>
+  <meta name="description" content="Insights on quantitative investing, risk management, and market analysis from Delta Capital.">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <meta property="og:title" content="Blog — Delta Capital">
+  <meta property="og:description" content="Insights on quantitative investing and systematic conviction.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Delta Capital">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .blog-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .blog-card:hover {
+      border-color: #111;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .blog-card-header {
+      padding: 24px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .blog-category {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #999;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .blog-card-title {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #111;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .blog-card-excerpt {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .blog-card-footer {
+      padding: 16px 24px;
+      background: #fafafa;
+      font-size: 0.85rem;
+      color: #999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 16px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .blog-read-time {
+      font-family: 'JetBrains Mono', monospace;
+      color: #555;
+    }
+
+    .blog-link {
+      color: #111;
+      text-decoration: none;
+      font-weight: 400;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .blog-link:hover {
+      color: #555;
+    }
+
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1px solid #e0e0e0;
+      background: white;
+      color: #111;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #111;
+      color: white;
+      border-color: #111;
+    }
+
+    .no-posts {
+      text-align: center;
+      padding: 60px 20px;
+      color: #555;
+    }
+
+    .featured-post {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 40px;
+      margin-bottom: 60px;
+      border-radius: 4px;
+    }
+
+    .featured-post h2 {
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+      color: #111;
+    }
+
+    .featured-excerpt {
+      font-size: 1.05rem;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      max-width: 800px;
+    }
+
+    .featured-meta {
+      font-size: 0.9rem;
+      color: #999;
+      display: flex;
+      gap: 20px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Header -->
+    <section class="section" style="min-height: auto; padding-bottom: 4vh;">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Insights</span>
+          <div class="divider"></div>
+          <h1>Blog</h1>
+          <p style="margin-top: 2vh;">
+            Research, analysis, and insights on quantitative investing, risk management, and systematic conviction.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="section section--compact">
+      <div class="section-inner" style="max-width: 1400px;">
+
+        <!-- Filter Tags -->
+        <div class="reveal" style="transition-delay: 0.1s;">
+          <div class="filter-tags" id="filterTags">
+            <button class="filter-btn active" data-filter="all">All Articles</button>
+            <button class="filter-btn" data-filter="analysis">Market Analysis</button>
+            <button class="filter-btn" data-filter="risk">Risk Management</button>
+            <button class="filter-btn" data-filter="strategy">Strategy</button>
+            <button class="filter-btn" data-filter="education">Education</button>
+            <button class="filter-btn" data-filter="research">Research</button>
+          </div>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="reveal" style="transition-delay: 0.2s;">
+          <div class="blog-grid" id="blogGrid">
+            <!-- Blog cards will be inserted here by JavaScript -->
+          </div>
+          <div id="noPostsMessage" class="no-posts" style="display: none;">
+            <p>No articles in this category yet. Check back soon.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Submit Article CTA -->
+    <section class="section section--compact" style="text-align: center; padding-top: 0;">
+      <div class="section-inner">
+        <div class="reveal">
+          <p style="color: #555; font-size: 0.95rem;">
+            Have insights to share? <a href="/contact.html" style="color: #111; border-bottom: 1px solid #111; text-decoration: none;">Get in touch</a> to contribute to our blog.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="/">Philosophy</a>
+        <a href="/research.html">Research</a>
+        <a href="/risk.html">Risk</a>
+        <a href="/architecture.html">Architecture</a>
+        <a href="/insights.html">Insights</a>
+        <a href="/principles.html">Principles</a>
+        <a href="/screener.html">Screener</a>
+        <a href="/blog.html" class="active">Blog</a>
+        <a href="/glossary.html">Glossary</a>
+        <a href="/brandkit.html">Brand Kit</a>
+        <a href="/email-signatures.html">Email Signatures</a>
+        <a href="/disclosures.html">Disclosures</a>
+        <a href="/faq.html">Questions</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="/js/core.js"></script>
+
+  <!-- Blog Data -->
+  <script>
+    // Blog posts data structure - EASY TO UPDATE
+    const blogPosts = [
+      {
+        id: 1,
+        title: "Coming Soon: Quantitative Investing Insights",
+        excerpt: "Our first blog posts will cover quantitative methods, risk management, and systematic investment strategies.",
+        category: "education",
+        author: "Delta Capital",
+        date: "2026-02-08",
+        readTime: 5,
+        slug: "coming-soon"
+      }
+      // More articles will be added here
+    ];
+
+    // Render blog grid
+    function renderBlog(filter = 'all') {
+      const grid = document.getElementById('blogGrid');
+      const noPostsMsg = document.getElementById('noPostsMessage');
+
+      let filtered = filter === 'all'
+        ? blogPosts
+        : blogPosts.filter(post => post.category === filter);
+
+      if (filtered.length === 0) {
+        grid.style.display = 'none';
+        noPostsMsg.style.display = 'block';
+        return;
+      }
+
+      grid.style.display = 'grid';
+      noPostsMsg.style.display = 'none';
+
+      grid.innerHTML = filtered.map(post => `
+        <article class="blog-card">
+          <div class="blog-card-header">
+            <span class="blog-category">${post.category}</span>
+            <h2 class="blog-card-title">${post.title}</h2>
+            <p class="blog-card-excerpt">${post.excerpt}</p>
+          </div>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>${formatDate(post.date)}</span>
+              <span>•</span>
+              <span>${post.readTime} min read</span>
+            </div>
+            <a href="/blog/${post.slug}.html" class="blog-link">Read →</a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Filter functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderBlog(this.dataset.filter);
+      });
+    });
+
+    // Format date
+    function formatDate(dateStr) {
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      return new Date(dateStr).toLocaleDateString('en-US', options);
+    }
+
+    // Initial render
+    renderBlog();
+  </script>
+</body>
+</html>
