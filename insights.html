@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights &mdash; Delta Capital</title>
+  <meta name="description" content="Delta Capital — Internal Research Notes">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <meta property="og:title" content="Insights — Delta Capital">
+  <meta property="og:description" content="Selected research notes from the Delta Capital research desk.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Delta Capital">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Header -->
+    <section class="section section--full">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Research Notes</span>
+          <div class="divider"></div>
+          <h1 class="letter-reveal">Insights</h1>
+          <p style="margin-top: 3vh;">
+            Selected observations from the research desk. These notes reflect
+            ongoing investigations into market microstructure, model behavior,
+            and the boundaries of quantitative inference.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Note 1 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="memo-block reveal">
+          <span class="memo-classification">INTERNAL &mdash; RESEARCH</span>
+          <h2>On the Instability of Rolling Covariance</h2>
+          <div class="divider"></div>
+          <p>
+            Rolling covariance matrices, computed over fixed lookback windows,
+            exhibit a pathological sensitivity to the choice of window length.
+            A 60-day window and a 120-day window can produce meaningfully
+            different portfolio allocations on the same date, given the same
+            universe of assets. This is not a technical nuisance. It is a
+            structural feature of non-stationary return series.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            Our observation: the instability is concentrated in the off-diagonal
+            elements. Variance estimates converge relatively quickly. Cross-asset
+            correlations do not. This asymmetry has direct implications for
+            portfolio construction. We now estimate the covariance matrix using
+            a shrinkage estimator that imposes structure on the correlation
+            matrix while leaving variances unconstrained. The reduction in
+            portfolio turnover has been significant.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            The deeper question remains open: if the true covariance structure
+            is regime-dependent, is a single estimator ever sufficient? We
+            suspect not, and are investigating mixture-based approaches that
+            blend multiple covariance estimates, weighted by regime probability.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Note 2 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="memo-block reveal">
+          <span class="memo-classification">INTERNAL &mdash; METHODOLOGY</span>
+          <h2>Regime Detection Under Non-Stationarity</h2>
+          <div class="divider"></div>
+          <p>
+            The standard Hidden Markov Model assumes a fixed number of regimes
+            and stationary transition probabilities. Neither assumption holds
+            in financial markets. Regimes emerge, persist for variable durations,
+            and dissolve. The transition dynamics themselves evolve.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            We have been experimenting with an online changepoint detection
+            framework that does not require pre-specification of regime count.
+            The method operates on a rolling basis, computing the posterior
+            probability that the most recent observation belongs to the current
+            regime versus a new one. When the new-regime probability exceeds a
+            calibrated threshold, the system flags a potential transition.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            Early results are encouraging but imperfect. The framework detects
+            genuine regime shifts with reasonable latency (3&ndash;7 trading days)
+            but produces false positives during periods of elevated but
+            directionless volatility. The false positive rate is our current
+            focus. Reducing it without increasing detection latency is a
+            constrained optimization problem in itself.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Note 3 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="memo-block reveal">
+          <span class="memo-classification">INTERNAL &mdash; INFRASTRUCTURE</span>
+          <h2>On the Cost of Precision in Execution</h2>
+          <div class="divider"></div>
+          <p>
+            There is a diminishing return to execution precision. Below a
+            certain latency threshold, the marginal improvement in fill quality
+            is dominated by the infrastructure cost required to achieve it.
+            For our strategy horizons (intraday to multi-week), microsecond
+            optimization is economically irrelevant.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            What matters is not speed but predictability. We optimize for
+            consistent execution quality rather than minimal latency. This
+            means deterministic order routing, predictable queue position,
+            and reliable fill reporting. The execution layer is designed to
+            minimize variance in slippage, not to minimize slippage itself.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            This perspective is unfashionable. The industry narrative rewards
+            speed. We prefer reliability. The distinction matters most during
+            periods of market stress, when fast systems compete for increasingly
+            scarce liquidity and the cost of unpredictable execution can exceed
+            the cost of slightly worse average fills.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Note 4 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="memo-block reveal">
+          <span class="memo-classification">INTERNAL &mdash; RESEARCH</span>
+          <h2>The Decay of Crowded Factors</h2>
+          <div class="divider"></div>
+          <p>
+            A factor that is known to everyone is a factor that is priced by
+            everyone. The academic factor zoo&mdash;now exceeding 400 published
+            anomalies&mdash;has created a peculiar dynamic: the act of
+            documenting a return predictor accelerates its decay.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            We track factor crowding through multiple lenses: abnormal volume
+            in factor-loading portfolios, compression of cross-sectional
+            dispersion, and correlation among strategies that historically
+            loaded on the same factors. When all three indicators align,
+            the probability of a crowding-driven unwind rises materially.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            Our response is not to avoid well-known factors entirely. It is
+            to condition our exposure on crowding signals. The same factor
+            that is dangerous when crowded can be attractive when abandoned.
+            Timing the cycle of adoption and capitulation is itself a source
+            of edge, though one that resists formalization.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Classification Note -->
+    <section class="section section--compact" style="text-align: center;">
+      <div class="section-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="reveal">
+          <p class="mono" style="font-size: 0.65rem; color: var(--fg-faint);">
+            These notes represent internal research observations.<br>
+            They do not constitute investment advice or recommendations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="/">Philosophy</a>
+        <a href="/research.html">Research</a>
+        <a href="/risk.html">Risk</a>
+        <a href="/architecture.html">Architecture</a>
+        <a href="/insights.html" class="active">Insights</a>
+        <a href="/principles.html">Principles</a>
+        <a href="/disclosures.html">Disclosures</a>
+        <a href="/faq.html">Questions</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="/js/core.js"></script>
+</body>
+</html>

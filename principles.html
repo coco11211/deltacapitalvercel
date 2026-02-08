@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principles &mdash; Delta Capital</title>
+  <meta name="description" content="Delta Capital — Operating Principles">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <meta property="og:title" content="Principles — Delta Capital">
+  <meta property="og:description" content="The operating principles that govern every decision at Delta Capital.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Delta Capital">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Header -->
+    <section class="section section--full">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Operating Principles</span>
+          <div class="divider"></div>
+          <h1 class="letter-reveal">Principles</h1>
+          <p style="margin-top: 3vh;">
+            These are not aspirations. They are constraints.
+            Every decision at Delta Capital is evaluated against these
+            principles. When a decision conflicts with a principle,
+            the principle wins.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principle 1 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="principle-block reveal">
+          <span class="principle-number">01</span>
+          <h2>Evidence over intuition.</h2>
+          <div class="divider"></div>
+          <p>
+            Conviction without evidence is speculation. Every position we take
+            is backed by statistical evidence that has survived out-of-sample
+            testing, stress scenarios, and adversarial review. When the evidence
+            is ambiguous, we do not act. The opportunity cost of inaction is
+            always less than the realized cost of a false conviction.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principle 2 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="principle-block reveal">
+          <span class="principle-number">02</span>
+          <h2>Risk is the foundation, not the afterthought.</h2>
+          <div class="divider"></div>
+          <p>
+            We do not generate return targets and then check risk. We define
+            risk budgets first and then determine what returns are achievable
+            within those constraints. This inversion of the conventional process
+            is deliberate. It ensures that our worst-case scenarios are defined
+            before our best-case projections, and that survival always takes
+            precedence over performance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principle 3 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="principle-block reveal">
+          <span class="principle-number">03</span>
+          <h2>Models are hypotheses. Treat them accordingly.</h2>
+          <div class="divider"></div>
+          <p>
+            No model is permanent. Every model we deploy represents a testable
+            hypothesis about some aspect of market structure. Hypotheses can be
+            supported by evidence, but they cannot be proven. The moment we treat
+            a model as truth rather than conjecture is the moment we become
+            vulnerable to the conditions under which it fails. We schedule
+            model reviews not because we doubt our models, but because we
+            refuse to trust them unconditionally.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principle 4 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="principle-block reveal">
+          <span class="principle-number">04</span>
+          <h2>Reproducibility is non-negotiable.</h2>
+          <div class="divider"></div>
+          <p>
+            Given the same inputs, our system produces the same outputs.
+            Every computation is deterministic, logged, and auditable. This
+            principle extends beyond the code to the research process itself:
+            every backtest is versioned, every parameter choice is documented,
+            every result is reproducible by any team member without additional
+            context. If a result cannot be reproduced, it does not exist.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principle 5 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="principle-block reveal">
+          <span class="principle-number">05</span>
+          <h2>Simplicity is a feature, not a limitation.</h2>
+          <div class="divider"></div>
+          <p>
+            Complexity has a cost that is rarely accounted for: it increases
+            the surface area for failure, the difficulty of diagnosis, and the
+            time to recovery. We prefer the simplest model that captures the
+            relevant dynamics. When a linear model explains 90% of the variance,
+            we do not deploy a neural network to chase the remaining 10%.
+            The marginal improvement rarely justifies the marginal opacity.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principle 6 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="principle-block reveal">
+          <span class="principle-number">06</span>
+          <h2>Fail safely. Fail visibly. Fail forward.</h2>
+          <div class="divider"></div>
+          <p>
+            Systems will fail. The question is not whether, but how. Every
+            component is designed to degrade gracefully rather than cascade
+            destructively. When a model produces an anomalous signal, the
+            system reduces exposure rather than amplifying it. When a data
+            feed drops, the system falls back to stale data with explicit
+            uncertainty adjustments rather than operating blind. Every failure
+            is logged, reviewed, and converted into a system improvement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principle 7 -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="principle-block reveal">
+          <span class="principle-number">07</span>
+          <h2>Patience is a competitive advantage.</h2>
+          <div class="divider"></div>
+          <p>
+            The pressure to deploy capital quickly is a liability dressed as
+            urgency. We deploy strategies only after they have survived a
+            validation process that is deliberately slow. We would rather miss
+            an opportunity than deploy a strategy prematurely. Markets are
+            persistent. The opportunities that exist today existed yesterday
+            and will likely exist tomorrow. The same cannot be said of capital
+            lost to an untested idea.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="section section--compact" style="text-align: center;">
+      <div class="section-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="reveal">
+          <p style="font-style: italic; font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--fg-faint); max-width: 460px; line-height: 1.7;">
+            Principles are not what we believe.<br>
+            They are what we do when it is difficult<br>
+            to do them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="/">Philosophy</a>
+        <a href="/research.html">Research</a>
+        <a href="/risk.html">Risk</a>
+        <a href="/architecture.html">Architecture</a>
+        <a href="/insights.html">Insights</a>
+        <a href="/principles.html" class="active">Principles</a>
+        <a href="/disclosures.html">Disclosures</a>
+        <a href="/faq.html">Questions</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="/js/core.js"></script>
+</body>
+</html>

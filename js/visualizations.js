@@ -388,68 +388,80 @@
     var ctx = setupCanvas(canvas, w, h);
     var margin = { top: 35, right: 25, bottom: 45, left: 50 };
 
+    // Model: daily returns ~ mixture of normals (% terms)
+    // Component 1: N(0.02%, 0.9%) — normal regime (85%)
+    // Component 2: N(-0.15%, 2.0%) — stress regime (15%)
+    // This produces fat tails consistent with empirical equity returns
+    var mu1 = 0.02, sig1 = 0.9;
+    var mu2 = -0.15, sig2 = 2.0;
+    var w1 = 0.85, w2 = 0.15;
+
+    // Range: -5% to +5% daily returns
+    var xMin = -5, xMax = 5;
+
     var plot = drawPlotFrame(ctx, {
       width: w, height: h, margin: margin,
-      title: 'PORTFOLIO RETURN DISTRIBUTION  —  VALUE AT RISK',
-      xTitle: 'DAILY RETURN',
+      title: 'DAILY RETURN DISTRIBUTION  —  TAIL RISK ANALYSIS',
+      xTitle: 'DAILY RETURN (%)',
       yTitle: 'DENSITY',
-      xLabels: ['-4\u03C3', '-3\u03C3', '-2\u03C3', '-1\u03C3', '0', '+1\u03C3', '+2\u03C3', '+3\u03C3', '+4\u03C3'],
-      yLabels: ['0.0', '0.1', '0.2', '0.3', '0.4'],
-      gridX: 8, gridY: 4
+      xLabels: ['-5%', '-4%', '-3%', '-2%', '-1%', '0%', '+1%', '+2%', '+3%', '+4%', '+5%'],
+      yLabels: [],
+      gridX: 10, gridY: 4
     });
 
-    function mapX(v) { return plot.x + ((v + 4) / 8) * plot.w; }
-    function mapY(v) { return plot.y + plot.h - (v / 0.4) * plot.h; }
+    function mapX(v) { return plot.x + ((v - xMin) / (xMax - xMin)) * plot.w; }
     function normalPDF(x, mu, sig) {
       return Math.exp(-0.5 * Math.pow((x - mu) / sig, 2)) / (sig * Math.sqrt(2 * Math.PI));
     }
 
-    // Fat-tailed distribution (mixture)
-    function fatTailPDF(x) {
-      return 0.85 * normalPDF(x, 0, 1) + 0.15 * normalPDF(x, -0.3, 2.2);
+    // Empirical (fat-tailed mixture)
+    function empiricalPDF(x) {
+      return w1 * normalPDF(x, mu1, sig1) + w2 * normalPDF(x, mu2, sig2);
     }
 
-    // VaR threshold (95th percentile ~ -1.65)
-    var varThreshold = -1.65;
+    // Normal approximation: same mean & variance as the mixture
+    var mixMean = w1 * mu1 + w2 * mu2;
+    var mixVar = w1 * (sig1 * sig1 + mu1 * mu1) + w2 * (sig2 * sig2 + mu2 * mu2) - mixMean * mixMean;
+    var mixSig = Math.sqrt(mixVar);
 
-    // Fill tail region (loss zone)
+    // Find peak for Y scaling
+    var yMax = empiricalPDF(mu1) * 1.1;
+    function mapY(v) { return plot.y + plot.h - (v / yMax) * plot.h; }
+
+    // 95% VaR: approximate 5th percentile of the mixture
+    // For this mixture, the 5th percentile is roughly -1.8%
+    var varThreshold = -1.8;
+
+    // 99% VaR / CVaR boundary: roughly -3.2%
+    var cvarBound = -3.2;
+
+    // Fill VaR region (5th percentile tail)
     ctx.beginPath();
-    ctx.moveTo(mapX(-4), mapY(0));
-    for (var x = -4; x <= varThreshold; x += 0.05) {
-      ctx.lineTo(mapX(x), mapY(fatTailPDF(x)));
+    ctx.moveTo(mapX(xMin), mapY(0));
+    for (var x = xMin; x <= varThreshold; x += 0.05) {
+      ctx.lineTo(mapX(x), mapY(empiricalPDF(x)));
     }
     ctx.lineTo(mapX(varThreshold), mapY(0));
     ctx.closePath();
-    ctx.fillStyle = 'rgba(196, 78, 82, 0.2)';
+    ctx.fillStyle = 'rgba(196, 78, 82, 0.15)';
     ctx.fill();
 
-    // CVaR region (darker)
+    // CVaR region (darker — expected shortfall beyond 99%)
     ctx.beginPath();
-    ctx.moveTo(mapX(-4), mapY(0));
-    for (var xc = -4; xc <= -2.33; xc += 0.05) {
-      ctx.lineTo(mapX(xc), mapY(fatTailPDF(xc)));
+    ctx.moveTo(mapX(xMin), mapY(0));
+    for (var xc = xMin; xc <= cvarBound; xc += 0.05) {
+      ctx.lineTo(mapX(xc), mapY(empiricalPDF(xc)));
     }
-    ctx.lineTo(mapX(-2.33), mapY(0));
+    ctx.lineTo(mapX(cvarBound), mapY(0));
     ctx.closePath();
-    ctx.fillStyle = 'rgba(196, 78, 82, 0.35)';
+    ctx.fillStyle = 'rgba(196, 78, 82, 0.30)';
     ctx.fill();
 
-    // Main distribution curve
+    // Normal approximation curve (dashed)
     ctx.beginPath();
-    for (var xd = -4; xd <= 4; xd += 0.05) {
-      var yv = fatTailPDF(xd);
-      if (xd === -4) ctx.moveTo(mapX(xd), mapY(yv));
-      else ctx.lineTo(mapX(xd), mapY(yv));
-    }
-    ctx.strokeStyle = COLORS.primary;
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    // Normal distribution overlay (thin, dashed)
-    ctx.beginPath();
-    for (var xn = -4; xn <= 4; xn += 0.05) {
-      var yn = normalPDF(xn, 0, 1);
-      if (xn === -4) ctx.moveTo(mapX(xn), mapY(yn));
+    for (var xn = xMin; xn <= xMax; xn += 0.05) {
+      var yn = normalPDF(xn, mixMean, mixSig);
+      if (xn === xMin) ctx.moveTo(mapX(xn), mapY(yn));
       else ctx.lineTo(mapX(xn), mapY(yn));
     }
     ctx.strokeStyle = COLORS.accent1;
@@ -458,22 +470,48 @@
     ctx.stroke();
     ctx.setLineDash([]);
 
-    // VaR line
+    // Empirical distribution curve (solid)
+    ctx.beginPath();
+    for (var xd = xMin; xd <= xMax; xd += 0.05) {
+      var yv = empiricalPDF(xd);
+      if (xd === xMin) ctx.moveTo(mapX(xd), mapY(yv));
+      else ctx.lineTo(mapX(xd), mapY(yv));
+    }
+    ctx.strokeStyle = COLORS.primary;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // VaR vertical line
     ctx.beginPath();
     ctx.moveTo(mapX(varThreshold), mapY(0));
-    ctx.lineTo(mapX(varThreshold), mapY(fatTailPDF(varThreshold)));
+    ctx.lineTo(mapX(varThreshold), mapY(empiricalPDF(varThreshold)));
     ctx.strokeStyle = COLORS.accent2;
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
-    // Labels
+    // VaR label
     ctx.font = '8px "JetBrains Mono", monospace';
     ctx.fillStyle = COLORS.accent2;
     ctx.textAlign = 'center';
-    ctx.fillText('95% VaR', mapX(varThreshold), mapY(fatTailPDF(varThreshold)) - 8);
+    ctx.fillText('VaR 95%', mapX(varThreshold), mapY(empiricalPDF(varThreshold)) - 12);
+    ctx.fillText(varThreshold.toFixed(1) + '%', mapX(varThreshold), mapY(empiricalPDF(varThreshold)) - 3);
 
-    ctx.fillStyle = 'rgba(196, 78, 82, 0.7)';
-    ctx.fillText('CVaR', mapX(-3.1), mapY(0.02) - 4);
+    // CVaR label
+    ctx.fillStyle = 'rgba(196, 78, 82, 0.8)';
+    ctx.font = '7px "JetBrains Mono", monospace';
+    ctx.fillText('CVaR / ES', mapX(-4.0), mapY(empiricalPDF(-4.0)) - 6);
+
+    // Annotation: show the fat-tail difference
+    var annotX = mapX(3.5);
+    var normalY = normalPDF(-2.5, mixMean, mixSig);
+    var empirY = empiricalPDF(-2.5);
+    if (empirY > normalY * 1.3) {
+      ctx.font = '7px "JetBrains Mono", monospace';
+      ctx.fillStyle = COLORS.tertiary;
+      ctx.textAlign = 'left';
+      ctx.fillText('FAT TAIL:', plot.x + plot.w - 85, plot.y + plot.h - 40);
+      ctx.fillText('EMPIRICAL > NORMAL', plot.x + plot.w - 85, plot.y + plot.h - 30);
+    }
 
     // Legend
     var lx = plot.x + plot.w - 150;
@@ -491,7 +529,17 @@
     ctx.setLineDash([4, 3]);
     ctx.beginPath(); ctx.moveTo(lx, ly + 14); ctx.lineTo(lx + 18, ly + 14); ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillText('NORMAL', lx + 24, ly + 17);
+    ctx.fillText('NORMAL APPROX', lx + 24, ly + 17);
+
+    ctx.fillStyle = 'rgba(196, 78, 82, 0.15)';
+    ctx.fillRect(lx, ly + 25, 18, 8);
+    ctx.fillStyle = COLORS.tertiary;
+    ctx.fillText('95% TAIL', lx + 24, ly + 32);
+
+    ctx.fillStyle = 'rgba(196, 78, 82, 0.30)';
+    ctx.fillRect(lx, ly + 38, 18, 8);
+    ctx.fillStyle = COLORS.tertiary;
+    ctx.fillText('EXPECTED SHORTFALL', lx + 24, ly + 45);
   }
 
 
