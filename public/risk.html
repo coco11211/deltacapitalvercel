@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk & Controls — Delta Capital</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="risk-page">
+
+    <div class="viz-container">
+        <canvas id="ambient-canvas"></canvas>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Risk & Controls</h1>
+
+        <div class="section">
+            <h2>Systematic Risk Management</h2>
+            <p>Risk is not an afterthought; it is a core component of our investment process. We employ a multi-layered framework of pre-trade, real-time, and post-trade risk controls. Portfolio-level constraints are systematically enforced, and exposures are monitored continuously against predefined limits.</p>
+        </div>
+
+        <div class="section">
+            <h2>Measurement & Mitigation</h2>
+            <p>Our risk measurement system utilizes a combination of Value-at-Risk (VaR), Conditional Value-at-Risk (CVaR), and proprietary stress tests. These metrics inform portfolio construction and tactical adjustments. We explicitly model and manage liquidity risk, execution risk, and model decay.</p>
+        </div>
+
+        <div class="section">
+            <h2>Operational Integrity</h2>
+            <p>The firm maintains a clear separation between research, portfolio management, and execution. All trading activity is automated and monitored through a system of checks and balances designed to ensure operational integrity and minimize the potential for human error. Access to critical systems is strictly controlled and logged.</p>
+        </div>
+    </div>
+
+    <div id="command-palette" class="command-palette">
+        <div class="command-palette-content">
+            <input type="text" id="command-input" placeholder="Navigate...">
+            <ul id="command-list"></ul>
+        </div>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>

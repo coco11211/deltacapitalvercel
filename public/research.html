@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology — Delta Capital</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="viz-container">
+        <canvas id="ambient-canvas"></canvas>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Methodology</h1>
+
+        <div class="section">
+            <h2>Model Validation</h2>
+            <p>Our research process is predicated on a commitment to out-of-sample validation and the prevention of overfitting. Models are subjected to a battery of tests, including walk-forward validation and Monte Carlo stress testing, to ensure their robustness across a wide range of potential market regimes.</p>
+             <p>A model is not considered for production unless it demonstrates statistical significance after accounting for transaction costs, execution slippage, and data-mining bias.</p>
+        </div>
+    </div>
+
+    <div id="narrative-container">
+        <div class="narrative-sticky-parent">
+            <canvas id="narrative-canvas"></canvas>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Ensemble Approach</h2>
+            <p>We do not rely on a single monolithic model. Instead, we deploy an ensemble of diverse, uncorrelated predictive models. This approach reduces model-specific risk and creates a more resilient portfolio. Signals are generated from a variety of sources and combined using a proprietary weighting algorithm that considers both the model's historical performance and its recent predictive accuracy.</p>
+        </div>
+    </div>
+    
+    <div id="command-palette" class="command-palette">
+        <div class="command-palette-content">
+            <input type="text" id="command-input" placeholder="Navigate...">
+            <ul id="command-list"></ul>
+        </div>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>
