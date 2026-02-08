@@ -39,6 +39,28 @@
     { symbol: 'CRM', name: 'Salesforce Inc', price: 278.40, sector: 'Technology', cap: '271B', vol: 0.018 }
   ];
 
+  // Initialize with real data from provider
+  function initializeFromProvider() {
+    var symbols = STOCKS.map(function (s) { return s.symbol; });
+    MarketDataProvider.fetchQuotes(symbols, function (data) {
+      if (data) {
+        Object.keys(data).forEach(function (sym) {
+          var quote = data[sym];
+          var stock = STOCKS.find(function (s) { return s.symbol === sym; });
+          if (stock && quote.price) {
+            stock.currentPrice = quote.price;
+            stock.change = quote.change || 0;
+            stock.changePct = quote.changePct || 0;
+            stock.high = quote.high || quote.price;
+            stock.low = quote.low || quote.price;
+            stock.volume = quote.volume || 0;
+            stock.prevClose = quote.prevClose || quote.price;
+          }
+        });
+      }
+    });
+  }
+
   // --- Seeded RNG ---
   function seededRandom(seed) {
     var s = seed;
@@ -72,15 +94,27 @@
     stock.low = stock.currentPrice * (1 - dayRng() * 0.012);
   });
 
-  // --- Micro tick simulation ---
+  // --- Micro tick simulation with real data ---
   function tickPrices() {
     STOCKS.forEach(function (stock) {
-      var micro = normalRandom(tickRng) * stock.currentPrice * 0.0002;
-      stock.currentPrice = Math.max(0.01, stock.currentPrice + micro);
-      stock.change = stock.currentPrice - stock.prevClose;
-      stock.changePct = (stock.change / stock.prevClose) * 100;
-      if (stock.currentPrice > stock.high) stock.high = stock.currentPrice;
-      if (stock.currentPrice < stock.low) stock.low = stock.currentPrice;
+      var cached = MarketDataProvider.getCached(stock.symbol);
+      if (cached && cached.price) {
+        // Use real API data
+        stock.currentPrice = cached.price;
+        stock.change = cached.change;
+        stock.changePct = cached.changePct;
+        stock.high = Math.max(stock.high || cached.price, cached.high || cached.price);
+        stock.low = Math.min(stock.low || cached.price, cached.low || cached.price);
+        stock.volume = cached.volume || stock.volume;
+      } else {
+        // Fallback: micro-tick simulation
+        var micro = normalRandom(tickRng) * stock.currentPrice * 0.0002;
+        stock.currentPrice = Math.max(0.01, stock.currentPrice + micro);
+        stock.change = stock.currentPrice - stock.prevClose;
+        stock.changePct = (stock.change / stock.prevClose) * 100;
+        if (stock.currentPrice > stock.high) stock.high = stock.currentPrice;
+        if (stock.currentPrice < stock.low) stock.low = stock.currentPrice;
+      }
     });
   }
 
@@ -251,6 +285,8 @@
     var container = document.getElementById('sentiment-gauge');
     if (!container) return;
 
+    var realSentiment = null;
+
     function compute() {
       var upCount = 0, totalPct = 0;
       STOCKS.forEach(function (s) {
@@ -262,6 +298,12 @@
       var avgChange = totalPct / STOCKS.length;
       var vix = 14 + tickRng() * 18;
       var putCall = 0.65 + tickRng() * 0.85;
+
+      // Blend real sentiment data if available
+      if (realSentiment) {
+        var bullishBias = realSentiment.bullishPct > 60 ? 1 : realSentiment.bullishPct < 40 ? -1 : 0;
+        avgChange = avgChange * 0.6 + (bullishBias * 2) * 0.4;
+      }
 
       // Composite score 0–100
       var score = Math.round(
@@ -323,6 +365,24 @@
     }
 
     render();
+
+    // Fetch real sentiment data and re-render
+    MarketDataProvider.fetchSentiment(function (sentiment) {
+      if (sentiment) {
+        realSentiment = sentiment;
+        render();
+      }
+    });
+
+    // Update sentiment every 5 minutes
+    setInterval(function () {
+      MarketDataProvider.fetchSentiment(function (sentiment) {
+        if (sentiment) {
+          realSentiment = sentiment;
+          render();
+        }
+      });
+    }, 300000);
   }
 
 
@@ -330,9 +390,25 @@
   //  INIT
   // ==========================================
   function init() {
-    createTicker();
-    initScreener();
-    initSentiment();
+    // Initialize data provider first
+    if (typeof MarketDataProvider !== 'undefined') {
+      MarketDataProvider.init().then(function () {
+        initializeFromProvider();
+        createTicker();
+        initScreener();
+        initSentiment();
+      }).catch(function (err) {
+        console.error('MarketDataProvider init failed, using simulation mode:', err);
+        createTicker();
+        initScreener();
+        initSentiment();
+      });
+    } else {
+      // MarketDataProvider not loaded, use simulation
+      createTicker();
+      initScreener();
+      initSentiment();
+    }
   }
 
   // Handle both direct include and dynamic loading (after DOMContentLoaded)
