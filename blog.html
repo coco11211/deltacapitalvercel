@@ -250,7 +250,6 @@
         <a href="/blog.html" class="active">Blog</a>
         <a href="/glossary.html">Glossary</a>
         <a href="/brandkit.html">Brand Kit</a>
-        <a href="/email-signatures.html">Email Signatures</a>
         <a href="/disclosures.html">Disclosures</a>
         <a href="/faq.html">Questions</a>
         <a href="/contact.html">Contact</a>
@@ -264,22 +263,33 @@
   </div>
 
   <script src="/js/core.js"></script>
+  <script src="/js/market-data.js"></script>
+  <script src="/js/market.js"></script>
 
   <!-- Blog Data -->
   <script>
     // Blog posts data structure - EASY TO UPDATE
     const blogPosts = [
-      {
-        id: 1,
-        title: "Coming Soon: Quantitative Investing Insights",
-        excerpt: "Our first blog posts will cover quantitative methods, risk management, and systematic investment strategies.",
-        category: "education",
-        author: "Delta Capital",
-        date: "2026-02-08",
-        readTime: 5,
-        slug: "coming-soon"
-      }
-      // More articles will be added here
+      { id: 1, title: "Quantitative Investing: A Comprehensive Guide", excerpt: "Complete guide to quantitative investing strategies and systematic trading approaches.", category: "education", author: "Delta Capital", date: "2026-02-08", readTime: 8, slug: "quantitative-investing-guide" },
+      { id: 2, title: "Portfolio Optimization: Building Efficient Portfolios", excerpt: "Learn how to construct optimal portfolios using Modern Portfolio Theory and efficient frontier.", category: "strategy", author: "Delta Capital", date: "2026-02-08", readTime: 7, slug: "portfolio-optimization" },
+      { id: 3, title: "Risk Management Framework for Systematic Investors", excerpt: "Comprehensive guide to implementing risk controls and managing portfolio drawdowns.", category: "risk", author: "Delta Capital", date: "2026-02-07", readTime: 9, slug: "risk-management-framework" },
+      { id: 4, title: "Backtesting Strategies: Avoiding Common Pitfalls", excerpt: "Best practices for validating strategies without overfitting, look-ahead bias, or survivorship bias.", category: "analysis", author: "Delta Capital", date: "2026-02-07", readTime: 8, slug: "backtesting-strategies" },
+      { id: 5, title: "Understanding the Sharpe Ratio: Risk-Adjusted Returns", excerpt: "Complete breakdown of the Sharpe ratio and evaluating investment performance.", category: "analysis", author: "Delta Capital", date: "2026-02-06", readTime: 6, slug: "sharpe-ratio-explained" },
+      { id: 6, title: "Correlation and Diversification: Stable Returns", excerpt: "How correlation analysis helps build diversified portfolios that reduce risk.", category: "strategy", author: "Delta Capital", date: "2026-02-06", readTime: 7, slug: "correlation-diversification" },
+      { id: 7, title: "Machine Learning in Finance: Applications and Limitations", excerpt: "How AI and machine learning are transforming investment management.", category: "research", author: "Delta Capital", date: "2026-02-05", readTime: 10, slug: "machine-learning-finance" },
+      { id: 8, title: "Mean Reversion Strategies: Profiting from Extremes", excerpt: "How mean reversion works and building profitable mean reversion strategies.", category: "strategy", author: "Delta Capital", date: "2026-02-05", readTime: 8, slug: "mean-reversion-strategies" },
+      { id: 9, title: "Volatility Management: Controlling Market Swings", excerpt: "Techniques for measuring and managing portfolio volatility effectively.", category: "risk", author: "Delta Capital", date: "2026-02-04", readTime: 7, slug: "volatility-management" },
+      { id: 10, title: "Factor Investing: The Science of Outperformance", excerpt: "Understanding value, momentum, quality factors that drive returns.", category: "education", author: "Delta Capital", date: "2026-02-04", readTime: 9, slug: "factor-investing-guide" },
+      { id: 11, title: "Momentum Investing: Riding Market Trends", excerpt: "How momentum strategies exploit trends using behavioral finance.", category: "strategy", author: "Delta Capital", date: "2026-02-03", readTime: 8, slug: "momentum-investing" },
+      { id: 12, title: "Quantitative Value Investing: Data-Driven Selection", excerpt: "Apply quantitative methods to identify undervalued securities systematically.", category: "strategy", author: "Delta Capital", date: "2026-02-03", readTime: 8, slug: "value-investing-quantitative" },
+      { id: 13, title: "Market Sentiment Analysis: Reading the Crowd", excerpt: "Using sentiment indicators and positioning data for market analysis.", category: "analysis", author: "Delta Capital", date: "2026-02-02", readTime: 7, slug: "market-sentiment-analysis" },
+      { id: 14, title: "Derivatives and Hedging: Portfolio Protection", excerpt: "Introduction to options, futures, and hedging strategies.", category: "risk", author: "Delta Capital", date: "2026-02-02", readTime: 10, slug: "derivatives-hedging" },
+      { id: 15, title: "Systematic Rebalancing: Optimal Allocations", excerpt: "When and how to rebalance portfolios to maintain target risk exposure.", category: "strategy", author: "Delta Capital", date: "2026-02-01", readTime: 6, slug: "systematic-rebalancing" },
+      { id: 16, title: "Data Quality in Investing: Garbage In, Garbage Out", excerpt: "Why clean data is critical for successful quantitative investing.", category: "research", author: "Delta Capital", date: "2026-02-01", readTime: 7, slug: "data-quality-importance" },
+      { id: 17, title: "Algorithmic Trading: Automating Strategies", excerpt: "How to implement algorithms and manage automated execution.", category: "strategy", author: "Delta Capital", date: "2026-01-31", readTime: 9, slug: "algo-trading-basics" },
+      { id: 18, title: "Crisis Management in Quantitative Portfolios", excerpt: "Managing quantitative portfolios during market stress and extreme events.", category: "risk", author: "Delta Capital", date: "2026-01-31", readTime: 8, slug: "crisis-management" },
+      { id: 19, title: "Tax-Efficient Investing: Maximizing After-Tax Returns", excerpt: "Strategies for minimizing tax impact on systematic returns.", category: "analysis", author: "Delta Capital", date: "2026-01-30", readTime: 7, slug: "tax-efficiency-investing" },
+      { id: 20, title: "Benchmarking and Performance Attribution", excerpt: "How to measure performance and attribute returns to decisions.", category: "analysis", author: "Delta Capital", date: "2026-01-30", readTime: 8, slug: "benchmarking-performance" }
     ];
 
     // Render blog grid
