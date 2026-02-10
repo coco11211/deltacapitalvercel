@@ -6,6 +6,12 @@
   <title>Delta Capital — Brand Kit</title>
   <meta name="description" content="Delta Capital brand identity guidelines. Logo, color palette, typography, and visual style standards.">
   <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
+  <link rel="manifest" href="/img/manifest.json">
+  <meta name="theme-color" content="#111111">
   <link rel="canonical" href="https://deltacapitaltrading.com/brandkit.html">
   <meta property="og:title" content="Brand Kit — Delta Capital">
   <meta property="og:description" content="Delta Capital brand identity guidelines, logo, colors, and visual standards.">
@@ -445,6 +451,148 @@
       </div>
     </section>
 
+    <!-- Asset Library -->
+    <section>
+      <h2>Asset Library</h2>
+      <p style="margin-bottom: 30px; color: #555;">
+        Delta Capital maintains a comprehensive asset library for use across all digital and print applications.
+      </p>
+
+      <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #111;">Favicon Suite</h3>
+      <p style="color: #555; margin-bottom: 20px;">
+        Multi-platform favicon set for optimal icon display across browsers and devices:
+      </p>
+      <ul style="list-style: none; color: #555; margin-bottom: 30px;">
+        <li>favicon.svg — Vector icon (scalable)</li>
+        <li>favicon.ico — Multi-resolution ICO (16×16, 32×32, 48×48)</li>
+        <li>apple-touch-icon.png — iOS home screen (180×180)</li>
+        <li>apple-touch-icon-152x152.png — iPad (152×152)</li>
+        <li>apple-touch-icon-120x120.png — iPhone (120×120)</li>
+        <li>android-chrome-192x192.png — Android (192×192)</li>
+        <li>android-chrome-512x512.png — Android (512×512)</li>
+        <li>manifest.json — Web app manifest</li>
+      </ul>
+
+      <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #111;">Social Media & Meta Assets</h3>
+      <p style="color: #555; margin-bottom: 20px;">
+        Optimized images for social sharing and search engine previews:
+      </p>
+      <ul style="list-style: none; color: #555; margin-bottom: 30px;">
+        <li>og-default.png — OpenGraph image (1200×630) for social sharing</li>
+        <li>logo.png — Logo for JSON-LD structured data (512×512)</li>
+      </ul>
+
+      <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #111;">Location</h3>
+      <p style="color: #555;">
+        All assets are stored in the <code>/img</code> directory. Reference them with absolute paths: <code>/img/favicon.ico</code>, <code>/img/og-default.png</code>, etc.
+      </p>
+    </section>
+
+    <!-- HTML Meta Tags -->
+    <section>
+      <h2>HTML Meta Tags Template</h2>
+      <p style="margin-bottom: 30px; color: #555;">
+        Include these essential meta tags in the &lt;head&gt; of all HTML pages:
+      </p>
+
+      <div style="background: #f3f3f3; padding: 20px; border-radius: 4px; overflow-x: auto; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+        <pre style="margin: 0;">&lt;!-- Favicon Suite --&gt;
+&lt;link rel="icon" type="image/svg+xml" href="/img/favicon.svg"&gt;
+&lt;link rel="icon" type="image/x-icon" href="/img/favicon.ico"&gt;
+&lt;link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png"&gt;
+&lt;link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png"&gt;
+&lt;link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png"&gt;
+&lt;link rel="manifest" href="/img/manifest.json"&gt;
+&lt;meta name="theme-color" content="#111111"&gt;
+
+&lt;!-- OpenGraph --&gt;
+&lt;meta property="og:image" content="https://deltacapitaltrading.com/img/og-default.png"&gt;
+&lt;meta property="og:image:width" content="1200"&gt;
+&lt;meta property="og:image:height" content="630"&gt;
+
+&lt;!-- Canonical URL --&gt;
+&lt;link rel="canonical" href="https://deltacapitaltrading.com/page-name.html"&gt;</pre>
+      </div>
+    </section>
+
+    <!-- Email & Digital Applications -->
+    <section>
+      <h2>Email & Digital Applications</h2>
+      <p style="margin-bottom: 30px; color: #555;">
+        For email templates, digital documents, and other applications:
+      </p>
+
+      <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #111;">Email Signatures</h3>
+      <p style="color: #555; margin-bottom: 20px;">
+        Professional email signature templates are available in <a href="/email-signatures.html">email-signatures.html</a>. All signatures use Delta Capital brand colors and typography.
+      </p>
+
+      <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #111;">Email Design Guidelines</h3>
+      <ul style="list-style: none; color: #555;">
+        <li>Use Cormorant Garamond for headings (with fallback to Georgia)</li>
+        <li>Use monospace for technical content and emphasis</li>
+        <li>Maintain 1.7 line-height for body text</li>
+        <li>Use #111 for text on light backgrounds only</li>
+      </ul>
+    </section>
+
+    <!-- Utility Pages -->
+    <section>
+      <h2>Utility Pages</h2>
+      <p style="margin-bottom: 30px; color: #555;">
+        Delta Capital includes branded utility pages for common use cases:
+      </p>
+
+      <ul class="tone-list">
+        <li>
+          <strong><a href="/404.html">404.html</a></strong>
+          <span>Custom error page for missing or moved content. Returns HTTP 404 status code.</span>
+        </li>
+        <li>
+          <strong><a href="/maintenance.html">maintenance.html</a></strong>
+          <span>Standalone maintenance mode page with animated Delta symbol. Requires no external dependencies.</span>
+        </li>
+        <li>
+          <strong><a href="/coming-soon.html">coming-soon.html</a></strong>
+          <span>Pre-launch placeholder page with full OG meta tags for social sharing.</span>
+        </li>
+        <li>
+          <strong><a href="/accessibility.html">accessibility.html</a></strong>
+          <span>WCAG 2.1 compliance statement and accessibility features documentation.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Print Guidelines -->
+    <section>
+      <h2>Print Guidelines</h2>
+      <p style="margin-bottom: 30px; color: #555;">
+        All pages support print-optimized styling through the print stylesheet in <code>css/style.css</code>.
+      </p>
+
+      <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #111;">Print Features</h3>
+      <ul style="list-style: none; color: #555; margin-bottom: 30px;">
+        <li>• Navigation and interactive elements automatically hidden</li>
+        <li>• Colors convert to black text on white background</li>
+        <li>• External link URLs display after links</li>
+        <li>• Page breaks managed automatically</li>
+        <li>• Responsive images scale appropriately</li>
+      </ul>
+
+      <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #111;">How to Print</h3>
+      <ol style="list-style: none; color: #555; padding-left: 0;">
+        <li>1. Open the page in your browser</li>
+        <li>2. Press <kbd>Ctrl+P</kbd> (Windows) or <kbd>Cmd+P</kbd> (Mac)</li>
+        <li>3. Uncheck "Headers and Footers" if desired</li>
+        <li>4. Select "Save as PDF" or print directly</li>
+        <li>5. Check "Print Background Graphics" for color elements</li>
+      </ol>
+
+      <p style="margin-top: 30px; color: #555;">
+        <strong>Supported Browsers:</strong> Chrome, Firefox, Safari, and Edge (latest versions)
+      </p>
+    </section>
+
     <!-- Print Info -->
     <section>
       <div class="print-note">
@@ -454,5 +602,7 @@
     </section>
 
   </div>
+
+  <script src="/js/cookie-notice.js"></script>
 </body>
 </html>

@@ -117,4 +117,12 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- Accessibility & Compliance -->
+  <url>
+    <loc>https://deltacapitaltrading.com/accessibility.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
