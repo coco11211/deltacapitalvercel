@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossary — Delta Capital</title>
+  <meta name="description" content="Financial and investment terminology glossary. Key terms used in quantitative investing and risk management.">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
+  <link rel="manifest" href="/img/manifest.json">
+  <meta name="theme-color" content="#111111">
+  <link rel="canonical" href="https://deltacapitaltrading.com/glossary.html">
+  <meta property="og:title" content="Glossary — Delta Capital">
+  <meta property="og:description" content="Financial and investment terminology glossary.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Delta Capital">
+  <meta property="og:url" content="https://deltacapitaltrading.com/glossary.html">
+  <meta property="og:image" content="https://deltacapitaltrading.com/img/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Glossary — Delta Capital">
+  <meta name="twitter:description" content="Financial and investment terminology glossary.">
+  <meta name="twitter:image" content="https://deltacapitaltrading.com/img/og-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .glossary-search {
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    .glossary-search input {
+      width: 100%;
+      padding: 14px 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: #111;
+      background: white;
+      transition: border-color 0.2s ease;
+    }
+
+    .glossary-search input:focus {
+      outline: none;
+      border-color: #111;
+    }
+
+    .glossary-search input::placeholder {
+      color: #999;
+    }
+
+    .glossary-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+
+    .index-link {
+      padding: 8px 12px;
+      border: 1px solid #e0e0e0;
+      background: white;
+      color: #111;
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+
+    .index-link:hover,
+    .index-link.active {
+      background: #111;
+      color: white;
+      border-color: #111;
+    }
+
+    .glossary-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .glossary-letter {
+      margin-bottom: 50px;
+      page-break-inside: avoid;
+    }
+
+    .glossary-letter-heading {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #111;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #111;
+      letter-spacing: -0.01em;
+    }
+
+    .glossary-term {
+      margin-bottom: 30px;
+    }
+
+    .term-title {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .term-name {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #111;
+    }
+
+    .term-category {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #999;
+      letter-spacing: 0.04em;
+    }
+
+    .term-definition {
+      color: #555;
+      line-height: 1.7;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .term-example {
+      font-style: italic;
+      color: #999;
+      font-size: 0.9rem;
+      padding-left: 16px;
+      border-left: 2px solid #e0e0e0;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: #555;
+    }
+
+    .glossary-stats {
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Header -->
+    <section class="section" style="min-height: auto; padding-bottom: 4vh;">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Reference</span>
+          <div class="divider"></div>
+          <h1>Glossary</h1>
+          <p style="margin-top: 2vh;">
+            Financial and investment terminology. Essential concepts for understanding quantitative investing and risk management.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Glossary Content -->
+    <section class="section section--compact">
+      <div class="section-inner">
+
+        <!-- Search -->
+        <div class="reveal glossary-search" style="transition-delay: 0.1s;">
+          <input type="text" id="glossarySearch" placeholder="Search terms..." spellcheck="false">
+        </div>
+
+        <!-- Index -->
+        <div class="reveal glossary-index" id="glossaryIndex" style="transition-delay: 0.15s;">
+          <!-- Generated by JavaScript -->
+        </div>
+
+        <!-- Stats -->
+        <div class="reveal glossary-stats" style="transition-delay: 0.2s;">
+          <span id="termCount">0 terms</span>
+        </div>
+
+        <!-- Glossary Terms -->
+        <div class="reveal glossary-container" style="transition-delay: 0.25s;" id="glossaryTerms">
+          <!-- Generated by JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="/">Philosophy</a>
+        <a href="/research.html">Research</a>
+        <a href="/risk.html">Risk</a>
+        <a href="/architecture.html">Architecture</a>
+        <a href="/insights.html">Insights</a>
+        <a href="/principles.html">Principles</a>
+        <a href="/screener.html">Screener</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/glossary.html" class="active">Glossary</a>
+        <a href="/brandkit.html">Brand Kit</a>
+        <a href="/disclosures.html">Disclosures</a>
+        <a href="/faq.html">Questions</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="/js/core.js"></script>
+  <script src="/js/market-data.js"></script>
+  <script src="/js/market.js"></script>
+
+  <!-- Glossary Data -->
+  <script>
+    // Glossary terms - EASY TO UPDATE
+    const glossaryTerms = [
+      {
+        term: "Alpha",
+        category: "Performance",
+        definition: "Excess return above a benchmark. Positive alpha indicates outperformance; negative alpha indicates underperformance.",
+        example: "A fund returning 12% when its benchmark returned 10% has generated 2% alpha."
+      },
+      {
+        term: "Backtesting",
+        category: "Analysis",
+        definition: "Testing a trading strategy using historical data to evaluate performance before deploying with real capital.",
+        example: "We backtest strategies over 20 years of market data to assess robustness."
+      },
+      {
+        term: "Basis Points",
+        category: "Measurement",
+        definition: "One hundredth of a percent (0.01%). Used to describe small changes in interest rates, bond yields, and fees.",
+        example: "A fund fee increase of 25 basis points is a 0.25% increase."
+      },
+      {
+        term: "Beta",
+        category: "Risk",
+        definition: "Measure of a security's volatility relative to the market. Beta of 1.0 means it moves with the market; >1.0 is more volatile; <1.0 is less volatile.",
+        example: "A stock with beta of 1.5 is expected to move 1.5% for every 1% market movement."
+      },
+      {
+        term: "Correlation",
+        category: "Risk",
+        definition: "Statistical measure of how two assets move together. Ranges from -1 (inverse) to +1 (perfectly correlated).",
+        example: "Stocks and bonds typically have low or negative correlation, making them good portfolio diversifiers."
+      },
+      {
+        term: "Drawdown",
+        category: "Risk",
+        definition: "Peak-to-trough decline during a specific period. Maximum drawdown is the largest loss from peak to trough.",
+        example: "A portfolio that went from $1M to $800K experienced a 20% drawdown."
+      },
+      {
+        term: "Efficient Frontier",
+        category: "Portfolio",
+        definition: "Set of optimal portfolios offering the highest expected return for a given level of risk.",
+        example: "Modern Portfolio Theory uses the efficient frontier to identify ideal asset allocations."
+      },
+      {
+        term: "Hedging",
+        category: "Strategy",
+        definition: "Taking a position to offset potential losses in another position. Reduces risk but often at a cost.",
+        example: "Buying put options on stocks you own is a hedge against downside risk."
+      },
+      {
+        term: "Kurtosis",
+        category: "Risk",
+        definition: "Statistical measure of tail risk. High kurtosis indicates greater likelihood of extreme events.",
+        example: "Assets with high kurtosis experience more frequent extreme price movements."
+      },
+      {
+        term: "Liquidity",
+        category: "Market",
+        definition: "Ability to buy or sell an asset quickly without significantly affecting its price.",
+        example: "Stocks are generally more liquid than real estate or private equity."
+      },
+      {
+        term: "Mean Reversion",
+        category: "Strategy",
+        definition: "Theory that prices tend to move back toward their average over time.",
+        example: "A stock trading far below its historical average may revert upward."
+      },
+      {
+        term: "Volatility",
+        category: "Risk",
+        definition: "Measure of price fluctuations. Standard deviation of returns. Higher volatility means greater price swings.",
+        example: "A stock with 20% annualized volatility fluctuates significantly more than one with 10% volatility."
+      },
+      {
+        term: "Sharpe Ratio",
+        category: "Performance",
+        definition: "Risk-adjusted return metric. Excess return per unit of risk taken. Higher is better.",
+        example: "A strategy with 1.5 Sharpe Ratio generates 1.5% excess return per 1% of risk."
+      },
+      {
+        term: "Standard Deviation",
+        category: "Risk",
+        definition: "Measure of dispersion around the mean. Quantifies volatility and variability of returns.",
+        example: "Returns with a standard deviation of 15% are more dispersed than those with 10%."
+      },
+      {
+        term: "Value at Risk (VaR)",
+        category: "Risk",
+        definition: "Maximum expected loss over a given period with a specified confidence level.",
+        example: "95% VaR of $100k means there's a 5% chance of losses exceeding $100k."
+      },
+      // MOAT TYPES - Demand Domain
+      {
+        term: "Brand Trust",
+        category: "Moat",
+        definition: "Competitive advantage created when consumers trust and prefer a brand due to reputation and quality perception.",
+        example: "Coca-Cola's brand trust allows premium pricing despite commodity-like product."
+      },
+      {
+        term: "Custom / One-off",
+        category: "Moat",
+        definition: "Moat created by customized solutions tailored to specific customer needs, making switching difficult.",
+        example: "Specialized software built for a company's unique workflow creates switching costs."
+      },
+      {
+        term: "Data Workflow Lock-in",
+        category: "Moat",
+        definition: "Advantage from accumulating customer data over time, making it difficult to switch platforms.",
+        example: "LinkedIn's value increases as users add more professional history and connections."
+      },
+      {
+        term: "Design In Qualification",
+        category: "Moat",
+        definition: "Moat created when a product becomes embedded in customer's design or engineering specifications.",
+        example: "Intel processors embedded in computer designs create switching costs for manufacturers."
+      },
+      {
+        term: "Format Lock In",
+        category: "Moat",
+        definition: "Advantage from proprietary formats that are difficult or costly to convert to competing standards.",
+        example: "Adobe PDF format became so standard that alternatives struggle to compete."
+      },
+      {
+        term: "Habit Default",
+        category: "Moat",
+        definition: "Moat from habitual usage patterns where customers default to familiar solutions.",
+        example: "Users default to Google for search due to habit, making competitor adoption difficult."
+      },
+      {
+        term: "Installed Base Consumables",
+        category: "Moat",
+        definition: "Moat from customers locked into buying replacement consumables for installed products.",
+        example: "Printer manufacturers create loyalty by selling ink cartridges to existing printer owners."
+      },
+      {
+        term: "Long Term Contracts",
+        category: "Moat",
+        definition: "Competitive advantage from multi-year contracts that lock customers into exclusive relationships.",
+        example: "Telecom companies use multi-year contracts to retain subscribers."
+      },
+      {
+        term: "Procurement Inertia",
+        category: "Moat",
+        definition: "Moat from the difficulty and cost of changing established procurement processes.",
+        example: "Businesses reluctant to change established vendor relationships despite better alternatives."
+      },
+      {
+        term: "Reputation Reviews",
+        category: "Moat",
+        definition: "Competitive advantage from positive review accumulation that attracts new customers.",
+        example: "Amazon sellers with thousands of 5-star reviews gain trust-based advantage."
+      },
+      {
+        term: "Suite Bundling",
+        category: "Moat",
+        definition: "Moat from bundling multiple products together, making it costly to switch from partial suite.",
+        example: "Microsoft Office suite is harder to replace than individual apps."
+      },
+      {
+        term: "Switching Costs General",
+        category: "Moat",
+        definition: "Broad category of costs (financial, time, psychological) that make switching to competitors difficult.",
+        example: "Enterprise software switching costs can exceed $1M in implementation and training."
+      },
+      {
+        term: "Training Org Change Costs",
+        category: "Moat",
+        definition: "Moat from the organizational complexity and cost of retraining staff on new solutions.",
+        example: "Large organizations reluctant to switch ERP systems due to massive training requirements."
+      },
+      {
+        term: "Capacity Moat",
+        category: "Moat",
+        definition: "Competitive advantage from limited production capacity that controls supply in market.",
+        example: "TSMC's limited chip manufacturing capacity creates pricing power."
+      },
+      {
+        term: "Capex Knowhow Scale",
+        category: "Moat",
+        definition: "Moat from economies of scale in capital-intensive manufacturing with technical expertise.",
+        example: "Samsung's massive chip fabrication plants lower per-unit costs vs competitors."
+      },
+      {
+        term: "Distribution Control",
+        category: "Moat",
+        definition: "Competitive advantage from controlling distribution channels and logistics.",
+        example: "Coca-Cola's extensive distribution network makes it difficult for competitors to reach customers."
+      },
+      {
+        term: "Geographic Natural",
+        category: "Moat",
+        definition: "Moat from natural geographic advantages like proximity to raw materials or customers.",
+        example: "Aluminum smelters near hydroelectric power have massive cost advantage."
+      },
+      {
+        term: "Keystone Component",
+        category: "Moat",
+        definition: "Advantage from controlling a critical component that others depend on.",
+        example: "Intel's dominance in CPU design gives them power over PC manufacturers."
+      },
+      {
+        term: "Learning Curve Yield",
+        category: "Moat",
+        definition: "Moat from improving yields and efficiency through accumulated production experience.",
+        example: "Samsung improves chip yields faster than competitors due to manufacturing experience."
+      },
+      {
+        term: "Operational Excellence",
+        category: "Moat",
+        definition: "Competitive advantage from superior operational efficiency and cost management.",
+        example: "Amazon's logistics efficiency creates cost advantage over traditional retailers."
+      },
+      {
+        term: "Physical Network Density",
+        category: "Moat",
+        definition: "Moat from dense physical networks that are expensive to replicate.",
+        example: "Electric utility networks are expensive to duplicate due to physical infrastructure."
+      },
+      {
+        term: "Preferential Input Access",
+        category: "Moat",
+        definition: "Advantage from preferential access to key inputs or raw materials.",
+        example: "De Beers' control of diamond supply sources creates pricing power."
+      },
+      {
+        term: "Scale Economies Unit Cost",
+        category: "Moat",
+        definition: "Competitive advantage from lower per-unit costs at higher volumes.",
+        example: "Larger retailers achieve lower inventory costs than smaller competitors."
+      },
+      {
+        term: "Scope Economies",
+        category: "Moat",
+        definition: "Moat from leveraging shared assets across multiple product lines or markets.",
+        example: "Conglomerates achieve efficiency by sharing R&D, manufacturing, and distribution."
+      },
+      {
+        term: "Service Field Network",
+        category: "Moat",
+        definition: "Competitive advantage from extensive service network that competitors can't easily replicate.",
+        example: "Caterpillar's global service network supports equipment sales and creates loyalty."
+      },
+      {
+        term: "Supply Chain Control",
+        category: "Moat",
+        definition: "Moat from owning or controlling parts of the supply chain.",
+        example: "Vertical integration of mining and refining gives aluminum producers cost advantage."
+      },
+      {
+        term: "Compliance Advantage",
+        category: "Moat",
+        definition: "Competitive advantage from existing compliance infrastructure that competitors must replicate.",
+        example: "Banks with established regulatory frameworks make it hard for fintech competitors."
+      },
+      {
+        term: "Concession License",
+        category: "Moat",
+        definition: "Moat from government-granted exclusive rights or concessions.",
+        example: "Casino licenses limiting competition in specific jurisdictions."
+      },
+      {
+        term: "Content Rights Currency",
+        category: "Moat",
+        definition: "Advantage from owning exclusive content rights and intellectual property.",
+        example: "Disney's content library creates durable competitive advantage for streaming."
+      },
+      {
+        term: "Contractual Exclusivity",
+        category: "Moat",
+        definition: "Moat created by exclusive contracts that prevent competitors from accessing customers.",
+        example: "Exclusive distribution agreements give preferred access to key retailers."
+      },
+      {
+        term: "Government Contracting Relationships",
+        category: "Moat",
+        definition: "Competitive advantage from long-term government contracts and established relationships.",
+        example: "Defense contractors maintain moats through established government contracts."
+      },
+      {
+        term: "IP Choke Point",
+        category: "Moat",
+        definition: "Moat from controlling essential intellectual property or patents.",
+        example: "Qualcomm's patent portfolio in mobile chips creates licensing moat."
+      },
+      {
+        term: "Permits Rights Of Way",
+        category: "Moat",
+        definition: "Advantage from holding permits or rights necessary for operation.",
+        example: "Utility companies hold permits making new entrants difficult."
+      },
+      {
+        term: "Regulated Standards Pipe",
+        category: "Moat",
+        definition: "Moat from regulatory standards that favor established players.",
+        example: "Banking regulations create barriers for new fintech entrants."
+      },
+      {
+        term: "Clearing Settlement",
+        category: "Moat",
+        definition: "Moat from controlling payment clearing and settlement systems.",
+        example: "Visa and Mastercard control critical payment infrastructure."
+      },
+      {
+        term: "Data Network Effects",
+        category: "Moat",
+        definition: "Competitive advantage from network effects where data value increases with network size.",
+        example: "Google's search improves as it collects more user data and search queries."
+      },
+      {
+        term: "De Facto Standard",
+        category: "Moat",
+        definition: "Moat from becoming the standard solution that others conform to.",
+        example: "Windows became the de facto standard for enterprise operating systems."
+      },
+      {
+        term: "Default OS Gateway",
+        category: "Moat",
+        definition: "Advantage from controlling the default operating system or platform.",
+        example: "Apple iOS creates moat as default mobile OS for iPhone users."
+      },
+      {
+        term: "Direct Network Effects",
+        category: "Moat",
+        definition: "Moat where value increases directly with network size.",
+        example: "Facebook becomes more valuable as more users join the network."
+      },
+      {
+        term: "Ecosystem Complements",
+        category: "Moat",
+        definition: "Competitive advantage from ecosystem of complementary products and services.",
+        example: "Apple's ecosystem of hardware, software, and services creates strong moat."
+      },
+      {
+        term: "Interoperability Hub",
+        category: "Moat",
+        definition: "Moat from being the central hub that others must connect to.",
+        example: "Credit card networks require merchants to connect for payment processing."
+      },
+      {
+        term: "Standards Registry",
+        category: "Moat",
+        definition: "Advantage from controlling standards or registries others depend on.",
+        example: "ICANN controls domain name registry, creating dependency moat."
+      },
+      {
+        term: "Two Sided Network",
+        category: "Moat",
+        definition: "Moat from two-sided network effects connecting buyers and sellers.",
+        example: "Uber's value increases as more drivers and riders join the platform."
+      },
+      {
+        term: "Benchmark Pricing Power",
+        category: "Moat",
+        definition: "Competitive advantage from setting price benchmarks that others follow.",
+        example: "Dominant firms in commodity markets can influence global pricing."
+      },
+      {
+        term: "Cost Of Capital Advantage",
+        category: "Moat",
+        definition: "Moat from lower cost of capital due to creditworthiness or investor preference.",
+        example: "Apple's strong credit rating gives it lower borrowing costs than competitors."
+      },
+      {
+        term: "Float Prepayment",
+        category: "Moat",
+        definition: "Advantage from receiving cash from customers before delivering products/services.",
+        example: "Insurance companies invest premium float before paying claims."
+      },
+      {
+        term: "Negative Working Capital",
+        category: "Moat",
+        definition: "Moat from business model where customers pay before inventory must be purchased.",
+        example: "Amazon receives payment before paying suppliers, funding growth with no debt."
+      },
+      {
+        term: "Underwriting Risk Pooling",
+        category: "Moat",
+        definition: "Advantage from pooling risk across large customer base.",
+        example: "Large insurance companies achieve better underwriting economics through pooling."
+      },
+      {
+        term: "Arbitrage",
+        category: "Strategy",
+        definition: "Simultaneous buying and selling of identical securities in different markets to profit from price discrepancies.",
+        example: "Buying a stock at $100 on NYSE and selling at $101 on NASDAQ locks in 1% profit."
+      },
+      {
+        term: "Bid-Ask Spread",
+        category: "Market",
+        definition: "Difference between the bid price (buyer price) and ask price (seller price) for a security.",
+        example: "A stock with bid of $99.50 and ask of $99.75 has a 0.25 spread."
+      },
+      {
+        term: "Black-Scholes Model",
+        category: "Analysis",
+        definition: "Mathematical model for pricing European options based on stock price, volatility, and time to expiration.",
+        example: "The Black-Scholes formula determines option prices from market conditions."
+      },
+      {
+        term: "Book Value",
+        category: "Valuation",
+        definition: "Total assets minus total liabilities, representing the company's equity on balance sheet.",
+        example: "A company with $1B in assets and $300M in liabilities has $700M book value."
+      },
+      {
+        term: "Breakeven Point",
+        category: "Analysis",
+        definition: "Price level where a position has zero profit or loss, often used for options.",
+        example: "A call option with strike 100 and premium 5 has breakeven at price 105."
+      },
+      {
+        term: "Bull Market",
+        category: "Market",
+        definition: "Extended period when securities prices are rising and investor sentiment is positive.",
+        example: "The 2010-2020 period was a long bull market with rising stock prices."
+      },
+      {
+        term: "Bear Market",
+        category: "Market",
+        definition: "Extended period when securities prices are falling and investor sentiment is negative.",
+        example: "2008 financial crisis was a severe bear market with 50%+ declines."
+      },
+      {
+        term: "Call Option",
+        category: "Derivatives",
+        definition: "Contract giving the holder the right (but not obligation) to buy an asset at a specified price.",
+        example: "A call option on Apple stock with $150 strike gives the right to buy AAPL at $150."
+      },
+      {
+        term: "Collar Strategy",
+        category: "Strategy",
+        definition: "Buy protective put and sell covered call to reduce downside risk while capping upside gains.",
+        example: "Own 100 shares, buy put to protect against 10 percent drop, sell call to limit gains to 10 percent profit."
+      },
+      {
+        term: "Coefficient of Variation",
+        category: "Risk",
+        definition: "Ratio of standard deviation to mean return, measuring risk per unit of return.",
+        example: "Portfolio with 10% return and 5% volatility has CV of 0.5."
+      },
+      {
+        term: "Compound Annual Growth Rate",
+        category: "Performance",
+        definition: "Annualized rate of growth accounting for compounding over multiple periods.",
+        example: "An investment growing from $10,000 to $20,000 in 5 years has 14.9% CAGR."
+      },
+      {
+        term: "Correlation Coefficient",
+        category: "Risk",
+        definition: "Statistical measure between -1 and +1 showing how two variables move together.",
+        example: "Stocks and bonds often have negative correlation, moving in opposite directions."
+      },
+      {
+        term: "Coupon Rate",
+        category: "Fixed Income",
+        definition: "Annual interest rate paid by bond issuer, expressed as percentage of par value.",
+        example: "A bond with 4% coupon pays $40 annually on $1,000 par value."
+      },
+      {
+        term: "Cumulative Return",
+        category: "Performance",
+        definition: "Total gain or loss from investing over an entire period, not annualized.",
+        example: "An investment with 5% annual return for 2 years has 10.25% cumulative return."
+      },
+      {
+        term: "Default Risk",
+        category: "Risk",
+        definition: "Risk that a borrower will fail to make required interest or principal payments.",
+        example: "A bond from a company with weak financials has high default risk."
+      },
+      {
+        term: "Delta",
+        category: "Greeks",
+        definition: "Rate of change of option price relative to change in underlying asset price.",
+        example: "An option with delta 0.5 gains $0.50 for every $1 gain in the underlying."
+      },
+      {
+        term: "Diversification Ratio",
+        category: "Risk",
+        definition: "Ratio of weighted average volatility to portfolio volatility, measuring diversification benefit.",
+        example: "A ratio of 2.0 means portfolio volatility is half of average component volatility."
+      },
+      {
+        term: "Dividend Yield",
+        category: "Income",
+        definition: "Annual dividend payment divided by stock price, expressed as percentage.",
+        example: "A stock trading at $100 paying $4 annual dividend has 4% dividend yield."
+      },
+      {
+        term: "Double Top",
+        category: "Technical",
+        definition: "Technical chart pattern where price reaches the same resistance level twice, often predicting decline.",
+        example: "Stock reaching $100 twice with decline in between may indicate bearish reversal."
+      },
+      {
+        term: "Duration",
+        category: "Fixed Income",
+        definition: "Measure of bond's sensitivity to interest rate changes, weighted average time to cash flows.",
+        example: "A bond with 5-year duration loses 5% in value if interest rates rise 1%."
+      },
+      {
+        term: "Earnings Per Share",
+        category: "Valuation",
+        definition: "Company's net income divided by number of outstanding shares.",
+        example: "A company with $100M net income and 10M shares has $10 EPS."
+      },
+      {
+        term: "Efficient Market Hypothesis",
+        category: "Theory",
+        definition: "Theory that asset prices fully reflect available information, making consistent outperformance impossible.",
+        example: "If EMH is true, active management cannot consistently beat the market."
+      },
+      {
+        term: "Exponential Moving Average",
+        category: "Technical",
+        definition: "Moving average that gives more weight to recent prices than older prices.",
+        example: "A 20-day EMA responds faster to price changes than simple 20-day moving average."
+      },
+      {
+        term: "Free Cash Flow",
+        category: "Fundamentals",
+        definition: "Cash generated by operations minus capital expenditures, available to investors.",
+        example: "A company with $500M operating cash flow and $100M capex has $400M FCF."
+      },
+      {
+        term: "Gamma",
+        category: "Greeks",
+        definition: "Rate of change of delta relative to change in underlying asset price.",
+        example: "An option with high gamma has delta that changes rapidly with price moves."
+      },
+      {
+        term: "Gini Coefficient",
+        category: "Risk",
+        definition: "Measure of statistical dispersion, sometimes used to assess portfolio return distribution inequality.",
+        example: "Portfolios with unequal return distributions have higher Gini coefficients."
+      },
+      {
+        term: "Golden Cross",
+        category: "Technical",
+        definition: "Technical pattern when short-term moving average crosses above long-term moving average.",
+        example: "50-day MA crossing above 200-day MA is considered a bullish signal."
+      },
+      {
+        term: "Greeks",
+        category: "Derivatives",
+        definition: "Set of metrics (Delta, Gamma, Vega, Theta, Rho) measuring option sensitivity to various factors.",
+        example: "Options traders monitor Greeks to understand their position risks."
+      },
+      {
+        term: "Head and Shoulders",
+        category: "Technical",
+        definition: "Chart pattern with three peaks (head higher than shoulders) indicating bearish reversal.",
+        example: "Head and shoulders pattern often precedes significant price declines."
+      },
+      {
+        term: "Hedge",
+        category: "Strategy",
+        definition: "Position taken to offset potential losses in another position.",
+        example: "Buying put options on stocks you own hedges against downside risk."
+      },
+      {
+        term: "Historical Volatility",
+        category: "Risk",
+        definition: "Volatility calculated from past price changes, often measured as standard deviation.",
+        example: "A stock with 20% historical volatility has moved ±20% from its mean."
+      },
+      {
+        term: "Index",
+        category: "Market",
+        definition: "Basket of securities representing a market segment or asset class.",
+        example: "S&P 500 index comprises 500 large-cap US companies."
+      },
+      {
+        term: "Intrinsic Value",
+        category: "Valuation",
+        definition: "Fundamental value of a security based on discounted future cash flows.",
+        example: "A stock trading at $50 might have intrinsic value of $60 based on DCF analysis."
+      },
+      {
+        term: "Jensen's Alpha",
+        category: "Performance",
+        definition: "Risk-adjusted excess return compared to a market benchmark.",
+        example: "A fund with positive Jensen's alpha outperforms its benchmark after adjusting for risk."
+      },
+      {
+        term: "Joint Probability",
+        category: "Statistics",
+        definition: "Probability that two events occur together.",
+        example: "Probability of interest rates rising AND stock market declining is their joint probability."
+      },
+      {
+        term: "Just-in-Time Inventory",
+        category: "Operations",
+        definition: "Business practice of receiving inventory just before it's needed, minimizing storage costs.",
+        example: "Dell computers uses just-in-time inventory to reduce holding costs."
+      },
+      {
+        term: "Kelly Criterion",
+        category: "Strategy",
+        definition: "Mathematical formula for optimal position sizing based on win rate and payoff ratios.",
+        example: "Kelly Criterion determines the ideal percentage of capital to risk on each trade."
+      },
+      {
+        term: "Kurtosis",
+        category: "Risk",
+        definition: "Statistical measure of tail behavior, indicating likelihood of extreme events.",
+        example: "High-kurtosis distributions experience more frequent extreme returns."
+      },
+      {
+        term: "Long Position",
+        category: "Position",
+        definition: "Ownership of a security, benefiting from price appreciation.",
+        example: "Owning 100 shares of Apple means you have a long position."
+      },
+      {
+        term: "Lookback Option",
+        category: "Derivatives",
+        definition: "Exotic option that pays based on the optimal price achieved during the holding period.",
+        example: "A lookback call option pays the difference between current price and the lowest price during the period."
+      },
+      {
+        term: "Loss Aversion",
+        category: "Behavioral",
+        definition: "Tendency to feel loss pain more acutely than equivalent gain pleasure.",
+        example: "Investors hold losing positions too long due to loss aversion."
+      },
+      {
+        term: "Maximum Drawdown",
+        category: "Risk",
+        definition: "Largest peak-to-trough decline experienced during a specific period.",
+        example: "A portfolio that dropped from $1M to $600k had a 40% maximum drawdown."
+      }
+    ];
+
+    // Helper function to group terms by first letter
+    function groupByLetter() {
+      const grouped = {};
+      glossaryTerms.forEach(item => {
+        const letter = item.term[0].toUpperCase();
+        if (!grouped[letter]) grouped[letter] = [];
+        grouped[letter].push(item);
+      });
+      return grouped;
+    }
+
+    // Render glossary
+    function renderGlossary(terms = glossaryTerms) {
+      const container = document.getElementById('glossaryTerms');
+      const grouped = {};
+
+      terms.forEach(item => {
+        const letter = item.term[0].toUpperCase();
+        if (!grouped[letter]) grouped[letter] = [];
+        grouped[letter].push(item);
+      });
+
+      if (Object.keys(grouped).length === 0) {
+        container.innerHTML = '<div class="no-results"><p>No terms match your search.</p></div>';
+        document.getElementById('termCount').textContent = '0 terms';
+        return;
+      }
+
+      let html = '';
+      Object.keys(grouped).sort().forEach(letter => {
+        html += `<div class="glossary-letter">
+          <h2 class="glossary-letter-heading">${letter}</h2>
+          ${grouped[letter].map(item => `
+            <div class="glossary-term">
+              <div class="term-title">
+                <span class="term-name">${item.term}</span>
+                <span class="term-category">${item.category}</span>
+              </div>
+              <p class="term-definition">${item.definition}</p>
+              <p class="term-example">${item.example}</p>
+            </div>
+          `).join('')}
+        </div>`;
+      });
+
+      container.innerHTML = html;
+      document.getElementById('termCount').textContent = `${terms.length} terms`;
+    }
+
+    // Search functionality
+    document.getElementById('glossarySearch').addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase().trim();
+      if (query === '') {
+        renderGlossary(glossaryTerms);
+      } else {
+        const filtered = glossaryTerms.filter(item =>
+          item.term.toLowerCase().includes(query) ||
+          item.definition.toLowerCase().includes(query)
+        );
+        renderGlossary(filtered);
+      }
+    });
+
+    // Render index
+    function renderIndex() {
+      const index = document.getElementById('glossaryIndex');
+      const grouped = groupByLetter();
+      const letters = Object.keys(grouped).sort();
+
+      const html = letters.map(letter =>
+        `<button class="index-link" data-letter="${letter}">${letter}</button>`
+      ).join('');
+
+      index.innerHTML = html;
+
+      document.querySelectorAll('.index-link').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const letter = this.dataset.letter;
+          document.querySelector(`#glossaryTerms [data-letter="${letter}"]`)
+            ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    }
+
+    // Initial render
+    renderGlossary();
+    renderIndex();
+  </script>
+
+  <script src="/js/cookie-notice.js"></script>
+</body>
+</html>
