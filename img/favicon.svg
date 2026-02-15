@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- White background -->
-  <rect width="64" height="64" fill="#fafafa"/>
-  <!-- Delta triangle -->
-  <polygon points="32,8 56,56 8,56" fill="none" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
-  <!-- Horizontal line -->
-  <line x1="8" y1="56" x2="56" y2="56" stroke="#111" stroke-width="2.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Delta mark">
+  <rect width="256" height="256" fill="#000000"/>
+  <polygon points="128,18 240,222 16,222" fill="#f2f2f2"/>
+  <polygon points="128,92 170,168 86,168" fill="none" stroke="#111111" stroke-width="9" stroke-linejoin="miter"/>
 </svg>
