@@ -443,23 +443,33 @@
       `).join('');
     }
 
-    // Filter functionality
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        renderBlog(this.dataset.filter);
-      });
-    });
-
     // Format date
     function formatDate(dateStr) {
       const options = { year: 'numeric', month: 'short', day: 'numeric' };
       return new Date(dateStr).toLocaleDateString('en-US', options);
     }
 
-    // Initial render
-    renderBlog();
+    // Initialize blog on DOM ready
+    function initBlog() {
+      // Initial render - show all posts
+      renderBlog('all');
+
+      // Filter functionality
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          renderBlog(this.dataset.filter);
+        });
+      });
+    }
+
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initBlog);
+    } else {
+      initBlog();
+    }
   </script>
 
   <script src="/js/cookie-notice.js"></script>
