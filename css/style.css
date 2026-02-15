@@ -1456,6 +1456,178 @@ body.risk-page .content-block p { line-height: 1.9; }
   .sent-ind-val { font-size: 0.8rem; }
 }
 
+/* ============================================
+   BLOG SIDEBARS — MULTIPLE VARIANTS
+   ============================================ */
+
+.article-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.article-container > .reveal {
+  flex: 1;
+  min-width: 0;
+}
+
+.article-container article {
+  max-width: none;
+}
+
+/* --- Sidebar Container --- */
+.blog-sidebar {
+  flex: 0 0 260px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  position: sticky;
+  top: 8vh;
+}
+
+/* --- Variant A: Accent Border --- */
+.blog-sidebar.variant-a {
+  border-left: 5px solid #111;
+  padding-left: 1.2rem;
+  padding: 1.2rem;
+  padding-left: 1.2rem;
+  border-left: 5px solid #111;
+  background: rgba(17, 17, 17, 0.02);
+  margin-left: -1.2rem;
+}
+
+.blog-sidebar.variant-a h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #333;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  font-family: var(--mono);
+  font-weight: 400;
+}
+
+.blog-sidebar.variant-a .sidebar-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.blog-sidebar.variant-a .sidebar-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* --- Variant B: Minimal --- */
+.blog-sidebar.variant-b {
+  border-top: 2px solid #d0d0d0;
+  padding-top: 1.2rem;
+  background: transparent;
+}
+
+.blog-sidebar.variant-b h3 {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.blog-sidebar.variant-b .sidebar-item {
+  margin-bottom: 1.5rem;
+}
+
+.blog-sidebar.variant-b .sidebar-item:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Variant C: Bold --- */
+.blog-sidebar.variant-c {
+  background: #f8f8f8;
+  padding: 1.2rem;
+  border: 1px solid #ddd;
+}
+
+.blog-sidebar.variant-c h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #111;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  font-family: var(--mono);
+  font-weight: 400;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.8rem;
+}
+
+.blog-sidebar.variant-c .sidebar-item {
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #efefef;
+}
+
+.blog-sidebar.variant-c .sidebar-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* --- Sidebar Content --- */
+.sidebar-item-content {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.sidebar-item-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-item-content li {
+  margin-bottom: 0.6rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.sidebar-item-content li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: #aaa;
+}
+
+.sidebar-item-content p {
+  margin: 0;
+}
+
+.sidebar-item-content a {
+  color: #111;
+  text-decoration: underline;
+  transition: opacity 0.3s;
+}
+
+.sidebar-item-content a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 1100px) {
+  .article-container {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .blog-sidebar {
+    flex: 1;
+    position: static;
+  }
+}
+
 /* --- Very small screens (max-width: 380px) --- */
 @media (max-width: 380px) {
   .section { padding: 5vh 4vw; }
