@@ -882,7 +882,7 @@
         category: "Risk",
         definition: "Largest peak-to-trough decline experienced during a specific period.",
         example: "A portfolio that dropped from $1M to $600k had a 40% maximum drawdown."
-      }
+      },
       {
         term: "Adaptive Alpha",
         category: "Analysis",
@@ -1515,7 +1515,7 @@
 
       let html = '';
       Object.keys(grouped).sort().forEach(letter => {
-        html += `<div class="glossary-letter">
+        html += `<div class="glossary-letter" data-letter="${letter}">
           <h2 class="glossary-letter-heading">${letter}</h2>
           ${grouped[letter].map(item => `
             <div class="glossary-term">
