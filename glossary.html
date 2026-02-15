@@ -1534,20 +1534,6 @@
       document.getElementById('termCount').textContent = `${terms.length} terms`;
     }
 
-    // Search functionality
-    document.getElementById('glossarySearch').addEventListener('input', function(e) {
-      const query = e.target.value.toLowerCase().trim();
-      if (query === '') {
-        renderGlossary(glossaryTerms);
-      } else {
-        const filtered = glossaryTerms.filter(item =>
-          item.term.toLowerCase().includes(query) ||
-          item.definition.toLowerCase().includes(query)
-        );
-        renderGlossary(filtered);
-      }
-    });
-
     // Render index
     function renderIndex() {
       const index = document.getElementById('glossaryIndex');
@@ -1569,9 +1555,33 @@
       });
     }
 
-    // Initial render
-    renderGlossary();
-    renderIndex();
+    // Initialize glossary when DOM is ready
+    function initGlossary() {
+      // Initial render
+      renderGlossary();
+      renderIndex();
+
+      // Search functionality
+      document.getElementById('glossarySearch').addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        if (query === '') {
+          renderGlossary(glossaryTerms);
+        } else {
+          const filtered = glossaryTerms.filter(item =>
+            item.term.toLowerCase().includes(query) ||
+            item.definition.toLowerCase().includes(query)
+          );
+          renderGlossary(filtered);
+        }
+      });
+    }
+
+    // Wait for DOM
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initGlossary);
+    } else {
+      initGlossary();
+    }
   </script>
 
   <script src="/js/cookie-notice.js"></script>
