@@ -10,8 +10,8 @@
     if (loader) {
       setTimeout(function () {
         loader.classList.add('done');
-        setTimeout(function () { loader.remove(); }, 600);
-      }, 800);
+        setTimeout(function () { loader.remove(); }, 400);
+      }, 200);
     }
   });
 

@@ -27,7 +27,7 @@
   <meta name="twitter:image" content="https://deltacapitaltrading.com/img/og-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .contact-person .title {
@@ -80,7 +80,7 @@
           <div class="divider"></div>
           <div class="contact-list">
             <div class="contact-person">
-              <img src="/img/cole.png" alt="Cole Wysopal" class="photo">
+              <img src="/img/cole.png" alt="Cole Wysopal" class="photo" loading="lazy">
               <div class="info">
                 <span class="name">Cole Wysopal</span>
                 <span class="title">Chief Executive Officer</span>
@@ -88,7 +88,7 @@
               </div>
             </div>
             <div class="contact-person">
-              <img src="/img/yonatan.png" alt="Yonatan Shichor" class="photo">
+              <img src="/img/yonatan.png" alt="Yonatan Shichor" class="photo" loading="lazy">
               <div class="info">
                 <span class="name">Yonatan Shichor</span>
                 <span class="title">Chief Financial Officer</span>
@@ -96,7 +96,7 @@
               </div>
             </div>
             <div class="contact-person">
-              <img src="/img/noah.png" alt="Noah Rubin" class="photo">
+              <img src="/img/noah.png" alt="Noah Rubin" class="photo" loading="lazy">
               <div class="info">
                 <span class="name">Noah Rubin</span>
                 <span class="title">Chief Operations Officer</span>
@@ -104,7 +104,7 @@
               </div>
             </div>
             <div class="contact-person">
-              <img src="/img/ethan.png" alt="Ethan Lopez Levy" class="photo">
+              <img src="/img/ethan.png" alt="Ethan Lopez Levy" class="photo" loading="lazy">
               <div class="info">
                 <span class="name">Ethan Lopez Levy</span>
                 <span class="title">Chief Administrative Officer</span>
@@ -157,10 +157,10 @@
 
   </div>
 
-  <script src="/js/core.js"></script>
-  <script src="/js/market-data.js"></script>
-  <script src="/js/market.js"></script>
+  <script src="/js/core.js" defer></script>
+  <script src="/js/market-data.js" defer></script>
+  <script src="/js/market.js" defer></script>
 
-  <script src="/js/cookie-notice.js"></script>
+  <script src="/js/cookie-notice.js" defer></script>
 </body>
 </html>
