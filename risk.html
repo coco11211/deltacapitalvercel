@@ -54,137 +54,41 @@
     <section class="section section--full">
       <div class="section-inner">
         <div class="reveal">
-          <span class="section-label">Risk &amp; Controls</span>
+          <span class="section-label">Risk</span>
           <div class="divider"></div>
           <h1>Risk is not managed.<br>It is understood.</h1>
           <p style="margin-top: 3vh;">
-            Risk management is not a function within our process.
-            It is the process. Every model we build, every design
-            decision, every system parameter is evaluated through the lens
-            of controlled exposure.
+            We think about risk before we think about returns. This is
+            a foundational belief, not a tagline. When we eventually build
+            and deploy trading systems, risk management will not be a
+            feature — it will be the architecture itself.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Risk Philosophy -->
+    <!-- How We Think About Risk -->
     <section class="section">
       <div class="section-inner">
         <div class="grid-2">
           <div class="reveal">
-            <span class="section-label">Framework</span>
+            <span class="section-label">Philosophy</span>
             <div class="divider"></div>
-            <h2>Failure-First Design</h2>
-            <p style="margin-top: 2vh;">
-              We are designing systems assuming they will fail. Every risk
-              parameter is calibrated not for expected conditions, but for
-              the conditions that would be most destructive. This asymmetric
-              framing is deliberate.
-            </p>
+            <h2>Think About Failure First</h2>
           </div>
           <div class="reveal" style="transition-delay: 0.15s;">
             <p>
-              Our risk framework is being built to operate across multiple
-              horizons and granularities: position-level, strategy-level,
-              and portfolio-level. Limits will be enforced programmatically,
-              without override capability during trading.
+              We believe the right question is not "how much can we make?"
+              but "how much can we lose, and can we survive it?" Every
+              system we eventually build will be designed with this
+              asymmetry in mind.
             </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Risk Measures -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="reveal">
-          <span class="section-label">Measurement</span>
-          <div class="divider"></div>
-          <h2>Quantifying the Left Tail</h2>
-        </div>
-        <div class="grid-2 reveal-stagger" style="margin-top: 6vh;">
-          <div class="content-block">
-            <h3><span class="hover-underline">Value at Risk</span></h3>
-            <p>
-              Portfolio-level VaR will be computed using parametric, historical simulation,
-              and Monte Carlo methods. Divergence between methods will serve as an
-              additional risk signal.
+            <p style="margin-top: 1.5rem;">
+              We do not have a risk engine yet. We do not have trading
+              controls yet. But we are studying risk frameworks deeply,
+              because when we do build, risk will be embedded in every
+              layer from day one.
             </p>
-          </div>
-          <div class="content-block">
-            <h3><span class="hover-underline">Conditional Value at Risk</span></h3>
-            <p>
-              CVaR captures expected loss beyond the VaR threshold, providing a
-              coherent measure of tail exposure that will inform position sizing
-              and hedging decisions.
-            </p>
-          </div>
-          <div class="content-block">
-            <h3><span class="hover-underline">Maximum Drawdown</span></h3>
-            <p>
-              We are building real-time drawdown monitoring with automated deleveraging triggers.
-              Historical drawdown profiles will calibrate strategy-level capital allocation.
-            </p>
-          </div>
-          <div class="content-block">
-            <h3><span class="hover-underline">Stress Testing</span></h3>
-            <p>
-              Systematic stress scenarios will be applied continuously, not episodically.
-              Scenarios will include historical crises, hypothetical dislocations,
-              and reverse stress tests.
-            </p>
-          </div>
-        </div>
-
-        <!-- Risk Visualizations -->
-        <div class="viz-container reveal" style="margin-top: 4vh;">
-          <canvas id="viz-var"></canvas>
-        </div>
-        <div class="viz-row">
-          <div class="viz-container reveal">
-            <canvas id="viz-montecarlo"></canvas>
-          </div>
-          <div class="viz-container reveal" style="transition-delay: 0.15s;">
-            <canvas id="viz-drawdown"></canvas>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Controls -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="grid-2">
-          <div class="reveal">
-            <span class="section-label">Controls</span>
-            <div class="divider"></div>
-            <h2>Programmatic Discipline</h2>
-          </div>
-          <div class="reveal-stagger" style="transition-delay: 0.1s;">
-            <div class="content-block">
-              <h3>Pre-Trade Validation</h3>
-              <p>
-                Every order will pass through position limits, concentration limits,
-                margin requirements, and compliance checks before reaching
-                the execution layer.
-              </p>
-            </div>
-            <div class="content-block">
-              <h3>Real-Time Monitoring</h3>
-              <p>
-                We are building continuous monitoring of exposure, P&amp;L,
-                liquidity metrics, and system health. Anomaly detection will
-                trigger automated protective actions.
-              </p>
-            </div>
-            <div class="content-block">
-              <h3>Immutable Audit Trail</h3>
-              <p>
-                Every action&mdash;order, fill, cancellation, risk check,
-                parameter change&mdash;will be logged with precision
-                in append-only storage.
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -204,16 +108,12 @@
 
     <footer class="page-footer">
       <nav class="footer-nav">
-        <a href="/">Philosophy</a>
-        <a href="/research.html">Research</a>
-        <a href="/risk.html" class="active">Risk</a>
-        <a href="/architecture.html">Architecture</a>
-        <a href="/insights.html">Insights</a>
+        <a href="/">Home</a>
         <a href="/principles.html">Principles</a>
+        <a href="/mission.html">Mission</a>
         <a href="/screener.html">Screener</a>
         <a href="/blog.html">Blog</a>
         <a href="/glossary.html">Glossary</a>
-        <a href="/brandkit.html">Brand Kit</a>
         <a href="/disclosures.html">Disclosures</a>
         <a href="/faq.html">Questions</a>
         <a href="/contact.html">Contact</a>
@@ -229,7 +129,6 @@
   <script src="/js/core.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
-  <script src="/js/visualizations.js" defer></script>
 
   <script src="/js/cookie-notice.js" defer></script>
 </body>

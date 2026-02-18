@@ -54,200 +54,65 @@
     <section class="section section--full">
       <div class="section-inner">
         <div class="reveal">
-          <span class="section-label">Research &amp; Methodology</span>
+          <span class="section-label">Our Approach</span>
           <div class="divider"></div>
-          <h1 class="letter-reveal">Quantitative Rigor</h1>
+          <h1 class="letter-reveal">How We Think</h1>
           <p style="margin-top: 3vh;">
-            Our research is built on a foundation of mathematical formalism
-            and empirical validation. We are developing systematic methods
-            to pursue alpha — not through discretionary judgment, but through
-            disciplined, testable approaches.
+            We are studying markets with the goal of building systematic
+            trading strategies. We do not have a working system yet.
+            What we have is a clear framework for how we intend to
+            approach the problem.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Modeling Philosophy -->
+    <!-- What We're Studying -->
     <section class="section">
       <div class="section-inner">
         <div class="grid-2">
           <div class="reveal">
-            <span class="section-label">01 &mdash; Modeling Philosophy</span>
+            <span class="section-label">Research</span>
             <div class="divider"></div>
-            <h2>Models as Hypotheses</h2>
-            <p style="margin-top: 2vh;">
-              Every model we develop represents a testable hypothesis about market structure.
-              We reject the notion of permanent models. Instead, we are building an ensemble
-              of competing approaches, each subject to continuous out-of-sample validation.
-            </p>
-          </div>
-          <div class="reveal" style="transition-delay: 0.15s;">
-            <div class="disclosure-block">
-              <h3>Ensemble Architecture</h3>
-              <p>
-                Multiple model families contribute weighted predictions. Weights are dynamic,
-                adjusted by rolling validation performance across regimes.
-              </p>
-              <div class="disclosure-hint">Read more</div>
-              <div class="disclosure-content">
-                <p>
-                  Our ensemble architecture combines gradient-boosted trees, regularized linear models,
-                  and neural architectures. Each model family is designed to capture different aspects of
-                  market microstructure. The weighting mechanism will ensure that model
-                  contributions shift as market conditions evolve, preventing regime-dependent
-                  overfitting.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Signal Construction -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="reveal">
-          <span class="section-label">02 &mdash; Signal Construction</span>
-          <div class="divider"></div>
-          <h2 class="letter-reveal">From Noise to Conviction</h2>
-        </div>
-        <div class="grid-3 reveal-stagger" style="margin-top: 6vh;">
-          <div class="content-block disclosure-block">
-            <h3><span class="hover-underline">Feature Engineering</span></h3>
-            <p>
-              Raw market data is transformed into a rich feature space capturing
-              momentum, mean-reversion, volatility regimes, and cross-asset relationships.
-            </p>
-            <div class="disclosure-hint">Read more</div>
-            <div class="disclosure-content">
-              <p>
-                Features are constructed from price dynamics, volume patterns, and
-                derived statistical measures. Each feature undergoes rigorous testing
-                for predictive power, stability, and independence before inclusion
-                in the feature set.
-              </p>
-            </div>
-          </div>
-          <div class="content-block disclosure-block">
-            <h3><span class="hover-underline">Signal Aggregation</span></h3>
-            <p>
-              Individual signals are combined through a principled framework that
-              accounts for correlation structure and signal decay characteristics.
-            </p>
-            <div class="disclosure-hint">Read more</div>
-            <div class="disclosure-content">
-              <p>
-                Signals are not naively averaged. We are developing covariance-aware combination
-                methods that maximize information content while minimizing redundancy.
-                Signal half-lives are estimated empirically and will be used to determine
-                optimal rebalancing frequencies.
-              </p>
-            </div>
-          </div>
-          <div class="content-block disclosure-block">
-            <h3><span class="hover-underline">Regime Awareness</span></h3>
-            <p>
-              Market regimes are identified through statistical methods, allowing
-              adaptive model selection and position sizing.
-            </p>
-            <div class="disclosure-hint">Read more</div>
-            <div class="disclosure-content">
-              <p>
-                Hidden Markov models and changepoint detection algorithms are being explored to identify
-                shifts in volatility regimes, correlation structures, and liquidity
-                conditions. This regime awareness will feed directly into both model
-                weighting and risk parameter calibration.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Neural Network Architecture -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="reveal">
-          <span class="section-label">Model Architecture</span>
-          <div class="divider"></div>
-        </div>
-        <div class="viz-container reveal">
-          <canvas id="viz-neural"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <!-- Signal Decay + Correlation -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="reveal">
-          <span class="section-label">Signal Analysis</span>
-          <div class="divider"></div>
-        </div>
-        <div class="viz-row">
-          <div class="viz-container reveal">
-            <canvas id="viz-signaldecay"></canvas>
-          </div>
-          <div class="viz-container reveal" style="transition-delay: 0.15s;">
-            <canvas id="viz-correlation"></canvas>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Portfolio Construction -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="grid-2">
-          <div class="reveal">
-            <span class="section-label">03 &mdash; Portfolio Construction</span>
-            <div class="divider"></div>
-            <h2>Optimization Under Constraint</h2>
+            <h2>What We Are Studying</h2>
           </div>
           <div class="reveal" style="transition-delay: 0.15s;">
             <p>
-              Portfolio construction is a constrained optimization problem. We are
-              designing systems that balance expected return against multiple risk
-              dimensions: variance, tail risk, drawdown, and concentration.
+              We are reading, learning, and exploring the landscape of
+              quantitative trading — from market microstructure to portfolio
+              construction to risk management. We are building our understanding
+              before we build our systems.
             </p>
             <p style="margin-top: 1.5rem;">
-              The optimization framework we are building incorporates transaction costs,
-              market impact estimates, and realistic turnover constraints to ensure that
-              theoretical portfolios will be implementable in practice.
+              Our areas of focus include systematic strategy design,
+              statistical analysis of market data, and the engineering
+              required to execute reliably.
             </p>
-          </div>
-        </div>
-        <div class="viz-container reveal" style="margin-top: 4vh;">
-          <canvas id="viz-frontier"></canvas>
-        </div>
-        <div class="viz-row" style="margin-top: 2vh;">
-          <div class="viz-container reveal">
-            <canvas id="viz-riskparity"></canvas>
-          </div>
-          <div class="viz-container reveal" style="transition-delay: 0.15s;">
-            <canvas id="viz-sharpe"></canvas>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Validation -->
-    <section class="section">
+    <!-- Beliefs -->
+    <section class="section section--compact">
       <div class="section-inner">
         <div class="reveal">
-          <span class="section-label">04 &mdash; Validation</span>
+          <span class="section-label">Beliefs</span>
           <div class="divider"></div>
-          <h2 class="letter-reveal">Trust Nothing Untested</h2>
-          <p style="margin-top: 3vh; max-width: 600px;">
-            Every strategy will undergo walk-forward analysis, Monte Carlo stress testing,
-            and out-of-sample validation before deployment. We are deliberately skeptical
-            of our own results. The cost of a false positive far exceeds the cost of
-            delayed deployment.
-          </p>
         </div>
-        <div class="viz-container reveal" style="margin-top: 4vh;">
-          <canvas id="viz-walkforward"></canvas>
+        <div class="grid-3 reveal-stagger" style="margin-top: 4vh;">
+          <div class="content-block">
+            <h3>Models Are Hypotheses</h3>
+            <p>No model should be treated as truth. Every model is a testable idea about how markets work, and should be validated accordingly.</p>
+          </div>
+          <div class="content-block">
+            <h3>Simplicity First</h3>
+            <p>Complexity has a cost. We believe in starting with the simplest approach that captures the relevant dynamics, and adding complexity only when justified.</p>
+          </div>
+          <div class="content-block">
+            <h3>Skepticism of Results</h3>
+            <p>Backtest results are not real results. We will be deliberately skeptical of our own findings and set a high bar for what we consider validated.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -265,16 +130,13 @@
 
     <footer class="page-footer">
       <nav class="footer-nav">
-        <a href="/">Philosophy</a>
-        <a href="/research.html" class="active">Research</a>
-        <a href="/risk.html">Risk</a>
-        <a href="/architecture.html">Architecture</a>
-        <a href="/insights.html">Insights</a>
+        <a href="/">Home</a>
+        <a href="/research.html" class="active">Approach</a>
         <a href="/principles.html">Principles</a>
+        <a href="/mission.html">Mission</a>
         <a href="/screener.html">Screener</a>
         <a href="/blog.html">Blog</a>
         <a href="/glossary.html">Glossary</a>
-        <a href="/brandkit.html">Brand Kit</a>
         <a href="/disclosures.html">Disclosures</a>
         <a href="/faq.html">Questions</a>
         <a href="/contact.html">Contact</a>
@@ -290,7 +152,6 @@
   <script src="/js/core.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
-  <script src="/js/visualizations.js" defer></script>
 
   <script src="/js/cookie-notice.js" defer></script>
 </body>

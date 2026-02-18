@@ -83,15 +83,14 @@
     if (!palette || !overlay) return;
 
     var pages = [
-      { name: 'Philosophy', path: '/', shortcut: '/' },
-      { name: 'Research & Methodology', path: '/research.html', shortcut: 'R' },
-      { name: 'Risk & Controls', path: '/risk.html', shortcut: 'K' },
-      { name: 'System Architecture', path: '/architecture.html', shortcut: 'A' },
-      { name: 'Insights', path: '/insights.html', shortcut: 'I' },
+      { name: 'Home', path: '/', shortcut: '/' },
       { name: 'Principles', path: '/principles.html', shortcut: 'P' },
+      { name: 'Mission', path: '/mission.html', shortcut: 'M' },
       { name: 'Screener', path: '/screener.html', shortcut: 'S' },
+      { name: 'Blog', path: '/blog.html', shortcut: 'B' },
+      { name: 'Glossary', path: '/glossary.html', shortcut: 'G' },
       { name: 'Disclosures', path: '/disclosures.html', shortcut: 'D' },
-      { name: 'Common Questions', path: '/faq.html', shortcut: 'Q' },
+      { name: 'Questions', path: '/faq.html', shortcut: 'Q' },
       { name: 'Contact', path: '/contact.html', shortcut: 'C' }
     ];
 
