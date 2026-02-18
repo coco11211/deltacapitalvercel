@@ -66,11 +66,11 @@
         <div class="reveal">
           <span class="section-label">Contact</span>
           <div class="divider"></div>
-          <h1>Correspondence</h1>
+          <h1>Get In Touch</h1>
           <p style="margin-top: 3vh; margin-bottom: 4vh;">
-            For inquiries regarding Delta Capital, its strategies,
-            or potential collaboration, direct all correspondence
-            to the team below.
+            Delta Capital is in active development. If you are interested
+            in what we are building, want to follow our progress, or have
+            a question — reach out below.
           </p>
         </div>
 
@@ -114,9 +114,33 @@
           </div>
         </div>
 
-        <!-- Secure Message Form -->
+        <!-- Stay Updated -->
         <div class="reveal" style="margin-top: 8vh; transition-delay: 0.4s;">
-          <span class="section-label">Secure Message</span>
+          <span class="section-label">Stay Updated</span>
+          <div class="divider"></div>
+          <p style="margin-bottom: 2vh;">
+            Join our mailing list to receive occasional updates on our progress.
+            No spam. Unsubscribe anytime.
+          </p>
+          <form class="secure-form" id="waitlist-form" onsubmit="return handleWaitlist(event);">
+            <div class="form-group">
+              <label for="waitlist-name">Name</label>
+              <input type="text" id="waitlist-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="waitlist-email">Email</label>
+              <input type="email" id="waitlist-email" name="email" autocomplete="email" required>
+            </div>
+            <button type="submit">Join Waitlist</button>
+            <p id="waitlist-confirmation" style="display: none; margin-top: 1.5rem; color: var(--fg-faint); font-style: italic;">
+              Thank you. We will be in touch.
+            </p>
+          </form>
+        </div>
+
+        <!-- Message -->
+        <div class="reveal" style="margin-top: 8vh; transition-delay: 0.5s;">
+          <span class="section-label">Send a Message</span>
           <div class="divider"></div>
           <form class="secure-form" onsubmit="return false;">
             <div class="form-group">
@@ -162,5 +186,17 @@
   <script src="/js/market.js" defer></script>
 
   <script src="/js/cookie-notice.js" defer></script>
+  <script>
+    function handleWaitlist(e) {
+      e.preventDefault();
+      var form = document.getElementById('waitlist-form');
+      var confirm = document.getElementById('waitlist-confirmation');
+      form.querySelector('button').style.display = 'none';
+      form.querySelector('[name="name"]').disabled = true;
+      form.querySelector('[name="email"]').disabled = true;
+      confirm.style.display = 'block';
+      return false;
+    }
+  </script>
 </body>
 </html>
