@@ -175,6 +175,45 @@ p {
   line-height: 1.6;
 }
 
+/* --- Scroll Indicator --- */
+.scroll-indicator {
+  position: absolute;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  animation: fade-in 1s var(--ease) 2.8s forwards;
+}
+
+.scroll-indicator span {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--fg-faint);
+}
+
+.scroll-indicator::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: var(--fg-faint);
+  animation: scroll-pulse 2.4s var(--ease-in-out) infinite;
+  transform-origin: top;
+}
+
+@keyframes scroll-pulse {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  40% { opacity: 0.5; transform: scaleY(1); transform-origin: top; }
+  60% { opacity: 0.5; transform: scaleY(1); transform-origin: bottom; }
+  100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+}
+
 @keyframes hero-delta-in {
   to { opacity: 1; transform: scale(1); }
 }
