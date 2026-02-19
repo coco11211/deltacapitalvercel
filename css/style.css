@@ -1031,10 +1031,53 @@ p {
   align-items: center;
 }
 
-#signal-noise-canvas {
+#convergence-canvas {
   display: block;
   width: 100%;
-  border-bottom: 1px solid var(--border);
+}
+
+/* Geometric accent — animated line + delta */
+.geo-accent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2vh 0;
+}
+
+.geo-line {
+  display: block;
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, transparent, var(--border));
+  transition: width 1.8s var(--ease);
+}
+
+.geo-line--right {
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.reveal.visible .geo-line {
+  width: 100px;
+}
+
+.geo-delta {
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--fg-faint);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 1s var(--ease) 0.6s, transform 1s var(--ease) 0.6s;
+}
+
+.reveal.visible .geo-delta {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 600px) {
+  .geo-delta { font-size: 1.8rem; }
+  .reveal.visible .geo-line { width: 60px; }
 }
 
 .section-graphic {
