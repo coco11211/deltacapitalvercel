@@ -185,12 +185,18 @@
   function initScrollProgress() {
     var bar = document.querySelector('.scroll-progress');
     if (!bar) return;
+    var indicators = document.querySelectorAll('.scroll-indicator');
     window.addEventListener('scroll', function () {
       var scrollTop = window.scrollY;
       var docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight > 0) {
         bar.style.transform = 'scaleX(' + (scrollTop / docHeight) + ')';
       }
+      // Fade out scroll indicators once user scrolls
+      indicators.forEach(function (el) {
+        el.style.opacity = scrollTop > 80 ? '0' : '';
+        el.style.pointerEvents = scrollTop > 80 ? 'none' : '';
+      });
     }, { passive: true });
   }
 
