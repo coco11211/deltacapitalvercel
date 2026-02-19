@@ -1034,7 +1034,11 @@ p {
 #convergence-canvas,
 #flow-canvas,
 #network-canvas,
-#walks-canvas {
+#walks-canvas,
+#constraints-canvas,
+#trajectory-canvas,
+#branching-canvas,
+#ripple-canvas {
   display: block;
   width: 100%;
 }
