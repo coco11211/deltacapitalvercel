@@ -1,0 +1,39 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" class="section-graphic">
+  <defs>
+    <style>
+      .line-chart { stroke: #333; stroke-width: 1.5; fill: none; }
+      .point { fill: #333; }
+      .grid { stroke: #e0e0e0; stroke-width: 0.5; }
+      .axis { stroke: #111; stroke-width: 1; }
+      .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #999; }
+    </style>
+  </defs>
+
+  <!-- Grid -->
+  <line class="grid" x1="30" y1="30" x2="30" y2="210" />
+  <line class="grid" x1="30" y1="210" x2="210" y2="210" />
+
+  <!-- Grid lines -->
+  <line class="grid" x1="30" y1="70" x2="210" y2="70" />
+  <line class="grid" x1="30" y1="110" x2="210" y2="110" />
+  <line class="grid" x1="30" y1="150" x2="210" y2="150" />
+
+  <!-- Axes -->
+  <line class="axis" x1="30" y1="30" x2="30" y2="210" />
+  <line class="axis" x1="30" y1="210" x2="210" y2="210" />
+
+  <!-- Data lines (hypothesis testing over time) -->
+  <polyline class="line-chart" points="40,180 60,160 80,140 100,130 120,110 140,100 160,95 180,100 200,110" />
+
+  <!-- Data points -->
+  <circle class="point" cx="40" cy="180" r="2" opacity="0.6" />
+  <circle class="point" cx="60" cy="160" r="2" opacity="0.6" />
+  <circle class="point" cx="100" cy="130" r="2" opacity="0.8" />
+  <circle class="point" cx="140" cy="100" r="2" opacity="0.8" />
+  <circle class="point" cx="180" cy="100" r="2" opacity="0.6" />
+  <circle class="point" cx="200" cy="110" r="2" opacity="0.6" />
+
+  <!-- Labels -->
+  <text class="label" x="10" y="215">Time</text>
+  <text class="label" x="205" y="25">Signal</text>
+</svg>

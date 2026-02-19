@@ -1,0 +1,54 @@
+<svg viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg" class="section-graphic">
+  <defs>
+    <style>
+      .pipe-box { fill: none; stroke: #111; stroke-width: 1.5; }
+      .pipe-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #333; text-anchor: middle; dominant-baseline: middle; }
+      .pipe-arrow { stroke: #555; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead2); }
+      .highlight { fill: #f3f3f3; }
+    </style>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#555" />
+    </marker>
+  </defs>
+
+  <!-- Stage 1: Data Ingestion -->
+  <rect class="pipe-box highlight" x="10" y="45" width="40" height="30" rx="2" />
+  <text class="pipe-label" x="30" y="57" font-size="9">Data</text>
+  <text class="pipe-label" x="30" y="68" font-size="8">Ingestion</text>
+
+  <!-- Arrow -->
+  <path class="pipe-arrow" d="M 50 60 L 65 60" />
+
+  <!-- Stage 2: Signal Generation -->
+  <rect class="pipe-box highlight" x="65" y="45" width="40" height="30" rx="2" />
+  <text class="pipe-label" x="85" y="57" font-size="9">Signal</text>
+  <text class="pipe-label" x="85" y="68" font-size="8">Generation</text>
+
+  <!-- Arrow -->
+  <path class="pipe-arrow" d="M 105 60 L 120 60" />
+
+  <!-- Stage 3: Risk Management -->
+  <rect class="pipe-box highlight" x="120" y="45" width="40" height="30" rx="2" />
+  <text class="pipe-label" x="140" y="57" font-size="9">Risk</text>
+  <text class="pipe-label" x="140" y="68" font-size="8">Management</text>
+
+  <!-- Arrow -->
+  <path class="pipe-arrow" d="M 160 60 L 175 60" />
+
+  <!-- Stage 4: Portfolio Construction -->
+  <rect class="pipe-box highlight" x="175" y="45" width="45" height="30" rx="2" />
+  <text class="pipe-label" x="197.5" y="57" font-size="9">Portfolio</text>
+  <text class="pipe-label" x="197.5" y="68" font-size="8">Construction</text>
+
+  <!-- Arrow -->
+  <path class="pipe-arrow" d="M 220 60 L 235 60" />
+
+  <!-- Stage 5: Execution -->
+  <rect class="pipe-box highlight" x="235" y="45" width="35" height="30" rx="2" />
+  <text class="pipe-label" x="252.5" y="57" font-size="9">Execution</text>
+  <text class="pipe-label" x="252.5" y="68" font-size="8">&amp; Monitoring</text>
+
+  <!-- Feedback loop -->
+  <path class="pipe-arrow" d="M 252.5 75 Q 140 100 30 75" stroke-dasharray="2,2" />
+  <text class="pipe-label" x="140" y="110" font-size="8" fill="#999">Continuous Iteration</text>
+</svg>

@@ -1024,6 +1024,27 @@ p {
   height: 220px;
 }
 
+/* --- Section Graphics --- */
+.section-graphic-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-graphic {
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+.section-graphic--full {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  height: auto;
+  min-height: 120px;
+}
+
 .chart-label {
   display: block;
   margin-top: 0.8rem;
