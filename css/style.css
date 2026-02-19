@@ -190,8 +190,8 @@ p {
 
 /* --- Scroll Indicator --- */
 .scroll-indicator {
-  position: absolute;
-  bottom: 3vh;
+  position: fixed;
+  bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -200,7 +200,7 @@ p {
   gap: 0.5rem;
   opacity: 0;
   animation: fade-in 1.2s var(--ease) 2.8s forwards;
-  z-index: 10;
+  z-index: 50;
   transition: opacity 0.4s var(--ease);
 }
 
@@ -829,6 +829,82 @@ p {
   .viz-row { grid-template-columns: 1fr; }
 }
 
+/* --- D3FC Charts --- */
+.d3fc-wrap {
+  width: 100%;
+  position: relative;
+}
+
+.d3fc-chart {
+  height: 380px;
+  width: 100%;
+}
+
+.d3fc-chart--sm {
+  height: 220px;
+}
+
+.chart-label {
+  display: block;
+  margin-top: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+/* d3fc layout */
+d3fc-group {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* Axes */
+.d3fc-chart .x-axis text,
+.d3fc-chart .y-axis text {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: var(--fg-faint);
+}
+
+.d3fc-chart .x-axis .domain,
+.d3fc-chart .y-axis .domain {
+  stroke: var(--border);
+}
+
+.d3fc-chart .x-axis .tick line,
+.d3fc-chart .y-axis .tick line {
+  stroke: var(--border);
+  stroke-opacity: 0.5;
+}
+
+/* Candlestick */
+.d3fc-chart .up path {
+  fill: var(--bg);
+  stroke: var(--fg-muted);
+  stroke-width: 1;
+}
+
+.d3fc-chart .down path {
+  fill: var(--fg);
+  stroke: var(--fg);
+  stroke-width: 1;
+}
+
+/* Streaming line */
+.d3fc-chart .line path {
+  stroke: var(--fg-muted);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.d3fc-chart .area path {
+  fill: rgba(17, 17, 17, 0.04);
+  stroke: none;
+}
+
 /* --- Memo Blocks (Insights) --- */
 .memo-block {
   max-width: 720px;
@@ -1435,6 +1511,10 @@ body.risk-page .content-block p { line-height: 1.9; }
     gap: 3vh;
     margin: 3vh 0;
   }
+
+  /* d3fc charts */
+  .d3fc-chart { height: 260px; }
+  .d3fc-chart--sm { height: 180px; }
 
   /* Secure form */
   .secure-form { max-width: 100%; }
