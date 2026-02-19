@@ -98,6 +98,27 @@
       </div>
     </section>
 
+    <!-- Risk Parity Visualization -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Illustration</span>
+          <div class="divider"></div>
+          <h2>Balance risk, not capital</h2>
+          <p style="margin-top: 2vh;">
+            Traditional portfolios allocate by capital weight. Risk
+            parity allocates by risk contribution — ensuring no single
+            asset class dominates the portfolio's risk profile. This
+            is the kind of thinking we aim to embed in everything
+            we build.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-riskparity"></canvas>
+        </div>
+      </div>
+    </section>
+
     <!-- Core Principles -->
     <section class="section section--compact">
       <div class="section-inner">
@@ -156,6 +177,7 @@
   </div>
 
   <script src="/js/core.js" defer></script>
+  <script src="/js/visualizations.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
 

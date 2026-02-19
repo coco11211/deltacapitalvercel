@@ -96,6 +96,47 @@
       </div>
     </section>
 
+    <!-- Monte Carlo -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Simulation</span>
+          <div class="divider"></div>
+          <h2>Thinking in distributions</h2>
+          <p style="margin-top: 2vh;">
+            Monte Carlo simulation is a technique we intend to use
+            for stress-testing strategies before they go live. Instead
+            of a single backtest, you generate thousands of possible
+            paths — and design for the worst of them.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-montecarlo"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Efficient Frontier -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Optimization</span>
+          <div class="divider"></div>
+          <h2>The risk-return trade-off</h2>
+          <p style="margin-top: 2vh;">
+            The efficient frontier illustrates a foundational idea in
+            portfolio theory: for any level of risk, there is an
+            optimal combination of assets. Finding it requires
+            understanding covariance, correlation, and the cost of
+            diversification.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-frontier"></canvas>
+        </div>
+      </div>
+    </section>
+
     <footer class="page-footer">
       <nav class="footer-nav">
         <a href="/">Home</a>
@@ -117,6 +158,7 @@
   </div>
 
   <script src="/js/core.js" defer></script>
+  <script src="/js/visualizations.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
 

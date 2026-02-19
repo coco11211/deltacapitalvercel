@@ -131,6 +131,46 @@
       </div>
     </section>
 
+    <!-- Correlation -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Factor Analysis</span>
+          <div class="divider"></div>
+          <h2>How factors relate to each other</h2>
+          <p style="margin-top: 2vh;">
+            Understanding the correlation structure between factors —
+            momentum, value, volatility, size — is central to portfolio
+            construction. High correlation means less diversification
+            than you think.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-correlation"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signal Decay -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Alpha Research</span>
+          <div class="divider"></div>
+          <h2>How signals lose predictive power</h2>
+          <p style="margin-top: 2vh;">
+            Every signal decays. Momentum signals persist longer than
+            sentiment signals, but all eventually lose their edge.
+            Understanding the half-life of a signal determines how
+            frequently a strategy should trade.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-signaldecay"></canvas>
+        </div>
+      </div>
+    </section>
+
     <!-- Blog Link -->
     <section class="section section--compact">
       <div class="section-inner">
@@ -179,6 +219,7 @@
   </div>
 
   <script src="/js/core.js" defer></script>
+  <script src="/js/visualizations.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
 

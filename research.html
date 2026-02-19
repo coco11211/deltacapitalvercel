@@ -117,6 +117,46 @@
       </div>
     </section>
 
+    <!-- Bayesian Precision -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Precision</span>
+          <div class="divider"></div>
+          <h2>More data, sharper estimates</h2>
+          <p style="margin-top: 2vh;">
+            One of the core ideas we study: with enough observations,
+            uncertainty narrows. Estimates converge on truth. The
+            question is always whether you have enough data — and
+            whether you are measuring the right thing.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-bayesian"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Walk-Forward -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Validation</span>
+          <div class="divider"></div>
+          <h2>Testing without peeking</h2>
+          <p style="margin-top: 2vh;">
+            Walk-forward validation is a methodology we are studying
+            for evaluating strategies without overfitting. Train on
+            one window, test on the next. No future information leaks
+            into the past.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-walkforward"></canvas>
+        </div>
+      </div>
+    </section>
+
     <!-- What We Want To Build -->
     <section class="section">
       <div class="section-inner">
@@ -191,6 +231,7 @@
   </div>
 
   <script src="/js/core.js" defer></script>
+  <script src="/js/visualizations.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
 

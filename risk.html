@@ -94,6 +94,71 @@
       </div>
     </section>
 
+    <!-- What We're Studying: Tail Risk -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Concepts We Study</span>
+          <div class="divider"></div>
+          <h2>Understanding tail risk</h2>
+          <p style="margin-top: 2vh;">
+            Markets are not normally distributed. Extreme events happen
+            more often than simple models predict. Understanding the
+            shape of the return distribution — especially the tails —
+            is fundamental to building systems that survive.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-var"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Drawdown -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Measurement</span>
+          <div class="divider"></div>
+          <h2>Drawdown analysis</h2>
+          <p style="margin-top: 2vh;">
+            Maximum drawdown — the peak-to-trough decline — is one
+            of the most important metrics in risk management. It
+            measures the worst an investor would have experienced.
+            We study this because surviving drawdowns is the
+            prerequisite for capturing long-term returns.
+          </p>
+        </div>
+        <div class="viz-container reveal" style="margin-top: 4vh;">
+          <canvas id="viz-drawdown"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Risk Concepts Grid -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Framework</span>
+          <div class="divider"></div>
+        </div>
+        <div class="grid-3 reveal-stagger" style="margin-top: 4vh;">
+          <div class="content-block">
+            <h3>Position Sizing</h3>
+            <p>How much capital to allocate to any single idea. Too much and one loss is catastrophic. Too little and the returns are meaningless.</p>
+          </div>
+          <div class="content-block">
+            <h3>Correlation Risk</h3>
+            <p>Diversification fails when correlations spike. Understanding how positions relate to each other — especially in stress — is essential.</p>
+          </div>
+          <div class="content-block">
+            <h3>Regime Awareness</h3>
+            <p>Markets shift between calm and volatile states. A system that does not recognize regime changes will eventually fail in one.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Statement -->
     <section class="section section--compact" style="text-align: center;">
       <div class="section-inner" style="display: flex; flex-direction: column; align-items: center;">
@@ -127,6 +192,7 @@
   </div>
 
   <script src="/js/core.js" defer></script>
+  <script src="/js/visualizations.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
 
