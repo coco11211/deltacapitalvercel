@@ -1031,6 +1031,12 @@ p {
   align-items: center;
 }
 
+#signal-noise-canvas {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+}
+
 .section-graphic {
   display: block;
   max-width: 100%;
