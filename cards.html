@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Cards &mdash; Delta Capital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --card-w: 3.5in;
+      --card-h: 2in;
+      --serif: 'Cormorant Garamond', 'Georgia', serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --gray: #777;
+      --light: #c8c8c8;
+      --hairline: #2a2a2a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--serif);
+      background: #e8e8e8;
+      color: #333;
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .page-header h1 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 2rem;
+      color: #111;
+      letter-spacing: 0.02em;
+    }
+
+    .page-header p {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 8px;
+    }
+
+    .page-header .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .page-header button {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border: 1px solid #ccc;
+      background: white;
+      color: #111;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .page-header button:hover {
+      border-color: #111;
+      background: #111;
+      color: white;
+    }
+
+    .card-pair {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #aaa;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    /* ============ CARD FRONT ============ */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .card-front {
+      background: var(--black);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.3in 0.32in;
+    }
+
+    .card-front .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .card-front .delta-mark {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--white);
+      opacity: 0.9;
+    }
+
+    .card-front .corner-lines {
+      width: 18px;
+      height: 18px;
+      position: relative;
+    }
+
+    .card-front .corner-lines::before,
+    .card-front .corner-lines::after {
+      content: '';
+      position: absolute;
+      background: var(--light);
+      opacity: 0.25;
+    }
+
+    .card-front .corner-lines::before {
+      top: 0; right: 0;
+      width: 18px; height: 0.5px;
+    }
+
+    .card-front .corner-lines::after {
+      top: 0; right: 0;
+      width: 0.5px; height: 18px;
+    }
+
+    .card-front .person {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .card-front .person-name {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+
+    .card-front .person-title {
+      font-family: var(--mono);
+      font-size: 0.42rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* Subtle foil line */
+    .card-front .foil-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(200, 200, 200, 0.08) 20%,
+        rgba(200, 200, 200, 0.15) 50%,
+        rgba(200, 200, 200, 0.08) 80%,
+        transparent 100%
+      );
+    }
+
+    /* Subtle texture overlay */
+    .card-front::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 85%, rgba(255,255,255,0.015) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 15%, rgba(255,255,255,0.01) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ============ CARD BACK ============ */
+    .card-back {
+      background: var(--white);
+      color: var(--black);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.3in 0.32in;
+      border: 1px solid #e0e0e0;
+    }
+
+    .card-back .top-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .card-back .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .card-back .brand-delta {
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--black);
+      opacity: 0.7;
+      line-height: 1;
+    }
+
+    .card-back .brand-name {
+      font-family: var(--serif);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: 0.5;
+    }
+
+    .card-back .qr-placeholder {
+      width: 38px;
+      height: 38px;
+      border: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+
+    .card-back .details {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .card-back .detail-line {
+      font-family: var(--mono);
+      font-size: 0.4rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .card-back .detail-line.email {
+      color: var(--black);
+      font-weight: 400;
+    }
+
+    .card-back .divider-line {
+      width: 24px;
+      height: 0.5px;
+      background: #ddd;
+      margin: 3px 0;
+    }
+
+    /* ============ PRINT STYLES ============ */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .page-header { display: none; }
+      .card-label { display: none; }
+
+      .card-pair {
+        page-break-inside: avoid;
+        margin-bottom: 0.25in;
+        gap: 0.25in;
+      }
+
+      .card {
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .card-back { border: 0.5px solid #ccc; }
+
+      /* Cut marks */
+      .card::after {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border: 0.25px solid #ddd;
+        pointer-events: none;
+        border-radius: 0;
+      }
+    }
+
+    /* ============ SCREEN SHADOW ============ */
+    @media screen {
+      .card {
+        box-shadow:
+          0 1px 3px rgba(0,0,0,0.08),
+          0 4px 12px rgba(0,0,0,0.06),
+          0 12px 40px rgba(0,0,0,0.04);
+      }
+
+      .card-front {
+        box-shadow: inset 0 0 60px rgba(255,255,255,0.02);
+      }
+    }
+
+    /* Separator between people */
+    .person-divider {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .person-divider span {
+      display: inline-block;
+      width: 40px;
+      height: 0.5px;
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>Business Cards</h1>
+    <p>Delta Capital &mdash; 3.5 &times; 2 in &mdash; Print Ready</p>
+    <div class="actions">
+      <button onclick="window.print()">Print / Export PDF</button>
+    </div>
+  </div>
+
+  <!-- Cole Wysopal -->
+  <div class="card-pair">
+    <div>
+      <div class="card-label">Front</div>
+      <div class="card card-front">
+        <div class="top-row">
+          <div class="delta-mark">&Delta;</div>
+          <div class="corner-lines"></div>
+        </div>
+        <div class="person">
+          <span class="person-name">Cole Wysopal</span>
+          <span class="person-title">Chief Executive Officer</span>
+        </div>
+        <div class="foil-line"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card-label">Back</div>
+      <div class="card card-back">
+        <div class="top-section">
+          <div class="brand">
+            <span class="brand-delta">&Delta;</span>
+            <span class="brand-name">Delta Capital</span>
+          </div>
+          <div class="qr-placeholder">&Delta;</div>
+        </div>
+        <div class="details">
+          <div class="divider-line"></div>
+          <span class="detail-line email">colewysopal@deltacapitaltrading.com</span>
+          <span class="detail-line">deltacapitaltrading.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="person-divider"><span></span></div>
+
+  <!-- Yonatan Shichor -->
+  <div class="card-pair">
+    <div>
+      <div class="card-label">Front</div>
+      <div class="card card-front">
+        <div class="top-row">
+          <div class="delta-mark">&Delta;</div>
+          <div class="corner-lines"></div>
+        </div>
+        <div class="person">
+          <span class="person-name">Yonatan Shichor</span>
+          <span class="person-title">Chief Financial Officer</span>
+        </div>
+        <div class="foil-line"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card-label">Back</div>
+      <div class="card card-back">
+        <div class="top-section">
+          <div class="brand">
+            <span class="brand-delta">&Delta;</span>
+            <span class="brand-name">Delta Capital</span>
+          </div>
+          <div class="qr-placeholder">&Delta;</div>
+        </div>
+        <div class="details">
+          <div class="divider-line"></div>
+          <span class="detail-line email">yonatanshichor@deltacapitaltrading.com</span>
+          <span class="detail-line">deltacapitaltrading.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="person-divider"><span></span></div>
+
+  <!-- Noah Rubin -->
+  <div class="card-pair">
+    <div>
+      <div class="card-label">Front</div>
+      <div class="card card-front">
+        <div class="top-row">
+          <div class="delta-mark">&Delta;</div>
+          <div class="corner-lines"></div>
+        </div>
+        <div class="person">
+          <span class="person-name">Noah Rubin</span>
+          <span class="person-title">Chief Operating Officer</span>
+        </div>
+        <div class="foil-line"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card-label">Back</div>
+      <div class="card card-back">
+        <div class="top-section">
+          <div class="brand">
+            <span class="brand-delta">&Delta;</span>
+            <span class="brand-name">Delta Capital</span>
+          </div>
+          <div class="qr-placeholder">&Delta;</div>
+        </div>
+        <div class="details">
+          <div class="divider-line"></div>
+          <span class="detail-line email">noahrubin@deltacapitaltrading.com</span>
+          <span class="detail-line">deltacapitaltrading.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="person-divider"><span></span></div>
+
+  <!-- Ethan Lopez Levy -->
+  <div class="card-pair">
+    <div>
+      <div class="card-label">Front</div>
+      <div class="card card-front">
+        <div class="top-row">
+          <div class="delta-mark">&Delta;</div>
+          <div class="corner-lines"></div>
+        </div>
+        <div class="person">
+          <span class="person-name">Ethan Lopez Levy</span>
+          <span class="person-title">Chief Administrative Officer</span>
+        </div>
+        <div class="foil-line"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card-label">Back</div>
+      <div class="card card-back">
+        <div class="top-section">
+          <div class="brand">
+            <span class="brand-delta">&Delta;</span>
+            <span class="brand-name">Delta Capital</span>
+          </div>
+          <div class="qr-placeholder">&Delta;</div>
+        </div>
+        <div class="details">
+          <div class="divider-line"></div>
+          <span class="detail-line email">ethanlopezlevy@deltacapital.com</span>
+          <span class="detail-line">deltacapitaltrading.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
