@@ -31,7 +31,8 @@
       "Bash(git commit -m \"$\\(cat <<''EOF''\nStrip all fake technical content — honest about having zero code\n\nRemoved all fabricated system descriptions \\(Bayesian optimization,\nensemble architectures, neural networks, HMMs, covariance matrices,\nVaR engines, pipeline architecture, execution layers\\). Replaced with\nhonest content about being in early building/learning phase. Simplified\nsite navigation to core pages only.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
       "WebFetch(domain:curvenote.dev)",
       "WebFetch(domain:d3fc.io)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(git checkout:*)"
     ]
   }
 }
