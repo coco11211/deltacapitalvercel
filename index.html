@@ -175,6 +175,15 @@
       </div>
     </section>
 
+    <!-- Data Flow Visual -->
+    <section class="section section--compact" style="min-height: auto; padding: 2vh 8vw;">
+      <div class="section-inner">
+        <div class="reveal">
+          <canvas id="flow-canvas"></canvas>
+        </div>
+      </div>
+    </section>
+
     <!-- Why -->
     <section class="section">
       <div class="section-inner">
@@ -281,10 +290,20 @@
       </div>
     </section>
 
+    <!-- Network Visual -->
+    <section class="section section--compact" style="min-height: auto; padding: 2vh 8vw;">
+      <div class="section-inner">
+        <div class="reveal">
+          <canvas id="network-canvas"></canvas>
+        </div>
+      </div>
+    </section>
+
     <!-- Quiet Signal -->
     <section class="section section--full section--alt" style="text-align: center;">
       <div class="section-inner" style="display: flex; flex-direction: column; align-items: center;">
         <div class="reveal">
+          <canvas id="walks-canvas" style="margin-bottom: 4vh;"></canvas>
           <p style="font-style: italic; font-size: clamp(1.2rem, 2vw, 1.6rem); color: var(--fg-faint); max-width: 480px; line-height: 1.7;">
             The distance between noise and signal<br>
             is measured in discipline.
@@ -331,6 +350,9 @@
 
   <script src="/js/core.js" defer></script>
   <script src="/js/convergence.js" defer></script>
+  <script src="/js/data-flow.js" defer></script>
+  <script src="/js/pulse-network.js" defer></script>
+  <script src="/js/random-walks.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
 

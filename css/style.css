@@ -1031,7 +1031,10 @@ p {
   align-items: center;
 }
 
-#convergence-canvas {
+#convergence-canvas,
+#flow-canvas,
+#network-canvas,
+#walks-canvas {
   display: block;
   width: 100%;
 }
