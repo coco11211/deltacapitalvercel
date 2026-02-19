@@ -17,7 +17,7 @@
 
   // --- Scroll Reveal ---
   function initScrollReveal() {
-    var els = document.querySelectorAll('.reveal, .reveal-stagger, .letter-reveal, .arch-node, .arch-connector, .viz-container, #arch-canvas');
+    var els = document.querySelectorAll('.reveal, .reveal-stagger, .letter-reveal, .arch-node, .arch-connector, .viz-container, .team-card, #arch-canvas');
     if (!els.length) return;
 
     var observer = new IntersectionObserver(function (entries) {
@@ -193,9 +193,9 @@
         bar.style.transform = 'scaleX(' + (scrollTop / docHeight) + ')';
       }
       // Fade out scroll indicators once user scrolls
+      var shouldHide = scrollTop > 80;
       indicators.forEach(function (el) {
-        el.style.opacity = scrollTop > 80 ? '0' : '';
-        el.style.pointerEvents = scrollTop > 80 ? 'none' : '';
+        el.classList.toggle('hide', shouldHide);
       });
     }, { passive: true });
   }

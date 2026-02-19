@@ -222,6 +222,12 @@ p {
   transform-origin: top;
 }
 
+.scroll-indicator.hide {
+  animation: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
 @keyframes scroll-pulse {
   0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
   40% { opacity: 0.5; transform: scaleY(1); transform-origin: top; }
@@ -797,6 +803,180 @@ p {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+}
+
+/* --- Team Grid (animated) --- */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 6vh;
+  position: relative;
+}
+
+/* Connecting line behind photos */
+.team-grid::before {
+  content: '';
+  position: absolute;
+  top: 70px;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
+  z-index: 0;
+}
+
+.team-card {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  cursor: default;
+}
+
+.team-avatar {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1.5rem;
+}
+
+/* Spinning ring on hover */
+.team-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: var(--fg-faint);
+  border-right-color: var(--fg-faint);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  animation: spin-ring 4s linear infinite;
+  pointer-events: none;
+}
+
+.team-card:hover .team-avatar::after {
+  opacity: 1;
+}
+
+@keyframes spin-ring {
+  to { transform: rotate(360deg); }
+}
+
+/* Photo clip-path reveal */
+.team-photo-wrap {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 1s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 0.15s);
+}
+
+.team-card.visible .team-photo-wrap {
+  clip-path: circle(50% at 50% 50%);
+}
+
+.team-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transform: scale(1.1);
+  transition: filter 0.6s var(--ease), opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.team-card:hover .team-photo-wrap img {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Node dot below avatar */
+.team-card::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--border);
+  margin: -0.8rem auto 1rem;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease), background 0.4s var(--ease), transform 0.4s var(--ease);
+  transition-delay: calc(var(--i, 0) * 0.15s + 0.6s);
+}
+
+.team-card.visible::after {
+  opacity: 1;
+}
+
+.team-card:hover::after {
+  background: var(--fg-muted);
+  transform: scale(1.6);
+}
+
+/* Name & role — staggered fade-in */
+.team-name {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--fg);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  transition-delay: calc(var(--i, 0) * 0.15s + 0.4s);
+}
+
+.team-card.visible .team-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.team-card:hover .team-name {
+  transform: translateY(-2px);
+}
+
+.team-role {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin-top: 0.3rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), color 0.4s var(--ease);
+  transition-delay: calc(var(--i, 0) * 0.15s + 0.55s);
+}
+
+.team-card.visible .team-role {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.team-card:hover .team-role {
+  color: var(--fg-muted);
+}
+
+/* Team responsive */
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 1.5rem;
+  }
+  .team-grid::before { display: none; }
+  .team-card::after { display: none; }
+  .team-avatar { width: 110px; height: 110px; }
+}
+
+@media (max-width: 480px) {
+  .team-grid { grid-template-columns: 1fr; gap: 4rem; }
+  .team-avatar { width: 120px; height: 120px; }
 }
 
 /* --- Visualization Canvases --- */

@@ -132,7 +132,7 @@
       </div>
     </section>
 
-    <!-- Signal vs Noise — d3fc candlestick -->
+    <!-- Signal vs Noise -->
     <section class="section">
       <div class="section-inner">
         <div class="reveal">
@@ -144,30 +144,6 @@
             The challenge — and the opportunity — is building systems that
             can reliably distinguish the two. That is what we are working toward.
           </p>
-        </div>
-        <div class="d3fc-wrap reveal" style="margin-top: 4vh;">
-          <div id="d3fc-candlestick" class="d3fc-chart"></div>
-          <span class="chart-label">Simulated price data &mdash; d3fc</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Streaming Price Simulation -->
-    <section class="section section--compact">
-      <div class="section-inner">
-        <div class="reveal">
-          <span class="section-label">Real-Time</span>
-          <div class="divider"></div>
-          <h2>Building for live markets</h2>
-          <p style="margin-top: 2vh;">
-            Our infrastructure will process market data in real time.
-            This simulation demonstrates the kind of streaming data
-            our systems will handle.
-          </p>
-        </div>
-        <div class="d3fc-wrap reveal" style="margin-top: 4vh;">
-          <div id="d3fc-stream" class="d3fc-chart d3fc-chart--sm"></div>
-          <span class="chart-label">Live simulation &mdash; geometric Brownian motion</span>
         </div>
       </div>
     </section>
@@ -223,40 +199,49 @@
     </section>
 
     <!-- Team -->
-    <section class="section section--compact section--alt">
+    <section class="section section--alt">
       <div class="section-inner">
         <div class="reveal">
           <span class="section-label">Team</span>
           <div class="divider"></div>
+          <h2>Four people. One mission.</h2>
         </div>
-        <div class="contact-list reveal" style="margin-top: 4vh;">
-          <div class="contact-person">
-            <img src="/img/cole.png" alt="Cole Wysopal" class="photo" loading="lazy">
-            <div class="info">
-              <span class="name">Cole Wysopal</span>
-              <span style="display:block; font-size:0.85rem; color:#999; font-style:italic; margin-top:2px;">CEO</span>
+        <div class="team-grid">
+          <div class="team-card" style="--i: 0">
+            <div class="team-avatar">
+              <div class="team-photo-wrap">
+                <img src="/img/cole.png" alt="Cole Wysopal" loading="lazy">
+              </div>
             </div>
+            <span class="team-name">Cole Wysopal</span>
+            <span class="team-role">Chief Executive Officer</span>
           </div>
-          <div class="contact-person">
-            <img src="/img/yonatan.png" alt="Yonatan Shichor" class="photo" loading="lazy">
-            <div class="info">
-              <span class="name">Yonatan Shichor</span>
-              <span style="display:block; font-size:0.85rem; color:#999; font-style:italic; margin-top:2px;">CFO</span>
+          <div class="team-card" style="--i: 1">
+            <div class="team-avatar">
+              <div class="team-photo-wrap">
+                <img src="/img/yonatan.png" alt="Yonatan Shichor" loading="lazy">
+              </div>
             </div>
+            <span class="team-name">Yonatan Shichor</span>
+            <span class="team-role">Chief Financial Officer</span>
           </div>
-          <div class="contact-person">
-            <img src="/img/noah.png" alt="Noah Rubin" class="photo" loading="lazy">
-            <div class="info">
-              <span class="name">Noah Rubin</span>
-              <span style="display:block; font-size:0.85rem; color:#999; font-style:italic; margin-top:2px;">COO</span>
+          <div class="team-card" style="--i: 2">
+            <div class="team-avatar">
+              <div class="team-photo-wrap">
+                <img src="/img/noah.png" alt="Noah Rubin" loading="lazy">
+              </div>
             </div>
+            <span class="team-name">Noah Rubin</span>
+            <span class="team-role">Chief Operating Officer</span>
           </div>
-          <div class="contact-person">
-            <img src="/img/ethan.png" alt="Ethan Lopez Levy" class="photo" loading="lazy">
-            <div class="info">
-              <span class="name">Ethan Lopez Levy</span>
-              <span style="display:block; font-size:0.85rem; color:#999; font-style:italic; margin-top:2px;">CAO</span>
+          <div class="team-card" style="--i: 3">
+            <div class="team-avatar">
+              <div class="team-photo-wrap">
+                <img src="/img/ethan.png" alt="Ethan Lopez Levy" loading="lazy">
+              </div>
             </div>
+            <span class="team-name">Ethan Lopez Levy</span>
+            <span class="team-role">Chief Administrative Officer</span>
           </div>
         </div>
       </div>
@@ -341,10 +326,7 @@
 
   </div>
 
-  <script src="https://unpkg.com/d3@7" defer></script>
-  <script src="https://unpkg.com/d3fc@15" defer></script>
   <script src="/js/core.js" defer></script>
-  <script src="/js/d3-charts.js" defer></script>
   <script src="/js/market-data.js" defer></script>
   <script src="/js/market.js" defer></script>
 
