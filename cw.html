@@ -140,7 +140,6 @@
     .rule-a { animation-delay: .66s; }
     .rule-b { animation-delay: .88s; }
     .rule-c { animation-delay: 1.10s; }
-    .rule-currently { animation-delay: 1.14s; }
 
     /* ─── SYSTEM PANEL ─── */
     .panel { opacity: 0; animation: rise .6s .72s forwards; }
@@ -295,61 +294,16 @@
     }
 
 
-    /* ─── STATS ROW ─── */
-    .stats-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 0 0;
-      opacity: 0; animation: rise .5s .14s forwards;
-    }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-n {
-      display: block;
-      font-family: var(--serif); font-weight: 300;
-      font-size: clamp(1.4rem, 5vw, 2rem);
-      color: rgba(255,255,255,.72); line-height: 1;
-      letter-spacing: -.01em;
-    }
-    .stat-l {
-      display: block; margin-top: 4px;
-      font-size: .38rem; letter-spacing: .2em; text-transform: uppercase;
-      color: rgba(255,255,255,.2);
-    }
-    .stat-sep {
-      font-size: 1rem; color: rgba(255,255,255,.08);
-      flex-shrink: 0; padding: 0 4px;
-    }
 
-    /* ─── CURRENTLY ─── */
-    .currently { opacity: 0; animation: rise .6s 1.02s forwards; }
-    .section-tag {
-      font-size: .43rem; letter-spacing: .2em; color: var(--dim);
-      margin-bottom: 14px;
+    .btn-share {
+      border-color: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.5);
+      margin-top: 1px;
     }
-    .log-entries { display: flex; flex-direction: column; gap: 0; }
-    .log-entry {
-      display: flex; align-items: baseline; gap: 16px;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--border);
-      transition: background .15s;
+    .btn-share:hover {
+      border-color: rgba(255,255,255,.32);
+      color: rgba(255,255,255,.78);
     }
-    .log-entry:first-child { border-top: 1px solid var(--border); }
-    .log-ts {
-      font-size: .38rem; letter-spacing: .1em;
-      color: rgba(255,255,255,.18); flex-shrink: 0;
-      min-width: 72px;
-    }
-    .log-msg {
-      font-family: var(--serif); font-weight: 300;
-      font-size: .88rem; color: rgba(255,255,255,.58);
-      line-height: 1.4;
-    }
-    .log-cursor {
-      display: inline-block; width: 6px; height: .9em;
-      background: rgba(255,255,255,.25);
-      vertical-align: text-bottom; margin-left: 3px;
-      animation: cursor .9s step-end infinite;
-    }
-    @keyframes cursor { 0%,100%{opacity:1} 50%{opacity:0} }
 
     /* ─── OPEN TO ─── */
     .open-to {
@@ -613,6 +567,149 @@
     /* rule after card */
     .rule-card { animation-delay: 1.38s; }
 
+
+    /* ─── QUICK LINKS ─── */
+    .links-section { opacity: 0; animation: rise .6s .96s forwards; }
+    .links-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 14px;
+    }
+    .link-item {
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px;
+      text-decoration: none;
+      transition: background .18s;
+    }
+    .link-item:hover { background: rgba(255,255,255,.025); }
+    .link-name {
+      font-size: .46rem; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+    }
+    .link-arrow {
+      font-size: .5rem; color: rgba(255,255,255,.2);
+      transition: color .18s, transform .18s;
+    }
+    .link-item:hover .link-arrow {
+      color: rgba(255,255,255,.55);
+      transform: translate(2px, -2px);
+    }
+    body.terminal .link-item:hover { background: rgba(0,255,70,.03); }
+    body.terminal .link-name { color: rgba(0,255,70,.45); }
+    body.terminal .link-arrow { color: rgba(0,255,70,.2); }
+    body.terminal .link-item:hover .link-arrow { color: rgba(0,255,70,.55); }
+
+
+    /* ─── QUICK ACTIONS ─── */
+    .quick-actions {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      padding: 20px 0 0;
+      opacity: 0; animation: rise .5s .40s forwards;
+    }
+    .qa-btn {
+      font-family: var(--mono); font-size: .42rem; font-weight: 300;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      border: 1px solid rgba(255,255,255,.12);
+      background: transparent;
+      padding: 9px 15px; border-radius: 2px;
+      text-decoration: none; cursor: pointer;
+      transition: border-color .18s, color .18s, background .18s;
+      white-space: nowrap;
+    }
+    .qa-btn:hover, .qa-btn:focus {
+      border-color: rgba(255,255,255,.4);
+      color: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.03);
+    }
+    .qa-btn.primary {
+      border-color: rgba(255,255,255,.28);
+      color: rgba(255,255,255,.78);
+    }
+    .qa-btn.primary:hover {
+      border-color: rgba(255,255,255,.65);
+      color: #fff;
+      background: rgba(255,255,255,.05);
+    }
+    body.terminal .qa-btn { border-color: rgba(0,255,70,.15); color: rgba(0,255,70,.45); }
+    body.terminal .qa-btn:hover { border-color: rgba(0,255,70,.5); color: rgba(0,255,70,.9); }
+    body.terminal .qa-btn.primary { border-color: rgba(0,255,70,.35); color: rgba(0,255,70,.78); }
+
+    /* ─── FOCUSED ON ─── */
+    .focused { opacity: 0; animation: rise .6s .78s forwards; }
+    .focus-list { display: flex; flex-direction: column; gap: 0; margin-top: 14px; }
+    .focus-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .focus-item:first-child { border-top: 1px solid var(--border); }
+    .focus-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: rgba(255,255,255,.25); flex-shrink: 0;
+    }
+    .focus-text {
+      font-family: var(--serif); font-weight: 300;
+      font-size: .92rem; color: rgba(255,255,255,.6);
+      line-height: 1.4;
+    }
+    body.terminal .focus-text { font-family: var(--mono); font-size: .52rem; color: rgba(0,255,70,.5); }
+    body.terminal .focus-dot { background: rgba(0,255,70,.4); }
+
+    /* ─── PHILOSOPHY BLOCK ─── */
+    .philosophy { opacity: 0; animation: rise .6s .94s forwards; }
+    .phil-translation {
+      font-family: var(--mono); font-size: .46rem; letter-spacing: .14em;
+      color: rgba(255,255,255,.22); margin-bottom: 18px; line-height: 1.8;
+    }
+    .phil-translation strong {
+      display: block; color: rgba(255,255,255,.32);
+      margin-bottom: 6px; letter-spacing: .22em; text-transform: uppercase;
+    }
+    .phil-quote {
+      font-family: var(--serif); font-style: italic; font-weight: 300;
+      font-size: clamp(1.05rem, 3.6vw, 1.28rem);
+      color: rgba(255,255,255,.55); line-height: 1.55;
+      border-left: 1px solid rgba(255,255,255,.12);
+      padding-left: 18px;
+    }
+    .phil-quote em { color: rgba(255,255,255,.82); font-style: normal; }
+    body.terminal .phil-translation { color: rgba(0,255,70,.22); }
+    body.terminal .phil-translation strong { color: rgba(0,255,70,.32); }
+    body.terminal .phil-quote { color: rgba(0,255,70,.42); border-left-color: rgba(0,255,70,.15); }
+    body.terminal .phil-quote em { color: rgba(0,255,70,.75); }
+
+    /* ─── HARD CTA ─── */
+    .hard-cta {
+      padding: 32px 0 0;
+      opacity: 0; animation: rise .6s 1.12s forwards;
+    }
+    .hard-cta-premise {
+      font-family: var(--mono); font-size: .43rem; letter-spacing: .18em;
+      color: rgba(255,255,255,.25); margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .hard-cta-btn {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(1.1rem, 4vw, 1.35rem);
+      color: rgba(255,255,255,.78);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .hard-cta-btn:hover { color: #fff; }
+    .hard-cta-btn .arrow {
+      font-size: 1.1em; transition: transform .2s;
+      color: rgba(255,255,255,.4);
+    }
+    .hard-cta-btn:hover .arrow { transform: translate(3px, -3px); color: rgba(255,255,255,.8); }
+    body.terminal .hard-cta-premise { color: rgba(0,255,70,.22); }
+    body.terminal .hard-cta-btn { color: rgba(0,255,70,.65); }
+    body.terminal .hard-cta-btn:hover { color: rgba(0,255,70,.95); }
+    body.terminal .hard-cta-btn .arrow { color: rgba(0,255,70,.35); }
+
     /* ─── TICKER ─── */
     .ticker-fixed {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
@@ -654,12 +751,6 @@
     body.terminal .tk-up  { color: rgba(0,255,70,.52); }
     body.terminal .ot-tag { border-color: rgba(0,255,70,.12); color: rgba(0,255,70,.32); }
     body.terminal .ot-tag:hover { border-color: rgba(0,255,70,.35); color: rgba(0,255,70,.65); }
-    body.terminal .log-msg { color: rgba(0,255,70,.42); }
-    body.terminal .log-ts { color: rgba(0,255,70,.2); }
-    body.terminal .log-cursor { background: rgba(0,255,70,.5); }
-    body.terminal .stat-n { color: rgba(0,255,70,.62); }
-    body.terminal .stat-l { color: rgba(0,255,70,.2); }
-    body.terminal .stat-sep { color: rgba(0,255,70,.08); }
 
     /* ─── TERMINAL MODE ─── */
     body.terminal {
@@ -725,35 +816,21 @@
     </span>
   </div>
 
-  <!-- Stats Row -->
-  <div class="stats-row">
-    <div class="stat-item">
-      <span class="stat-n" id="sn1">04</span>
-      <span class="stat-l">Systems</span>
-    </div>
-    <span class="stat-sep">·</span>
-    <div class="stat-item">
-      <span class="stat-n" id="sn2">2024</span>
-      <span class="stat-l">Founded</span>
-    </div>
-    <span class="stat-sep">·</span>
-    <div class="stat-item">
-      <span class="stat-n" id="sn3">24/7</span>
-      <span class="stat-l">Operational</span>
-    </div>
-    <span class="stat-sep">·</span>
-    <div class="stat-item">
-      <span class="stat-n" id="sn4">∞</span>
-      <span class="stat-l">Upside</span>
-    </div>
-  </div>
-
   <!-- Hero -->
   <div class="hero">
     <p class="hero-tag">Principal Officer</p>
     <h1 class="hero-name">Cole<br>Wysopal</h1>
     <p class="hero-role">Chief Executive Officer &nbsp;/&nbsp; Founder</p>
     <p class="hero-statement">Building systems that operate under adversarial conditions.</p>
+  </div>
+
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <a href="mailto:colewysopal@deltacapitaltrading.com" class="qa-btn primary">&#x2192; Connect</a>
+    <a href="https://www.linkedin.com/in/cole-w-55baa337a/" target="_blank" rel="noopener" class="qa-btn">LinkedIn</a>
+    <a href="https://deltacapitaltrading.com" target="_blank" rel="noopener" class="qa-btn">Website</a>
+    <a href="https://deltacapitaltrading.com/blog" target="_blank" rel="noopener" class="qa-btn">Research</a>
   </div>
 
   <div class="rule rule-a"></div>
@@ -861,26 +938,27 @@
 
   <div class="rule rule-b"></div>
 
-  <!-- Currently -->
-  <div class="currently">
-    <p class="section-tag">// currently</p>
-    <div class="log-entries">
-      <div class="log-entry">
-        <span class="log-ts">2026-02-20</span>
-        <span class="log-msg">Building Delta Capital trading infrastructure<span class="log-cursor"></span></span>
+
+  <!-- Focused On -->
+  <div class="focused">
+    <p class="section-tag">// currently focused on</p>
+    <div class="focus-list">
+      <div class="focus-item">
+        <span class="focus-dot"></span>
+        <span class="focus-text">Quantitative system design &amp; research</span>
       </div>
-      <div class="log-entry">
-        <span class="log-ts">2026-01-15</span>
-        <span class="log-msg">Researching systematic &amp; quantitative strategies</span>
+      <div class="focus-item">
+        <span class="focus-dot"></span>
+        <span class="focus-text">Technology infrastructure for trading operations</span>
       </div>
-      <div class="log-entry">
-        <span class="log-ts">2025-12-01</span>
-        <span class="log-msg">Expanding team and capital base</span>
+      <div class="focus-item">
+        <span class="focus-dot"></span>
+        <span class="focus-text">Capital allocation &amp; structured instruments</span>
       </div>
     </div>
   </div>
 
-  <div class="rule rule-currently"></div>
+  <div class="rule rule-focus" style="opacity:0;animation:fadeIn .5s 1.02s forwards;"></div>
 
   <!-- Credentials -->
   <div class="creds">
@@ -898,19 +976,61 @@
     </div>
   </div>
 
+
+
+  <!-- Philosophy -->
+  <div class="philosophy">
+    <div class="phil-translation">
+      <strong>In practice</strong>
+      We build systems that identify risk, validate assumptions,<br>and operate reliably under uncertainty.
+    </div>
+    <p class="phil-quote">
+      The goal is not prediction.<br>
+      The goal is <em>survival under uncertainty.</em>
+    </p>
+  </div>
+
+  <div class="rule rule-phil" style="opacity:0;animation:fadeIn .5s 1.08s forwards;"></div>
+
+  <!-- Quick Links -->
+  <div class="links-section">
+    <p class="section-tag">// explore</p>
+    <div class="links-grid">
+      <a href="https://deltacapitaltrading.com" target="_blank" rel="noopener" class="link-item">
+        <span class="link-name">Website</span>
+        <span class="link-arrow">&#x2197;</span>
+      </a>
+      <a href="https://deltacapitaltrading.com/mission" target="_blank" rel="noopener" class="link-item">
+        <span class="link-name">Mission</span>
+        <span class="link-arrow">&#x2197;</span>
+      </a>
+      <a href="https://deltacapitaltrading.com/principles" target="_blank" rel="noopener" class="link-item">
+        <span class="link-name">Principles</span>
+        <span class="link-arrow">&#x2197;</span>
+      </a>
+      <a href="https://deltacapitaltrading.com/blog" target="_blank" rel="noopener" class="link-item">
+        <span class="link-name">Blog</span>
+        <span class="link-arrow">&#x2197;</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hard CTA -->
+  <div class="hard-cta">
+    <p class="hard-cta-premise">If this is relevant to what you're building</p>
+    <a href="mailto:colewysopal@deltacapitaltrading.com" class="hard-cta-btn">
+      <span class="arrow">&#x2192;</span>
+      <span>Let's talk</span>
+    </a>
+  </div>
+
   <div class="rule rule-c"></div>
 
   <!-- CTA -->
   <div class="cta">
-    <div class="open-to">
-      <span class="ot-label">Open to</span>
-      <div class="ot-tags">
-        <span class="ot-tag">Conversations</span>
-        <span class="ot-tag">Collaborations</span>
-        <span class="ot-tag">Deals</span>
-      </div>
     </div>
     <button onclick="saveContact()" class="btn-connect">&#x2193;&nbsp; Save Contact</button>
+    <button id="shareBtn" class="btn-connect btn-share">&#x2197;&nbsp; Share</button>
     <div class="secondary">
       <a href="https://www.linkedin.com/in/cole-w-55baa337a/" target="_blank" rel="noopener" class="btn-sec">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
@@ -930,7 +1050,6 @@
   <!-- Footer -->
   <div class="foot">
     <span class="foot-ts" id="ts"></span>
-    <button class="term-btn" id="shareBtn" title="Share" style="margin-right:10px">[&#x2197;]</button>
     <button class="term-btn" id="termBtn" title="Toggle terminal mode">[&gt;_]</button>
     <span class="foot-id">CW&#x2011;001 &nbsp;·&nbsp; NFC</span>
   </div>
