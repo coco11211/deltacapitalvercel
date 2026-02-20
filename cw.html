@@ -1237,11 +1237,11 @@
     card._flipTarget = 0;
 
     (function tick() {
-      flipVel += (card._flipTarget - flipAngle) * 0.055;
-      flipVel *= 0.74;
+      flipVel += (card._flipTarget - flipAngle) * 0.038;
+      flipVel *= 0.80;
       flipAngle += flipVel;
 
-      var k = over ? 0.09 : 0.055, d = 0.73;
+      var k = over ? 0.055 : 0.032, d = 0.78;
       vx += (tX-tx)*k; vy += (tY-ty)*k; vx *= d; vy *= d; tx += vx; ty += vy;
 
       var onFront = flipAngle < 90;
@@ -1346,8 +1346,8 @@
     }
     function draw() {
       ctx.clearRect(0,0,w,h);
-      if (frame++%2===0) {
-        vel+=(Math.random()-.5)*.6;vel*=.90;vel+=(50-price)*.002;
+      if (frame++%5===0) {
+        vel+=(Math.random()-.5)*.22;vel*=.94;vel+=(50-price)*.001;
         price+=vel;price=Math.max(6,Math.min(94,price));
         ticks.push(price);if(ticks.length>MAX_TICKS)ticks.shift();
         tickBuf.push(price);
