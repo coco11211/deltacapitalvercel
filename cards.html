@@ -532,7 +532,14 @@
 (function () {
   'use strict';
 
-  window.flipCard   = function (el) { el.classList.toggle('flipped'); };
+  window.flipCard = function (el) {
+    var wasFlipped = el.classList.contains('flipped');
+    el.classList.toggle('flipped');
+    if (!wasFlipped) {
+      /* Clear the spring's inline transform so the CSS transition owns the flip */
+      el.style.transform = '';
+    }
+  };
   window.copyEmail  = function (e, btn) {
     e.stopPropagation();
     navigator.clipboard.writeText(btn.closest('.card-wrap').getAttribute('data-email')).then(function () {
