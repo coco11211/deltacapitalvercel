@@ -11,91 +11,74 @@
     :root {
       --serif: 'Cormorant Garamond', 'Georgia', serif;
       --mono:  'JetBrains Mono', 'Fira Code', monospace;
-      --black: #0a0a0a;
-      --white: #fafafa;
-      --gray:  #666;
-      --faint: #999;
+      --bg:    #080808;
+      --white: #f4f4f4;
+      --dim:   rgba(255,255,255,0.45);
+      --faint: rgba(255,255,255,0.18);
+      --line:  rgba(255,255,255,0.06);
     }
+
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
+
     body {
       font-family: var(--serif);
-      background: var(--black);
+      background: var(--bg);
       color: var(--white);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      min-height: 100vh;
     }
 
-    /* ── Ambient drifting blob ── */
-    body::before {
-      content:'';
-      position:fixed; inset:0;
-      background: radial-gradient(ellipse 60% 50% at 50% 40%,
-        rgba(80,120,255,0.03) 0%, transparent 70%);
-      animation: blobDrift 28s ease-in-out infinite alternate;
-      pointer-events:none; z-index:0;
-    }
-    @keyframes blobDrift {
-      0%   { transform:translate(0,0)       scale(1);   filter:hue-rotate(0deg);   }
-      33%  { transform:translate(8%,-6%)    scale(1.15); filter:hue-rotate(55deg);  }
-      66%  { transform:translate(-6%,5%)   scale(0.9);  filter:hue-rotate(110deg); }
-      100% { transform:translate(5%,8%)    scale(1.1);  filter:hue-rotate(180deg); }
-    }
-
-    /* ── Page header ── */
+    /* ── Header ── */
     .page-header {
       text-align:center; padding:80px 20px 40px;
-      opacity:0; transform:translateY(20px);
-      animation:fadeUp 1s .3s forwards;
-      position:relative; z-index:1;
+      opacity:0; transform:translateY(16px);
+      animation:fadeUp .9s .2s forwards;
     }
     .page-header .delta {
-      font-size:2.5rem; font-weight:300; opacity:0.3; margin-bottom:16px;
-      animation:breathe 4s ease-in-out infinite;
+      font-size:2.2rem; font-weight:300;
+      color:rgba(255,255,255,0.2); margin-bottom:14px;
     }
-    .page-header h1 { font-weight:300; font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:.04em; }
-    .page-header p  {
-      font-family:var(--mono); font-size:.65rem;
-      color:var(--faint); text-transform:uppercase; letter-spacing:.14em; margin-top:10px;
+    .page-header h1 {
+      font-weight:300; font-size:clamp(1.6rem,3.5vw,2.4rem);
+      letter-spacing:.05em; color:rgba(255,255,255,0.85);
+    }
+    .page-header p {
+      font-family:var(--mono); font-size:.6rem;
+      color:rgba(255,255,255,0.25); text-transform:uppercase;
+      letter-spacing:.18em; margin-top:10px;
     }
 
     /* ── Grid ── */
     .cards-grid {
       display:grid;
       grid-template-columns:repeat(auto-fit, minmax(420px,1fr));
-      gap:0; max-width:1000px;
-      margin:20px auto 80px; padding:0 40px;
-      position:relative; z-index:1;
+      max-width:1000px; margin:20px auto 100px; padding:0 40px;
     }
-    @media(max-width:900px){ .cards-grid{ grid-template-columns:1fr; max-width:500px; } }
+    @media(max-width:900px){ .cards-grid{ grid-template-columns:1fr; max-width:480px; } }
     @media(max-width:500px){ .cards-grid{ padding:0 16px; } }
 
-    /* ── Card wrap ── */
+    /* ── Wrap ── */
     .card-wrap {
-      perspective:800px;
-      padding:40px 20px;
-      opacity:0; transform:translateY(40px) scale(.95);
+      perspective:900px; padding:44px 20px;
+      opacity:0; transform:translateY(32px);
     }
-    .card-wrap.visible { animation:fadeUp .8s forwards; }
-    .card-wrap:nth-child(1).visible { animation-delay:.10s; }
-    .card-wrap:nth-child(2).visible { animation-delay:.25s; }
-    .card-wrap:nth-child(3).visible { animation-delay:.40s; }
-    .card-wrap:nth-child(4).visible { animation-delay:.55s; }
+    .card-wrap.visible { animation:fadeUp .7s forwards; }
+    .card-wrap:nth-child(1).visible { animation-delay:.08s; }
+    .card-wrap:nth-child(2).visible { animation-delay:.20s; }
+    .card-wrap:nth-child(3).visible { animation-delay:.32s; }
+    .card-wrap:nth-child(4).visible { animation-delay:.44s; }
 
-    /* ── Idle float per card (paused on hover) ── */
-    .card-scene {
-      width:100%;
-      will-change:transform;
-    }
-    .card-wrap:nth-child(1) .card-scene { animation:cardFloat 3.8s ease-in-out infinite; }
-    .card-wrap:nth-child(2) .card-scene { animation:cardFloat 4.2s ease-in-out infinite -1.4s; }
-    .card-wrap:nth-child(3) .card-scene { animation:cardFloat 3.6s ease-in-out infinite -0.9s; }
-    .card-wrap:nth-child(4) .card-scene { animation:cardFloat 4.0s ease-in-out infinite -2.1s; }
+    /* Idle float — each card offset */
+    .card-scene { width:100%; }
+    .card-wrap:nth-child(1) .card-scene { animation:cardFloat 4.0s ease-in-out infinite  0.0s; }
+    .card-wrap:nth-child(2) .card-scene { animation:cardFloat 4.4s ease-in-out infinite -1.5s; }
+    .card-wrap:nth-child(3) .card-scene { animation:cardFloat 3.8s ease-in-out infinite -0.8s; }
+    .card-wrap:nth-child(4) .card-scene { animation:cardFloat 4.2s ease-in-out infinite -2.2s; }
     .card-wrap:hover .card-scene { animation-play-state:paused; }
     @keyframes cardFloat {
-      0%,100% { transform:translateY(0); }
-      50%      { transform:translateY(-9px); }
+      0%,100%{ transform:translateY(0); }
+      50%     { transform:translateY(-7px); }
     }
 
     /* ── Flip container ── */
@@ -103,96 +86,78 @@
       width:100%; max-width:440px; aspect-ratio:3.5/2;
       margin:0 auto; position:relative;
       transform-style:preserve-3d;
-      transition:transform .75s cubic-bezier(.4,0,.2,1);
-      cursor:pointer;
-      will-change:transform, filter;
+      cursor:pointer; will-change:transform,filter;
+      /* transition only used when flipping, spring handles tilt */
     }
-    .card-flip.flipped { transform:rotateY(180deg) !important; }
+    .card-flip.flipped { transform:rotateY(180deg) !important; transition:transform .75s cubic-bezier(.4,0,.2,1); }
 
     .card-face {
       position:absolute; inset:0;
       backface-visibility:hidden;
-      border-radius:12px; overflow:hidden;
+      border-radius:10px; overflow:hidden;
     }
 
     .card-hint {
-      text-align:center; margin-top:14px;
-      font-family:var(--mono); font-size:.55rem;
-      text-transform:uppercase; letter-spacing:.12em;
-      color:#444; opacity:0; transition:opacity .3s;
+      text-align:center; margin-top:12px;
+      font-family:var(--mono); font-size:.5rem;
+      text-transform:uppercase; letter-spacing:.15em;
+      color:rgba(255,255,255,0.15); opacity:0; transition:opacity .3s;
     }
     .card-wrap:hover .card-hint { opacity:1; }
 
-    /* ══════════════ FRONT FACE ══════════════ */
+    /* ══ FRONT ══ */
     .card-front {
-      background:var(--black);
-      border:1px solid rgba(255,255,255,.07);
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.07);
       display:flex; flex-direction:column;
-      justify-content:space-between;
-      padding:10% 9%; z-index:2;
-      animation:borderGlow 10s ease-in-out infinite;
-    }
-    @keyframes borderGlow {
-      0%,100% { box-shadow:0 0 22px rgba(80,140,255,.08),  inset 0 0 22px rgba(80,140,255,.02); }
-      33%      { box-shadow:0 0 22px rgba(160,80,255,.08), inset 0 0 22px rgba(160,80,255,.02); }
-      66%      { box-shadow:0 0 22px rgba(80,220,180,.08), inset 0 0 22px rgba(80,220,180,.02); }
+      justify-content:space-between; padding:9% 8%;
+      box-shadow: 0 2px 40px rgba(0,0,0,0.7);
     }
 
-    /* Scan line */
-    .card-front::before {
-      content:''; position:absolute; left:0; right:0; top:0; height:2px;
-      background:linear-gradient(90deg,
-        transparent, rgba(255,255,255,.05) 20%,
-        rgba(255,255,255,.25) 50%, rgba(255,255,255,.05) 80%, transparent);
-      animation:scanLine 5s ease-in-out infinite;
-      z-index:4; pointer-events:none;
-    }
-    .card-wrap:nth-child(2) .card-front::before { animation-delay:1.25s; }
-    .card-wrap:nth-child(3) .card-front::before { animation-delay:2.5s;  }
-    .card-wrap:nth-child(4) .card-front::before { animation-delay:3.75s; }
-    @keyframes scanLine {
-      0%   { top:0%;   opacity:0; }
-      4%   { opacity:1; }
-      94%  { opacity:.7; }
-      100% { top:100%; opacity:0; }
-    }
-
-    /* Aurora overlay */
-    .card-front::after {
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background:
-        radial-gradient(ellipse 65% 45% at 80% 20%, rgba(100,150,255,.05) 0%, transparent 70%),
-        radial-gradient(ellipse 45% 65% at 20% 80%, rgba(160,100,255,.04) 0%, transparent 70%);
-      animation:auroraShift 14s ease-in-out infinite alternate;
-      z-index:1;
-    }
-    @keyframes auroraShift {
-      0%   { opacity:.4; filter:hue-rotate(0deg);  }
-      50%  { opacity:.8; filter:hue-rotate(35deg); }
-      100% { opacity:.4; filter:hue-rotate(75deg); }
-    }
-
-    /* Particle canvas */
+    /* Canvas — full bleed chart */
     .card-front canvas {
       position:absolute; inset:0; width:100%; height:100%;
-      pointer-events:none; z-index:2;
+      pointer-events:none; z-index:1;
     }
 
-    /* Holographic foil overlay (filled by JS) */
-    .holo-overlay {
-      position:absolute; inset:0; border-radius:12px;
-      pointer-events:none; z-index:6;
-      opacity:0; mix-blend-mode:screen;
-      transition:opacity .25s;
+    /* Gradient vignette — clears the lower third for text legibility */
+    .card-front::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to top,
+        rgba(8,8,8,.96) 0%,
+        rgba(8,8,8,.7)  28%,
+        rgba(8,8,8,.2)  55%,
+        transparent     80%
+      );
+      z-index:2; pointer-events:none;
     }
 
-    /* Mouse shimmer */
+    /* Subtle scan line */
+    .card-front::after {
+      content:''; position:absolute; left:0; right:0; top:0; height:1px;
+      background:linear-gradient(90deg,
+        transparent 0%, rgba(255,255,255,.07) 25%,
+        rgba(255,255,255,.16) 50%, rgba(255,255,255,.07) 75%, transparent 100%);
+      animation:scanLine 9s ease-in-out infinite;
+      z-index:6; pointer-events:none;
+    }
+    .card-wrap:nth-child(2) .card-front::after { animation-delay:-3s; }
+    .card-wrap:nth-child(3) .card-front::after { animation-delay:-6s; }
+    .card-wrap:nth-child(4) .card-front::after { animation-delay:-1.5s; }
+    @keyframes scanLine {
+      0%  { top:0%;   opacity:0; }
+      3%  { opacity:1; }
+      95% { opacity:.5; }
+      100%{ top:100%; opacity:0; }
+    }
+
+    /* Shimmer — mono white only */
     .card-front .shimmer {
       position:absolute; inset:0; pointer-events:none;
-      opacity:0; transition:opacity .4s; z-index:5;
+      opacity:0; transition:opacity .35s; z-index:5;
       background:radial-gradient(
-        circle 180px at var(--mx,50%) var(--my,50%),
-        rgba(255,255,255,.07) 0%, transparent 100%
+        circle 160px at var(--mx,50%) var(--my,50%),
+        rgba(255,255,255,.05) 0%, transparent 100%
       );
     }
     .card-flip:hover .shimmer { opacity:1; }
@@ -203,137 +168,117 @@
       position:relative; z-index:8;
     }
     .card-front .delta-mark {
-      font-size:clamp(1.4rem,3vw,1.8rem); font-weight:300; line-height:1;
-      opacity:.85; animation:breathe 4s ease-in-out infinite;
+      font-size:clamp(1.3rem,2.8vw,1.7rem); font-weight:300; line-height:1;
+      color:rgba(255,255,255,.7);
       will-change:transform;
     }
     .card-front .corner-accent {
-      width:22px; height:22px; position:relative; will-change:transform;
+      width:18px; height:18px; position:relative; will-change:transform;
     }
     .card-front .corner-accent::before,
     .card-front .corner-accent::after {
       content:''; position:absolute;
-      background:rgba(255,255,255,.15); transition:background .4s;
+      background:rgba(255,255,255,.2); transition:background .4s;
     }
     .card-flip:hover .corner-accent::before,
     .card-flip:hover .corner-accent::after { background:rgba(255,255,255,.4); }
-    .card-front .corner-accent::before { top:0; right:0; width:22px; height:.5px; }
-    .card-front .corner-accent::after  { top:0; right:0; width:.5px; height:22px; }
+    .card-front .corner-accent::before { top:0; right:0; width:18px; height:.5px; }
+    .card-front .corner-accent::after  { top:0; right:0; width:.5px; height:18px; }
 
-    /* Person info */
+    /* Person */
     .card-front .person { position:relative; z-index:8; }
     .card-front .person-name {
-      display:block; font-size:clamp(1rem,2.2vw,1.2rem); font-weight:400;
-      letter-spacing:.03em; margin-bottom:3px;
-      transition:text-shadow .5s; will-change:transform;
-    }
-    .card-flip:hover .person-name {
-      text-shadow:0 0 22px rgba(255,255,255,.3), 0 0 55px rgba(255,255,255,.12);
+      display:block; font-size:clamp(.95rem,2vw,1.15rem); font-weight:400;
+      letter-spacing:.03em; color:rgba(255,255,255,.88);
+      will-change:transform;
     }
     .card-front .person-title {
       display:block; font-family:var(--mono);
-      font-size:clamp(.45rem,1vw,.55rem); font-weight:300;
-      letter-spacing:.14em; text-transform:uppercase; color:var(--gray);
-      opacity:0; transform:translateY(4px); transition:all .5s .1s;
+      font-size:clamp(.42rem,.9vw,.52rem); font-weight:300;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(255,255,255,.3);
+      opacity:0; transform:translateY(4px); transition:all .5s .15s;
       will-change:transform;
     }
     .card-wrap.visible .person-title { opacity:1; transform:translateY(0); }
 
-    /* Foil line */
+    /* Bottom foil line */
     .card-front .foil-line {
       position:absolute; bottom:0; left:0; right:0; height:1px;
       background:linear-gradient(90deg,
-        transparent, rgba(255,255,255,.08) 20%,
-        rgba(255,255,255,.22) 50%, rgba(255,255,255,.08) 80%, transparent);
-      animation:shimmerSlide 6s ease-in-out infinite; z-index:8;
+        transparent, rgba(255,255,255,.06) 25%,
+        rgba(255,255,255,.18) 50%, rgba(255,255,255,.06) 75%, transparent);
+      z-index:8;
     }
 
-    /* Sparkle */
-    .sparkle {
-      position:absolute; width:4px; height:4px; border-radius:50%;
-      background:white; pointer-events:none; z-index:10;
-      animation:sparkleAnim .65s ease-out forwards;
-    }
-    @keyframes sparkleAnim {
-      0%   { transform:scale(0) rotate(0deg);   opacity:1;   box-shadow:0 0 6px 2px rgba(255,255,255,.9); }
-      40%  { transform:scale(1.6) rotate(90deg);  opacity:.9; }
-      100% { transform:scale(0) rotate(200deg);  opacity:0;   }
-    }
-
-    /* ══════════════ BACK FACE ══════════════ */
+    /* ══ BACK ══ */
     .card-back {
-      background: var(--white);
+      background: #f5f5f5;
       background-image:
-        linear-gradient(rgba(0,0,0,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,.025) 1px, transparent 1px);
-      background-size:22px 22px;
-      color:var(--black);
+        linear-gradient(rgba(0,0,0,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.018) 1px, transparent 1px);
+      background-size:20px 20px;
+      color:#111;
       transform:rotateY(180deg);
       display:flex; flex-direction:column;
-      justify-content:space-between;
-      padding:10% 9%; border:1px solid #e0e0e0;
+      justify-content:space-between; padding:10% 9%;
+      border:1px solid #e8e8e8;
     }
     /* Shine sweep */
     .card-back::after {
-      content:''; position:absolute; inset:0; border-radius:12px;
-      background:linear-gradient(108deg,
-        transparent 38%, rgba(255,255,255,.6) 50%, transparent 62%);
+      content:''; position:absolute; inset:0; border-radius:10px;
+      background:linear-gradient(112deg,
+        transparent 36%, rgba(255,255,255,.55) 50%, transparent 64%);
       transform:translateX(-200%);
-      animation:backShine 7s ease-in-out infinite;
+      animation:backShine 8s ease-in-out infinite;
       pointer-events:none; z-index:2;
     }
     @keyframes backShine {
-      0%,58%,100% { transform:translateX(-200%); }
-      46%          { transform:translateX(200%); }
+      0%,60%,100%{ transform:translateX(-200%); }
+      45%         { transform:translateX(200%); }
     }
+
     .card-back .top-section {
-      display:flex; justify-content:space-between; align-items:flex-start; z-index:3; position:relative;
+      display:flex; justify-content:space-between; align-items:flex-start;
+      position:relative; z-index:3;
     }
-    .card-back .brand-delta { font-size:1.1rem; font-weight:300; opacity:.6; line-height:1; }
+    .card-back .brand-delta { font-size:1rem; font-weight:300; opacity:.5; line-height:1; }
     .card-back .brand-name  {
-      font-size:.55rem; font-weight:400; letter-spacing:.1em;
-      text-transform:uppercase; opacity:.4; margin-top:2px;
+      font-size:.5rem; font-weight:400; letter-spacing:.12em;
+      text-transform:uppercase; opacity:.35; margin-top:2px;
     }
     .card-back .qr-box {
-      width:44px; height:44px; border:1px solid #e0e0e0;
+      width:40px; height:40px; border:1px solid #ddd;
       display:flex; align-items:center; justify-content:center;
-      font-size:1rem; color:#bbb;
-      animation:qrPulse 4s ease-in-out infinite;
+      font-size:.9rem; color:#bbb;
       transition:border-color .3s, color .3s;
     }
-    @keyframes qrPulse {
-      0%,100% { border-color:#e0e0e0; color:#ccc; }
-      50%      { border-color:#aaa;   color:#888; }
-    }
-    .card-flip:hover .qr-box { border-color:#888; color:#666; }
+    .card-flip:hover .qr-box { border-color:#999; color:#777; }
+
     .card-back .details {
       display:flex; flex-direction:column; gap:4px;
       position:relative; z-index:3;
     }
-    .card-back .detail-divider { width:28px; height:.5px; background:#ddd; margin-bottom:4px; }
+    .card-back .detail-divider { width:24px; height:.5px; background:#ccc; margin-bottom:4px; }
     .card-back .detail-line {
-      font-family:var(--mono); font-size:clamp(.4rem,.9vw,.5rem);
-      font-weight:300; letter-spacing:.06em; color:var(--gray);
+      font-family:var(--mono); font-size:clamp(.38rem,.85vw,.48rem);
+      font-weight:300; letter-spacing:.06em; color:#888;
     }
-    .card-back .detail-line.email { color:var(--black); font-weight:400; }
+    .card-back .detail-line.email { color:#222; font-weight:400; }
+
     .card-back .copy-btn {
       position:absolute; bottom:8%; right:8%;
-      font-family:var(--mono); font-size:.45rem;
+      font-family:var(--mono); font-size:.42rem;
       text-transform:uppercase; letter-spacing:.1em;
-      background:none; border:1px solid #ddd; color:#999;
-      padding:4px 10px; cursor:pointer; border-radius:3px;
+      background:none; border:1px solid #ddd; color:#aaa;
+      padding:4px 10px; cursor:pointer; border-radius:2px;
       transition:all .2s; z-index:3;
     }
-    .card-back .copy-btn:hover  { border-color:var(--black); color:var(--black); }
+    .card-back .copy-btn:hover  { border-color:#222; color:#222; }
     .card-back .copy-btn.copied { border-color:#4a4; color:#4a4; }
 
     /* ── Shared keyframes ── */
-    @keyframes fadeUp  { to { opacity:1; transform:translateY(0) scale(1); } }
-    @keyframes breathe { 0%,100%{opacity:.3} 50%{opacity:.65} }
-    @keyframes shimmerSlide {
-      0%,100%{ background-position:-200% 0; }
-      50%    { background-position: 200% 0; }
-    }
+    @keyframes fadeUp { to{ opacity:1; transform:translateY(0) scale(1); } }
   </style>
 </head>
 <body>
@@ -351,7 +296,6 @@
         <div class="card-flip" onclick="flipCard(this)">
           <div class="card-face card-front">
             <canvas></canvas>
-            <div class="holo-overlay"></div>
             <div class="shimmer"></div>
             <div class="top-row">
               <div class="delta-mark">&Delta;</div>
@@ -377,7 +321,7 @@
           </div>
         </div>
       </div>
-      <div class="card-hint">Click to flip &nbsp;·&nbsp; Hover to tilt</div>
+      <div class="card-hint">hover &nbsp;/&nbsp; click to flip</div>
     </div>
 
     <div class="card-wrap" data-email="yonatanshichor@deltacapitaltrading.com">
@@ -385,7 +329,6 @@
         <div class="card-flip" onclick="flipCard(this)">
           <div class="card-face card-front">
             <canvas></canvas>
-            <div class="holo-overlay"></div>
             <div class="shimmer"></div>
             <div class="top-row">
               <div class="delta-mark">&Delta;</div>
@@ -411,7 +354,7 @@
           </div>
         </div>
       </div>
-      <div class="card-hint">Click to flip &nbsp;·&nbsp; Hover to tilt</div>
+      <div class="card-hint">hover &nbsp;/&nbsp; click to flip</div>
     </div>
 
     <div class="card-wrap" data-email="noahrubin@deltacapitaltrading.com">
@@ -419,7 +362,6 @@
         <div class="card-flip" onclick="flipCard(this)">
           <div class="card-face card-front">
             <canvas></canvas>
-            <div class="holo-overlay"></div>
             <div class="shimmer"></div>
             <div class="top-row">
               <div class="delta-mark">&Delta;</div>
@@ -445,7 +387,7 @@
           </div>
         </div>
       </div>
-      <div class="card-hint">Click to flip &nbsp;·&nbsp; Hover to tilt</div>
+      <div class="card-hint">hover &nbsp;/&nbsp; click to flip</div>
     </div>
 
     <div class="card-wrap" data-email="ethanlopezlevy@deltacapital.com">
@@ -453,7 +395,6 @@
         <div class="card-flip" onclick="flipCard(this)">
           <div class="card-face card-front">
             <canvas></canvas>
-            <div class="holo-overlay"></div>
             <div class="shimmer"></div>
             <div class="top-row">
               <div class="delta-mark">&Delta;</div>
@@ -479,7 +420,7 @@
           </div>
         </div>
       </div>
-      <div class="card-hint">Click to flip &nbsp;·&nbsp; Hover to tilt</div>
+      <div class="card-hint">hover &nbsp;/&nbsp; click to flip</div>
     </div>
 
   </div>
@@ -491,7 +432,7 @@
   /* ══ FLIP ══ */
   window.flipCard = function (el) { el.classList.toggle('flipped'); };
 
-  /* ══ COPY EMAIL ══ */
+  /* ══ COPY ══ */
   window.copyEmail = function (e, btn) {
     e.stopPropagation();
     var email = btn.closest('.card-wrap').getAttribute('data-email');
@@ -502,260 +443,247 @@
   };
 
   /* ══ SCROLL REVEAL ══ */
-  var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
+  var obs = new IntersectionObserver(function (ents) {
+    ents.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
   document.querySelectorAll('.card-wrap').forEach(function (w) { obs.observe(w); });
 
-  /* ══ SPRING PHYSICS + HOLOGRAPHIC + PARALLAX + SPARKLES ══ */
-  var sparkleThrottle = {};
+  /* ══ SPRING TILT + PARALLAX ══ */
+  document.querySelectorAll('.card-flip').forEach(function (card) {
+    var shimmer = card.querySelector('.shimmer');
+    var canvas  = card.querySelector('canvas');
+    var dmark   = card.querySelector('.delta-mark');
+    var pname   = card.querySelector('.person-name');
+    var ptitle  = card.querySelector('.person-title');
+    var corner  = card.querySelector('.corner-accent');
 
-  document.querySelectorAll('.card-flip').forEach(function (card, idx) {
-    var shimmer  = card.querySelector('.shimmer');
-    var holo     = card.querySelector('.holo-overlay');
-    var front    = card.querySelector('.card-front');
-    var canvas   = card.querySelector('canvas');
-    var dmark    = card.querySelector('.delta-mark');
-    var pname    = card.querySelector('.person-name');
-    var ptitle   = card.querySelector('.person-title');
-    var corner   = card.querySelector('.corner-accent');
+    var tx = 0, ty = 0, vx = 0, vy = 0, tX = 0, tY = 0, over = false;
 
-    /* Spring state */
-    var tx = 0, ty = 0, vx = 0, vy = 0;
-    var targetX = 0, targetY = 0;
-    var hovering = false;
-
-    /* Spring loop — always running */
     (function tick() {
-      var stiff = hovering ? 0.10 : 0.07;
-      var damp  = 0.72;
-      vx += (targetX - tx) * stiff; vy += (targetY - ty) * stiff;
-      vx *= damp; vy *= damp;
-      tx += vx; ty += vy;
+      var k = over ? 0.09 : 0.06, d = 0.74;
+      vx += (tX - tx) * k; vy += (tY - ty) * k;
+      vx *= d; vy *= d; tx += vx; ty += vy;
 
       if (!card.classList.contains('flipped')) {
         card.style.transform = 'rotateX(' + tx.toFixed(2) + 'deg) rotateY(' + ty.toFixed(2) + 'deg)';
       }
 
-      /* Dynamic drop-shadow shifts with tilt */
-      var sx = (ty * 1.8).toFixed(1);
-      var sy = (-tx * 1.8).toFixed(1);
-      card.style.filter = 'drop-shadow(' + sx + 'px ' + sy + 'px 28px rgba(0,0,0,.65))';
+      /* Drop-shadow shifts with tilt direction */
+      var sx = (ty * 1.4).toFixed(1), sy = (-tx * 1.4).toFixed(1);
+      card.style.filter = 'drop-shadow(' + sx + 'px ' + sy + 'px 32px rgba(0,0,0,.8))';
 
-      /* Depth parallax — text floats at different layers */
-      if (hovering) {
-        if (dmark)  dmark.style.transform  = 'translate(' + (ty * 1.6).toFixed(1) + 'px,' + (-tx * 1.6).toFixed(1) + 'px)';
-        if (pname)  pname.style.transform  = 'translate(' + (ty * 0.9).toFixed(1) + 'px,' + (-tx * 0.9).toFixed(1) + 'px)';
-        if (ptitle) ptitle.style.transform = 'translate(' + (ty * 0.4).toFixed(1) + 'px,' + (-tx * 0.4).toFixed(1) + 'px)';
-        if (corner) corner.style.transform = 'translate(' + (ty * 1.3).toFixed(1) + 'px,' + (-tx * 1.3).toFixed(1) + 'px)';
+      /* Parallax layers */
+      if (over) {
+        if (dmark)  dmark.style.transform  = 'translate(' + (ty*1.4).toFixed(1) + 'px,' + (-tx*1.4).toFixed(1) + 'px)';
+        if (pname)  pname.style.transform  = 'translate(' + (ty*0.7).toFixed(1) + 'px,' + (-tx*0.7).toFixed(1) + 'px)';
+        if (ptitle) ptitle.style.transform = 'translate(' + (ty*0.3).toFixed(1) + 'px,' + (-tx*0.3).toFixed(1) + 'px)';
+        if (corner) corner.style.transform = 'translate(' + (ty*1.1).toFixed(1) + 'px,' + (-tx*1.1).toFixed(1) + 'px)';
       }
-
       requestAnimationFrame(tick);
     })();
 
-    /* Mouse enter */
-    card.addEventListener('mouseenter', function () {
-      hovering = true;
-      holo.style.opacity = '1';
-    });
+    card.addEventListener('mouseenter', function () { over = true; });
 
-    /* Mouse move */
     card.addEventListener('mousemove', function (e) {
-      var rect = card.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width;
-      var y = (e.clientY - rect.top)  / rect.height;
-
-      targetX = (y - 0.5) * -18;
-      targetY = (x - 0.5) *  18;
-
-      /* Shimmer */
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width;
+      var y = (e.clientY - r.top)  / r.height;
+      tX = (y - 0.5) * -12;
+      tY = (x - 0.5) *  12;
       shimmer.style.setProperty('--mx', (x * 100) + '%');
       shimmer.style.setProperty('--my', (y * 100) + '%');
-
-      /* Holographic rainbow foil — conic gradient tracks mouse angle */
-      var angle = Math.atan2(y - 0.5, x - 0.5) * (180 / Math.PI);
-      var hue   = ((angle + 180) / 360) * 360;
-      var h0 = hue % 360, h1 = (hue + 60) % 360, h2 = (hue + 120) % 360;
-      var h3 = (hue + 180) % 360, h4 = (hue + 240) % 360, h5 = (hue + 300) % 360;
-      holo.style.background = [
-        'conic-gradient(from ' + (angle + 90).toFixed(0) + 'deg at ' + (x * 100).toFixed(0) + '% ' + (y * 100).toFixed(0) + '%,',
-        'hsla(' + h0 + ',100%,65%,.18),',
-        'hsla(' + h1 + ',100%,65%,.18),',
-        'hsla(' + h2 + ',100%,65%,.18),',
-        'hsla(' + h3 + ',100%,65%,.18),',
-        'hsla(' + h4 + ',100%,65%,.18),',
-        'hsla(' + h5 + ',100%,65%,.18),',
-        'hsla(' + h0 + ',100%,65%,.18))'
-      ].join('');
-
-      /* Pass mouse to particle system */
-      if (canvas) { canvas._mx = e.clientX - rect.left; canvas._my = e.clientY - rect.top; }
-
-      /* Sparkles — throttled */
-      var now = Date.now();
-      if (!sparkleThrottle[idx] || now - sparkleThrottle[idx] > 75) {
-        sparkleThrottle[idx] = now;
-        var s = document.createElement('div');
-        s.className = 'sparkle';
-        var ox = e.clientX - rect.left + (Math.random() - 0.5) * 28;
-        var oy = e.clientY - rect.top  + (Math.random() - 0.5) * 28;
-        s.style.left = ox + 'px'; s.style.top = oy + 'px';
-        /* Random hue tint */
-        var sh = Math.floor(Math.random() * 360);
-        s.style.background = 'hsl(' + sh + ',100%,90%)';
-        s.style.boxShadow  = '0 0 6px 2px hsla(' + sh + ',100%,80%,.8)';
-        front.appendChild(s);
-        setTimeout(function () { if (s.parentNode) s.remove(); }, 700);
-      }
+      if (canvas) { canvas._mx = e.clientX - r.left; canvas._my = e.clientY - r.top; }
     });
 
-    /* Mouse leave */
     card.addEventListener('mouseleave', function () {
-      hovering = false;
-      targetX = 0; targetY = 0;
-      holo.style.opacity = '0';
+      over = false; tX = 0; tY = 0;
       if (canvas) { canvas._mx = null; canvas._my = null; }
-      if (dmark)  dmark.style.transform  = '';
-      if (pname)  pname.style.transform  = '';
-      if (ptitle) ptitle.style.transform = '';
-      if (corner) corner.style.transform = '';
+      [dmark, pname, ptitle, corner].forEach(function (el) { if (el) el.style.transform = ''; });
     });
   });
 
-  /* ══ GYROSCOPE (mobile) ══ */
-  var gyroActive = false;
+  /* ══ GYROSCOPE ══ */
   if (typeof DeviceOrientationEvent !== 'undefined') {
     window.addEventListener('deviceorientation', function (e) {
       if (e.beta === null) return;
-      gyroActive = true;
-      var pitchN = Math.max(-1, Math.min(1, ((e.beta - 45) / 30)));
-      var rollN  = Math.max(-1, Math.min(1, (e.gamma / 30)));
-      document.querySelectorAll('.card-flip').forEach(function (card) {
-        /* only if not hover-targeted */
-        var holo = card.querySelector('.holo-overlay');
-        var angle = Math.atan2(pitchN, rollN) * (180 / Math.PI);
-        var hue   = ((angle + 180) / 360) * 360;
-        if (!card.matches(':hover')) {
-          card._gyroX = pitchN * -12;
-          card._gyroY = rollN  *  12;
-        }
+      var roll  = Math.max(-1, Math.min(1, e.gamma / 25));
+      var pitch = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
+      document.querySelectorAll('.card-flip:not(:hover)').forEach(function (card) {
+        card._gyroX = pitch * -10;
+        card._gyroY = roll  *  10;
       });
     });
   }
 
-  /* ══ PARTICLE CANVAS ══ */
-  document.querySelectorAll('.card-front canvas').forEach(function (canvas, cardIdx) {
+  /* ══ MARKET CHART CANVAS ══ */
+  document.querySelectorAll('.card-front canvas').forEach(function (canvas, idx) {
     var ctx = canvas.getContext('2d');
     var dpr = window.devicePixelRatio || 1;
-    var w, h, animId, particles = [];
-    var TOTAL = 55, DELTA_N = 38, time = cardIdx * 100;
+    var w = 0, h = 0, animId;
+
+    /* ── Price simulation ── */
+    var HISTORY = 220;
+    var prices = [], volumes = [];
+    var price = 50 + (Math.random() - 0.5) * 12;
+    var vel   = 0;
+
+    /* Seed with history, each card a different "instrument" */
+    var seed = idx * 137.5 + 42;
+    function rng() { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return (seed >>> 0) / 0xffffffff; }
+
+    for (var i = 0; i < HISTORY; i++) {
+      vel += (rng() - 0.5) * 0.9;
+      vel *= 0.88;
+      vel += (50 - price) * 0.003;  /* mean reversion */
+      price += vel;
+      price = Math.max(10, Math.min(90, price));
+      prices.push(price);
+      volumes.push(0.3 + rng() * 0.7);
+    }
+
+    var frame = 0;
 
     function resize() {
       var rect = canvas.parentElement.getBoundingClientRect();
       w = rect.width; h = rect.height;
-      canvas.width = w * dpr; canvas.height = h * dpr;
+      canvas.width  = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    function seed() {
-      particles = [];
-      for (var i = 0; i < TOTAL; i++) {
-        particles.push({
-          x: Math.random() * (w || 300), y: Math.random() * (h || 180),
-          vx: (Math.random() - 0.5) * 0.8, vy: (Math.random() - 0.5) * 0.8,
-          tx: 0, ty: 0, sz: 0.6 + Math.random() * 0.9, delta: i < DELTA_N
-        });
-      }
-      assignTargets();
-    }
-
-    function assignTargets() {
-      if (!w || !h) return;
-      var cx = w * 0.82, cy = h * 0.35, sz = Math.min(w * 0.18, h * 0.45);
-      var A = { x: cx, y: cy - sz * 0.6 };
-      var B = { x: cx - sz * 0.52, y: cy + sz * 0.38 };
-      var C = { x: cx + sz * 0.52, y: cy + sz * 0.38 };
-      for (var i = 0; i < TOTAL; i++) {
-        var p = particles[i]; if (!p) continue;
-        if (i < DELTA_N) {
-          if (i < DELTA_N * 0.7) {
-            var edge = i % 3, t = Math.random();
-            if      (edge === 0) { p.tx = A.x+(B.x-A.x)*t; p.ty = A.y+(B.y-A.y)*t; }
-            else if (edge === 1) { p.tx = B.x+(C.x-B.x)*t; p.ty = B.y+(C.y-B.y)*t; }
-            else                 { p.tx = C.x+(A.x-C.x)*t; p.ty = C.y+(A.y-C.y)*t; }
-          } else {
-            var r1 = Math.random(), r2 = Math.random();
-            if (r1 + r2 > 1) { r1 = 1 - r1; r2 = 1 - r2; }
-            p.tx = A.x+(B.x-A.x)*r1+(C.x-A.x)*r2;
-            p.ty = A.y+(B.y-A.y)*r1+(C.y-A.y)*r2;
-          }
-          p.tx += (Math.random()-0.5)*3; p.ty += (Math.random()-0.5)*3;
-        } else { p.tx = Math.random()*w; p.ty = Math.random()*h; }
-      }
-    }
-
-    function draw() {
+    function drawChart() {
       ctx.clearRect(0, 0, w, h);
-      time += 0.006;
-      var conv = 0.5 + 0.45 * Math.sin(time * 0.25);
-      var mx = canvas._mx, my = canvas._my, hasM = (mx != null);
 
-      for (var i = 0; i < TOTAL; i++) {
-        var p = particles[i];
-        var pull   = p.delta ? conv * 0.018 : 0.003;
-        var jitter = p.delta ? (1 - conv) * 0.6 : 0.4;
-        p.vx += (p.tx - p.x) * pull + (Math.random()-0.5) * jitter;
-        p.vy += (p.ty - p.y) * pull + (Math.random()-0.5) * jitter;
-
-        /* Mouse repulsion */
-        if (hasM) {
-          var mdx = p.x - mx, mdy = p.y - my, md2 = mdx*mdx+mdy*mdy;
-          if (md2 < 2800 && md2 > 0) {
-            var md = Math.sqrt(md2), mf = (1 - md/53) * (p.delta ? 1.8 : 0.9);
-            p.vx += (mdx/md)*mf; p.vy += (mdy/md)*mf;
-          }
-        }
-
-        p.vx *= 0.93; p.vy *= 0.93;
-        p.x += p.vx;  p.y += p.vy;
-        if (p.x < -20) p.x += w+40; if (p.x > w+20) p.x -= w+40;
-        if (p.y < -20) p.y += h+40; if (p.y > h+20) p.y -= h+40;
+      /* Add a new tick every 2 frames */
+      if (frame++ % 2 === 0) {
+        vel += (Math.random() - 0.5) * 0.7;
+        vel *= 0.90;
+        vel += (50 - price) * 0.002;
+        price += vel;
+        price = Math.max(10, Math.min(90, price));
+        prices.push(price);
+        volumes.push(0.3 + Math.random() * 0.7);
+        if (prices.length > HISTORY) { prices.shift(); volumes.shift(); }
       }
 
-      /* Connections */
-      ctx.lineWidth = 0.3; ctx.beginPath();
-      for (var i = 0; i < TOTAL; i++) {
-        for (var j = i+1; j < TOTAL; j++) {
-          var dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y;
-          if (dx*dx+dy*dy < 950) { ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); }
-        }
-      }
-      ctx.strokeStyle = 'rgba(255,255,255,.05)'; ctx.stroke();
+      /* Visible window */
+      var N   = prices.length;
+      var VIS = Math.min(N, 110);           /* bars shown */
+      var vis = prices.slice(N - VIS);
+      var vol = volumes.slice(N - VIS);
 
-      /* Dots */
-      for (var i = 0; i < TOTAL; i++) {
-        var p = particles[i];
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.sz, 0, Math.PI*2);
-        ctx.fillStyle = p.delta
-          ? 'rgba(255,255,255,' + (0.13 + conv*0.2) + ')'
-          : 'rgba(255,255,255,.07)';
-        ctx.fill();
+      var pMin = Infinity, pMax = -Infinity;
+      for (var i = 0; i < vis.length; i++) {
+        if (vis[i] < pMin) pMin = vis[i];
+        if (vis[i] > pMax) pMax = vis[i];
       }
-      animId = requestAnimationFrame(draw);
+      var pad   = (pMax - pMin) * 0.25 || 1;
+      pMin -= pad; pMax += pad;
+      var pRange = pMax - pMin;
+
+      /* Layout */
+      var chartTop  = h * 0.08;
+      var chartBot  = h * 0.72;
+      var chartH    = chartBot - chartTop;
+      var volTop    = h * 0.76;
+      var volBot    = h * 0.92;
+      var volH      = volBot - volTop;
+
+      function py(p) { return chartBot - ((p - pMin) / pRange) * chartH; }
+
+      /* ── Grid ── */
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+      ctx.lineWidth   = 0.5;
+      for (var row = 0; row <= 4; row++) {
+        var gy = chartTop + (row / 4) * chartH;
+        ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(w, gy); ctx.stroke();
+      }
+      for (var col = 1; col <= 5; col++) {
+        var gx = (col / 6) * w;
+        ctx.beginPath(); ctx.moveTo(gx, chartTop); ctx.lineTo(gx, chartBot); ctx.stroke();
+      }
+
+      /* ── Volume bars (very faint) ── */
+      var bw = w / VIS;
+      ctx.fillStyle = 'rgba(255,255,255,0.055)';
+      for (var i = 0; i < vis.length; i++) {
+        var bx = i * bw;
+        var bh = vol[i] * volH;
+        ctx.fillRect(bx + bw * 0.1, volBot - bh, bw * 0.8, bh);
+      }
+
+      /* ── Separator between chart and volume ── */
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.moveTo(0, volTop - 2); ctx.lineTo(w, volTop - 2); ctx.stroke();
+
+      /* ── Area fill ── */
+      ctx.beginPath();
+      for (var i = 0; i < vis.length; i++) {
+        var px_ = (i / (vis.length - 1)) * w;
+        var py_ = py(vis[i]);
+        if (i === 0) ctx.moveTo(px_, py_); else ctx.lineTo(px_, py_);
+      }
+      ctx.lineTo(w, chartBot); ctx.lineTo(0, chartBot); ctx.closePath();
+      var areaGrad = ctx.createLinearGradient(0, chartTop, 0, chartBot);
+      areaGrad.addColorStop(0,   'rgba(255,255,255,0.08)');
+      areaGrad.addColorStop(0.6, 'rgba(255,255,255,0.02)');
+      areaGrad.addColorStop(1,   'rgba(255,255,255,0)');
+      ctx.fillStyle = areaGrad;
+      ctx.fill();
+
+      /* ── Price line ── */
+      ctx.beginPath();
+      for (var i = 0; i < vis.length; i++) {
+        var px_ = (i / (vis.length - 1)) * w;
+        var py_ = py(vis[i]);
+        if (i === 0) ctx.moveTo(px_, py_); else ctx.lineTo(px_, py_);
+      }
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      ctx.lineWidth   = 1;
+      ctx.lineJoin    = 'round';
+      ctx.stroke();
+
+      /* ── Current price dot ── */
+      var lastY = py(vis[vis.length - 1]);
+      ctx.beginPath(); ctx.arc(w, lastY, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(w, lastY, 5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.fill();
+
+      /* ── Mouse crosshair ── */
+      var mx = canvas._mx, my = canvas._my;
+      if (mx != null && mx >= 0 && mx <= w && my >= chartTop && my <= chartBot) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+        ctx.lineWidth = 0.5;
+        ctx.setLineDash([4, 5]);
+        ctx.beginPath(); ctx.moveTo(mx, chartTop); ctx.lineTo(mx, chartBot); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, my); ctx.lineTo(w, my); ctx.stroke();
+        ctx.setLineDash([]);
+        /* Intersection dot */
+        var dataIdx = Math.round((mx / w) * (vis.length - 1));
+        dataIdx = Math.max(0, Math.min(vis.length - 1, dataIdx));
+        var crossY = py(vis[dataIdx]);
+        var crossX = (dataIdx / (vis.length - 1)) * w;
+        ctx.beginPath(); ctx.arc(crossX, crossY, 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.fill();
+      }
+
+      animId = requestAnimationFrame(drawChart);
     }
 
-    var visible = false;
-    var cObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting && !visible) { visible=true;  resize(); seed(); draw(); }
-        else if (!e.isIntersecting && visible) { visible=false; cancelAnimationFrame(animId); }
+    /* Start only when visible */
+    var active = false;
+    var visObs = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) {
+        if (e.isIntersecting && !active) { active = true; resize(); drawChart(); }
+        else if (!e.isIntersecting && active) { active = false; cancelAnimationFrame(animId); }
       });
     }, { threshold: 0.05 });
 
     function init() {
-      resize(); seed();
-      cObs.observe(canvas.closest('.card-wrap'));
-      window.addEventListener('resize', function () { resize(); assignTargets(); });
+      resize();
+      visObs.observe(canvas.closest('.card-wrap'));
+      window.addEventListener('resize', function () { resize(); });
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
