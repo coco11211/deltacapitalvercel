@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <style>
     :root {
       --serif: 'Cormorant Garamond', 'Georgia', serif;
@@ -186,71 +187,121 @@
       z-index:10;
     }
 
-    /* ══ BACK ══ — both sides dark, premium coherent */
+    /* ══ BACK ══ */
     .card-back {
       background:
-        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px),
         linear-gradient(152deg, #101014 0%, #0a0a0e 100%);
       background-size: 20px 20px, 20px 20px, auto;
       color: rgba(255,255,255,.78);
-      transform:rotateY(180deg);
-      display:flex; flex-direction:column;
-      justify-content:space-between; padding:10% 9%;
-      border:1px solid rgba(255,255,255,.07);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.1),
-        inset 0 -1px 0 rgba(0,0,0,.6);
+      transform: rotateY(180deg);
+      display: flex; flex-direction: column;
+      padding: 8% 9%; gap: 0;
+      border: 1px solid rgba(255,255,255,.07);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -1px 0 rgba(0,0,0,.6);
     }
 
-    /* Large Δ watermark */
+    /* Subtle ghost Δ watermark bottom-right */
     .card-back::before {
-      content:'Δ'; position:absolute; right:5%; top:5%;
-      font-family:var(--serif); font-size:5.5rem; font-weight:300; line-height:1;
-      color:rgba(255,255,255,.035);
-      pointer-events:none; z-index:1; user-select:none;
+      content:'Δ'; position:absolute; right:3%; bottom:2%;
+      font-family:var(--serif); font-size:7rem; font-weight:300; line-height:1;
+      color:rgba(255,255,255,.03); pointer-events:none; z-index:1; user-select:none;
     }
 
     /* Shine sweep */
     .card-back::after {
       content:''; position:absolute; inset:0; border-radius:10px;
       background:linear-gradient(112deg,
-        transparent 36%, rgba(255,255,255,.12) 50%, transparent 64%);
+        transparent 36%, rgba(255,255,255,.1) 50%, transparent 64%);
       transform:translateX(-200%);
       animation:backShine 9s ease-in-out infinite;
       pointer-events:none; z-index:2;
     }
     @keyframes backShine { 0%,64%,100%{ transform:translateX(-200%); } 47%{ transform:translateX(200%); } }
 
-    .card-back .top-section {
-      display:flex; justify-content:space-between; align-items:flex-start;
-      position:relative; z-index:3;
+    /* ── Back: header (logo + wordmark) ── */
+    .back-header {
+      display:flex; align-items:center; gap:9px;
+      position:relative; z-index:3; margin-bottom:6%;
     }
-    .card-back .brand-delta { font-size:.95rem; font-weight:300; opacity:.45; line-height:1; }
-    .card-back .brand-name  { font-size:.48rem; letter-spacing:.13em; text-transform:uppercase; opacity:.28; margin-top:2px; }
-    .card-back .qr-box {
-      width:38px; height:38px; border:1px solid rgba(255,255,255,.12);
-      display:flex; align-items:center; justify-content:center;
-      font-size:.85rem; color:rgba(255,255,255,.28);
-      transition:border-color .3s, color .3s;
+    .back-logo-delta {
+      font-family:var(--serif); font-size:1.5rem; font-weight:300;
+      color:rgba(255,255,255,.55); line-height:1;
     }
-    .card-flip:hover .qr-box { border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.55); }
+    .back-wordmark { display:flex; flex-direction:column; }
+    .back-firm {
+      font-family:var(--serif); font-size:clamp(.72rem,1.55vw,.92rem);
+      font-weight:300; letter-spacing:.06em; color:rgba(255,255,255,.72); line-height:1.1;
+    }
+    .back-tagline {
+      font-family:var(--mono); font-size:.35rem;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(255,255,255,.24); margin-top:2px;
+    }
 
-    .card-back .details { display:flex; flex-direction:column; gap:4px; position:relative; z-index:3; }
-    .card-back .detail-divider { width:22px; height:.5px; background:rgba(255,255,255,.15); margin-bottom:4px; }
-    .card-back .detail-line { font-family:var(--mono); font-size:clamp(.36rem,.8vw,.45rem); font-weight:300; letter-spacing:.06em; color:rgba(255,255,255,.32); }
-    .card-back .detail-line.email { color:rgba(255,255,255,.78); font-weight:400; }
-
-    .card-back .copy-btn {
-      position:absolute; bottom:8%; right:8%;
-      font-family:var(--mono); font-size:.39rem;
-      text-transform:uppercase; letter-spacing:.12em;
-      background:none; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.32);
-      padding:4px 10px; cursor:pointer; border-radius:2px;
-      transition:all .2s; z-index:3;
+    /* ── Back: rule ── */
+    .back-rule {
+      width:100%; height:.5px;
+      background:linear-gradient(90deg, rgba(255,255,255,.12) 0%, transparent 70%);
+      margin-bottom:6%; position:relative; z-index:3;
     }
-    .card-back .copy-btn:hover  { border-color:rgba(255,255,255,.6); color:rgba(255,255,255,.8); }
-    .card-back .copy-btn.copied { border-color:rgba(100,220,120,.6); color:rgba(100,220,120,.8); }
+
+    /* ── Back: person info ── */
+    .back-person {
+      position:relative; z-index:3; margin-bottom:5%;
+    }
+    .back-person-name {
+      display:block; font-family:var(--serif);
+      font-size:clamp(.78rem,1.6vw,.96rem); font-weight:400;
+      letter-spacing:.03em; color:rgba(255,255,255,.82);
+    }
+    .back-person-title {
+      display:block; font-family:var(--mono);
+      font-size:clamp(.34rem,.72vw,.42rem); font-weight:300;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(255,255,255,.28); margin-top:3px;
+    }
+
+    /* ── Back: body (contact left, QR right) ── */
+    .back-body {
+      display:flex; justify-content:space-between; align-items:flex-end;
+      flex:1; position:relative; z-index:3;
+    }
+    .back-contact { display:flex; flex-direction:column; gap:3px; }
+    .back-contact-rule { width:18px; height:.5px; background:rgba(255,255,255,.15); margin-bottom:4px; }
+    .back-email {
+      font-family:var(--mono); font-size:clamp(.31rem,.67vw,.39rem);
+      font-weight:400; color:rgba(255,255,255,.65); letter-spacing:.02em;
+    }
+    .back-web {
+      font-family:var(--mono); font-size:clamp(.3rem,.64vw,.37rem);
+      font-weight:300; color:rgba(255,255,255,.25); letter-spacing:.04em;
+    }
+
+    /* ── Back: QR section ── */
+    .back-qr-wrap { display:flex; flex-direction:column; align-items:center; gap:5px; }
+    .qr-canvas { width:72px; height:72px; image-rendering:pixelated; }
+    .back-qr-label {
+      font-family:var(--mono); font-size:.33rem;
+      text-transform:uppercase; letter-spacing:.14em;
+      color:rgba(255,255,255,.2);
+    }
+
+    /* ── Back: footer ── */
+    .back-footer {
+      display:flex; justify-content:flex-end;
+      margin-top:5%; position:relative; z-index:3;
+    }
+    .copy-btn {
+      font-family:var(--mono); font-size:.37rem;
+      text-transform:uppercase; letter-spacing:.13em;
+      background:none; border:1px solid rgba(255,255,255,.14);
+      color:rgba(255,255,255,.3); padding:4px 11px;
+      cursor:pointer; border-radius:2px; transition:all .2s;
+    }
+    .copy-btn:hover  { border-color:rgba(255,255,255,.55); color:rgba(255,255,255,.75); }
+    .copy-btn.copied { border-color:rgba(120,220,140,.6);  color:rgba(120,220,140,.8);  }
 
     @keyframes fadeUp { to{ opacity:1; transform:translateY(0); } }
   </style>
@@ -281,16 +332,32 @@
             <div class="foil-line"></div>
           </div>
           <div class="card-face card-back">
-            <div class="top-section">
-              <div><div class="brand-delta">&Delta;</div><div class="brand-name">Delta Capital</div></div>
-              <div class="qr-box">&Delta;</div>
+            <div class="back-header">
+              <div class="back-logo-delta">&Delta;</div>
+              <div class="back-wordmark">
+                <div class="back-firm">Delta Capital</div>
+                <div class="back-tagline">Trading &amp; Investment</div>
+              </div>
             </div>
-            <div class="details">
-              <div class="detail-divider"></div>
-              <span class="detail-line email">colewysopal@deltacapitaltrading.com</span>
-              <span class="detail-line">deltacapitaltrading.com</span>
+            <div class="back-rule"></div>
+            <div class="back-person">
+              <span class="back-person-name">Cole Wysopal</span>
+              <span class="back-person-title">Chief Executive Officer</span>
             </div>
-            <button class="copy-btn" onclick="copyEmail(event,this)">Copy Email</button>
+            <div class="back-body">
+              <div class="back-contact">
+                <div class="back-contact-rule"></div>
+                <span class="back-email">colewysopal@deltacapitaltrading.com</span>
+                <span class="back-web">deltacapitaltrading.com</span>
+              </div>
+              <div class="back-qr-wrap">
+                <canvas class="qr-canvas"></canvas>
+                <span class="back-qr-label">scan to visit</span>
+              </div>
+            </div>
+            <div class="back-footer">
+              <button class="copy-btn" onclick="copyEmail(event,this)">Copy Email</button>
+            </div>
           </div>
         </div>
       </div>
@@ -313,16 +380,32 @@
             <div class="foil-line"></div>
           </div>
           <div class="card-face card-back">
-            <div class="top-section">
-              <div><div class="brand-delta">&Delta;</div><div class="brand-name">Delta Capital</div></div>
-              <div class="qr-box">&Delta;</div>
+            <div class="back-header">
+              <div class="back-logo-delta">&Delta;</div>
+              <div class="back-wordmark">
+                <div class="back-firm">Delta Capital</div>
+                <div class="back-tagline">Trading &amp; Investment</div>
+              </div>
             </div>
-            <div class="details">
-              <div class="detail-divider"></div>
-              <span class="detail-line email">yonatanshichor@deltacapitaltrading.com</span>
-              <span class="detail-line">deltacapitaltrading.com</span>
+            <div class="back-rule"></div>
+            <div class="back-person">
+              <span class="back-person-name">Yonatan Shichor</span>
+              <span class="back-person-title">Chief Financial Officer</span>
             </div>
-            <button class="copy-btn" onclick="copyEmail(event,this)">Copy Email</button>
+            <div class="back-body">
+              <div class="back-contact">
+                <div class="back-contact-rule"></div>
+                <span class="back-email">yonatanshichor@deltacapitaltrading.com</span>
+                <span class="back-web">deltacapitaltrading.com</span>
+              </div>
+              <div class="back-qr-wrap">
+                <canvas class="qr-canvas"></canvas>
+                <span class="back-qr-label">scan to visit</span>
+              </div>
+            </div>
+            <div class="back-footer">
+              <button class="copy-btn" onclick="copyEmail(event,this)">Copy Email</button>
+            </div>
           </div>
         </div>
       </div>
@@ -345,16 +428,32 @@
             <div class="foil-line"></div>
           </div>
           <div class="card-face card-back">
-            <div class="top-section">
-              <div><div class="brand-delta">&Delta;</div><div class="brand-name">Delta Capital</div></div>
-              <div class="qr-box">&Delta;</div>
+            <div class="back-header">
+              <div class="back-logo-delta">&Delta;</div>
+              <div class="back-wordmark">
+                <div class="back-firm">Delta Capital</div>
+                <div class="back-tagline">Trading &amp; Investment</div>
+              </div>
             </div>
-            <div class="details">
-              <div class="detail-divider"></div>
-              <span class="detail-line email">noahrubin@deltacapitaltrading.com</span>
-              <span class="detail-line">deltacapitaltrading.com</span>
+            <div class="back-rule"></div>
+            <div class="back-person">
+              <span class="back-person-name">Noah Rubin</span>
+              <span class="back-person-title">Chief Operating Officer</span>
             </div>
-            <button class="copy-btn" onclick="copyEmail(event,this)">Copy Email</button>
+            <div class="back-body">
+              <div class="back-contact">
+                <div class="back-contact-rule"></div>
+                <span class="back-email">noahrubin@deltacapitaltrading.com</span>
+                <span class="back-web">deltacapitaltrading.com</span>
+              </div>
+              <div class="back-qr-wrap">
+                <canvas class="qr-canvas"></canvas>
+                <span class="back-qr-label">scan to visit</span>
+              </div>
+            </div>
+            <div class="back-footer">
+              <button class="copy-btn" onclick="copyEmail(event,this)">Copy Email</button>
+            </div>
           </div>
         </div>
       </div>
@@ -377,16 +476,32 @@
             <div class="foil-line"></div>
           </div>
           <div class="card-face card-back">
-            <div class="top-section">
-              <div><div class="brand-delta">&Delta;</div><div class="brand-name">Delta Capital</div></div>
-              <div class="qr-box">&Delta;</div>
+            <div class="back-header">
+              <div class="back-logo-delta">&Delta;</div>
+              <div class="back-wordmark">
+                <div class="back-firm">Delta Capital</div>
+                <div class="back-tagline">Trading &amp; Investment</div>
+              </div>
             </div>
-            <div class="details">
-              <div class="detail-divider"></div>
-              <span class="detail-line email">ethanlopezlevy@deltacapital.com</span>
-              <span class="detail-line">deltacapitaltrading.com</span>
+            <div class="back-rule"></div>
+            <div class="back-person">
+              <span class="back-person-name">Ethan Lopez Levy</span>
+              <span class="back-person-title">Chief Administrative Officer</span>
             </div>
-            <button class="copy-btn" onclick="copyEmail(event,this)">Copy Email</button>
+            <div class="back-body">
+              <div class="back-contact">
+                <div class="back-contact-rule"></div>
+                <span class="back-email">ethanlopezlevy@deltacapital.com</span>
+                <span class="back-web">deltacapitaltrading.com</span>
+              </div>
+              <div class="back-qr-wrap">
+                <canvas class="qr-canvas"></canvas>
+                <span class="back-qr-label">scan to visit</span>
+              </div>
+            </div>
+            <div class="back-footer">
+              <button class="copy-btn" onclick="copyEmail(event,this)">Copy Email</button>
+            </div>
           </div>
         </div>
       </div>
@@ -806,6 +921,81 @@
     if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
     else init();
   });
+
+  /* ══ BRANDED QR CODES ══ */
+  function rrect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+    ctx.lineTo(x+w, y+h-r); ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    ctx.lineTo(x+r, y+h); ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+    ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y, x+r, y);
+    ctx.closePath();
+  }
+
+  function drawQR(canvas) {
+    try {
+      var qr = qrcode(0, 'H');
+      qr.addData('https://deltacapitaltrading.com');
+      qr.make();
+
+      var mc  = qr.getModuleCount();
+      var dpr = window.devicePixelRatio || 1;
+      var SZ  = 72;
+      var ms  = SZ / mc;
+
+      canvas.width  = SZ * dpr;
+      canvas.height = SZ * dpr;
+      canvas.style.width  = SZ + 'px';
+      canvas.style.height = SZ + 'px';
+
+      var ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, SZ, SZ);
+
+      /* Subtle dark background tile */
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      rrect(ctx, 0, 0, SZ, SZ, 4); ctx.fill();
+
+      /* Draw modules — rounded squares, finder corners slightly brighter */
+      for (var r = 0; r < mc; r++) {
+        for (var c = 0; c < mc; c++) {
+          if (!qr.isDark(r, c)) continue;
+          var isFinder = (r < 8 && c < 8) || (r < 8 && c >= mc-8) || (r >= mc-8 && c < 8);
+          var x = c * ms + 0.3, y = r * ms + 0.3;
+          var sz = ms - 0.6;
+          var rad = isFinder ? sz * 0.08 : sz * 0.28;
+          ctx.fillStyle = isFinder ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.75)';
+          rrect(ctx, x, y, sz, sz, rad); ctx.fill();
+        }
+      }
+
+      /* Center Δ logo — clear a patch then draw the symbol */
+      var logoSz = ms * 5.5;
+      var lx = (SZ - logoSz) * 0.5, ly = (SZ - logoSz) * 0.5;
+      ctx.fillStyle = '#0a0a0e';
+      rrect(ctx, lx - 1, ly - 1, logoSz + 2, logoSz + 2, 3); ctx.fill();
+
+      /* Thin border around logo patch */
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 0.5;
+      rrect(ctx, lx - 0.5, ly - 0.5, logoSz + 1, logoSz + 1, 3); ctx.stroke();
+
+      /* Delta glyph */
+      ctx.font = '300 ' + Math.floor(logoSz * 0.82) + 'px Cormorant Garamond, Georgia, serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('\u0394', SZ * 0.5, SZ * 0.5 + 1);
+
+    } catch (e) { console.warn('QR render failed', e); }
+  }
+
+  function initQRs() {
+    if (typeof qrcode === 'undefined') { setTimeout(initQRs, 80); return; }
+    document.fonts.ready.then(function () {
+      document.querySelectorAll('.qr-canvas').forEach(drawQR);
+    });
+  }
+  initQRs();
 
 })();
 </script>
