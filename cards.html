@@ -11,22 +11,17 @@
     :root {
       --serif: 'Cormorant Garamond', 'Georgia', serif;
       --mono:  'JetBrains Mono', 'Fira Code', monospace;
-      --bg:    #080808;
-      --white: #f4f4f4;
-      --dim:   rgba(255,255,255,0.45);
-      --faint: rgba(255,255,255,0.18);
-      --line:  rgba(255,255,255,0.06);
+      --bg:    #080809;
+      --white: #f2f2f2;
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-
     body {
-      font-family: var(--serif);
-      background: var(--bg);
-      color: var(--white);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      font-family:var(--serif);
+      background:var(--bg);
+      color:var(--white);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
     }
 
     /* ── Header ── */
@@ -35,19 +30,9 @@
       opacity:0; transform:translateY(16px);
       animation:fadeUp .9s .2s forwards;
     }
-    .page-header .delta {
-      font-size:2.2rem; font-weight:300;
-      color:rgba(255,255,255,0.2); margin-bottom:14px;
-    }
-    .page-header h1 {
-      font-weight:300; font-size:clamp(1.6rem,3.5vw,2.4rem);
-      letter-spacing:.05em; color:rgba(255,255,255,0.85);
-    }
-    .page-header p {
-      font-family:var(--mono); font-size:.6rem;
-      color:rgba(255,255,255,0.25); text-transform:uppercase;
-      letter-spacing:.18em; margin-top:10px;
-    }
+    .page-header .delta { font-size:2rem; font-weight:300; color:rgba(255,255,255,.18); margin-bottom:12px; }
+    .page-header h1    { font-weight:300; font-size:clamp(1.5rem,3.2vw,2.2rem); letter-spacing:.06em; color:rgba(255,255,255,.8); }
+    .page-header p     { font-family:var(--mono); font-size:.58rem; color:rgba(255,255,255,.22); text-transform:uppercase; letter-spacing:.2em; margin-top:9px; }
 
     /* ── Grid ── */
     .cards-grid {
@@ -61,224 +46,215 @@
     /* ── Wrap ── */
     .card-wrap {
       perspective:900px; padding:44px 20px;
-      opacity:0; transform:translateY(32px);
+      opacity:0; transform:translateY(28px);
     }
-    .card-wrap.visible { animation:fadeUp .7s forwards; }
-    .card-wrap:nth-child(1).visible { animation-delay:.08s; }
-    .card-wrap:nth-child(2).visible { animation-delay:.20s; }
-    .card-wrap:nth-child(3).visible { animation-delay:.32s; }
-    .card-wrap:nth-child(4).visible { animation-delay:.44s; }
+    .card-wrap.visible { animation:fadeUp .65s forwards; }
+    .card-wrap:nth-child(1).visible { animation-delay:.07s; }
+    .card-wrap:nth-child(2).visible { animation-delay:.18s; }
+    .card-wrap:nth-child(3).visible { animation-delay:.29s; }
+    .card-wrap:nth-child(4).visible { animation-delay:.40s; }
 
-    /* Idle float — each card offset */
+    /* Idle float */
     .card-scene { width:100%; }
     .card-wrap:nth-child(1) .card-scene { animation:cardFloat 4.0s ease-in-out infinite  0.0s; }
     .card-wrap:nth-child(2) .card-scene { animation:cardFloat 4.4s ease-in-out infinite -1.5s; }
     .card-wrap:nth-child(3) .card-scene { animation:cardFloat 3.8s ease-in-out infinite -0.8s; }
     .card-wrap:nth-child(4) .card-scene { animation:cardFloat 4.2s ease-in-out infinite -2.2s; }
     .card-wrap:hover .card-scene { animation-play-state:paused; }
-    @keyframes cardFloat {
-      0%,100%{ transform:translateY(0); }
-      50%     { transform:translateY(-7px); }
-    }
+    @keyframes cardFloat { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
 
-    /* ── Flip container ── */
+    /* ── Flip ── */
     .card-flip {
       width:100%; max-width:440px; aspect-ratio:3.5/2;
       margin:0 auto; position:relative;
       transform-style:preserve-3d;
       cursor:pointer; will-change:transform,filter;
-      /* transition only used when flipping, spring handles tilt */
     }
     .card-flip.flipped { transform:rotateY(180deg) !important; transition:transform .75s cubic-bezier(.4,0,.2,1); }
-
     .card-face {
       position:absolute; inset:0;
       backface-visibility:hidden;
       border-radius:10px; overflow:hidden;
     }
-
     .card-hint {
-      text-align:center; margin-top:12px;
-      font-family:var(--mono); font-size:.5rem;
-      text-transform:uppercase; letter-spacing:.15em;
-      color:rgba(255,255,255,0.15); opacity:0; transition:opacity .3s;
+      text-align:center; margin-top:11px;
+      font-family:var(--mono); font-size:.48rem;
+      text-transform:uppercase; letter-spacing:.16em;
+      color:rgba(255,255,255,.14); opacity:0; transition:opacity .3s;
     }
     .card-wrap:hover .card-hint { opacity:1; }
 
     /* ══ FRONT ══ */
     .card-front {
-      background: var(--bg);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(148deg, #0d0d10 0%, #080809 55%, #060607 100%);
+      border: 1px solid rgba(255,255,255,.06);
+      /* Inset highlight — top edge catches light */
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.1),
+        inset 0 -1px 0 rgba(0,0,0,.6),
+        inset 1px 0 0 rgba(255,255,255,.04),
+        0 28px 70px rgba(0,0,0,.85);
       display:flex; flex-direction:column;
       justify-content:space-between; padding:9% 8%;
-      box-shadow: 0 2px 40px rgba(0,0,0,0.7);
     }
 
-    /* Canvas — full bleed chart */
+    /* Full-bleed chart canvas */
     .card-front canvas {
       position:absolute; inset:0; width:100%; height:100%;
       pointer-events:none; z-index:1;
     }
 
-    /* Gradient vignette — clears the lower third for text legibility */
+    /* Grain texture */
+    .card-front .grain {
+      position:absolute; inset:0; border-radius:10px;
+      pointer-events:none; z-index:9; opacity:.04;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:160px 160px;
+    }
+
+    /* Vignette — darkens lower third for text */
     .card-front::before {
       content:''; position:absolute; inset:0;
       background:linear-gradient(to top,
-        rgba(8,8,8,.96) 0%,
-        rgba(8,8,8,.7)  28%,
-        rgba(8,8,8,.2)  55%,
-        transparent     80%
-      );
+        rgba(6,6,7,.97) 0%, rgba(6,6,7,.72) 26%,
+        rgba(6,6,7,.18) 52%, transparent 78%);
       z-index:2; pointer-events:none;
     }
 
-    /* Subtle scan line */
+    /* Scan line */
     .card-front::after {
       content:''; position:absolute; left:0; right:0; top:0; height:1px;
       background:linear-gradient(90deg,
-        transparent 0%, rgba(255,255,255,.07) 25%,
-        rgba(255,255,255,.16) 50%, rgba(255,255,255,.07) 75%, transparent 100%);
-      animation:scanLine 9s ease-in-out infinite;
+        transparent 0%, rgba(255,255,255,.06) 25%,
+        rgba(255,255,255,.14) 50%, rgba(255,255,255,.06) 75%, transparent 100%);
+      animation:scanLine 10s ease-in-out infinite;
       z-index:6; pointer-events:none;
     }
-    .card-wrap:nth-child(2) .card-front::after { animation-delay:-3s; }
-    .card-wrap:nth-child(3) .card-front::after { animation-delay:-6s; }
-    .card-wrap:nth-child(4) .card-front::after { animation-delay:-1.5s; }
+    .card-wrap:nth-child(2) .card-front::after { animation-delay:-3.3s; }
+    .card-wrap:nth-child(3) .card-front::after { animation-delay:-6.6s; }
+    .card-wrap:nth-child(4) .card-front::after { animation-delay:-1.6s; }
     @keyframes scanLine {
       0%  { top:0%;   opacity:0; }
       3%  { opacity:1; }
-      95% { opacity:.5; }
+      94% { opacity:.45; }
       100%{ top:100%; opacity:0; }
     }
 
-    /* Shimmer — mono white only */
+    /* Shimmer */
     .card-front .shimmer {
       position:absolute; inset:0; pointer-events:none;
       opacity:0; transition:opacity .35s; z-index:5;
       background:radial-gradient(
-        circle 160px at var(--mx,50%) var(--my,50%),
-        rgba(255,255,255,.05) 0%, transparent 100%
+        circle 140px at var(--mx,50%) var(--my,50%),
+        rgba(255,255,255,.045) 0%, transparent 100%
       );
     }
     .card-flip:hover .shimmer { opacity:1; }
 
+    /* Four-corner brackets */
+    .corners { position:absolute; inset:0; pointer-events:none; z-index:8; }
+    .c { position:absolute; width:14px; height:14px; transition:border-color .4s, opacity .4s; opacity:.4; }
+    .c.tl { top:9px;  left:9px;  border-top:.5px solid rgba(255,255,255,.5); border-left:.5px solid rgba(255,255,255,.5);  }
+    .c.tr { top:9px;  right:9px; border-top:.5px solid rgba(255,255,255,.5); border-right:.5px solid rgba(255,255,255,.5); }
+    .c.bl { bottom:9px; left:9px;  border-bottom:.5px solid rgba(255,255,255,.5); border-left:.5px solid rgba(255,255,255,.5);  }
+    .c.br { bottom:9px; right:9px; border-bottom:.5px solid rgba(255,255,255,.5); border-right:.5px solid rgba(255,255,255,.5); }
+    .card-flip:hover .c { opacity:1; }
+
     /* Top row */
     .card-front .top-row {
       display:flex; justify-content:space-between; align-items:flex-start;
-      position:relative; z-index:8;
+      position:relative; z-index:10;
     }
     .card-front .delta-mark {
-      font-size:clamp(1.3rem,2.8vw,1.7rem); font-weight:300; line-height:1;
-      color:rgba(255,255,255,.7);
-      will-change:transform;
+      font-size:clamp(1.2rem,2.6vw,1.6rem); font-weight:300; line-height:1;
+      color:rgba(255,255,255,.65); will-change:transform;
     }
-    .card-front .corner-accent {
-      width:18px; height:18px; position:relative; will-change:transform;
-    }
-    .card-front .corner-accent::before,
-    .card-front .corner-accent::after {
-      content:''; position:absolute;
-      background:rgba(255,255,255,.2); transition:background .4s;
-    }
-    .card-flip:hover .corner-accent::before,
-    .card-flip:hover .corner-accent::after { background:rgba(255,255,255,.4); }
-    .card-front .corner-accent::before { top:0; right:0; width:18px; height:.5px; }
-    .card-front .corner-accent::after  { top:0; right:0; width:.5px; height:18px; }
+    /* Replaced corner-accent with .corners; keep an empty spacer */
+    .card-front .top-right-spacer { width:18px; }
 
     /* Person */
-    .card-front .person { position:relative; z-index:8; }
+    .card-front .person { position:relative; z-index:10; }
     .card-front .person-name {
-      display:block; font-size:clamp(.95rem,2vw,1.15rem); font-weight:400;
-      letter-spacing:.03em; color:rgba(255,255,255,.88);
-      will-change:transform;
+      display:block; font-size:clamp(.92rem,1.9vw,1.1rem); font-weight:400;
+      letter-spacing:.03em; color:rgba(255,255,255,.85); will-change:transform;
     }
     .card-front .person-title {
       display:block; font-family:var(--mono);
-      font-size:clamp(.42rem,.9vw,.52rem); font-weight:300;
-      letter-spacing:.16em; text-transform:uppercase;
-      color:rgba(255,255,255,.3);
+      font-size:clamp(.4rem,.86vw,.5rem); font-weight:300;
+      letter-spacing:.17em; text-transform:uppercase;
+      color:rgba(255,255,255,.28);
       opacity:0; transform:translateY(4px); transition:all .5s .15s;
       will-change:transform;
     }
     .card-wrap.visible .person-title { opacity:1; transform:translateY(0); }
 
-    /* Bottom foil line */
+    /* Foil line */
     .card-front .foil-line {
       position:absolute; bottom:0; left:0; right:0; height:1px;
       background:linear-gradient(90deg,
-        transparent, rgba(255,255,255,.06) 25%,
-        rgba(255,255,255,.18) 50%, rgba(255,255,255,.06) 75%, transparent);
-      z-index:8;
+        transparent, rgba(255,255,255,.05) 25%,
+        rgba(255,255,255,.16) 50%, rgba(255,255,255,.05) 75%, transparent);
+      z-index:10;
     }
 
     /* ══ BACK ══ */
     .card-back {
-      background: #f5f5f5;
+      background:#f3f3f3;
       background-image:
-        linear-gradient(rgba(0,0,0,.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,.018) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.02) 1px, transparent 1px);
       background-size:20px 20px;
       color:#111;
       transform:rotateY(180deg);
       display:flex; flex-direction:column;
       justify-content:space-between; padding:10% 9%;
-      border:1px solid #e8e8e8;
+      border:1px solid #e5e5e5;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
     }
-    /* Shine sweep */
     .card-back::after {
       content:''; position:absolute; inset:0; border-radius:10px;
-      background:linear-gradient(112deg,
-        transparent 36%, rgba(255,255,255,.55) 50%, transparent 64%);
+      background:linear-gradient(112deg, transparent 36%, rgba(255,255,255,.52) 50%, transparent 64%);
       transform:translateX(-200%);
       animation:backShine 8s ease-in-out infinite;
       pointer-events:none; z-index:2;
     }
-    @keyframes backShine {
-      0%,60%,100%{ transform:translateX(-200%); }
-      45%         { transform:translateX(200%); }
-    }
+    @keyframes backShine { 0%,62%,100%{ transform:translateX(-200%); } 46%{ transform:translateX(200%); } }
 
     .card-back .top-section {
       display:flex; justify-content:space-between; align-items:flex-start;
       position:relative; z-index:3;
     }
-    .card-back .brand-delta { font-size:1rem; font-weight:300; opacity:.5; line-height:1; }
+    .card-back .brand-delta { font-size:.95rem; font-weight:300; opacity:.45; line-height:1; }
     .card-back .brand-name  {
-      font-size:.5rem; font-weight:400; letter-spacing:.12em;
-      text-transform:uppercase; opacity:.35; margin-top:2px;
+      font-size:.48rem; font-weight:400; letter-spacing:.12em;
+      text-transform:uppercase; opacity:.3; margin-top:2px;
     }
     .card-back .qr-box {
-      width:40px; height:40px; border:1px solid #ddd;
+      width:38px; height:38px; border:1px solid #d8d8d8;
       display:flex; align-items:center; justify-content:center;
-      font-size:.9rem; color:#bbb;
+      font-size:.85rem; color:#bbb;
       transition:border-color .3s, color .3s;
     }
     .card-flip:hover .qr-box { border-color:#999; color:#777; }
-
-    .card-back .details {
-      display:flex; flex-direction:column; gap:4px;
-      position:relative; z-index:3;
-    }
-    .card-back .detail-divider { width:24px; height:.5px; background:#ccc; margin-bottom:4px; }
+    .card-back .details { display:flex; flex-direction:column; gap:4px; position:relative; z-index:3; }
+    .card-back .detail-divider { width:22px; height:.5px; background:#ccc; margin-bottom:4px; }
     .card-back .detail-line {
-      font-family:var(--mono); font-size:clamp(.38rem,.85vw,.48rem);
+      font-family:var(--mono); font-size:clamp(.37rem,.82vw,.46rem);
       font-weight:300; letter-spacing:.06em; color:#888;
     }
-    .card-back .detail-line.email { color:#222; font-weight:400; }
-
+    .card-back .detail-line.email { color:#1a1a1a; font-weight:400; }
     .card-back .copy-btn {
       position:absolute; bottom:8%; right:8%;
-      font-family:var(--mono); font-size:.42rem;
-      text-transform:uppercase; letter-spacing:.1em;
-      background:none; border:1px solid #ddd; color:#aaa;
+      font-family:var(--mono); font-size:.4rem;
+      text-transform:uppercase; letter-spacing:.11em;
+      background:none; border:1px solid #d5d5d5; color:#aaa;
       padding:4px 10px; cursor:pointer; border-radius:2px;
       transition:all .2s; z-index:3;
     }
     .card-back .copy-btn:hover  { border-color:#222; color:#222; }
     .card-back .copy-btn.copied { border-color:#4a4; color:#4a4; }
 
-    /* ── Shared keyframes ── */
-    @keyframes fadeUp { to{ opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes fadeUp { to{ opacity:1; transform:translateY(0); } }
   </style>
 </head>
 <body>
@@ -296,10 +272,15 @@
         <div class="card-flip" onclick="flipCard(this)">
           <div class="card-face card-front">
             <canvas></canvas>
+            <div class="grain"></div>
             <div class="shimmer"></div>
+            <div class="corners">
+              <span class="c tl"></span><span class="c tr"></span>
+              <span class="c bl"></span><span class="c br"></span>
+            </div>
             <div class="top-row">
               <div class="delta-mark">&Delta;</div>
-              <div class="corner-accent"></div>
+              <div class="top-right-spacer"></div>
             </div>
             <div class="person">
               <span class="person-name">Cole Wysopal</span>
@@ -321,7 +302,7 @@
           </div>
         </div>
       </div>
-      <div class="card-hint">hover &nbsp;/&nbsp; click to flip</div>
+      <div class="card-hint">hover &nbsp;·&nbsp; click to flip</div>
     </div>
 
     <div class="card-wrap" data-email="yonatanshichor@deltacapitaltrading.com">
@@ -329,10 +310,15 @@
         <div class="card-flip" onclick="flipCard(this)">
           <div class="card-face card-front">
             <canvas></canvas>
+            <div class="grain"></div>
             <div class="shimmer"></div>
+            <div class="corners">
+              <span class="c tl"></span><span class="c tr"></span>
+              <span class="c bl"></span><span class="c br"></span>
+            </div>
             <div class="top-row">
               <div class="delta-mark">&Delta;</div>
-              <div class="corner-accent"></div>
+              <div class="top-right-spacer"></div>
             </div>
             <div class="person">
               <span class="person-name">Yonatan Shichor</span>
@@ -354,7 +340,7 @@
           </div>
         </div>
       </div>
-      <div class="card-hint">hover &nbsp;/&nbsp; click to flip</div>
+      <div class="card-hint">hover &nbsp;·&nbsp; click to flip</div>
     </div>
 
     <div class="card-wrap" data-email="noahrubin@deltacapitaltrading.com">
@@ -362,10 +348,15 @@
         <div class="card-flip" onclick="flipCard(this)">
           <div class="card-face card-front">
             <canvas></canvas>
+            <div class="grain"></div>
             <div class="shimmer"></div>
+            <div class="corners">
+              <span class="c tl"></span><span class="c tr"></span>
+              <span class="c bl"></span><span class="c br"></span>
+            </div>
             <div class="top-row">
               <div class="delta-mark">&Delta;</div>
-              <div class="corner-accent"></div>
+              <div class="top-right-spacer"></div>
             </div>
             <div class="person">
               <span class="person-name">Noah Rubin</span>
@@ -387,7 +378,7 @@
           </div>
         </div>
       </div>
-      <div class="card-hint">hover &nbsp;/&nbsp; click to flip</div>
+      <div class="card-hint">hover &nbsp;·&nbsp; click to flip</div>
     </div>
 
     <div class="card-wrap" data-email="ethanlopezlevy@deltacapital.com">
@@ -395,10 +386,15 @@
         <div class="card-flip" onclick="flipCard(this)">
           <div class="card-face card-front">
             <canvas></canvas>
+            <div class="grain"></div>
             <div class="shimmer"></div>
+            <div class="corners">
+              <span class="c tl"></span><span class="c tr"></span>
+              <span class="c bl"></span><span class="c br"></span>
+            </div>
             <div class="top-row">
               <div class="delta-mark">&Delta;</div>
-              <div class="corner-accent"></div>
+              <div class="top-right-spacer"></div>
             </div>
             <div class="person">
               <span class="person-name">Ethan Lopez Levy</span>
@@ -420,7 +416,7 @@
           </div>
         </div>
       </div>
-      <div class="card-hint">hover &nbsp;/&nbsp; click to flip</div>
+      <div class="card-hint">hover &nbsp;·&nbsp; click to flip</div>
     </div>
 
   </div>
@@ -442,7 +438,7 @@
     });
   };
 
-  /* ══ SCROLL REVEAL ══ */
+  /* ══ REVEAL ══ */
   var obs = new IntersectionObserver(function (ents) {
     ents.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
@@ -455,8 +451,6 @@
     var dmark   = card.querySelector('.delta-mark');
     var pname   = card.querySelector('.person-name');
     var ptitle  = card.querySelector('.person-title');
-    var corner  = card.querySelector('.corner-accent');
-
     var tx = 0, ty = 0, vx = 0, vy = 0, tX = 0, tY = 0, over = false;
 
     (function tick() {
@@ -467,38 +461,30 @@
       if (!card.classList.contains('flipped')) {
         card.style.transform = 'rotateX(' + tx.toFixed(2) + 'deg) rotateY(' + ty.toFixed(2) + 'deg)';
       }
+      var sx = (ty * 1.3).toFixed(1), sy = (-tx * 1.3).toFixed(1);
+      card.style.filter = 'drop-shadow(' + sx + 'px ' + sy + 'px 36px rgba(0,0,0,.85))';
 
-      /* Drop-shadow shifts with tilt direction */
-      var sx = (ty * 1.4).toFixed(1), sy = (-tx * 1.4).toFixed(1);
-      card.style.filter = 'drop-shadow(' + sx + 'px ' + sy + 'px 32px rgba(0,0,0,.8))';
-
-      /* Parallax layers */
       if (over) {
-        if (dmark)  dmark.style.transform  = 'translate(' + (ty*1.4).toFixed(1) + 'px,' + (-tx*1.4).toFixed(1) + 'px)';
-        if (pname)  pname.style.transform  = 'translate(' + (ty*0.7).toFixed(1) + 'px,' + (-tx*0.7).toFixed(1) + 'px)';
-        if (ptitle) ptitle.style.transform = 'translate(' + (ty*0.3).toFixed(1) + 'px,' + (-tx*0.3).toFixed(1) + 'px)';
-        if (corner) corner.style.transform = 'translate(' + (ty*1.1).toFixed(1) + 'px,' + (-tx*1.1).toFixed(1) + 'px)';
+        if (dmark)  dmark.style.transform  = 'translate(' + (ty*1.3).toFixed(1) + 'px,' + (-tx*1.3).toFixed(1) + 'px)';
+        if (pname)  pname.style.transform  = 'translate(' + (ty*0.65).toFixed(1) + 'px,' + (-tx*0.65).toFixed(1) + 'px)';
+        if (ptitle) ptitle.style.transform = 'translate(' + (ty*0.28).toFixed(1) + 'px,' + (-tx*0.28).toFixed(1) + 'px)';
       }
       requestAnimationFrame(tick);
     })();
 
     card.addEventListener('mouseenter', function () { over = true; });
-
     card.addEventListener('mousemove', function (e) {
       var r = card.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width;
-      var y = (e.clientY - r.top)  / r.height;
-      tX = (y - 0.5) * -12;
-      tY = (x - 0.5) *  12;
-      shimmer.style.setProperty('--mx', (x * 100) + '%');
-      shimmer.style.setProperty('--my', (y * 100) + '%');
+      var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      tX = (y - 0.5) * -11; tY = (x - 0.5) * 11;
+      shimmer.style.setProperty('--mx', (x*100) + '%');
+      shimmer.style.setProperty('--my', (y*100) + '%');
       if (canvas) { canvas._mx = e.clientX - r.left; canvas._my = e.clientY - r.top; }
     });
-
     card.addEventListener('mouseleave', function () {
       over = false; tX = 0; tY = 0;
       if (canvas) { canvas._mx = null; canvas._my = null; }
-      [dmark, pname, ptitle, corner].forEach(function (el) { if (el) el.style.transform = ''; });
+      [dmark, pname, ptitle].forEach(function (el) { if (el) el.style.transform = ''; });
     });
   });
 
@@ -506,39 +492,38 @@
   if (typeof DeviceOrientationEvent !== 'undefined') {
     window.addEventListener('deviceorientation', function (e) {
       if (e.beta === null) return;
-      var roll  = Math.max(-1, Math.min(1, e.gamma / 25));
-      var pitch = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
       document.querySelectorAll('.card-flip:not(:hover)').forEach(function (card) {
-        card._gyroX = pitch * -10;
-        card._gyroY = roll  *  10;
+        card._gyroX = Math.max(-1, Math.min(1, (e.beta - 45) / 28)) * -9;
+        card._gyroY = Math.max(-1, Math.min(1, e.gamma / 28)) * 9;
       });
     });
   }
 
-  /* ══ MARKET CHART CANVAS ══ */
+  /* ══ MARKET CHART ══ */
+  /* Realistic-looking base prices per card */
+  var BASES = [342.18, 89.45, 1247.30, 56.72];
+  var TICKERS = ['DCT·A', 'DCT·B', 'DCT·C', 'DCT·D'];
+
   document.querySelectorAll('.card-front canvas').forEach(function (canvas, idx) {
-    var ctx = canvas.getContext('2d');
-    var dpr = window.devicePixelRatio || 1;
+    var ctx    = canvas.getContext('2d');
+    var dpr    = window.devicePixelRatio || 1;
     var w = 0, h = 0, animId;
+    var basePrice = BASES[idx];
+    var ticker    = TICKERS[idx];
 
-    /* ── Price simulation ── */
-    var HISTORY = 220;
-    var prices = [], volumes = [];
-    var price = 50 + (Math.random() - 0.5) * 12;
-    var vel   = 0;
+    /* ── Deterministic seeded RNG for consistent history ── */
+    var seed = idx * 137 + 59;
+    function rng() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
 
-    /* Seed with history, each card a different "instrument" */
-    var seed = idx * 137.5 + 42;
-    function rng() { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return (seed >>> 0) / 0xffffffff; }
-
+    /* ── Price history ── */
+    var HISTORY = 240, VIS = 110;
+    var prices = [], vel = 0;
+    var price = 50 + (rng() - 0.5) * 14;
     for (var i = 0; i < HISTORY; i++) {
-      vel += (rng() - 0.5) * 0.9;
-      vel *= 0.88;
-      vel += (50 - price) * 0.003;  /* mean reversion */
-      price += vel;
-      price = Math.max(10, Math.min(90, price));
+      vel += (rng() - 0.5) * 0.85;
+      vel *= 0.88; vel += (50 - price) * 0.003;
+      price += vel; price = Math.max(8, Math.min(92, price));
       prices.push(price);
-      volumes.push(0.3 + rng() * 0.7);
     }
 
     var frame = 0;
@@ -546,144 +531,228 @@
     function resize() {
       var rect = canvas.parentElement.getBoundingClientRect();
       w = rect.width; h = rect.height;
-      canvas.width  = w * dpr; canvas.height = h * dpr;
+      canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    function drawChart() {
+    /* ── Smooth bezier through points ── */
+    function bezierPath(pts, startIdx, endIdx) {
+      if (endIdx - startIdx < 1) return;
+      ctx.moveTo(pts[startIdx].x, pts[startIdx].y);
+      for (var i = startIdx + 1; i < endIdx; i++) {
+        var mx = (pts[i].x + pts[i+1].x) * 0.5;
+        var my = (pts[i].y + pts[i+1].y) * 0.5;
+        ctx.quadraticCurveTo(pts[i].x, pts[i].y, mx, my);
+      }
+      ctx.lineTo(pts[endIdx].x, pts[endIdx].y);
+    }
+
+    /* ── SMA ── */
+    function sma(data, period) {
+      var out = [];
+      for (var i = 0; i < data.length; i++) {
+        if (i < period - 1) { out.push(null); continue; }
+        var s = 0; for (var j = i - period + 1; j <= i; j++) s += data[j];
+        out.push(s / period);
+      }
+      return out;
+    }
+
+    function draw() {
       ctx.clearRect(0, 0, w, h);
 
-      /* Add a new tick every 2 frames */
+      /* New tick every 2 frames */
       if (frame++ % 2 === 0) {
-        vel += (Math.random() - 0.5) * 0.7;
-        vel *= 0.90;
-        vel += (50 - price) * 0.002;
-        price += vel;
-        price = Math.max(10, Math.min(90, price));
+        vel += (Math.random() - 0.5) * 0.65;
+        vel *= 0.90; vel += (50 - price) * 0.002;
+        price += vel; price = Math.max(8, Math.min(92, price));
         prices.push(price);
-        volumes.push(0.3 + Math.random() * 0.7);
-        if (prices.length > HISTORY) { prices.shift(); volumes.shift(); }
+        if (prices.length > HISTORY) prices.shift();
       }
 
-      /* Visible window */
       var N   = prices.length;
-      var VIS = Math.min(N, 110);           /* bars shown */
       var vis = prices.slice(N - VIS);
-      var vol = volumes.slice(N - VIS);
+      var V   = vis.length;
+      var ma20 = sma(vis, 20);
 
+      /* Price range */
       var pMin = Infinity, pMax = -Infinity;
-      for (var i = 0; i < vis.length; i++) {
+      for (var i = 0; i < V; i++) {
         if (vis[i] < pMin) pMin = vis[i];
         if (vis[i] > pMax) pMax = vis[i];
       }
-      var pad   = (pMax - pMin) * 0.25 || 1;
+      var pad = (pMax - pMin) * 0.22 || 1;
       pMin -= pad; pMax += pad;
       var pRange = pMax - pMin;
 
-      /* Layout */
-      var chartTop  = h * 0.08;
-      var chartBot  = h * 0.72;
-      var chartH    = chartBot - chartTop;
-      var volTop    = h * 0.76;
-      var volBot    = h * 0.92;
-      var volH      = volBot - volTop;
+      /* % change */
+      var pctRaw  = (vis[V-1] - vis[0]) / vis[0] * 100;
+      var pctSign = pctRaw >= 0 ? '+' : '';
 
-      function py(p) { return chartBot - ((p - pMin) / pRange) * chartH; }
+      /* Layout */
+      var rMargin  = 44;  /* reserve right edge for labels */
+      var chartTop = h * 0.07;
+      var chartBot = h * 0.70;
+      var chartH   = chartBot - chartTop;
+      var volTop   = h * 0.755;
+      var volBot   = h * 0.915;
+      var volH     = volBot - volTop;
+      var chartW   = w - rMargin;
+
+      var hovered = (canvas._mx != null);
+      var bright  = hovered ? 1.45 : 1.0;
+
+      function py(p)  { return chartBot - ((p - pMin) / pRange) * chartH; }
+      function px_(i) { return (i / (V - 1)) * chartW; }
 
       /* ── Grid ── */
-      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+      ctx.strokeStyle = 'rgba(255,255,255,0.038)';
       ctx.lineWidth   = 0.5;
       for (var row = 0; row <= 4; row++) {
         var gy = chartTop + (row / 4) * chartH;
-        ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(w, gy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(chartW, gy); ctx.stroke();
       }
-      for (var col = 1; col <= 5; col++) {
-        var gx = (col / 6) * w;
+      for (var col = 1; col <= 4; col++) {
+        var gx = (col / 5) * chartW;
         ctx.beginPath(); ctx.moveTo(gx, chartTop); ctx.lineTo(gx, chartBot); ctx.stroke();
       }
 
-      /* ── Volume bars (very faint) ── */
-      var bw = w / VIS;
-      ctx.fillStyle = 'rgba(255,255,255,0.055)';
-      for (var i = 0; i < vis.length; i++) {
-        var bx = i * bw;
-        var bh = vol[i] * volH;
-        ctx.fillRect(bx + bw * 0.1, volBot - bh, bw * 0.8, bh);
+      /* ── Price scale labels ── */
+      ctx.font      = '300 6px "JetBrains Mono", monospace';
+      ctx.fillStyle = 'rgba(255,255,255,0.22)';
+      ctx.textAlign = 'left';
+      for (var row = 0; row <= 4; row++) {
+        var gy  = chartTop + (row / 4) * chartH;
+        var lp  = pMax - (row / 4) * pRange;
+        var lv  = (basePrice + (lp - 50)).toFixed(2);
+        ctx.fillText(lv, chartW + 3, gy + 2.5);
       }
 
-      /* ── Separator between chart and volume ── */
-      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-      ctx.lineWidth = 0.5;
-      ctx.beginPath(); ctx.moveTo(0, volTop - 2); ctx.lineTo(w, volTop - 2); ctx.stroke();
+      /* ── Volume divider ── */
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+      ctx.beginPath(); ctx.moveTo(0, volTop - 3); ctx.lineTo(chartW, volTop - 3); ctx.stroke();
+
+      /* ── Volume bars ── */
+      var barW = chartW / V;
+      for (var i = 0; i < V; i++) {
+        var rising = (i === 0) || (vis[i] >= vis[i-1]);
+        var bh = (0.25 + Math.abs(vis[i] - (i > 0 ? vis[i-1] : vis[i])) * 4) * volH;
+        bh = Math.min(bh, volH * 0.9);
+        ctx.fillStyle = rising
+          ? 'rgba(255,255,255,0.08)'
+          : 'rgba(255,255,255,0.04)';
+        ctx.fillRect(i * barW + barW * 0.1, volBot - bh, barW * 0.8, bh);
+      }
+
+      /* ── Build point array ── */
+      var pts = [];
+      for (var i = 0; i < V; i++) pts.push({ x: px_(i), y: py(vis[i]) });
 
       /* ── Area fill ── */
       ctx.beginPath();
-      for (var i = 0; i < vis.length; i++) {
-        var px_ = (i / (vis.length - 1)) * w;
-        var py_ = py(vis[i]);
-        if (i === 0) ctx.moveTo(px_, py_); else ctx.lineTo(px_, py_);
+      bezierPath(pts, 0, V - 1);
+      ctx.lineTo(pts[V-1].x, chartBot); ctx.lineTo(pts[0].x, chartBot); ctx.closePath();
+      var ag = ctx.createLinearGradient(0, chartTop, 0, chartBot);
+      ag.addColorStop(0,   'rgba(255,255,255,' + (0.09 * bright) + ')');
+      ag.addColorStop(0.55,'rgba(255,255,255,' + (0.025 * bright) + ')');
+      ag.addColorStop(1,   'rgba(255,255,255,0)');
+      ctx.fillStyle = ag; ctx.fill();
+
+      /* ── MA line ── */
+      ctx.beginPath();
+      var maStarted = false;
+      var maPts = [];
+      for (var i = 0; i < V; i++) {
+        if (ma20[i] === null) continue;
+        maPts.push({ x: px_(i), y: py(ma20[i]) });
       }
-      ctx.lineTo(w, chartBot); ctx.lineTo(0, chartBot); ctx.closePath();
-      var areaGrad = ctx.createLinearGradient(0, chartTop, 0, chartBot);
-      areaGrad.addColorStop(0,   'rgba(255,255,255,0.08)');
-      areaGrad.addColorStop(0.6, 'rgba(255,255,255,0.02)');
-      areaGrad.addColorStop(1,   'rgba(255,255,255,0)');
-      ctx.fillStyle = areaGrad;
-      ctx.fill();
+      if (maPts.length > 1) {
+        ctx.beginPath(); bezierPath(maPts, 0, maPts.length - 1);
+        ctx.strokeStyle = 'rgba(255,255,255,' + (0.18 * bright) + ')';
+        ctx.lineWidth = 0.7; ctx.lineJoin = 'round';
+        ctx.setLineDash([3, 4]); ctx.stroke(); ctx.setLineDash([]);
+      }
 
       /* ── Price line ── */
       ctx.beginPath();
-      for (var i = 0; i < vis.length; i++) {
-        var px_ = (i / (vis.length - 1)) * w;
-        var py_ = py(vis[i]);
-        if (i === 0) ctx.moveTo(px_, py_); else ctx.lineTo(px_, py_);
-      }
-      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
-      ctx.lineWidth   = 1;
+      bezierPath(pts, 0, V - 1);
+      ctx.strokeStyle = 'rgba(255,255,255,' + (0.5 * bright) + ')';
+      ctx.lineWidth   = hovered ? 1.15 : 0.95;
       ctx.lineJoin    = 'round';
       ctx.stroke();
 
-      /* ── Current price dot ── */
-      var lastY = py(vis[vis.length - 1]);
-      ctx.beginPath(); ctx.arc(w, lastY, 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(w, lastY, 5, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.fill();
+      /* ── Live price dot + pulse ── */
+      var dotX = pts[V-1].x, dotY = pts[V-1].y;
+      var t = (Date.now() % 1800) / 1800;
+      var pulse = Math.sin(t * Math.PI * 2) * 0.5 + 0.5;
+      ctx.beginPath(); ctx.arc(dotX, dotY, 2 + pulse * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,' + (0.08 - pulse * 0.06) + ')'; ctx.fill();
+      ctx.beginPath(); ctx.arc(dotX, dotY, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.fill();
+
+      /* ── Live price label (top-right) ── */
+      var livePrice  = (basePrice + (vis[V-1] - 50)).toFixed(2);
+      ctx.textAlign  = 'right';
+      ctx.font       = '400 8.5px "JetBrains Mono", monospace';
+      ctx.fillStyle  = 'rgba(255,255,255,0.72)';
+      ctx.fillText(livePrice, chartW - 4, chartTop + 11);
+
+      /* % change */
+      ctx.font      = '300 7px "JetBrains Mono", monospace';
+      ctx.fillStyle = pctRaw >= 0
+        ? 'rgba(160,240,180,0.65)'
+        : 'rgba(240,140,140,0.6)';
+      ctx.fillText(pctSign + pctRaw.toFixed(2) + '%', chartW - 4, chartTop + 21);
+
+      /* Ticker label (top-left, very faint) */
+      ctx.textAlign  = 'left';
+      ctx.font       = '300 6px "JetBrains Mono", monospace';
+      ctx.fillStyle  = 'rgba(255,255,255,0.14)';
+      ctx.fillText(ticker, 4, chartTop + 10);
 
       /* ── Mouse crosshair ── */
       var mx = canvas._mx, my = canvas._my;
-      if (mx != null && mx >= 0 && mx <= w && my >= chartTop && my <= chartBot) {
-        ctx.strokeStyle = 'rgba(255,255,255,0.12)';
-        ctx.lineWidth = 0.5;
+      if (mx != null && mx >= 0 && mx <= chartW && my >= chartTop && my <= chartBot) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+        ctx.lineWidth   = 0.5;
         ctx.setLineDash([4, 5]);
         ctx.beginPath(); ctx.moveTo(mx, chartTop); ctx.lineTo(mx, chartBot); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0, my); ctx.lineTo(w, my); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, my); ctx.lineTo(chartW, my); ctx.stroke();
         ctx.setLineDash([]);
-        /* Intersection dot */
-        var dataIdx = Math.round((mx / w) * (vis.length - 1));
-        dataIdx = Math.max(0, Math.min(vis.length - 1, dataIdx));
-        var crossY = py(vis[dataIdx]);
-        var crossX = (dataIdx / (vis.length - 1)) * w;
-        ctx.beginPath(); ctx.arc(crossX, crossY, 3, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.fill();
+
+        /* Snap dot to price line at cursor X */
+        var dataIdx = Math.round((mx / chartW) * (V - 1));
+        dataIdx = Math.max(0, Math.min(V - 1, dataIdx));
+        var snapX   = px_(dataIdx), snapY = py(vis[dataIdx]);
+        ctx.beginPath(); ctx.arc(snapX, snapY, 2.8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.65)'; ctx.fill();
+
+        /* Price label at crosshair Y (left edge) */
+        var crossPrice = (basePrice + (vis[dataIdx] - 50)).toFixed(2);
+        ctx.font = '300 6px "JetBrains Mono", monospace';
+        var lw = ctx.measureText(crossPrice).width + 7;
+        ctx.fillStyle = 'rgba(255,255,255,0.1)';
+        ctx.fillRect(0, my - 8, lw, 10);
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.textAlign = 'left';
+        ctx.fillText(crossPrice, 3, my);
       }
 
-      animId = requestAnimationFrame(drawChart);
+      animId = requestAnimationFrame(draw);
     }
 
-    /* Start only when visible */
     var active = false;
-    var visObs = new IntersectionObserver(function (ents) {
+    var vObs = new IntersectionObserver(function (ents) {
       ents.forEach(function (e) {
-        if (e.isIntersecting && !active) { active = true; resize(); drawChart(); }
+        if (e.isIntersecting && !active) { active = true; resize(); draw(); }
         else if (!e.isIntersecting && active) { active = false; cancelAnimationFrame(animId); }
       });
     }, { threshold: 0.05 });
 
     function init() {
       resize();
-      visObs.observe(canvas.closest('.card-wrap'));
-      window.addEventListener('resize', function () { resize(); });
+      vObs.observe(canvas.closest('.card-wrap'));
+      window.addEventListener('resize', resize);
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
