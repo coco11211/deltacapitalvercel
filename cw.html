@@ -140,6 +140,7 @@
     .rule-a { animation-delay: .66s; }
     .rule-b { animation-delay: .88s; }
     .rule-c { animation-delay: 1.10s; }
+    .rule-currently { animation-delay: 1.14s; }
 
     /* ─── SYSTEM PANEL ─── */
     .panel { opacity: 0; animation: rise .6s .72s forwards; }
@@ -293,6 +294,83 @@
       color: rgba(255,255,255,.1);
     }
 
+
+    /* ─── STATS ROW ─── */
+    .stats-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0 0;
+      opacity: 0; animation: rise .5s .14s forwards;
+    }
+    .stat-item { text-align: center; flex: 1; }
+    .stat-n {
+      display: block;
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      color: rgba(255,255,255,.72); line-height: 1;
+      letter-spacing: -.01em;
+    }
+    .stat-l {
+      display: block; margin-top: 4px;
+      font-size: .38rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,255,255,.2);
+    }
+    .stat-sep {
+      font-size: 1rem; color: rgba(255,255,255,.08);
+      flex-shrink: 0; padding: 0 4px;
+    }
+
+    /* ─── CURRENTLY ─── */
+    .currently { opacity: 0; animation: rise .6s 1.02s forwards; }
+    .section-tag {
+      font-size: .43rem; letter-spacing: .2em; color: var(--dim);
+      margin-bottom: 14px;
+    }
+    .log-entries { display: flex; flex-direction: column; gap: 0; }
+    .log-entry {
+      display: flex; align-items: baseline; gap: 16px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    .log-entry:first-child { border-top: 1px solid var(--border); }
+    .log-ts {
+      font-size: .38rem; letter-spacing: .1em;
+      color: rgba(255,255,255,.18); flex-shrink: 0;
+      min-width: 72px;
+    }
+    .log-msg {
+      font-family: var(--serif); font-weight: 300;
+      font-size: .88rem; color: rgba(255,255,255,.58);
+      line-height: 1.4;
+    }
+    .log-cursor {
+      display: inline-block; width: 6px; height: .9em;
+      background: rgba(255,255,255,.25);
+      vertical-align: text-bottom; margin-left: 3px;
+      animation: cursor .9s step-end infinite;
+    }
+    @keyframes cursor { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ─── OPEN TO ─── */
+    .open-to {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      opacity: 0; animation: rise .5s 1.08s forwards;
+    }
+    .ot-label {
+      font-size: .4rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,255,255,.2); flex-shrink: 0;
+    }
+    .ot-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .ot-tag {
+      font-size: .38rem; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 4px 10px; border-radius: 2px;
+      transition: border-color .2s, color .2s;
+    }
+    .ot-tag:hover { border-color: rgba(255,255,255,.35); color: rgba(255,255,255,.65); }
 
     /* ─── VIRTUAL CARD ─── */
     .card-section {
@@ -535,6 +613,54 @@
     /* rule after card */
     .rule-card { animation-delay: 1.38s; }
 
+    /* ─── TICKER ─── */
+    .ticker-fixed {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      height: 24px; overflow: hidden;
+      background: rgba(5,5,8,.97);
+      border-top: 1px solid rgba(255,255,255,.055);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+    .ticker-track {
+      display: flex; align-items: center;
+      height: 100%;
+      animation: tickerScroll 52s linear infinite;
+      will-change: transform;
+    }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .tk {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 0 18px; height: 100%; flex-shrink: 0;
+      font-size: .36rem; letter-spacing: .11em;
+      color: rgba(255,255,255,.18);
+      border-right: 1px solid rgba(255,255,255,.04);
+      white-space: nowrap;
+    }
+    .tk-sym { color: rgba(255,255,255,.36); font-weight: 400; }
+    .tk-up  { color: rgba(140,220,160,.55); }
+    .tk-dn  { color: rgba(220,110,110,.5); }
+    .tk-sep { color: rgba(255,255,255,.1); margin: 0 4px; }
+
+    /* push footer above ticker */
+    .wrap { padding-bottom: 36px; }
+
+    /* terminal overrides for ticker + tags */
+    body.terminal .ticker-fixed { background: rgba(0,0,0,.97); border-top-color: rgba(0,255,70,.08); }
+    body.terminal .tk { color: rgba(0,255,70,.18); }
+    body.terminal .tk-sym { color: rgba(0,255,70,.38); }
+    body.terminal .tk-up  { color: rgba(0,255,70,.52); }
+    body.terminal .ot-tag { border-color: rgba(0,255,70,.12); color: rgba(0,255,70,.32); }
+    body.terminal .ot-tag:hover { border-color: rgba(0,255,70,.35); color: rgba(0,255,70,.65); }
+    body.terminal .log-msg { color: rgba(0,255,70,.42); }
+    body.terminal .log-ts { color: rgba(0,255,70,.2); }
+    body.terminal .log-cursor { background: rgba(0,255,70,.5); }
+    body.terminal .stat-n { color: rgba(0,255,70,.62); }
+    body.terminal .stat-l { color: rgba(0,255,70,.2); }
+    body.terminal .stat-sep { color: rgba(0,255,70,.08); }
+
     /* ─── TERMINAL MODE ─── */
     body.terminal {
       --bg:     #000;
@@ -597,6 +723,29 @@
       <span class="live-dot"></span>
       <span id="live-label">System Live</span>
     </span>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <span class="stat-n" id="sn1">04</span>
+      <span class="stat-l">Systems</span>
+    </div>
+    <span class="stat-sep">·</span>
+    <div class="stat-item">
+      <span class="stat-n" id="sn2">2024</span>
+      <span class="stat-l">Founded</span>
+    </div>
+    <span class="stat-sep">·</span>
+    <div class="stat-item">
+      <span class="stat-n" id="sn3">24/7</span>
+      <span class="stat-l">Operational</span>
+    </div>
+    <span class="stat-sep">·</span>
+    <div class="stat-item">
+      <span class="stat-n" id="sn4">∞</span>
+      <span class="stat-l">Upside</span>
+    </div>
   </div>
 
   <!-- Hero -->
@@ -712,6 +861,27 @@
 
   <div class="rule rule-b"></div>
 
+  <!-- Currently -->
+  <div class="currently">
+    <p class="section-tag">// currently</p>
+    <div class="log-entries">
+      <div class="log-entry">
+        <span class="log-ts">2026-02-20</span>
+        <span class="log-msg">Building Delta Capital trading infrastructure<span class="log-cursor"></span></span>
+      </div>
+      <div class="log-entry">
+        <span class="log-ts">2026-01-15</span>
+        <span class="log-msg">Researching systematic &amp; quantitative strategies</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-ts">2025-12-01</span>
+        <span class="log-msg">Expanding team and capital base</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule rule-currently"></div>
+
   <!-- Credentials -->
   <div class="creds">
     <div class="cred">
@@ -732,6 +902,14 @@
 
   <!-- CTA -->
   <div class="cta">
+    <div class="open-to">
+      <span class="ot-label">Open to</span>
+      <div class="ot-tags">
+        <span class="ot-tag">Conversations</span>
+        <span class="ot-tag">Collaborations</span>
+        <span class="ot-tag">Deals</span>
+      </div>
+    </div>
     <button onclick="saveContact()" class="btn-connect">&#x2193;&nbsp; Save Contact</button>
     <div class="secondary">
       <a href="https://www.linkedin.com/in/cole-w-55baa337a/" target="_blank" rel="noopener" class="btn-sec">
@@ -752,11 +930,44 @@
   <!-- Footer -->
   <div class="foot">
     <span class="foot-ts" id="ts"></span>
+    <button class="term-btn" id="shareBtn" title="Share" style="margin-right:10px">[&#x2197;]</button>
     <button class="term-btn" id="termBtn" title="Toggle terminal mode">[&gt;_]</button>
     <span class="foot-id">CW&#x2011;001 &nbsp;·&nbsp; NFC</span>
   </div>
 
 </div>
+
+<!-- Ticker -->
+<div class="ticker-fixed" aria-hidden="true">
+  <div class="ticker-track" id="ticker-track">
+    <span class="tk"><span class="tk-sym">DCT·A</span> 342.18 <span class="tk-up">+1.24%</span></span>
+    <span class="tk"><span class="tk-sym">DCT·B</span> 89.45 <span class="tk-dn">-0.32%</span></span>
+    <span class="tk"><span class="tk-sym">DCT·C</span> 1247.30 <span class="tk-up">+0.87%</span></span>
+    <span class="tk"><span class="tk-sym">DCT·D</span> 56.72 <span class="tk-dn">-1.05%</span></span>
+    <span class="tk"><span class="tk-sym tk-sep">·</span></span>
+    <span class="tk"><span class="tk-sym">SYSTEMS</span> <span class="tk-up">04/04 NOMINAL</span></span>
+    <span class="tk"><span class="tk-sym">UPTIME</span> <span id="ticker-uptime">00:00:00</span></span>
+    <span class="tk"><span class="tk-sym">STATUS</span> <span class="tk-up">LIVE</span></span>
+    <span class="tk"><span class="tk-sym tk-sep">·</span></span>
+    <span class="tk"><span class="tk-sym">DELTA CAPITAL</span> TRADING &amp; INVESTMENT</span>
+    <span class="tk"><span class="tk-sym">NFC/01</span> COLE WYSOPAL · CEO</span>
+    <span class="tk"><span class="tk-sym tk-sep">·</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="tk"><span class="tk-sym">DCT·A</span> 342.18 <span class="tk-up">+1.24%</span></span>
+    <span class="tk"><span class="tk-sym">DCT·B</span> 89.45 <span class="tk-dn">-0.32%</span></span>
+    <span class="tk"><span class="tk-sym">DCT·C</span> 1247.30 <span class="tk-up">+0.87%</span></span>
+    <span class="tk"><span class="tk-sym">DCT·D</span> 56.72 <span class="tk-dn">-1.05%</span></span>
+    <span class="tk"><span class="tk-sym tk-sep">·</span></span>
+    <span class="tk"><span class="tk-sym">SYSTEMS</span> <span class="tk-up">04/04 NOMINAL</span></span>
+    <span class="tk"><span class="tk-sym">UPTIME</span> <span id="ticker-uptime2">00:00:00</span></span>
+    <span class="tk"><span class="tk-sym">STATUS</span> <span class="tk-up">LIVE</span></span>
+    <span class="tk"><span class="tk-sym tk-sep">·</span></span>
+    <span class="tk"><span class="tk-sym">DELTA CAPITAL</span> TRADING &amp; INVESTMENT</span>
+    <span class="tk"><span class="tk-sym">NFC/01</span> COLE WYSOPAL · CEO</span>
+    <span class="tk"><span class="tk-sym tk-sep">·</span></span>
+  </div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -805,6 +1016,49 @@
       statEl.textContent = statuses[Math.floor(Math.random() * statuses.length)];
     }
   }, 4000);
+
+  /* ── Share button ── */
+  var shareBtn = document.getElementById('shareBtn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function () {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Cole Wysopal — Delta Capital',
+          text: 'Cole Wysopal · CEO & Founder, Delta Capital Trading',
+          url: window.location.href
+        }).catch(function () {});
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(function () {
+          shareBtn.innerHTML = '[&#x2713;]';
+          setTimeout(function () { shareBtn.innerHTML = '[&#x2197;]'; }, 1800);
+        });
+      }
+    });
+  }
+
+  /* ── Ticker uptime ── */
+  var tickerUp1 = document.getElementById('ticker-uptime');
+  var tickerUp2 = document.getElementById('ticker-uptime2');
+  setInterval(function () {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    var h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+    var str = pad(h)+':'+pad(m)+':'+pad(sec);
+    if (tickerUp1) tickerUp1.textContent = str;
+    if (tickerUp2) tickerUp2.textContent = str;
+  }, 1000);
+
+  /* ── Live ticker prices (subtle drift) ── */
+  var tkPrices = [342.18, 89.45, 1247.30, 56.72];
+  var tkVels   = [0, 0, 0, 0];
+  var tkSyms   = ['DCT·A','DCT·B','DCT·C','DCT·D'];
+  var tkEls    = document.querySelectorAll('.ticker-track .tk');
+  setInterval(function () {
+    tkPrices.forEach(function (p, i) {
+      tkVels[i] += (Math.random()-.5) * .08;
+      tkVels[i] *= .92;
+      tkPrices[i] = Math.max(tkPrices[i]*.85, Math.min(tkPrices[i]*1.15, tkPrices[i] + tkVels[i]));
+    });
+  }, 800);
 
   /* ── Terminal mode toggle ── */
   var btn = document.getElementById('termBtn');
