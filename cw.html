@@ -764,6 +764,98 @@
     body.terminal .acc-li { color: rgba(0,255,70,.3); border-bottom-color: rgba(0,255,70,.05); }
     body.terminal .acc-li::before { color: rgba(0,255,70,.12); }
 
+
+    /* ─── LIVE MARKET DATA ─── */
+    .market-widget {
+      opacity: 0; animation: rise .6s .56s forwards;
+      margin-bottom: 0;
+    }
+    .mkt-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .mkt-label {
+      font-size: .4rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--dim);
+    }
+    .mkt-updated {
+      font-size: .36rem; letter-spacing: .1em;
+      color: rgba(255,255,255,.14);
+    }
+    .mkt-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .mkt-cell {
+      background: var(--bg); padding: 12px 12px 10px;
+      position: relative; overflow: hidden;
+    }
+    .mkt-sym {
+      display: block; font-size: .38rem; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(255,255,255,.28);
+      margin-bottom: 5px;
+    }
+    .mkt-price {
+      display: block; font-family: var(--serif); font-weight: 300;
+      font-size: clamp(.82rem, 2.8vw, 1rem);
+      color: rgba(255,255,255,.78); line-height: 1;
+      letter-spacing: -.01em;
+      transition: color .4s;
+    }
+    .mkt-change {
+      display: block; font-size: .38rem; letter-spacing: .1em;
+      margin-top: 4px; transition: color .4s;
+    }
+    .mkt-up   { color: rgba(120,215,150,.75); }
+    .mkt-dn   { color: rgba(215,100,100,.7); }
+    .mkt-flat { color: rgba(255,255,255,.3); }
+    .mkt-bar {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1.5px;
+      background: var(--border); overflow: hidden;
+    }
+    .mkt-bar-fill {
+      height: 100%; width: 0%;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1), background .4s;
+    }
+    .mkt-flash {
+      position: absolute; inset: 0; opacity: 0;
+      pointer-events: none;
+      transition: opacity .1s;
+    }
+    .mkt-cell.flash-up   .mkt-flash { background: rgba(120,215,150,.04); opacity: 1; }
+    .mkt-cell.flash-down .mkt-flash { background: rgba(215,100,100,.04); opacity: 1; }
+    /* loading shimmer */
+    .mkt-price.loading {
+      background: linear-gradient(90deg, rgba(255,255,255,.06) 25%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.06) 75%);
+      background-size: 200% 100%;
+      animation: shimmerLoad 1.4s infinite;
+      border-radius: 2px; color: transparent;
+      min-width: 60px; min-height: 1em;
+    }
+    @keyframes shimmerLoad { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    body.terminal .mkt-grid { background: rgba(0,255,70,.08); border-color: rgba(0,255,70,.08); }
+    body.terminal .mkt-cell { background: var(--bg); }
+    body.terminal .mkt-sym { color: rgba(0,255,70,.28); }
+    body.terminal .mkt-price { color: rgba(0,255,70,.72); }
+    body.terminal .mkt-up  { color: rgba(0,255,70,.75); }
+    body.terminal .mkt-dn  { color: rgba(200,80,80,.7); }
+    body.terminal .mkt-label { color: rgba(0,255,70,.35); }
+
+
+    /* ─── MAGNETIC / CURSOR ─── */
+    .mag { transition: transform .12s cubic-bezier(.4,0,.2,1); }
+
+    /* ─── ENTRY DECODE ─── */
+    @keyframes glitch {
+      0%,100% { clip-path: inset(0 0 100% 0); }
+      20%      { clip-path: inset(30% 0 40% 0); opacity:.7; }
+      40%      { clip-path: inset(60% 0 10% 0); opacity:.5; }
+      60%      { clip-path: inset(10% 0 70% 0); opacity:.8; }
+      80%      { clip-path: inset(80% 0 5%  0); opacity:.6; }
+    }
+    .hero-name { position: relative; }
+
     /* ─── TICKER ─── */
     .ticker-fixed {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
@@ -884,7 +976,7 @@
     <a href="mailto:colewysopal@deltacapitaltrading.com" class="qa-btn primary">&#x2192; Connect</a>
     <a href="https://www.linkedin.com/in/cole-w-55baa337a/" target="_blank" rel="noopener" class="qa-btn">LinkedIn</a>
     <a href="https://deltacapitaltrading.com" target="_blank" rel="noopener" class="qa-btn">Website</a>
-    <a href="https://deltacapitaltrading.com/blog" target="_blank" rel="noopener" class="qa-btn">Research</a>
+    <a href="https://deltacapitaltrading.com/contact" target="_blank" rel="noopener" class="qa-btn">Contact</a>
   </div>
 
   <!-- Personal Layer -->
@@ -895,6 +987,38 @@
     </span>
   </div>
 
+
+
+  <!-- Live Market Data -->
+  <div class="market-widget">
+    <div class="mkt-head">
+      <span class="mkt-label">// live markets</span>
+      <span class="mkt-updated" id="mkt-ts">fetching...</span>
+    </div>
+    <div class="mkt-grid">
+      <div class="mkt-cell" id="mkt-btc">
+        <span class="mkt-flash"></span>
+        <span class="mkt-sym">BTC</span>
+        <span class="mkt-price loading" id="btc-price">——</span>
+        <span class="mkt-change mkt-flat" id="btc-chg">—</span>
+        <div class="mkt-bar"><div class="mkt-bar-fill" id="btc-bar"></div></div>
+      </div>
+      <div class="mkt-cell" id="mkt-eth">
+        <span class="mkt-flash"></span>
+        <span class="mkt-sym">ETH</span>
+        <span class="mkt-price loading" id="eth-price">——</span>
+        <span class="mkt-change mkt-flat" id="eth-chg">—</span>
+        <div class="mkt-bar"><div class="mkt-bar-fill" id="eth-bar"></div></div>
+      </div>
+      <div class="mkt-cell" id="mkt-sol">
+        <span class="mkt-flash"></span>
+        <span class="mkt-sym">SOL</span>
+        <span class="mkt-price loading" id="sol-price">——</span>
+        <span class="mkt-change mkt-flat" id="sol-chg">—</span>
+        <div class="mkt-bar"><div class="mkt-bar-fill" id="sol-bar"></div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="rule rule-a"></div>
 
@@ -1573,8 +1697,7 @@
           var out = '';
           for (var i = 0; i < plain.length; i++) {
             var c = plain[i];
-            if (i < revealed || c === ' ' || c === '
-') {
+            if (i < revealed || c === ' ' || c === '\n' || c === '\r') {
               out += c;
             } else {
               out += CHARS[Math.floor(Math.random() * CHARS.length)];
@@ -1730,6 +1853,154 @@
     }
     drawSignal();
   }
+
+
+
+  /* ══════════════════════════════════════════════
+     LIVE MARKET DATA — CoinGecko public API
+  ══════════════════════════════════════════════ */
+  (function () {
+    var COINS = [
+      { id: 'bitcoin',  sym: 'BTC', priceEl: 'btc-price', chgEl: 'btc-chg', barEl: 'btc-bar', cellEl: 'mkt-btc', prev: null },
+      { id: 'ethereum', sym: 'ETH', priceEl: 'eth-price', chgEl: 'eth-chg', barEl: 'eth-bar', cellEl: 'mkt-eth', prev: null },
+      { id: 'solana',   sym: 'SOL', priceEl: 'sol-price', chgEl: 'sol-chg', barEl: 'sol-bar', cellEl: 'mkt-sol', prev: null }
+    ];
+    var tsEl = document.getElementById('mkt-ts');
+
+    function fmt(n) {
+      if (n >= 1000) return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+      if (n >= 100)  return '$' + n.toFixed(1);
+      return '$' + n.toFixed(2);
+    }
+    function fmtChg(c) {
+      return (c >= 0 ? '+' : '') + c.toFixed(2) + '%';
+    }
+
+    function flash(coin, dir) {
+      var cell = document.getElementById(coin.cellEl);
+      if (!cell) return;
+      cell.classList.remove('flash-up', 'flash-down');
+      void cell.offsetWidth; /* reflow */
+      cell.classList.add(dir > 0 ? 'flash-up' : 'flash-down');
+      setTimeout(function () { cell.classList.remove('flash-up', 'flash-down'); }, 350);
+    }
+
+    function updateCoin(coin, price, chg24) {
+      var pEl = document.getElementById(coin.priceEl);
+      var cEl = document.getElementById(coin.chgEl);
+      var bEl = document.getElementById(coin.barEl);
+      if (!pEl) return;
+      /* flash on price change */
+      if (coin.prev !== null && price !== coin.prev) {
+        flash(coin, price - coin.prev);
+      }
+      coin.prev = price;
+      pEl.classList.remove('loading');
+      pEl.textContent = fmt(price);
+      if (cEl) {
+        cEl.textContent = fmtChg(chg24);
+        cEl.className = 'mkt-change ' + (chg24 > 0 ? 'mkt-up' : chg24 < 0 ? 'mkt-dn' : 'mkt-flat');
+      }
+      /* bar: maps -5% to +5% → 0–100% */
+      if (bEl) {
+        var pct = Math.min(100, Math.max(0, (chg24 + 5) / 10 * 100));
+        bEl.style.width = pct + '%';
+        bEl.style.background = chg24 > 0 ? 'rgba(120,215,150,.55)' : 'rgba(215,100,100,.5)';
+      }
+    }
+
+    function fetch_prices() {
+      var ids = COINS.map(function (c) { return c.id; }).join(',');
+      var url = 'https://api.coingecko.com/api/v3/simple/price?ids=' + ids +
+                '&vs_currencies=usd&include_24hr_change=true&precision=2';
+      fetch(url)
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          COINS.forEach(function (coin) {
+            var d = data[coin.id];
+            if (d) updateCoin(coin, d.usd, d.usd_24h_change || 0);
+          });
+          if (tsEl) {
+            var n = new Date();
+            tsEl.textContent = 'updated ' + pad(n.getHours()) + ':' + pad(n.getMinutes()) + ':' + pad(n.getSeconds());
+          }
+        })
+        .catch(function () {
+          if (tsEl) tsEl.textContent = 'data unavailable';
+        });
+    }
+    fetch_prices();
+    setInterval(fetch_prices, 30000);
+  })();
+
+  /* ══════════════════════════════════════════════
+     MAGNETIC CURSOR — buttons/links levitate toward mouse
+  ══════════════════════════════════════════════ */
+  (function () {
+    if (window.matchMedia('(hover: none)').matches) return; /* skip on touch */
+    var MAG_R = 80, MAG_STR = 0.38;
+    var targets = [];
+
+    function register() {
+      targets = Array.from(document.querySelectorAll('.qa-btn, .btn-connect, .hard-cta-btn, .acc-trigger'));
+      targets.forEach(function (el) { el.classList.add('mag'); });
+    }
+    register();
+
+    document.addEventListener('mousemove', function (e) {
+      targets.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        var cx = r.left + r.width  / 2;
+        var cy = r.top  + r.height / 2;
+        var dx = e.clientX - cx;
+        var dy = e.clientY - cy;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < MAG_R) {
+          var pull = (1 - dist / MAG_R);
+          el.style.transform = 'translate(' +
+            (dx * pull * MAG_STR).toFixed(2) + 'px,' +
+            (dy * pull * MAG_STR).toFixed(2) + 'px)';
+        } else {
+          el.style.transform = '';
+        }
+      });
+    });
+    document.addEventListener('mouseleave', function () {
+      targets.forEach(function (el) { el.style.transform = ''; });
+    });
+  })();
+
+  /* ══════════════════════════════════════════════
+     ENTRY DECODE — hero name scrambles on load
+  ══════════════════════════════════════════════ */
+  (function () {
+    var el = document.querySelector('.hero-name');
+    if (!el) return;
+    var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·∆—';
+    var orig = el.innerHTML;
+    var plain = el.textContent;
+    var dur = 900, start;
+
+    function decode(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var revealed = Math.floor(p * plain.length);
+      var out = '';
+      for (var i = 0; i < plain.length; i++) {
+        var c = plain[i];
+        if (i < revealed || c === ' ' || c === '\n') {
+          out += c;
+        } else {
+          out += CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+      }
+      el.textContent = out;
+      if (p < 1) requestAnimationFrame(decode);
+      else el.innerHTML = orig;
+    }
+    /* small delay so font loads first */
+    setTimeout(function () { requestAnimationFrame(decode); }, 320);
+  })();
 
 
 })();
