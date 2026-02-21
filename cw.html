@@ -568,40 +568,6 @@
     .rule-card { animation-delay: 1.38s; }
 
 
-    /* ─── QUICK LINKS ─── */
-    .links-section { opacity: 0; animation: rise .6s .96s forwards; }
-    .links-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 14px;
-    }
-    .link-item {
-      background: var(--bg);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 16px;
-      text-decoration: none;
-      transition: background .18s;
-    }
-    .link-item:hover { background: rgba(255,255,255,.025); }
-    .link-name {
-      font-size: .46rem; letter-spacing: .18em; text-transform: uppercase;
-      color: rgba(255,255,255,.55);
-    }
-    .link-arrow {
-      font-size: .5rem; color: rgba(255,255,255,.2);
-      transition: color .18s, transform .18s;
-    }
-    .link-item:hover .link-arrow {
-      color: rgba(255,255,255,.55);
-      transform: translate(2px, -2px);
-    }
-    body.terminal .link-item:hover { background: rgba(0,255,70,.03); }
-    body.terminal .link-name { color: rgba(0,255,70,.45); }
-    body.terminal .link-arrow { color: rgba(0,255,70,.2); }
-    body.terminal .link-item:hover .link-arrow { color: rgba(0,255,70,.55); }
-
-
     /* ─── QUICK ACTIONS ─── */
     .quick-actions {
       display: flex; gap: 6px; flex-wrap: wrap;
@@ -709,6 +675,94 @@
     body.terminal .hard-cta-btn { color: rgba(0,255,70,.65); }
     body.terminal .hard-cta-btn:hover { color: rgba(0,255,70,.95); }
     body.terminal .hard-cta-btn .arrow { color: rgba(0,255,70,.35); }
+
+
+    /* ─── PERSONAL LAYER ─── */
+    .personal {
+      display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+      padding: 8px 0 0;
+      opacity: 0; animation: rise .5s .44s forwards;
+    }
+    .personal-label {
+      font-size: .37rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,255,255,.18); flex-shrink: 0;
+    }
+    .personal-items {
+      font-family: var(--mono); font-size: .38rem; letter-spacing: .11em;
+      color: rgba(255,255,255,.32); line-height: 1.8;
+    }
+    .ps { color: rgba(255,255,255,.1); margin: 0 5px; }
+    body.terminal .personal-label { color: rgba(0,255,70,.18); }
+    body.terminal .personal-items { color: rgba(0,255,70,.3); }
+    body.terminal .ps { color: rgba(0,255,70,.1); }
+
+
+    /* ─── ACCORDION ─── */
+    .accordion { opacity: 0; animation: rise .6s 1.00s forwards; }
+    .acc-item { border-bottom: 1px solid var(--border); }
+    .acc-item:first-child { border-top: 1px solid var(--border); }
+    .acc-trigger {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 0; background: none; border: none; cursor: pointer;
+      text-align: left; -webkit-tap-highlight-color: transparent;
+    }
+    .acc-title {
+      font-family: var(--mono); font-size: .46rem; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(255,255,255,.48);
+      transition: color .2s;
+    }
+    .acc-trigger:hover .acc-title,
+    .acc-item.open .acc-title { color: rgba(255,255,255,.82); }
+    .acc-icon {
+      font-size: .62rem; color: rgba(255,255,255,.22);
+      transition: transform .45s cubic-bezier(.4,0,.2,1), color .2s;
+      font-family: var(--mono); font-style: normal; line-height: 1;
+      flex-shrink: 0; margin-left: 16px;
+    }
+    .acc-item.open .acc-icon {
+      transform: rotate(45deg);
+      color: rgba(255,255,255,.5);
+    }
+    .acc-body { overflow: hidden; height: 0; }
+    .acc-inner { padding: 4px 0 26px; }
+
+    /* text inside accordion */
+    .acc-prose {
+      font-family: var(--serif); font-style: italic; font-weight: 300;
+      font-size: clamp(.93rem, 3.3vw, 1.12rem);
+      color: rgba(255,255,255,.46); line-height: 1.65; margin-bottom: 16px;
+    }
+    .acc-prose:last-child { margin-bottom: 0; }
+    .acc-prose em { font-style: normal; color: rgba(255,255,255,.72); }
+    .acc-list { display: flex; flex-direction: column; gap: 0; }
+    .acc-li {
+      font-family: var(--mono); font-size: .43rem; letter-spacing: .11em;
+      color: rgba(255,255,255,.32);
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      display: flex; align-items: baseline; gap: 10px;
+    }
+    .acc-li:last-child { border-bottom: none; }
+    .acc-li::before { content: '—'; color: rgba(255,255,255,.12); flex-shrink: 0; }
+
+    /* signal canvas inside accordion */
+    .signal-canvas {
+      width: 100%; height: 52px; display: block;
+      margin: 14px 0; opacity: .55;
+    }
+
+    /* terminal overrides */
+    body.terminal .acc-title { color: rgba(0,255,70,.35); }
+    body.terminal .acc-trigger:hover .acc-title,
+    body.terminal .acc-item.open .acc-title { color: rgba(0,255,70,.8); }
+    body.terminal .acc-icon { color: rgba(0,255,70,.18); }
+    body.terminal .acc-item.open .acc-icon { color: rgba(0,255,70,.45); }
+    body.terminal .acc-item { border-color: rgba(0,255,70,.08); }
+    body.terminal .acc-item:first-child { border-top-color: rgba(0,255,70,.08); }
+    body.terminal .acc-prose { font-family: var(--mono); font-style: normal; font-size: .5rem; color: rgba(0,255,70,.38); }
+    body.terminal .acc-prose em { color: rgba(0,255,70,.72); }
+    body.terminal .acc-li { color: rgba(0,255,70,.3); border-bottom-color: rgba(0,255,70,.05); }
+    body.terminal .acc-li::before { color: rgba(0,255,70,.12); }
 
     /* ─── TICKER ─── */
     .ticker-fixed {
@@ -832,6 +886,15 @@
     <a href="https://deltacapitaltrading.com" target="_blank" rel="noopener" class="qa-btn">Website</a>
     <a href="https://deltacapitaltrading.com/blog" target="_blank" rel="noopener" class="qa-btn">Research</a>
   </div>
+
+  <!-- Personal Layer -->
+  <div class="personal">
+    <span class="personal-label">Open to</span>
+    <span class="personal-items">
+      Advisory<span class="ps">·</span>Research conversations<span class="ps">·</span>Investment discussion<span class="ps">·</span>Early-stage ventures
+    </span>
+  </div>
+
 
   <div class="rule rule-a"></div>
 
@@ -992,28 +1055,78 @@
 
   <div class="rule rule-phil" style="opacity:0;animation:fadeIn .5s 1.08s forwards;"></div>
 
-  <!-- Quick Links -->
-  <div class="links-section">
-    <p class="section-tag">// explore</p>
-    <div class="links-grid">
-      <a href="https://deltacapitaltrading.com" target="_blank" rel="noopener" class="link-item">
-        <span class="link-name">Website</span>
-        <span class="link-arrow">&#x2197;</span>
-      </a>
-      <a href="https://deltacapitaltrading.com/mission" target="_blank" rel="noopener" class="link-item">
-        <span class="link-name">Mission</span>
-        <span class="link-arrow">&#x2197;</span>
-      </a>
-      <a href="https://deltacapitaltrading.com/principles" target="_blank" rel="noopener" class="link-item">
-        <span class="link-name">Principles</span>
-        <span class="link-arrow">&#x2197;</span>
-      </a>
-      <a href="https://deltacapitaltrading.com/blog" target="_blank" rel="noopener" class="link-item">
-        <span class="link-name">Blog</span>
-        <span class="link-arrow">&#x2197;</span>
-      </a>
+
+  <!-- Hidden Depth Accordion -->
+  <div class="accordion">
+    <!-- Philosophy -->
+    <div class="acc-item">
+      <button class="acc-trigger" aria-expanded="false">
+        <span class="acc-title">Full Philosophy</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <canvas class="signal-canvas" id="signal-canvas"></canvas>
+          <p class="acc-prose" data-scramble>
+            Markets are <em>adversarial systems.</em> Participants with structural advantages —
+            information, latency, capital — systematically extract value from those without.
+          </p>
+          <p class="acc-prose" data-scramble>
+            Survival requires not prediction, but <em>architecture:</em> systems designed to
+            operate under adverse conditions, absorb shocks, and remain solvent while
+            competitors fail.
+          </p>
+          <p class="acc-prose" data-scramble>
+            Delta Capital is built on this premise. We do not compete on conviction.
+            We compete on <em>rigor.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="acc-item">
+      <button class="acc-trigger" aria-expanded="false">
+        <span class="acc-title">About</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <p class="acc-prose" data-scramble>
+            Delta Capital Trading is an early-stage systematic trading and investment firm.
+            Built from first principles — <em>disciplined risk architecture,</em> structured
+            research, and technology infrastructure over premature scaling.
+          </p>
+          <p class="acc-prose" data-scramble>
+            The team brings together backgrounds in technology, quantitative research,
+            and structured finance. We are building the systems before we deploy the capital.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Collaboration -->
+    <div class="acc-item">
+      <button class="acc-trigger" aria-expanded="false">
+        <span class="acc-title">Collaboration</span>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-list">
+            <span class="acc-li" data-scramble>Trading infrastructure &amp; system design</span>
+            <span class="acc-li" data-scramble>Quantitative and systematic research</span>
+            <span class="acc-li" data-scramble>Capital allocation &amp; structured instruments</span>
+            <span class="acc-li" data-scramble>Technology ventures at the intersection of finance and markets</span>
+            <span class="acc-li" data-scramble>Advisory roles in early-stage finance and technology companies</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="rule rule-acc" style="opacity:0;animation:fadeIn .5s 1.18s forwards;"></div>
+
 
   <!-- Hard CTA -->
   <div class="hard-cta">
@@ -1442,6 +1555,182 @@
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
     else init();
   })();
+
+
+  /* ── Accordion: spring expand + text scramble ── */
+  (function () {
+    var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·—∆Σ±≠∂∫';
+
+    function scramble(el, delay) {
+      setTimeout(function () {
+        var text = el._origText || (el._origText = el.innerHTML);
+        var plain = el.textContent;
+        el._origText = el.innerHTML;
+        var start = Date.now(), dur = 560;
+        (function frame() {
+          var p = Math.min((Date.now() - start) / dur, 1);
+          var revealed = Math.floor(p * plain.length);
+          var out = '';
+          for (var i = 0; i < plain.length; i++) {
+            var c = plain[i];
+            if (i < revealed || c === ' ' || c === '
+') {
+              out += c;
+            } else {
+              out += CHARS[Math.floor(Math.random() * CHARS.length)];
+            }
+          }
+          el.textContent = out;
+          if (p < 1) requestAnimationFrame(frame);
+          else el.innerHTML = el._origText;
+        })();
+      }, delay || 0);
+    }
+
+    function springH(el, open) {
+      var target = open ? el.scrollHeight : 0;
+      var cur = parseFloat(el.style.height) || 0;
+      var vel = 0;
+      el.style.overflow = 'hidden';
+      (function step() {
+        vel += (target - cur) * 0.13;
+        vel *= 0.72;
+        cur += vel;
+        el.style.height = Math.max(0, cur) + 'px';
+        if (Math.abs(target - cur) > 0.4 || Math.abs(vel) > 0.4) {
+          requestAnimationFrame(step);
+        } else {
+          el.style.height = open ? 'auto' : '0';
+        }
+      })();
+    }
+
+    document.querySelectorAll('.acc-trigger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.acc-item');
+        var body = item.querySelector('.acc-body');
+        var isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.acc-item.open').forEach(function (other) {
+          if (other !== item) {
+            other.classList.remove('open');
+            other.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
+            springH(other.querySelector('.acc-body'), false);
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          springH(body, false);
+        } else {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          body.style.height = '0';
+          springH(body, true);
+          var delay = 0;
+          item.querySelectorAll('[data-scramble]').forEach(function (el) {
+            scramble(el, delay);
+            delay += 80;
+          });
+          /* Start signal canvas when philosophy opens */
+          if (item === document.querySelectorAll('.acc-item')[0]) {
+            startSignal();
+          }
+        }
+      });
+    });
+  })();
+
+  /* ── Signal canvas (noise → order visualization) ── */
+  var _signalStarted = false;
+  function startSignal() {
+    if (_signalStarted) return;
+    _signalStarted = true;
+    var canvas = document.getElementById('signal-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var dpr = window.devicePixelRatio || 1;
+    var w, h;
+
+    function resize() {
+      w = canvas.offsetWidth || 300;
+      h = canvas.offsetHeight || 52;
+      canvas.width  = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var N = 90;
+    var pts  = new Array(N).fill(0);
+    var vels = new Array(N).fill(0);
+    var phase = 0;
+    var noise = 1.4;
+    var noiseTarget = 0.18;
+    var t0sig = Date.now();
+
+    function drawSignal() {
+      ctx.clearRect(0, 0, w, h);
+      phase += 0.016;
+      noise += (noiseTarget - noise) * 0.008;
+
+      /* spring-coupled oscillator chain */
+      for (var i = 0; i < N; i++) {
+        var signal = (Math.sin(phase + i * 0.19) * 0.55) +
+                     (Math.sin(phase * 1.7 + i * 0.37) * 0.22);
+        var n = (Math.random() - 0.5) * noise;
+        var tgt = signal + n;
+        vels[i] += (tgt - pts[i]) * 0.30;
+        vels[i] *= 0.60;
+        pts[i] += vels[i];
+      }
+
+      /* gradient stroke: dim left → bright right */
+      var grad = ctx.createLinearGradient(0, 0, w, 0);
+      grad.addColorStop(0,   'rgba(255,255,255,.08)');
+      grad.addColorStop(0.5, 'rgba(255,255,255,.28)');
+      grad.addColorStop(1,   'rgba(255,255,255,.55)');
+
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) {
+        var x = (i / (N - 1)) * w;
+        var y = h / 2 + pts[i] * (h / 2 * 0.78);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = grad;
+      ctx.lineWidth   = 1.2;
+      ctx.lineJoin    = 'round';
+      ctx.stroke();
+
+      /* glowing live dot at tip */
+      var lx = w, ly = h / 2 + pts[N-1] * (h/2 * 0.78);
+      var pulse = 0.5 + 0.5 * Math.sin((Date.now() % 1200) / 1200 * Math.PI * 2);
+      ctx.save();
+      ctx.shadowBlur  = 8 + pulse * 5;
+      ctx.shadowColor = 'rgba(255,255,255,.6)';
+      ctx.beginPath(); ctx.arc(lx, ly, 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.fill();
+      ctx.restore();
+
+      /* noise label fades as noise settles */
+      var noiseRatio = (noise - noiseTarget) / (1.4 - noiseTarget);
+      if (noiseRatio > 0.05) {
+        ctx.font = '300 5px "JetBrains Mono",monospace';
+        ctx.fillStyle = 'rgba(255,255,255,' + (noiseRatio * 0.25) + ')';
+        ctx.textAlign = 'left';
+        ctx.fillText('NOISE', 2, 8);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = 'rgba(255,255,255,' + ((1 - noiseRatio) * 0.3) + ')';
+        ctx.fillText('SIGNAL', w - 2, 8);
+      }
+
+      requestAnimationFrame(drawSignal);
+    }
+    drawSignal();
+  }
+
 
 })();
 </script>
