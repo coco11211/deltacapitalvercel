@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculators &mdash; Delta Capital</title>
-  <meta name="description" content="Delta Capital — Interactive Trading Calculators">
+  <title>Risk Calculator — Delta Capital</title>
+  <meta name="description" content="Interactive risk/reward calculator for quantitative investing strategies.">
   <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -12,339 +12,446 @@
   <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
   <link rel="manifest" href="/img/manifest.json">
   <meta name="theme-color" content="#111111">
-  <link rel="canonical" href="https://deltacapitaltrading.com/calculators.html">
-  <meta property="og:title" content="Calculators &mdash; Delta Capital">
-  <meta property="og:description" content="Interactive trading calculators">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Delta Capital">
-  <meta property="og:url" content="https://deltacapitaltrading.com/calculators.html">
-  <meta property="og:image" content="https://deltacapitaltrading.com/img/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Calculators &mdash; Delta Capital">
-  <meta name="twitter:description" content="Interactive trading calculators">
-  <meta name="twitter:image" content="https://deltacapitaltrading.com/img/og-default.png">
+  <link rel="canonical" href="https://deltacapitaltrading.com/calculators">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .calculators-grid {
+    .risk-calculator {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 8vh 8vw;
+    }
+
+    .risk-calculator h2 {
+      margin-bottom: 3vh;
+      text-align: center;
+    }
+
+    .calc-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-      gap: 3rem;
-      margin: 4rem 0;
+      grid-template-columns: 1fr 1fr;
+      gap: 4vh;
+      margin-top: 4vh;
     }
-    .calculator-card {
+
+    .calc-group {
       background: white;
+      padding: 3vh;
       border: 1px solid var(--border);
-      padding: 3rem;
-      transition: all 0.4s var(--ease);
-    }
-    .calculator-card:hover {
-      border-color: var(--fg);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    }
-    .calculator-title {
-      font-family: var(--serif);
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-    .calculator-desc {
-      color: var(--fg-muted);
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
-    }
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    .form-group label {
-      display: block;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--fg-faint);
-      margin-bottom: 0.5rem;
-    }
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 0.875rem;
-      font-family: var(--serif);
-      font-size: 1rem;
-      border: 1px solid var(--border);
-      background: white;
-      color: var(--fg);
-      transition: all 0.3s var(--ease);
-    }
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--fg);
-    }
-    .result-box {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: var(--bg-dark);
       border-radius: 4px;
     }
-    .result-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--fg-faint);
-      margin-bottom: 0.5rem;
+
+    .calc-group h3 {
+      margin-bottom: 2vh;
+      font-size: 1.3rem;
     }
-    .result-value {
-      font-family: var(--serif);
+
+    .calc-input {
+      margin-bottom: 2vh;
+    }
+
+    .calc-input label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.8vh;
+      color: var(--fg-muted);
+    }
+
+    .calc-input input[type="number"],
+    .calc-input input[type="range"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--fg);
+      background: var(--bg);
+    }
+
+    .calc-input input[type="range"] {
+      padding: 0;
+      height: 6px;
+      -webkit-appearance: none;
+      background: var(--bg-dark);
+    }
+
+    .calc-input input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--fg);
+      cursor: pointer;
+      border: none;
+    }
+
+    .calc-input input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--fg);
+      cursor: pointer;
+      border: none;
+    }
+
+    .calc-value {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--fg-muted);
+      margin-top: 0.5vh;
+    }
+
+    .results-container {
+      grid-column: 1 / -1;
+      margin-top: 2vh;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3vh;
+      margin-top: 2vh;
+    }
+
+    .metric-card {
+      background: var(--fg);
+      color: var(--bg);
+      padding: 3vh;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .metric-card .metric-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(250, 250, 250, 0.7);
+      margin-bottom: 1vh;
+    }
+
+    .metric-card .metric-value {
+      font-family: var(--mono);
       font-size: 2rem;
       font-weight: 400;
-      color: var(--fg);
     }
-    .result-sub {
-      font-size: 0.9rem;
-      color: var(--fg-muted);
-      margin-top: 0.5rem;
+
+    .metric-card .metric-unit {
+      font-size: 1rem;
+      color: rgba(250, 250, 250, 0.6);
     }
-    .calculate-btn {
-      width: 100%;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: var(--fg);
-      color: white;
-      border: none;
-      padding: 1rem;
-      cursor: pointer;
-      transition: all 0.3s var(--ease);
-      margin-top: 1.5rem;
+
+    .metric-card .metric-desc {
+      font-size: 0.85rem;
+      color: rgba(250, 250, 250, 0.5);
+      margin-top: 1vh;
     }
-    .calculate-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    .risk-rating {
+      margin-top: 3vh;
+      padding: 2vh;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .risk-rating.good {
+      background: rgba(0, 128, 0, 0.1);
+      color: #008000;
+      border: 1px solid #008000;
+    }
+
+    .risk-rating.warning {
+      background: rgba(255, 165, 0, 0.1);
+      color: #ffa500;
+      border: 1px solid #ffa500;
+    }
+
+    .risk-rating.danger {
+      background: rgba(255, 0, 0, 0.1);
+      color: #ff0000;
+      border: 1px solid #ff0000;
+    }
+
+    .risk-rating h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1vh;
+    }
+
+    .risk-rating p {
+      font-size: 1rem;
+      color: inherit;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+      .results-container {
+        grid-column: 1;
+      }
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
-  <canvas id="ambient-canvas"></canvas>
-  <div class="scroll-progress"></div>
-  <div class="nav-trigger" aria-label="Open navigation">
-    <span></span><span></span>
-  </div>
-  <div class="cmd-palette-overlay"></div>
-  <div class="cmd-palette">
-    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
-    <ul class="cmd-palette-results"></ul>
-  </div>
-  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
   <div class="page-container">
-    <section class="section section--compact">
-      <div class="section-inner" style="max-width: 900px; margin: 0 auto;">
-        <div class="reveal">
-          <span class="section-label">Tools</span>
-          <div class="divider"></div>
-          <h1 class="letter-reveal">Calculators</h1>
-          <p style="margin-top: 2vh; color: var(--fg-muted); line-height: 1.8; max-width: 600px;">
-            Practical tools for evaluating trading performance, calculating risk metrics,
-            and understanding scenario outcomes.
+    <nav>
+      <div class="nav-inner">
+        <a href="/" class="logo">Delta Capital</a>
+        <a href="/calculators" class="active">Calculators</a>
+        <a href="/glossary">Glossary</a>
+        <a href="/screener">Screener</a>
+      </div>
+    </nav>
+
+    <div class="risk-calculator">
+      <h2>Risk & Reward Calculator</h2>
+      <p style="text-align: center; margin-top: 1vh;">
+        Interactive tool to evaluate risk-adjusted performance metrics
+      </p>
+
+      <div class="calc-grid">
+        <!-- Input Group 1: Returns -->
+        <div class="calc-group">
+          <h3>Expected Returns</h3>
+
+          <div class="calc-input">
+            <label>Expected Annual Return (%)</label>
+            <input type="range" id="expected-return" min="-50" max="100" value="15" step="0.5">
+            <div class="calc-value"><span id="expected-return-value">15</span>%</div>
+          </div>
+
+          <div class="calc-input">
+            <label>Maximum Drawdown (%)</label>
+            <input type="range" id="max-drawdown" min="0" max="100" value="30" step="0.5">
+            <div class="calc-value"><span id="max-drawdown-value">30</span>%</div>
+          </div>
+
+          <div class="calc-input">
+            <label>Standard Deviation (%)</label>
+            <input type="range" id="std-dev" min="5" max="100" value="20" step="0.5">
+            <div class="calc-value"><span id="std-dev-value">20</span>%</div>
+          </div>
+        </div>
+
+        <!-- Input Group 2: Risk-Free -->
+        <div class="calc-group">
+          <h3>Risk-Free Rate</h3>
+
+          <div class="calc-input">
+            <label>Risk-Free Rate (%)</label>
+            <input type="range" id="risk-free" min="0" max="10" value="2" step="0.1">
+            <div class="calc-value"><span id="risk-free-value">2</span>%</div>
+          </div>
+
+          <div class="calc-input">
+            <label>Time Horizon (Years)</label>
+            <input type="number" id="time-horizon" min="1" max="30" value="5" step="1">
+          </div>
+
+          <div class="calc-input">
+            <label>Initial Capital ($)</label>
+            <input type="number" id="initial-capital" min="1000" max="10000000" value="100000" step="1000">
+          </div>
+
+          <p style="font-size: 0.85rem; color: var(--fg-faint); margin-top: 2vh;">
+            Adjust sliders to see how different scenarios affect risk-adjusted metrics.
           </p>
         </div>
-      </div>
-    </section>
 
-    <section class="section section--compact">
-      <div class="section-inner">
-        <div class="calculators-grid">
-          <div class="calculator-card">
-            <h2 class="calculator-title">Risk/Reward Calculator</h2>
-            <p class="calculator-desc">Determine position sizing and expected returns.</p>
+        <!-- Results -->
+        <div class="results-container">
+          <h3>Performance Metrics</h3>
 
-            <form id="risk-reward-form" onsubmit="event.preventDefault(); calculateRiskReward();">
-              <div class="form-group">
-                <label for="entry-price">Entry Price</label>
-                <input type="number" id="entry-price" step="0.01" required placeholder="0.00">
-              </div>
-              <div class="form-group">
-                <label for="target-price">Target Price</label>
-                <input type="number" id="target-price" step="0.01" required placeholder="0.00">
-              </div>
-              <div class="form-group">
-                <label for="stop-loss">Stop Loss</label>
-                <input type="number" id="stop-loss" step="0.01" required placeholder="0.00">
-              </div>
-              <div class="form-group">
-                <label for="position-size">Position Size (shares)</label>
-                <input type="number" id="position-size" step="1" required placeholder="0">
-              </div>
-              <button type="submit" class="calculate-btn">Calculate</button>
-            </form>
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-label">Sharpe Ratio</div>
+              <div class="metric-value"><span id="sharpe">0.64</span></div>
+              <div class="metric-unit">annual</div>
+              <div class="metric-desc">Return / (Risk + Rate)</div>
+            </div>
 
-            <div class="result-box" id="rr-result" style="display: none;">
-              <div class="result-label">Risk/Reward Ratio</div>
-              <div class="result-value" id="rr-ratio">0:0</div>
-              <div class="result-sub" id="rr-details"></div>
+            <div class="metric-card">
+              <div class="metric-label">Calmar Ratio</div>
+              <div class="metric-value"><span id="calmar">0.50</span></div>
+              <div class="metric-unit">annual</div>
+              <div class="metric-desc">Return / Max Drawdown</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-label">Expected Growth</div>
+              <div class="metric-value"><span id="growth">1.0</span>x</div>
+              <div class="metric-unit">5 years</div>
+              <div class="metric-desc">Portfolio value</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-label">Expected Value</div>
+              <div class="metric-value"><span id="expected-value">0.0</span>%</div>
+              <div class="metric-unit">per period</div>
+              <div class="metric-desc">Mean outcome</div>
             </div>
           </div>
 
-          <div class="calculator-card">
-            <h2 class="calculator-title">Drawdown Calculator</h2>
-            <p class="calculator-desc">Estimate maximum drawdown for a given strategy.</p>
-
-            <form id="drawdown-form" onsubmit="event.preventDefault(); calculateDrawdown();">
-              <div class="form-group">
-                <label for="peak-value">Peak Value</label>
-                <input type="number" id="peak-value" step="0.01" required placeholder="0.00">
-              </div>
-              <div class="form-group">
-                <label for="trough-value">Trough Value</label>
-                <input type="number" id="trough-value" step="0.01" required placeholder="0.00">
-              </div>
-              <div class="form-group">
-                <label for="volatility">Annual Volatility (%)</label>
-                <input type="number" id="volatility" step="0.1" required placeholder="0.0">
-              </div>
-              <button type="submit" class="calculate-btn">Calculate</button>
-            </form>
-
-            <div class="result-box" id="dd-result" style="display: none;">
-              <div class="result-label">Estimated Drawdown</div>
-              <div class="result-value" id="dd-value">0%</div>
-              <div class="result-sub" id="dd-risk"></div>
-            </div>
+          <div class="risk-rating" id="risk-rating">
+            <h4 id="risk-level">Moderate Risk</h4>
+            <p id="risk-description">Balanced return profile with acceptable drawdown levels.</p>
           </div>
 
-          <div class="calculator-card">
-            <h2 class="calculator-title">Compound Growth</h2>
-            <p class="calculator-desc">Projected portfolio growth over time.</p>
-
-            <form id="compound-form" onsubmit="event.preventDefault(); calculateCompound();">
-              <div class="form-group">
-                <label for="initial-capital">Initial Capital</label>
-                <input type="number" id="initial-capital" step="0.01" required placeholder="0.00">
-              </div>
-              <div class="form-group">
-                <label for="annual-return">Annual Return (%)</label>
-                <input type="number" id="annual-return" step="0.1" required placeholder="0.0">
-              </div>
-              <div class="form-group">
-                <label for="years">Time Horizon (years)</label>
-                <input type="number" id="years" step="1" required placeholder="0">
-              </div>
-              <button type="submit" class="calculate-btn">Calculate</button>
-            </form>
-
-            <div class="result-box" id="compound-result" style="display: none;">
-              <div class="result-label">Final Value</div>
-              <div class="result-value" id="compound-value">0</div>
-              <div class="result-sub" id="compound-growth"></div>
-            </div>
-          </div>
-
-          <div class="calculator-card">
-            <h2 class="calculator-title">Kelly Criterion</h2>
-            <p class="calculator-desc">Optimal position sizing based on edge and variance.</p>
-
-            <form id="kelly-form" onsubmit="event.preventDefault(); calculateKelly();">
-              <div class="form-group">
-                <label for="win-rate">Win Rate (%)</label>
-                <input type="number" id="win-rate" step="0.1" required placeholder="0.0">
-              </div>
-              <div class="form-group">
-                <label for="avg-win">Average Win (%)</label>
-                <input type="number" id="avg-win" step="0.1" required placeholder="0.0">
-              </div>
-              <div class="form-group">
-                <label for="avg-loss">Average Loss (%)</label>
-                <input type="number" id="avg-loss" step="0.1" required placeholder="0.0">
-              </div>
-              <button type="submit" class="calculate-btn">Calculate</button>
-            </form>
-
-            <div class="result-box" id="kelly-result" style="display: none;">
-              <div class="result-label">Kelly Fraction</div>
-              <div class="result-value" id="kelly-value">0%</div>
-              <div class="result-sub" id="kelly-risk"></div>
-            </div>
+          <div style="margin-top: 3vh;">
+            <button onclick="resetCalculator()" style="
+              padding: 12px 24px;
+              border: 1px solid var(--border);
+              background: white;
+              color: var(--fg);
+              font-family: var(--mono);
+              font-size: 0.85rem;
+              text-transform: uppercase;
+              letter-spacing: 0.1em;
+              cursor: pointer;
+              border-radius: 4px;
+              transition: all 0.2s ease;
+            ">
+              Reset
+            </button>
           </div>
         </div>
       </div>
-    </section>
-
-    <footer class="page-footer">
-      <nav class="footer-nav">
-        <a href="/" class="active">Home</a>
-        <a href="/principles">Principles</a>
-        <a href="/mission">Mission</a>
-        <a href="/screener">Screener</a>
-        <a href="/blog">Blog</a>
-        <a href="/glossary">Glossary</a>
-        <a href="/disclosures">Disclosures</a>
-        <a href="/faq">Questions</a>
-        <a href="/careers">Careers</a>
-        <a href="/newsletter">Updates</a>
-        <a href="/contact">Contact</a>
-      </nav>
-      <div class="footer-bottom">
-        <span>&Delta; Capital &copy; 2026</span>
-        <span>All rights reserved</span>
-      </div>
-    </footer>
+    </div>
   </div>
 
-  <script src="/js/core.js" defer></script>
-  <script src="/js/market-data.js" defer></script>
-  <script src="/js/market.js" defer></script>
-  <script src="/js/cookie-notice.js" defer></script>
   <script>
-    function calculateRiskReward() {
-      const entry = parseFloat(document.getElementById('entry-price').value);
-      const target = parseFloat(document.getElementById('target-price').value);
-      const stop = parseFloat(document.getElementById('stop-loss').value);
-      const shares = parseInt(document.getElementById('position-size').value);
+    // Get DOM elements
+    const inputs = {
+      expectedReturn: document.getElementById('expected-return'),
+      maxDrawdown: document.getElementById('max-drawdown'),
+      stdDev: document.getElementById('std-dev'),
+      riskFree: document.getElementById('risk-free'),
+      timeHorizon: document.getElementById('time-horizon'),
+      initialCapital: document.getElementById('initial-capital')
+    };
 
-      const risk = Math.abs(entry - stop);
-      const reward = Math.abs(target - entry);
-      const rrRatio = risk > 0 ? (reward / risk).toFixed(2) : 0;
-      const maxRr = rrRatio >= 2 ? 'Excellent ✓' : rrRatio >= 1.5 ? 'Good ✓' : rrRatio >= 1 ? 'Fair' : 'Risky ✗';
+    const displays = {
+      expectedReturn: document.getElementById('expected-return-value'),
+      maxDrawdown: document.getElementById('max-drawdown-value'),
+      stdDev: document.getElementById('std-dev-value'),
+      riskFree: document.getElementById('risk-free-value')
+    };
 
-      document.getElementById('rr-ratio').textContent = `${rrRatio}:1`;
-      document.getElementById('rr-details').textContent = `Position value: ${(shares * entry).toFixed(2)} | Max loss: ${(shares * risk).toFixed(2)} | Max gain: ${(shares * reward).toFixed(2)}`;
-      document.getElementById('rr-result').style.display = 'block';
+    const results = {
+      sharpe: document.getElementById('sharpe'),
+      calmar: document.getElementById('calmar'),
+      growth: document.getElementById('growth'),
+      expectedValue: document.getElementById('expected-value')
+    };
+
+    const riskRating = {
+      level: document.getElementById('risk-level'),
+      description: document.getElementById('risk-description'),
+      container: document.getElementById('risk-rating')
+    };
+
+    // Format numbers
+    function formatNumber(num, decimals = 2) {
+      return num.toFixed(decimals);
     }
 
-    function calculateDrawdown() {
-      const peak = parseFloat(document.getElementById('peak-value').value);
-      const trough = parseFloat(document.getElementById('trough-value').value);
-      const vol = parseFloat(document.getElementById('volatility').value);
+    // Calculate risk-adjusted metrics
+    function calculate() {
+      // Get values
+      const expectedReturn = parseFloat(inputs.expectedReturn.value) / 100;
+      const maxDrawdown = parseFloat(inputs.maxDrawdown.value) / 100;
+      const stdDev = parseFloat(inputs.stdDev.value) / 100;
+      const riskFree = parseFloat(inputs.riskFree.value) / 100;
+      const timeHorizon = parseFloat(inputs.timeHorizon.value);
+      const initialCapital = parseFloat(inputs.initialCapital.value);
 
-      const dd = Math.abs((peak - trough) / peak * 100);
-      const peakDrawdown = dd > 20 ? 'Very High' : dd > 15 ? 'High' : dd > 10 ? 'Moderate' : dd > 5 ? 'Low' : 'Minimal';
-      const volatilities = ['Conservative', 'Moderate', 'Aggressive'];
+      // Update display values
+      displays.expectedReturn.textContent = inputs.expectedReturn.value;
+      displays.maxDrawdown.textContent = inputs.maxDrawdown.value;
+      displays.stdDev.textContent = inputs.stdDev.value;
+      displays.riskFree.textContent = inputs.riskFree.value;
 
-      document.getElementById('dd-value').textContent = `${dd.toFixed(2)}%`;
-      document.getElementById('dd-risk').textContent = `Peak drawdown: ${dd.toFixed(2)}% | Level: ${peakDrawdown} | Volatility context: ${volatilities[Math.min(Math.round(vol / 10), 2)]}`;
-      document.getElementById('dd-result').style.display = 'block';
+      // Calculate metrics
+      const sharpe = expectedReturn > 0
+        ? (expectedReturn - riskFree) / stdDev
+        : -1; // Avoid negative Sharpe for diversification
+
+      const calmar = maxDrawdown > 0
+        ? expectedReturn / maxDrawdown
+        : 0;
+
+      const growthFactor = Math.pow(1 + expectedReturn, timeHorizon);
+      const finalCapital = initialCapital * growthFactor;
+      const returnOnInvestment = ((finalCapital - initialCapital) / initialCapital) * 100;
+
+      const stdReturn = expectedReturn * stdDev; // Standard error
+
+      // Update results
+      results.sharpe.textContent = formatNumber(Math.max(0, sharpe), 2);
+      results.calmar.textContent = formatNumber(Math.max(0, calmar), 2);
+      results.growth.textContent = formatNumber(growthFactor, 2);
+      results.expectedValue.textContent = formatNumber(returnOnInvestment, 1);
+
+      // Update risk rating
+      updateRiskRating(sharpe, calmar, maxDrawdown);
     }
 
-    function calculateCompound() {
-      const initial = parseFloat(document.getElementById('initial-capital').value);
-      const returnRate = parseFloat(document.getElementById('annual-return').value) / 100;
-      const years = parseInt(document.getElementById('years').value);
+    // Update risk rating
+    function updateRiskRating(sharpe, calmar, maxDrawdown) {
+      const returnRatio = parseFloat(inputs.expectedReturn.value) / Math.abs(maxDrawdown);
+      const sharpeRatio = Math.abs(sharpe);
 
-      const final = initial * Math.pow(1 + returnRate, years);
-      const totalGain = final - initial;
-      const totalGainPercent = (totalGain / initial * 100).toFixed(2);
+      // Determine risk level
+      let level, description, className;
 
-      document.getElementById('compound-value').textContent = `$${final.toFixed(2)}`;
-      document.getElementById('compound-growth').textContent = `Total gain: $${totalGain.toFixed(2)} (${totalGainPercent}%) | Growth: ${totalGainPercent >= 100 ? 'Strong 🚀' : totalGainPercent >= 50 ? 'Good' : totalGainPercent >= 0 ? 'Moderate' : 'Declining 📉'}`;
-      document.getElementById('compound-result').style.display = 'block';
+      if (returnRatio > 3 && sharpeRatio > 1.5 && maxDrawdown < 20) {
+        level = 'Low Risk — Excellent';
+        description = 'Strong risk-adjusted returns with minimal drawdown. Very efficient strategy.';
+        className = 'good';
+      } else if (returnRatio > 2 && sharpeRatio > 1.0 && maxDrawdown < 35) {
+        level = 'Moderate Risk — Good';
+        description = 'Balanced risk profile with competitive returns. Acceptable drawdowns.';
+        className = 'warning';
+      } else if (returnRatio > 1.5 || sharpeRatio > 0.8) {
+        level = 'Elevated Risk — Fair';
+        description = 'Above-average return potential but with significant drawdown exposure.';
+        className = 'warning';
+      } else {
+        level = 'High Risk — Caution';
+        description = 'Poor risk-adjusted profile. Consider optimization or diversification.';
+        className = 'danger';
+      }
+
+      riskRating.level.textContent = level;
+      riskRating.description.textContent = description;
+      riskRating.container.className = 'risk-rating ' + className;
     }
 
-    function calculateKelly() {
-      const winRate = parseFloat(document.getElementById('win-rate').value) / 100;
-      const avgWin = parseFloat(document.getElementById('avg-win').value) / 100;
-      const avgLoss = parseFloat(document.getElementById('avg-loss').value) /
+    // Reset calculator
+    function resetCalculator() {
+      inputs.expectedReturn.value = 15;
+      inputs.maxDrawdown.value = 30;
+      inputs.stdDev.value = 20;
+      inputs.riskFree.value = 2;
+      inputs.timeHorizon.value = 5;
+      inputs.initialCapital.value = 100000;
+      calculate();
+    }
+
+    // Event listeners
+    Object.values(inputs).forEach(input => {
+      input.addEventListener('input', calculate);
+    });
+
+    // Initial calculation
+    calculate();
+  </script>
+</body>
+</html>

@@ -4,22 +4,6 @@
     {
       "source": "/:path((?!api).*)",
       "destination": "/:path"
-    },
-    {
-      "source": "/careers",
-      "destination": "/careers"
-    },
-    {
-      "source": "/newsletter",
-      "destination": "/newsletter"
-    },
-    {
-      "source": "/calculators",
-      "destination": "/calculators"
-    },
-    {
-      "source": "/:page(/:slug?)",
-      "destination": "/:page.html"
     }
   ],
   "cleanUrls": true,

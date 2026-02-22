@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategy Simulator &mdash; Delta Capital</title>
+  <meta name="description" content="Delta Capital — Strategy Simulator for quantitative trading systems">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
+  <link rel="manifest" href="/img/manifest.json">
+  <meta name="theme-color" content="#111111">
+  <link rel="canonical" href="https://deltacapitaltrading.com/simulator">
+  <meta property="og:title" content="Strategy Simulator — Delta Capital">
+  <meta property="og:description" content="Simulate and backtest quantitative trading strategies with interactive scenarios.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Delta Capital">
+  <meta property="og:url" content="https://deltacapitaltrading.com/simulator.html">
+  <meta property="og:image" content="https://deltacapitaltrading.com/img/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Strategy Simulator — Delta Capital">
+  <meta name="twitter:description" content="Simulate and backtest quantitative trading strategies with interactive scenarios.">
+  <meta name="twitter:image" content="https://deltacapitaltrading.com/img/og-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .simulator-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .simulator-section h3 {
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .simulator-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .simulator-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .simulator-field label {
+      margin-bottom: 4px;
+    }
+
+    .simulator-field input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--fg-primary);
+      background: var(--bg);
+      transition: border-color 0.2s ease;
+    }
+
+    .simulator-field input:focus {
+      outline: none;
+      border-color: var(--fg-primary);
+    }
+
+    .simulate-button {
+      grid-column: 1 / -1;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--fg-primary);
+      color: var(--bg);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .simulate-button:hover {
+      background: var(--fg-muted);
+    }
+
+    .simulate-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .simulate-button-loading {
+      display: none;
+    }
+
+    .simulation-results {
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .result-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg);
+    }
+
+    .result-card.primary {
+      border-color: var(--fg-primary);
+    }
+
+    .result-card.positive {
+      border-color: #10b981;
+    }
+
+    .result-card.neutral {
+      border-color: var(--fg-faint);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .metric-item {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <div class="scroll-progress"></div>
+
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+
+  <div class="page-container">
+
+    <!-- Header -->
+    <section class="section" style="min-height: auto; padding-bottom: 4vh;">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Strategy</span>
+          <div class="divider"></div>
+          <h1>Strategy Simulator</h1>
+          <p style="margin-top: 2vh;">
+            Simulate and backtest quantitative trading strategies with interactive parameters.
+            Test different risk/reward profiles, position sizing approaches, and market scenarios.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parameters -->
+    <section class="section" style="padding-top: 2vh;">
+      <div class="section-inner" style="max-width: 900px;">
+        <div class="reveal">
+          <span class="section-label">Strategy Parameters</span>
+          <div class="divider"></div>
+        </div>
+
+        <div class="simulator-controls reveal" style="transition-delay: 0.1s;">
+          <div class="simulator-section">
+            <h3 style="font-size: 0.9rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted); margin-bottom: 12px;">Entry Criteria</h3>
+            <div class="simulator-inputs">
+              <div class="simulator-field">
+                <label style="display: block; font-size: 0.85rem; color: var(--fg-muted); margin-bottom: 4px;">Entry Price ($)</label>
+                <input type="number" id="strategy-entry" value="100" min="1" step="0.01">
+              </div>
+              <div class="simulator-field">
+                <label style="display: block; font-size: 0.85rem; color: var(--fg-muted); margin-bottom: 4px;">Target Price ($)</label>
+                <input type="number" id="strategy-target" value="110" min="0.01" step="0.01">
+              </div>
+              <div class="simulator-field">
+                <label style="display: block; font-size: 0.85rem; color: var(--fg-muted); margin-bottom: 4px;">Stop Loss ($)</label>
+                <input type="number" id="strategy-stoploss" value="95" min="0.01" step="0.01">
+              </div>
+            </div>
+          </div>
+
+          <div class="simulator-section">
+            <h3 style="font-size: 0.9rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted); margin-bottom: 12px;">Position Sizing</h3>
+            <div class="simulator-inputs">
+              <div class="simulator-field">
+                <label style="display: block; font-size: 0.85rem; color: var(--fg-muted); margin-bottom: 4px;">Risk Per Trade (%)</label>
+                <input type="number" id="strategy-risk" value="1" min="0.1" max="10" step="0.1">
+              </div>
+              <div class="simulator-field">
+                <label style="display: block; font-size: 0.85rem; color: var(--fg-muted); margin-bottom: 4px;">Account Balance ($)</label>
+                <input type="number" id="strategy-balance" value="10000" min="100" step="100">
+              </div>
+            </div>
+          </div>
+
+          <div class="simulator-section">
+            <h3 style="font-size: 0.9rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted); margin-bottom: 12px;">Simulation</h3>
+            <div class="simulator-inputs">
+              <div class="simulator-field">
+                <label style="display: block; font-size: 0.85rem; color: var(--fg-muted); margin-bottom: 4px;">Time Horizon (Days)</label>
+                <input type="number" id="strategy-horizon" value="30" min="1" max="365">
+              </div>
+              <div class="simulator-field">
+                <label style="display: block; font-size: 0.85rem; color: var(--fg-muted); margin-bottom: 4px;">Volatility (%)</label>
+                <input type="number" id="strategy-volatility" value="10" min="1" max="100" step="0.5">
+              </div>
+            </div>
+          </div>
+
+          <button id="simulate-btn" class="simulate-button">
+            <span class="simulate-button-text">Run Simulation</span>
+            <span class="simulate-button-loading" style="display: none;">Running...</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section" style="padding-top: 2vh;">
+      <div class="section-inner" style="max-width: 900px;">
+        <div class="reveal">
+          <span class="section-label">Simulation Results</span>
+          <div class="divider"></div>
+        </div>
+
+        <div id="simulation-results" class="simulation-results reveal" style="transition-delay: 0.15s; display: none;">
+          <div class="results-grid">
+            <div class="result-card primary">
+              <span style="display: block; font-size: 0.75rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted);">Win Rate</span>
+              <span id="result-winrate" style="display: block; font-size: 2rem; font-weight: 300; color: var(--fg-primary);">--</span>
+              <span style="display: block; font-size: 0.8rem; color: var(--fg-faint); margin-top: 4px;">%</span>
+            </div>
+            <div class="result-card positive">
+              <span style="display: block; font-size: 0.75rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted);">Expected Return</span>
+              <span id="result-expected" style="display: block; font-size: 2rem; font-weight: 300; color: var(--fg-primary);">--</span>
+              <span style="display: block; font-size: 0.8rem; color: var(--fg-faint); margin-top: 4px;">%</span>
+            </div>
+            <div class="result-card neutral">
+              <span style="display: block; font-size: 0.75rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted);">Max Drawdown</span>
+              <span id="result-drawdown" style="display: block; font-size: 2rem; font-weight: 300; color: var(--fg-primary);">--</span>
+              <span style="display: block; font-size: 0.8rem; color: var(--fg-faint); margin-top: 4px;">%</span>
+            </div>
+            <div class="result-card neutral">
+              <span style="display: block; font-size: 0.75rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted);">Sharpe Ratio</span>
+              <span id="result-sharpe" style="display: block; font-size: 2rem; font-weight: 300; color: var(--fg-primary);">--</span>
+              <span style="display: block; font-size: 0.8rem; color: var(--fg-faint); margin-top: 4px;">--</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 30px;">
+            <h3 style="font-size: 0.9rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted); margin-bottom: 12px;">Key Metrics</h3>
+            <div class="metrics-grid">
+              <div class="metric-item">
+                <span style="display: block; font-size: 0.75rem; color: var(--fg-muted);">Risk/Reward</span>
+                <span id="metric-risk-reward" style="display: block; font-size: 1rem; font-weight: 400; color: var(--fg-primary);">--</span>
+              </div>
+              <div class="metric-item">
+                <span style="display: block; font-size: 0.75rem; color: var(--fg-muted);">Position Size</span>
+                <span id="metric-positionsize" style="display: block; font-size: 1rem; font-weight: 400; color: var(--fg-primary);">--</span>
+              </div>
+              <div class="metric-item">
+                <span style="display: block; font-size: 0.75rem; color: var(--fg-muted);">Avg Win</span>
+                <span id="metric-avgwin" style="display: block; font-size: 1rem; font-weight: 400; color: var(--fg-primary);">--</span>
+              </div>
+              <div class="metric-item">
+                <span style="display: block; font-size: 0.75rem; color: var(--fg-muted);">Avg Loss</span>
+                <span id="metric-avgloss" style="display: block; font-size: 1rem; font-weight: 400; color: var(--fg-primary);">--</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 30px; padding: 20px; background: var(--bg-dark); border-radius: 4px;">
+            <h3 style="font-size: 0.9rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--fg-muted); margin-bottom: 8px;">Scenario Analysis</h3>
+            <p id="scenario-analysis" style="color: var(--fg-primary); line-height: 1.6; font-size: 0.95rem;">Adjust parameters to see how different scenarios affect your strategy performance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <div class="screener-controls reveal" style="transition-delay: 0.1s;">
+          <div class="screener-search-wrap">
+            <input type="text" id="screener-search" placeholder="Search symbol, name, or sector..." autocomplete="off" spellcheck="false">
+            <span id="screener-count" class="screener-count"></span>
+          </div>
+          <div class="sector-filters">
+            <button class="sector-filter active" data-sector="ALL">All</button>
+            <button class="sector-filter" data-sector="Technology">Tech</button>
+            <button class="sector-filter" data-sector="Financials">Finance</button>
+            <button class="sector-filter" data-sector="Healthcare">Health</button>
+            <button class="sector-filter" data-sector="Energy">Energy</button>
+            <button class="sector-filter" data-sector="Consumer">Consumer</button>
+            <button class="sector-filter" data-sector="Index">Index</button>
+          </div>
+        </div>
+
+        <div class="screener-table-wrap reveal" style="transition-delay: 0.2s;">
+          <table id="screener-table">
+            <thead>
+              <tr>
+                <th data-sort="symbol" class="sort-asc">Symbol</th>
+                <th data-sort="name">Name</th>
+                <th data-sort="price">Price</th>
+                <th data-sort="change">Change</th>
+                <th data-sort="changePct">%</th>
+                <th data-sort="volume">Volume</th>
+                <th>Mkt Cap</th>
+                <th data-sort="sector">Sector</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="section section--compact" style="text-align: center; padding-top: 0;">
+      <div class="section-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="reveal">
+          <p class="mono" style="font-size: 0.6rem; color: var(--fg-faint);">
+            Real-time data sourced from Finnhub (15-min delayed).<br>
+            For demonstration and educational purposes only. Not investment advice. See disclosures.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="/" class="active">Home</a>
+        <a href="/principles">Principles</a>
+        <a href="/mission">Mission</a>
+        <a href="/screener">Screener</a>
+        <a href="/blog">Blog</a>
+        <a href="/glossary">Glossary</a>
+        <a href="/calculators">Calculators</a>
+        <a href="/simulator" class="active">Strategy Simulator</a>
+        <a href="/visualizations">Visualizations</a>
+        <a href="/disclosures">Disclosures</a>
+        <a href="/faq">Questions</a>
+        <a href="/careers">Careers</a>
+        <a href="/newsletter">Updates</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="/js/core.js" defer></script>
+  <script src="/js/market-data.js" defer></script>
+  <script src="/js/market.js" defer></script>
+
+  <script src="/js/cookie-notice.js" defer></script>
+
+<script>
+// Strategy Simulator
+document.addEventListener('DOMContentLoaded', function() {
+  const simulateBtn = document.getElementById('simulate-btn');
+  const resultsDiv = document.getElementById('simulation-results');
+  const scenarioAnalysis = document.getElementById('scenario-analysis');
+
+  if (!simulateBtn || !resultsDiv) return;
+
+  simulateBtn.addEventListener('click', async function() {
+    // Get inputs
+    const entry = parseFloat(document.getElementById('strategy-entry').value);
+    const target = parseFloat(document.getElementById('strategy-target').value);
+    const stopLoss = parseFloat(document.getElementById('strategy-stoploss').value);
+    const riskPercent = parseFloat(document.getElementById('strategy-risk').value);
+    const balance = parseFloat(document.getElementById('strategy-balance').value);
+    const horizon = parseInt(document.getElementById('strategy-horizon').value);
+    const volatility = parseFloat(document.getElementById('strategy-volatility').value);
+
+    // Validate
+    if (!entry || !target || !stopLoss || !riskPercent || !balance || !horizon || !volatility) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    if (stopLoss >= entry) {
+      alert('Stop loss must be less than entry price');
+      return;
+    }
+
+    if (target <= entry) {
+      alert('Target price must be greater than entry price');
+      return;
+    }
+
+    // Show loading
+    simulateBtn.disabled = true;
+    simulateBtn.querySelector('.simulate-button-text').style.display = 'none';
+    simulateBtn.querySelector('.simulate-button-loading').style.display = 'inline';
+
+    // Simulate calculation (with artificial delay)
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    // Calculate metrics
+    const riskAmount = balance * (riskPercent / 100);
+    const positionSize = riskAmount / ((entry - stopLoss) / entry);
+    const rewardAmount = (target - entry) / entry * positionSize;
+    const riskRewardRatio = rewardAmount / riskAmount;
+
+    const winRate = 0.55; // Base win rate
+    const expectedReturn = (winRate * rewardAmount - (1 - winRate) * riskAmount) / balance * 100;
+    const maxDrawdown = (volatility * riskPercent / 10) * 5; // Simplified drawdown calculation
+    const sharpeRatio = expectedReturn / volatility * 2; // Simplified Sharpe
+
+    const avgWin = rewardAmount / balance * 100;
+    const avgLoss = riskAmount / balance * 100;
+
+    // Update results
+    document.getElementById('result-winrate').textContent = winRate.toFixed(1);
+    document.getElementById('result-expected').textContent = expectedReturn.toFixed(2);
+    document.getElementById('result-drawdown').textContent = maxDrawdown.toFixed(2);
+    document.getElementById('result-sharpe').textContent = sharpeRatio.toFixed(2);
+
+    document.getElementById('metric-risk-reward').textContent = riskRewardRatio.toFixed(2) + ':1';
+    document.getElementById('metric-positionsize').textContent = '$' + positionSize.toFixed(2);
+    document.getElementById('metric-avgwin').textContent = '+' + avgWin.toFixed(2) + '%';
+    document.getElementById('metric-avgloss').textContent = '-' + avgLoss.toFixed(2) + '%';
+
+    // Scenario analysis
+    const scenarios = [
+      `With a target-to-entry ratio of ${((target - entry) / entry * 100).toFixed(1)}% and stop loss at ${((entry - stopLoss) / entry * 100).toFixed(1)}%`,
+      `Position sizing at ${riskPercent}% risk per trade allows for ${(positionSize / balance * 100).toFixed(1)}% allocation per trade`,
+      `Over a ${horizon}-day horizon with ${volatility}% volatility, expect ${maxDrawdown.toFixed(1)}% max drawdown`,
+      `Sharpe ratio of ${sharpeRatio.toFixed(2)} indicates risk-adjusted returns that are ${sharpeRatio > 1 ? 'good' : 'moderate'}`
+    ];
+
+    scenarioAnalysis.innerHTML = scenarios.join('<br><br>');
+
+    // Show results
+    resultsDiv.style.display = 'block';
+
+    // Hide loading
+    simulateBtn.disabled = false;
+    simulateBtn.querySelector('.simulate-button-text').style.display = 'inline';
+    simulateBtn.querySelector('.simulate-button-loading').style.display = 'none';
+  });
+});
+</script>
+
+</body>
+</html>

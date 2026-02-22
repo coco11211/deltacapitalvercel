@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
   <link rel="manifest" href="/img/manifest.json">
   <meta name="theme-color" content="#111111">
-  <link rel="canonical" href="https://deltacapitaltrading.com/glossary.html">
+  <link rel="canonical" href="https://deltacapitaltrading.com/glossary">
   <meta property="og:title" content="Glossary — Delta Capital">
   <meta property="og:description" content="Financial and investment terminology glossary.">
   <meta property="og:type" content="website">
@@ -38,6 +38,33 @@
     .glossary-search {
       max-width: 500px;
       margin: 0 auto 40px;
+    }
+
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .category-filter {
+      padding: 6px 14px;
+      border: 1px solid #e0e0e0;
+      background: white;
+      color: #111;
+      font-size: 0.85rem;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+
+    .category-filter:hover,
+    .category-filter.active {
+      background: #111;
+      color: white;
+      border-color: #111;
     }
 
     .glossary-search input {
@@ -117,7 +144,7 @@
       display: flex;
       align-items: baseline;
       gap: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .term-name {
@@ -132,6 +159,16 @@
       text-transform: uppercase;
       color: #999;
       letter-spacing: 0.04em;
+    }
+
+    .term-category-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: #555;
+      letter-spacing: 0.03em;
+      margin-top: 4px;
+      margin-bottom: 6px;
     }
 
     .term-definition {
@@ -201,6 +238,9 @@
     <!-- Glossary Content -->
     <section class="section section--compact">
       <div class="section-inner">
+
+        <!-- Category Filters -->
+        <div class="reveal category-filters" id="categoryFilters" style="transition-delay: 0.05s;"></div>
 
         <!-- Search -->
         <div class="reveal glossary-search" style="transition-delay: 0.1s;">
@@ -5921,18 +5961,19 @@
 
     <footer class="page-footer">
       <nav class="footer-nav">
-        <a href="/">Philosophy</a>
-        <a href="/research">Research</a>
-        <a href="/risk">Risk</a>
-        <a href="/architecture">Architecture</a>
-        <a href="/insights">Insights</a>
+        <a href="/" class="active">Home</a>
         <a href="/principles">Principles</a>
+        <a href="/mission">Mission</a>
         <a href="/screener">Screener</a>
         <a href="/blog">Blog</a>
         <a href="/glossary" class="active">Glossary</a>
-        <a href="/brandkit">Brand Kit</a>
+        <a href="/calculators">Calculators</a>
+        <a href="/simulator">Strategy Simulator</a>
+        <a href="/visualizations">Visualizations</a>
         <a href="/disclosures">Disclosures</a>
         <a href="/faq">Questions</a>
+        <a href="/careers">Careers</a>
+        <a href="/newsletter">Updates</a>
         <a href="/contact">Contact</a>
       </nav>
       <div class="footer-bottom">
@@ -10187,6 +10228,7 @@
                 <span class="term-category">${item.category}</span>
               </div>
               <p class="term-definition">${item.definition}</p>
+              <p class="term-category-tag">${item.category}</p>
               <p class="term-example">${item.example}</p>
             </div>
           `).join('')}
@@ -10220,6 +10262,50 @@
 
     // Initialize glossary when DOM is ready
     function initGlossary() {
+      // Get all unique categories
+      const categories = [...new Set(glossaryTerms.map(item => item.category))];
+
+      // Render category filters
+      const filterContainer = document.getElementById('categoryFilters');
+      if (filterContainer) {
+        const html = `
+          <button class="category-filter active" data-category="ALL">All</button>
+          ${categories.map(cat => `<button class="category-filter" data-category="${cat}">${cat}</button>`).join('')}
+        `;
+        filterContainer.innerHTML = html;
+
+        // Filter functionality
+        document.querySelectorAll('.category-filter').forEach(btn => {
+          btn.addEventListener('click', function() {
+            document.querySelectorAll('.category-filter').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const category = this.dataset.category;
+            const query = document.getElementById('glossarySearch')?.value.toLowerCase().trim() || '';
+
+            if (category === 'ALL' && query === '') {
+              renderGlossary(glossaryTerms);
+            } else if (category === 'ALL') {
+              const filtered = glossaryTerms.filter(item =>
+                item.term.toLowerCase().includes(query) ||
+                item.definition.toLowerCase().includes(query)
+              );
+              renderGlossary(filtered);
+            } else if (query === '') {
+              const filtered = glossaryTerms.filter(item => item.category === category);
+              renderGlossary(filtered);
+            } else {
+              const filtered = glossaryTerms.filter(item =>
+                (item.category === category) &&
+                (item.term.toLowerCase().includes(query) ||
+                 item.definition.toLowerCase().includes(query))
+              );
+              renderGlossary(filtered);
+            }
+          });
+        });
+      }
+
       // Initial render
       renderGlossary();
       renderIndex();
@@ -10227,12 +10313,24 @@
       // Search functionality
       document.getElementById('glossarySearch').addEventListener('input', function(e) {
         const query = e.target.value.toLowerCase().trim();
-        if (query === '') {
+        const activeCategory = document.querySelector('.category-filter.active')?.dataset.category || 'ALL';
+
+        if (activeCategory === 'ALL' && query === '') {
           renderGlossary(glossaryTerms);
-        } else {
+        } else if (activeCategory === 'ALL') {
           const filtered = glossaryTerms.filter(item =>
             item.term.toLowerCase().includes(query) ||
             item.definition.toLowerCase().includes(query)
+          );
+          renderGlossary(filtered);
+        } else if (query === '') {
+          const filtered = glossaryTerms.filter(item => item.category === activeCategory);
+          renderGlossary(filtered);
+        } else {
+          const filtered = glossaryTerms.filter(item =>
+            (item.category === activeCategory) &&
+            (item.term.toLowerCase().includes(query) ||
+             item.definition.toLowerCase().includes(query))
           );
           renderGlossary(filtered);
         }
