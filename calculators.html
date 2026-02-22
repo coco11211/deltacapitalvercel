@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculators &mdash; Delta Capital</title>
+  <meta name="description" content="Delta Capital — Interactive Trading Calculators">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
+  <link rel="manifest" href="/img/manifest.json">
+  <meta name="theme-color" content="#111111">
+  <link rel="canonical" href="https://deltacapitaltrading.com/calculators.html">
+  <meta property="og:title" content="Calculators &mdash; Delta Capital">
+  <meta property="og:description" content="Interactive trading calculators">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Delta Capital">
+  <meta property="og:url" content="https://deltacapitaltrading.com/calculators.html">
+  <meta property="og:image" content="https://deltacapitaltrading.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculators &mdash; Delta Capital">
+  <meta name="twitter:description" content="Interactive trading calculators">
+  <meta name="twitter:image" content="https://deltacapitaltrading.com/img/og-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .calculators-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 3rem;
+      margin: 4rem 0;
+    }
+    .calculator-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 3rem;
+      transition: all 0.4s var(--ease);
+    }
+    .calculator-card:hover {
+      border-color: var(--fg);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .calculator-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .calculator-desc {
+      color: var(--fg-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--fg-faint);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.875rem;
+      font-family: var(--serif);
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--fg);
+      transition: all 0.3s var(--ease);
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--fg);
+    }
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--bg-dark);
+      border-radius: 4px;
+    }
+    .result-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--fg-faint);
+      margin-bottom: 0.5rem;
+    }
+    .result-value {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--fg);
+    }
+    .result-sub {
+      font-size: 0.9rem;
+      color: var(--fg-muted);
+      margin-top: 0.5rem;
+    }
+    .calculate-btn {
+      width: 100%;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--fg);
+      color: white;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      margin-top: 1.5rem;
+    }
+    .calculate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
+  <canvas id="ambient-canvas"></canvas>
+  <div class="scroll-progress"></div>
+  <div class="nav-trigger" aria-label="Open navigation">
+    <span></span><span></span>
+  </div>
+  <div class="cmd-palette-overlay"></div>
+  <div class="cmd-palette">
+    <input type="text" placeholder="Navigate..." autocomplete="off" spellcheck="false">
+    <ul class="cmd-palette-results"></ul>
+  </div>
+  <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
+  <div class="page-container">
+    <section class="section section--compact">
+      <div class="section-inner" style="max-width: 900px; margin: 0 auto;">
+        <div class="reveal">
+          <span class="section-label">Tools</span>
+          <div class="divider"></div>
+          <h1 class="letter-reveal">Calculators</h1>
+          <p style="margin-top: 2vh; color: var(--fg-muted); line-height: 1.8; max-width: 600px;">
+            Practical tools for evaluating trading performance, calculating risk metrics,
+            and understanding scenario outcomes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="calculators-grid">
+          <div class="calculator-card">
+            <h2 class="calculator-title">Risk/Reward Calculator</h2>
+            <p class="calculator-desc">Determine position sizing and expected returns.</p>
+
+            <form id="risk-reward-form" onsubmit="event.preventDefault(); calculateRiskReward();">
+              <div class="form-group">
+                <label for="entry-price">Entry Price</label>
+                <input type="number" id="entry-price" step="0.01" required placeholder="0.00">
+              </div>
+              <div class="form-group">
+                <label for="target-price">Target Price</label>
+                <input type="number" id="target-price" step="0.01" required placeholder="0.00">
+              </div>
+              <div class="form-group">
+                <label for="stop-loss">Stop Loss</label>
+                <input type="number" id="stop-loss" step="0.01" required placeholder="0.00">
+              </div>
+              <div class="form-group">
+                <label for="position-size">Position Size (shares)</label>
+                <input type="number" id="position-size" step="1" required placeholder="0">
+              </div>
+              <button type="submit" class="calculate-btn">Calculate</button>
+            </form>
+
+            <div class="result-box" id="rr-result" style="display: none;">
+              <div class="result-label">Risk/Reward Ratio</div>
+              <div class="result-value" id="rr-ratio">0:0</div>
+              <div class="result-sub" id="rr-details"></div>
+            </div>
+          </div>
+
+          <div class="calculator-card">
+            <h2 class="calculator-title">Drawdown Calculator</h2>
+            <p class="calculator-desc">Estimate maximum drawdown for a given strategy.</p>
+
+            <form id="drawdown-form" onsubmit="event.preventDefault(); calculateDrawdown();">
+              <div class="form-group">
+                <label for="peak-value">Peak Value</label>
+                <input type="number" id="peak-value" step="0.01" required placeholder="0.00">
+              </div>
+              <div class="form-group">
+                <label for="trough-value">Trough Value</label>
+                <input type="number" id="trough-value" step="0.01" required placeholder="0.00">
+              </div>
+              <div class="form-group">
+                <label for="volatility">Annual Volatility (%)</label>
+                <input type="number" id="volatility" step="0.1" required placeholder="0.0">
+              </div>
+              <button type="submit" class="calculate-btn">Calculate</button>
+            </form>
+
+            <div class="result-box" id="dd-result" style="display: none;">
+              <div class="result-label">Estimated Drawdown</div>
+              <div class="result-value" id="dd-value">0%</div>
+              <div class="result-sub" id="dd-risk"></div>
+            </div>
+          </div>
+
+          <div class="calculator-card">
+            <h2 class="calculator-title">Compound Growth</h2>
+            <p class="calculator-desc">Projected portfolio growth over time.</p>
+
+            <form id="compound-form" onsubmit="event.preventDefault(); calculateCompound();">
+              <div class="form-group">
+                <label for="initial-capital">Initial Capital</label>
+                <input type="number" id="initial-capital" step="0.01" required placeholder="0.00">
+              </div>
+              <div class="form-group">
+                <label for="annual-return">Annual Return (%)</label>
+                <input type="number" id="annual-return" step="0.1" required placeholder="0.0">
+              </div>
+              <div class="form-group">
+                <label for="years">Time Horizon (years)</label>
+                <input type="number" id="years" step="1" required placeholder="0">
+              </div>
+              <button type="submit" class="calculate-btn">Calculate</button>
+            </form>
+
+            <div class="result-box" id="compound-result" style="display: none;">
+              <div class="result-label">Final Value</div>
+              <div class="result-value" id="compound-value">0</div>
+              <div class="result-sub" id="compound-growth"></div>
+            </div>
+          </div>
+
+          <div class="calculator-card">
+            <h2 class="calculator-title">Kelly Criterion</h2>
+            <p class="calculator-desc">Optimal position sizing based on edge and variance.</p>
+
+            <form id="kelly-form" onsubmit="event.preventDefault(); calculateKelly();">
+              <div class="form-group">
+                <label for="win-rate">Win Rate (%)</label>
+                <input type="number" id="win-rate" step="0.1" required placeholder="0.0">
+              </div>
+              <div class="form-group">
+                <label for="avg-win">Average Win (%)</label>
+                <input type="number" id="avg-win" step="0.1" required placeholder="0.0">
+              </div>
+              <div class="form-group">
+                <label for="avg-loss">Average Loss (%)</label>
+                <input type="number" id="avg-loss" step="0.1" required placeholder="0.0">
+              </div>
+              <button type="submit" class="calculate-btn">Calculate</button>
+            </form>
+
+            <div class="result-box" id="kelly-result" style="display: none;">
+              <div class="result-label">Kelly Fraction</div>
+              <div class="result-value" id="kelly-value">0%</div>
+              <div class="result-sub" id="kelly-risk"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <nav class="footer-nav">
+        <a href="/" class="active">Home</a>
+        <a href="/principles">Principles</a>
+        <a href="/mission">Mission</a>
+        <a href="/screener">Screener</a>
+        <a href="/blog">Blog</a>
+        <a href="/glossary">Glossary</a>
+        <a href="/disclosures">Disclosures</a>
+        <a href="/faq">Questions</a>
+        <a href="/careers">Careers</a>
+        <a href="/newsletter">Updates</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <span>&Delta; Capital &copy; 2026</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/core.js" defer></script>
+  <script src="/js/market-data.js" defer></script>
+  <script src="/js/market.js" defer></script>
+  <script src="/js/cookie-notice.js" defer></script>
+  <script>
+    function calculateRiskReward() {
+      const entry = parseFloat(document.getElementById('entry-price').value);
+      const target = parseFloat(document.getElementById('target-price').value);
+      const stop = parseFloat(document.getElementById('stop-loss').value);
+      const shares = parseInt(document.getElementById('position-size').value);
+
+      const risk = Math.abs(entry - stop);
+      const reward = Math.abs(target - entry);
+      const rrRatio = risk > 0 ? (reward / risk).toFixed(2) : 0;
+      const maxRr = rrRatio >= 2 ? 'Excellent ✓' : rrRatio >= 1.5 ? 'Good ✓' : rrRatio >= 1 ? 'Fair' : 'Risky ✗';
+
+      document.getElementById('rr-ratio').textContent = `${rrRatio}:1`;
+      document.getElementById('rr-details').textContent = `Position value: ${(shares * entry).toFixed(2)} | Max loss: ${(shares * risk).toFixed(2)} | Max gain: ${(shares * reward).toFixed(2)}`;
+      document.getElementById('rr-result').style.display = 'block';
+    }
+
+    function calculateDrawdown() {
+      const peak = parseFloat(document.getElementById('peak-value').value);
+      const trough = parseFloat(document.getElementById('trough-value').value);
+      const vol = parseFloat(document.getElementById('volatility').value);
+
+      const dd = Math.abs((peak - trough) / peak * 100);
+      const peakDrawdown = dd > 20 ? 'Very High' : dd > 15 ? 'High' : dd > 10 ? 'Moderate' : dd > 5 ? 'Low' : 'Minimal';
+      const volatilities = ['Conservative', 'Moderate', 'Aggressive'];
+
+      document.getElementById('dd-value').textContent = `${dd.toFixed(2)}%`;
+      document.getElementById('dd-risk').textContent = `Peak drawdown: ${dd.toFixed(2)}% | Level: ${peakDrawdown} | Volatility context: ${volatilities[Math.min(Math.round(vol / 10), 2)]}`;
+      document.getElementById('dd-result').style.display = 'block';
+    }
+
+    function calculateCompound() {
+      const initial = parseFloat(document.getElementById('initial-capital').value);
+      const returnRate = parseFloat(document.getElementById('annual-return').value) / 100;
+      const years = parseInt(document.getElementById('years').value);
+
+      const final = initial * Math.pow(1 + returnRate, years);
+      const totalGain = final - initial;
+      const totalGainPercent = (totalGain / initial * 100).toFixed(2);
+
+      document.getElementById('compound-value').textContent = `$${final.toFixed(2)}`;
+      document.getElementById('compound-growth').textContent = `Total gain: $${totalGain.toFixed(2)} (${totalGainPercent}%) | Growth: ${totalGainPercent >= 100 ? 'Strong 🚀' : totalGainPercent >= 50 ? 'Good' : totalGainPercent >= 0 ? 'Moderate' : 'Declining 📉'}`;
+      document.getElementById('compound-result').style.display = 'block';
+    }
+
+    function calculateKelly() {
+      const winRate = parseFloat(document.getElementById('win-rate').value) / 100;
+      const avgWin = parseFloat(document.getElementById('avg-win').value) / 100;
+      const avgLoss = parseFloat(document.getElementById('avg-loss').value) /

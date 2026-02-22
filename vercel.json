@@ -1,52 +1,27 @@
 {
-  "cleanUrls": false,
-  "headers": [
-    {
-      "source": "/sitemap.xml",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/xml"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
-      ]
-    },
-    {
-      "source": "/robots.txt",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/plain"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
-      ]
-    },
-    {
-      "source": "/img/manifest.json",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/manifest+json"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
-        }
-      ]
-    }
-  ],
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
-      "source": "/:path((?!img/|css/|js/|blog/)[^.]+)$",
-      "destination": "/:path.html"
+      "source": "/:path((?!api).*)",
+      "destination": "/:path"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers"
+    },
+    {
+      "source": "/newsletter",
+      "destination": "/newsletter"
+    },
+    {
+      "source": "/calculators",
+      "destination": "/calculators"
+    },
+    {
+      "source": "/:page(/:slug?)",
+      "destination": "/:page.html"
     }
   ],
-  "redirects": [],
+  "cleanUrls": true,
   "trailingSlash": false
 }
