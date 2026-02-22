@@ -3,30 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newsletter &mdash; Delta Capital</title>
-  <meta name="description" content="Delta Capital — Research Updates and Company News">
+  <title>Updates &mdash; Delta Capital</title>
+  <meta name="description" content="Research updates and company announcements from Delta Capital.">
   <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="152x152.png" href="/img/apple-touch-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="120x120.png" href="/img/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
   <link rel="manifest" href="/img/manifest.json">
   <meta name="theme-color" content="#111111">
   <link rel="canonical" href="https://deltacapitaltrading.com/newsletter.html">
-  <meta property="og:title" content="Newsletter &mdash; Delta Capital">
-  <meta property="og:description" content="Research updates and company announcements">
+  <meta property="og:title" content="Updates &mdash; Delta Capital">
+  <meta property="og:description" content="Research updates and company announcements.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Delta Capital">
   <meta property="og:url" content="https://deltacapitaltrading.com/newsletter.html">
   <meta property="og:image" content="https://deltacapitaltrading.com/img/og-default.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Newsletter &mdash; Delta Capital">
-  <meta name="twitter:description" content="Research updates and company announcements">
+  <meta name="twitter:title" content="Updates &mdash; Delta Capital">
+  <meta name="twitter:description" content="Research updates and company announcements.">
   <meta name="twitter:image" content="https://deltacapitaltrading.com/img/og-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .newsletter-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero-section {
+      padding: 14vh 0 8vh;
+      text-align: center;
+    }
+    .hero-section h1 {
+      margin-top: 2vh;
+      letter-spacing: -0.03em;
+    }
+    .hero-section p {
+      margin-top: 2vh;
+      font-size: clamp(1rem, 1.3vw, 1.1rem);
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .signup-section {
+      padding: 6vh 0;
+      border-top: 1px solid var(--border);
+    }
+    .form-group {
+      margin-bottom: 2rem;
+    }
+    .form-group label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--fg-faint);
+      margin-bottom: 0.75rem;
+      text-align: left;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 1.25rem;
+      font-family: var(--serif);
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--fg);
+      transition: all 0.3s var(--ease);
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--fg);
+    }
+    .submit-btn {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--fg);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+    .submit-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    .commitment {
+      font-size: 0.85rem;
+      color: var(--fg-faint);
+      margin-top: 1.5rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
   <div class="page-loader"><div class="delta-mark">&Delta;</div></div>
@@ -42,43 +116,40 @@
   </div>
   <div class="key-hint"><kbd>Ctrl</kbd> + <kbd>K</kbd></div>
   <div class="page-container">
-    <section class="section section--compact">
-      <div class="section-inner" style="max-width: 600px; margin: 0 auto;">
-        <div class="reveal">
-          <span class="section-label">Updates</span>
-          <div class="divider"></div>
-          <h1>Research Updates</h1>
-          <p style="margin-top: 2vh; color: #555; line-height: 1.7;">
-            We share updates on our research, system development, 
-            and key milestones. No spam, no product pitches — 
-            just our progress as we build quantitative investing systems.
-          </p>
-        </div>
-      </div>
-    </section>
+    <section class="section section--full">
+      <div class="section-inner">
+        <div class="newsletter-container">
+          <div class="hero-section reveal">
+            <span class="section-label">Updates</span>
+            <div class="divider"></div>
+            <h1 class="letter-reveal">Updates</h1>
+            <p>
+              We share progress on our research, system development, 
+              and key milestones. No spam, no products — just our 
+              work as we build quantitative trading infrastructure.
+            </p>
+          </div>
 
-    <section class="section section--compact">
-      <div class="section-inner" style="max-width: 600px; margin: 0 auto;">
-        <div class="reveal" style="margin-top: 4vh;">
-          <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
-            <div class="form-group">
-              <label for="newsletter-email">Email Address</label>
-              <input type="email" id="newsletter-email" name="email" 
-                     placeholder="you@example.com" autocomplete="email" required>
-            </div>
-            <button type="submit" style="margin-top: 1.5rem;">Subscribe</button>
-          </form>
-          <p style="margin-top: 1.5rem; color: #999; font-size: 0.9rem;">
-            By subscribing, you agree to receive periodic updates. 
-            We respect your privacy and do not sell your information.
-          </p>
+          <div class="signup-section reveal">
+            <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="you@example.com">
+              </div>
+              <button type="submit" class="submit-btn">Subscribe to Updates</button>
+            </form>
+            <p class="commitment">
+              By subscribing, you agree to receive occasional updates. 
+              We respect your privacy and will never share your information.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <footer class="page-footer">
       <nav class="footer-nav">
-        <a href="/">Home</a>
+        <a href="/" class="active">Home</a>
         <a href="/principles.html">Principles</a>
         <a href="/mission.html">Mission</a>
         <a href="/screener.html">Screener</a>
