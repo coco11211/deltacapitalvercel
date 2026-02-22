@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1128 191" width="1128" height="191">
+  <title>Delta Capital — LinkedIn Company Banner</title>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&amp;family=JetBrains+Mono:wght@300;400&amp;display=swap');
+    </style>
+
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="0.85" fill="rgba(255,255,255,0.055)"/>
+    </pattern>
+
+    <radialGradient id="triGlow" cx="80%" cy="50%" r="40%">
+      <stop offset="0%"   stop-color="rgba(255,255,255,0.018)"/>
+      <stop offset="100%" stop-color="rgba(5,5,8,0)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1128" height="191" fill="#050508"/>
+  <rect width="1128" height="191" fill="url(#dots)"/>
+  <rect width="1128" height="191" fill="url(#triGlow)"/>
+
+  <!-- ── DECORATIVE Δ TRIANGLES (right half) ── -->
+  <!-- Apex at (960, 10), base at (680, 185) and (1120, 185) -->
+  <polygon points="960,10 1118,182 802,182"
+           fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1.2"/>
+  <polygon points="960,28 1100,170 820,170"
+           fill="none" stroke="rgba(255,255,255,0.032)" stroke-width="1"/>
+  <polygon points="960,46 1082,158 838,158"
+           fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="1"/>
+  <polygon points="960,64 1064,146 856,146"
+           fill="none" stroke="rgba(255,255,255,0.010)" stroke-width="1"/>
+
+  <!-- ── VERTICAL DIVIDER ── -->
+  <line x1="720" y1="22" x2="720" y2="169"
+        stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- ── TOP HORIZONTAL RULE ── -->
+  <line x1="44" y1="22" x2="720" y2="22"
+        stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- ── Δ LOGO MARK (small) ── -->
+  <polygon points="60,50 72,72 48,72" fill="white"/>
+  <polygon points="60,56 68,70 52,70"
+           fill="none" stroke="#0a0a0c" stroke-width="5" stroke-linejoin="miter"/>
+
+  <!-- ── WORDMARK ── -->
+  <text x="86" y="68"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="300" font-size="26"
+        fill="rgba(255,255,255,0.92)" letter-spacing="0.5">Delta Capital</text>
+
+  <!-- ── IDENTIFIER LINE ── -->
+  <text x="86" y="82"
+        font-family="'JetBrains Mono', 'Courier New', monospace"
+        font-size="7" letter-spacing="2.8"
+        fill="rgba(255,255,255,0.22)">TRADING · QUANTITATIVE · SYSTEMATIC</text>
+
+  <!-- ── RULE ── -->
+  <line x1="44" y1="100" x2="600" y2="100"
+        stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- ── TAGLINE ── -->
+  <text x="44" y="125"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="300" font-style="italic"
+        font-size="15.5" fill="rgba(255,255,255,0.40)">Building quantitative trading systems with mathematical discipline.</text>
+
+  <!-- ── PRINCIPLES ROW ── -->
+  <text x="44" y="148"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.18)">EVIDENCE OVER INTUITION</text>
+  <text x="248" y="148"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.10)">·</text>
+  <text x="264" y="148"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.14)">RISK FIRST</text>
+  <text x="352" y="148"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.10)">·</text>
+  <text x="368" y="148"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.14)">PATIENCE</text>
+
+  <!-- ── BOTTOM RULE ── -->
+  <line x1="44" y1="164" x2="720" y2="164"
+        stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- ── FOOTER ── -->
+  <text x="44" y="179"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.14)">deltacapitaltrading.com</text>
+  <text x="698" y="179"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7" letter-spacing="1.8"
+        fill="rgba(255,255,255,0.08)" text-anchor="end">NFC/01</text>
+</svg>

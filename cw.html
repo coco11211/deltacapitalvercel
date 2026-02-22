@@ -999,6 +999,87 @@
     }
     @keyframes fadeIn { to { opacity:1; } }
 
+    /* ── Touch targets — global ── */
+    button, a, [role=button] {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* make small buttons easier to tap on mobile */
+    .qa-btn { min-height: 42px; display: inline-flex; align-items: center; }
+    .acc-trigger { min-height: 52px; }
+
+    /* ── Scroll progress bar ── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 1.5px;
+      background: rgba(232,232,238,.38);
+      width: 0%; z-index: 9999; pointer-events: none;
+      transition: width .08s linear;
+    }
+    body.terminal #progress-bar { background: rgba(0,255,70,.45); }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 80px; left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      background: rgba(12,12,16,.93);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px) saturate(1.2);
+      font-family: var(--mono); font-size: .38rem; letter-spacing: .2em;
+      color: rgba(255,255,255,.72);
+      padding: 10px 20px; white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity .22s, transform .22s;
+      z-index: 9997;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── Sticky save contact (mobile) ── */
+    #sticky-save {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+      padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+      background: linear-gradient(to top, rgba(5,5,8,.97) 55%, transparent);
+      display: flex; justify-content: center;
+      transform: translateY(100%);
+      transition: transform .38s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+    }
+    #sticky-save.up { transform: translateY(0); pointer-events: auto; }
+    /* hide when CTA section is visible */
+    #sticky-save.hide { transform: translateY(100%); pointer-events: none; }
+    #sticky-save-btn {
+      font-family: var(--mono); font-size: .46rem; letter-spacing: .22em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(5,5,8,.88);
+      color: rgba(255,255,255,.8);
+      padding: 15px 0; cursor: pointer;
+      width: 100%; max-width: 380px;
+      position: relative; overflow: hidden;
+    }
+    #sticky-save-btn:active { background: rgba(255,255,255,.06); }
+    body.terminal #sticky-save-btn { border-color: rgba(0,255,70,.3); color: rgba(0,255,70,.7); background: rgba(0,6,0,.9); }
+
+    /* ── Ripple ── */
+    .rpl { position: relative; overflow: hidden; }
+    .rpl-ink {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,.09);
+      transform: scale(0); pointer-events: none;
+      animation: rpl-anim .5s linear forwards;
+    }
+    @keyframes rpl-anim { to { transform: scale(4.5); opacity: 0; } }
+
+    /* ── iOS safe area for fixed bottom ── */
+    .ticker-fixed {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* ── Game canvas — responsive ── */
+    @media (max-width: 420px) {
+      #game-canvas { width: 300px !important; height: 300px !important; }
+      .game-modal { padding: 20px 16px; }
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 400px) {
       .wrap { padding: 0 18px; }
@@ -1006,9 +1087,20 @@
       .rule { margin: 42px 0; }
       .metric:last-child { display: none; }
     }
+
+    /* ── QA strip wraps better on narrow screens ── */
+    @media (max-width: 360px) {
+      .qa-strip { gap: 7px; }
+      .qa-btn { font-size: .37rem; padding: 9px 11px; }
+    }
   </style>
 </head>
 <body>
+<div id="progress-bar"></div>
+<div id="toast"></div>
+<div id="sticky-save">
+  <button id="sticky-save-btn" class="rpl">&#x2193;&nbsp;&nbsp;Save Contact</button>
+</div>
 <div class="wrap">
 
   <!-- Top bar -->
@@ -1324,8 +1416,8 @@
   <!-- CTA -->
   <div class="cta">
     </div>
-    <button onclick="saveContact()" class="btn-connect">&#x2193;&nbsp; Save Contact</button>
-    <button id="shareBtn" class="btn-connect btn-share">&#x2197;&nbsp; Share</button>
+    <button onclick="saveContact()" class="btn-connect rpl" id="saveBtn">&#x2193;&nbsp; Save Contact</button>
+    <button id="shareBtn" class="btn-connect btn-share rpl">&#x2197;&nbsp; Share</button>
     <div class="secondary">
       <a href="https://www.linkedin.com/in/cole-w-55baa337a/" target="_blank" rel="noopener" class="btn-sec">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
@@ -2048,6 +2140,149 @@
     document.addEventListener('mouseleave', function () {
       targets.forEach(function (el) { el.style.transform = ''; });
     });
+  })();
+
+  /* ══════════════════════════════════════════════
+     MOBILE — SCROLL PROGRESS BAR
+  ══════════════════════════════════════════════ */
+  (function () {
+    var bar = document.getElementById('progress-bar');
+    function updateBar() {
+      var el = document.documentElement;
+      var scrolled = el.scrollTop || document.body.scrollTop;
+      var total = el.scrollHeight - el.clientHeight;
+      bar.style.width = (total > 0 ? (scrolled / total * 100) : 0) + '%';
+    }
+    window.addEventListener('scroll', updateBar, { passive: true });
+  })();
+
+  /* ══════════════════════════════════════════════
+     MOBILE — TOAST NOTIFICATION
+  ══════════════════════════════════════════════ */
+  var toastEl = document.getElementById('toast');
+  var toastTimer;
+  function showToast(msg, ms) {
+    clearTimeout(toastTimer);
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, ms || 2000);
+  }
+
+  /* ══════════════════════════════════════════════
+     MOBILE — HAPTIC FEEDBACK
+  ══════════════════════════════════════════════ */
+  function haptic(ms) {
+    if (navigator.vibrate) navigator.vibrate(ms || 8);
+  }
+
+  /* ══════════════════════════════════════════════
+     MOBILE — RIPPLE EFFECT
+  ══════════════════════════════════════════════ */
+  document.addEventListener('pointerdown', function (e) {
+    var btn = e.target.closest('.rpl');
+    if (!btn) return;
+    var r = btn.getBoundingClientRect();
+    var ink = document.createElement('span');
+    ink.className = 'rpl-ink';
+    var size = Math.max(r.width, r.height);
+    ink.style.cssText = 'width:' + size + 'px;height:' + size + 'px;' +
+      'left:' + (e.clientX - r.left - size/2) + 'px;' +
+      'top:'  + (e.clientY - r.top  - size/2) + 'px;';
+    btn.appendChild(ink);
+    ink.addEventListener('animationend', function () { ink.remove(); });
+  });
+
+  /* ══════════════════════════════════════════════
+     MOBILE — TAP-TO-COPY EMAIL
+  ══════════════════════════════════════════════ */
+  (function () {
+    var EMAIL = 'colewysopal@deltacapitaltrading.com';
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        /* on mobile, copy + show toast instead of opening mail app */
+        if (!navigator.clipboard) return;
+        /* only intercept if it looks like a touch device */
+        if (!window.matchMedia('(hover: none)').matches) return;
+        e.preventDefault();
+        haptic(10);
+        navigator.clipboard.writeText(EMAIL).then(function () {
+          showToast('EMAIL COPIED');
+        });
+      });
+    });
+  })();
+
+  /* ══════════════════════════════════════════════
+     MOBILE — STICKY SAVE CONTACT
+  ══════════════════════════════════════════════ */
+  (function () {
+    var stk = document.getElementById('sticky-save');
+    var stkBtn = document.getElementById('sticky-save-btn');
+    var hero = document.querySelector('.hero');
+    var cta  = document.querySelector('.cta');
+    if (!stk || !hero || !stkBtn) return;
+
+    function check() {
+      var heroBottom = hero.getBoundingClientRect().bottom;
+      var ctaTop = cta ? cta.getBoundingClientRect().top : Infinity;
+      var winH = window.innerHeight;
+      if (heroBottom < 0 && ctaTop > winH) {
+        stk.classList.add('up');
+        stk.classList.remove('hide');
+      } else {
+        stk.classList.remove('up');
+      }
+    }
+    window.addEventListener('scroll', check, { passive: true });
+
+    stkBtn.addEventListener('click', function () {
+      haptic(12);
+      saveContact();
+      stk.classList.remove('up');
+    });
+  })();
+
+  /* ══════════════════════════════════════════════
+     MOBILE — HAPTIC ON SAVE / SHARE
+  ══════════════════════════════════════════════ */
+  (function () {
+    var sb = document.getElementById('saveBtn');
+    if (sb) sb.addEventListener('pointerdown', function () { haptic(10); });
+    var sh = document.getElementById('shareBtn');
+    if (sh) sh.addEventListener('pointerdown', function () { haptic(8); });
+    /* QA buttons */
+    document.querySelectorAll('.qa-btn').forEach(function (el) {
+      el.addEventListener('pointerdown', function () { haptic(6); });
+    });
+  })();
+
+  /* ══════════════════════════════════════════════
+     MOBILE — SHAKE TO FLIP CARD
+  ══════════════════════════════════════════════ */
+  (function () {
+    var last = { x: null, y: null, z: null };
+    var lastShake = 0;
+    var THRESH = 18;
+    window.addEventListener('devicemotion', function (e) {
+      var a = e.accelerationIncludingGravity;
+      if (!a) return;
+      if (last.x === null) { last.x = a.x; last.y = a.y; last.z = a.z; return; }
+      var delta = Math.abs(a.x - last.x) + Math.abs(a.y - last.y) + Math.abs(a.z - last.z);
+      last.x = a.x; last.y = a.y; last.z = a.z;
+      var now = Date.now();
+      if (delta > THRESH && now - lastShake > 1200) {
+        lastShake = now;
+        haptic([12, 60, 12]);
+        /* flip the card by toggling its _flipTarget */
+        var cardFlip = document.querySelector('.card-flip');
+        if (cardFlip) {
+          cardFlip._flipTarget = cardFlip._flipTarget ? 0 : 180;
+          var stateEl = document.getElementById('card-state');
+          if (stateEl) stateEl.textContent = cardFlip._flipTarget ? 'back' : 'front';
+        }
+        showToast('SHAKE DETECTED — CARD FLIPPED', 1400);
+      }
+    }, { passive: true });
   })();
 
   /* ══════════════════════════════════════════════

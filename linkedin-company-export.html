@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Delta Capital — LinkedIn Assets Export</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: #0e0e10;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      color: rgba(255,255,255,0.4);
+      padding: 60px 48px;
+      display: flex; flex-direction: column; gap: 64px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300; font-size: 2rem;
+      color: rgba(255,255,255,0.82); letter-spacing: -0.01em;
+    }
+    .subtitle { font-size: 0.6rem; letter-spacing: 2.5px; margin-top: 8px; color: rgba(255,255,255,0.22); }
+    .rule { width: 100%; height: 1px; background: rgba(255,255,255,0.07); flex-shrink: 0; }
+    .asset-block { display: flex; flex-direction: column; gap: 14px; }
+    .asset-label {
+      font-size: 0.6rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+    }
+    .asset-label span { color: rgba(255,255,255,0.12); white-space: nowrap; }
+    .asset-wrap { outline: 1px solid rgba(255,255,255,0.07); display: inline-block; line-height: 0; }
+    .hint {
+      font-size: 0.58rem; letter-spacing: 1.6px; line-height: 2.2;
+      color: rgba(255,255,255,0.16);
+      border-left: 1px solid rgba(255,255,255,0.07); padding-left: 16px;
+    }
+    .logo-row { display: flex; gap: 32px; align-items: flex-start; }
+    .logo-size { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+    .logo-size .asset-label { font-size: 0.52rem; }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h1>Delta Capital · LinkedIn Assets</h1>
+    <p class="subtitle">COMPANY PAGE · GRAPHICAL ASSETS · EXPORT GUIDE</p>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ═══════════════════════════════════════════
+       1. COMPANY PROFILE LOGO  300 × 300
+  ═══════════════════════════════════════════ -->
+  <div class="asset-block">
+    <div class="asset-label">
+      Company Profile Logo
+      <span>300 × 300 · displayed circular on LinkedIn</span>
+    </div>
+    <div class="logo-row">
+
+      <div class="logo-size">
+        <div class="asset-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+            <defs>
+              <radialGradient id="logo-vig" cx="50%" cy="50%" r="70%">
+                <stop offset="0%"   stop-color="#141416"/>
+                <stop offset="100%" stop-color="#050508"/>
+              </radialGradient>
+            </defs>
+            <rect width="300" height="300" fill="#050508"/>
+            <rect width="300" height="300" fill="url(#logo-vig)" opacity="0.6"/>
+            <polygon points="150,44 262,252 38,252" fill="white"/>
+            <polygon points="150,90 216,220 84,220"
+                     fill="none" stroke="#0a0a0c" stroke-width="18" stroke-linejoin="miter"/>
+          </svg>
+        </div>
+        <p class="asset-label">300 × 300 (upload size)</p>
+      </div>
+
+      <div class="logo-size">
+        <div class="asset-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100" height="100" style="border-radius:4px">
+            <defs>
+              <radialGradient id="logo-vig2" cx="50%" cy="50%" r="70%">
+                <stop offset="0%"   stop-color="#141416"/>
+                <stop offset="100%" stop-color="#050508"/>
+              </radialGradient>
+            </defs>
+            <rect width="300" height="300" fill="#050508"/>
+            <rect width="300" height="300" fill="url(#logo-vig2)" opacity="0.6"/>
+            <polygon points="150,44 262,252 38,252" fill="white"/>
+            <polygon points="150,90 216,220 84,220"
+                     fill="none" stroke="#0a0a0c" stroke-width="18" stroke-linejoin="miter"/>
+          </svg>
+        </div>
+        <p class="asset-label">100px (page header)</p>
+      </div>
+
+      <div class="logo-size">
+        <div class="asset-wrap" style="border-radius:50%; overflow:hidden;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="60" height="60">
+            <defs>
+              <radialGradient id="logo-vig3" cx="50%" cy="50%" r="70%">
+                <stop offset="0%"   stop-color="#141416"/>
+                <stop offset="100%" stop-color="#050508"/>
+              </radialGradient>
+            </defs>
+            <rect width="300" height="300" fill="#050508"/>
+            <rect width="300" height="300" fill="url(#logo-vig3)" opacity="0.6"/>
+            <polygon points="150,44 262,252 38,252" fill="white"/>
+            <polygon points="150,90 216,220 84,220"
+                     fill="none" stroke="#0a0a0c" stroke-width="18" stroke-linejoin="miter"/>
+          </svg>
+        </div>
+        <p class="asset-label">60px (feed, circular)</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ═══════════════════════════════════════════
+       2. COMPANY BANNER  1128 × 191
+  ═══════════════════════════════════════════ -->
+  <div class="asset-block">
+    <div class="asset-label">
+      Company Page Cover / Banner
+      <span>1128 × 191 · LinkedIn Company Page cover photo</span>
+    </div>
+    <div class="asset-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1128 191" width="1128" height="191">
+        <defs>
+          <pattern id="ban-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+            <circle cx="14" cy="14" r="0.85" fill="rgba(255,255,255,0.055)"/>
+          </pattern>
+          <radialGradient id="ban-glow" cx="80%" cy="50%" r="40%">
+            <stop offset="0%"   stop-color="rgba(255,255,255,0.018)"/>
+            <stop offset="100%" stop-color="rgba(5,5,8,0)"/>
+          </radialGradient>
+        </defs>
+        <rect width="1128" height="191" fill="#050508"/>
+        <rect width="1128" height="191" fill="url(#ban-dots)"/>
+        <rect width="1128" height="191" fill="url(#ban-glow)"/>
+        <!-- Ghost triangles -->
+        <polygon points="960,10 1118,182 802,182" fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1.2"/>
+        <polygon points="960,28 1100,170 820,170" fill="none" stroke="rgba(255,255,255,0.032)" stroke-width="1"/>
+        <polygon points="960,46 1082,158 838,158" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="1"/>
+        <polygon points="960,64 1064,146 856,146" fill="none" stroke="rgba(255,255,255,0.010)" stroke-width="1"/>
+        <!-- Vertical divider -->
+        <line x1="720" y1="22" x2="720" y2="169" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+        <!-- Top rule -->
+        <line x1="44" y1="22" x2="720" y2="22" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+        <!-- Δ mark -->
+        <polygon points="60,50 72,72 48,72" fill="white"/>
+        <polygon points="60,56 68,70 52,70" fill="none" stroke="#0a0a0c" stroke-width="5" stroke-linejoin="miter"/>
+        <!-- Wordmark -->
+        <text x="86" y="68" font-family="'Cormorant Garamond', Georgia, serif" font-weight="300" font-size="26" fill="rgba(255,255,255,0.92)" letter-spacing="0.5">Delta Capital</text>
+        <!-- Identifier -->
+        <text x="86" y="82" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="7" letter-spacing="2.8" fill="rgba(255,255,255,0.22)">TRADING · QUANTITATIVE · SYSTEMATIC</text>
+        <!-- Rule -->
+        <line x1="44" y1="100" x2="600" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <!-- Tagline -->
+        <text x="44" y="125" font-family="'Cormorant Garamond', Georgia, serif" font-weight="300" font-style="italic" font-size="15.5" fill="rgba(255,255,255,0.40)">Building quantitative trading systems with mathematical discipline.</text>
+        <!-- Principles -->
+        <text x="44"  y="148" font-family="'JetBrains Mono', monospace" font-size="7" letter-spacing="2.2" fill="rgba(255,255,255,0.18)">EVIDENCE OVER INTUITION</text>
+        <text x="248" y="148" font-family="'JetBrains Mono', monospace" font-size="7" letter-spacing="2.2" fill="rgba(255,255,255,0.10)">·</text>
+        <text x="264" y="148" font-family="'JetBrains Mono', monospace" font-size="7" letter-spacing="2.2" fill="rgba(255,255,255,0.14)">RISK FIRST</text>
+        <text x="352" y="148" font-family="'JetBrains Mono', monospace" font-size="7" letter-spacing="2.2" fill="rgba(255,255,255,0.10)">·</text>
+        <text x="368" y="148" font-family="'JetBrains Mono', monospace" font-size="7" letter-spacing="2.2" fill="rgba(255,255,255,0.14)">PATIENCE</text>
+        <!-- Bottom rule -->
+        <line x1="44" y1="164" x2="720" y2="164" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <!-- Footer -->
+        <text x="44"  y="179" font-family="'JetBrains Mono', monospace" font-size="7" letter-spacing="2.2" fill="rgba(255,255,255,0.14)">deltacapitaltrading.com</text>
+        <text x="698" y="179" font-family="'JetBrains Mono', monospace" font-size="7" letter-spacing="1.8" fill="rgba(255,255,255,0.08)" text-anchor="end">NFC/01</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ═══════════════════════════════════════════
+       3. POST TEMPLATE  1200 × 627
+  ═══════════════════════════════════════════ -->
+  <div class="asset-block">
+    <div class="asset-label">
+      Post / Content Image Template
+      <span>1200 × 627 · standard LinkedIn post image (1.91:1)</span>
+    </div>
+    <div class="asset-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 627" width="1200" height="627">
+        <defs>
+          <pattern id="post-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+            <circle cx="14" cy="14" r="0.9" fill="rgba(255,255,255,0.052)"/>
+          </pattern>
+          <radialGradient id="post-glow" cx="50%" cy="50%" r="38%">
+            <stop offset="0%"   stop-color="rgba(255,255,255,0.03)"/>
+            <stop offset="100%" stop-color="rgba(5,5,8,0)"/>
+          </radialGradient>
+        </defs>
+        <rect width="1200" height="627" fill="#050508"/>
+        <rect width="1200" height="627" fill="url(#post-dots)"/>
+        <!-- Concentric ghost triangles -->
+        <polygon points="600,80 1070,580 130,580"  fill="none" stroke="rgba(255,255,255,0.040)" stroke-width="1.2"/>
+        <polygon points="600,118 1042,562 158,562" fill="none" stroke="rgba(255,255,255,0.028)" stroke-width="1"/>
+        <polygon points="600,156 1014,544 186,544" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="1"/>
+        <polygon points="600,194 986,526 214,526"  fill="none" stroke="rgba(255,255,255,0.010)" stroke-width="1"/>
+        <polygon points="600,232 958,508 242,508"  fill="none" stroke="rgba(255,255,255,0.006)" stroke-width="1"/>
+        <rect width="1200" height="627" fill="url(#post-glow)"/>
+        <!-- Top rule -->
+        <line x1="60" y1="52" x2="1140" y2="52" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+        <!-- Δ mark top-left -->
+        <polygon points="76,32 90,58 62,58" fill="white"/>
+        <polygon points="76,37 86,55 66,55" fill="none" stroke="#0a0a0c" stroke-width="6" stroke-linejoin="miter"/>
+        <!-- Identifier -->
+        <text x="104" y="51" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="9" letter-spacing="3.5" fill="rgba(255,255,255,0.28)">DELTA CAPITAL</text>
+        <!-- Live dot -->
+        <circle cx="1116" cy="44" r="2.4" fill="rgba(255,255,255,0.38)"/>
+        <text x="1104" y="49" font-family="'JetBrains Mono', monospace" font-size="7.5" letter-spacing="2.2" fill="rgba(255,255,255,0.18)" text-anchor="end">LIVE</text>
+        <!-- Large Δ mark center -->
+        <polygon points="600,196 760,456 440,456" fill="white"/>
+        <polygon points="600,240 736,440 464,440" fill="none" stroke="#050508" stroke-width="28" stroke-linejoin="miter"/>
+        <!-- Wordmark -->
+        <text x="600" y="520" font-family="'Cormorant Garamond', Georgia, serif" font-weight="300" font-size="48" fill="rgba(255,255,255,0.88)" text-anchor="middle" letter-spacing="1">Delta Capital</text>
+        <!-- Tagline -->
+        <text x="600" y="558" font-family="'JetBrains Mono', monospace" font-size="9.5" letter-spacing="3" fill="rgba(255,255,255,0.26)" text-anchor="middle">BUILDING QUANTITATIVE TRADING SYSTEMS</text>
+        <!-- Bottom rule -->
+        <line x1="60" y1="588" x2="1140" y2="588" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <!-- Footer -->
+        <text x="60"   y="608" font-family="'JetBrains Mono', monospace" font-size="8" letter-spacing="2.2" fill="rgba(255,255,255,0.14)">deltacapitaltrading.com</text>
+        <text x="1140" y="608" font-family="'JetBrains Mono', monospace" font-size="8" letter-spacing="2" fill="rgba(255,255,255,0.08)" text-anchor="end">WITH MATHEMATICAL DISCIPLINE</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="hint">
+    EXPORT TO PNG (LinkedIn requires PNG or JPG — not SVG)<br><br>
+    1. Open this file in Chrome (double-click it, or drag into Chrome)<br>
+    2. Make sure zoom is 100% — Cmd+0 on Mac<br>
+    3. Right-click any asset → "Save image as…" → save as PNG<br>
+    &nbsp;&nbsp;&nbsp;or use Cmd+Shift+4 to screenshot a specific asset at exact pixel dimensions<br><br>
+    LINKEDIN UPLOAD SPECS<br><br>
+    Logo:   300 × 300 · PNG · max 4 MB<br>
+    Banner: 1128 × 191 · PNG or JPG · max 4 MB<br>
+    Post:   1200 × 627 · PNG or JPG
+  </div>
+
+</body>
+</html>

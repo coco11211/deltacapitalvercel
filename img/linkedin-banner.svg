@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396" width="1584" height="396">
+  <title>Cole Wysopal — LinkedIn Banner</title>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=JetBrains+Mono:wght@300;400&amp;display=swap');
+    </style>
+
+    <!-- Dot grid -->
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="0.9" fill="rgba(255,255,255,0.055)"/>
+    </pattern>
+
+    <!-- Right-side vignette so the ghost triangles fade in from center -->
+    <radialGradient id="rGlow" cx="78%" cy="50%" r="46%" fx="78%" fy="50%">
+      <stop offset="0%"   stop-color="rgba(255,255,255,0.025)"/>
+      <stop offset="100%" stop-color="rgba(5,5,8,0)"/>
+    </radialGradient>
+
+    <!-- Left-edge guard (keeps profile-pic zone visually clean) -->
+    <linearGradient id="leftGuard" x1="0%" y1="0%" x2="6%" y2="0%">
+      <stop offset="0%"   stop-color="#050508"/>
+      <stop offset="100%" stop-color="rgba(5,5,8,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ── BACKGROUND ── -->
+  <rect width="1584" height="396" fill="#050508"/>
+  <rect width="1584" height="396" fill="url(#dots)"/>
+
+  <!-- ── DECORATIVE Δ TRIANGLES (right panel) ── -->
+  <!-- outermost, most faint -->
+  <polygon points="1272,36 1558,364 986,364"
+           fill="none" stroke="rgba(255,255,255,0.048)" stroke-width="1.2"/>
+  <polygon points="1272,72 1530,348 1014,348"
+           fill="none" stroke="rgba(255,255,255,0.030)" stroke-width="1"/>
+  <polygon points="1272,108 1502,332 1042,332"
+           fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="1"/>
+  <polygon points="1272,144 1474,316 1070,316"
+           fill="none" stroke="rgba(255,255,255,0.010)" stroke-width="1"/>
+  <!-- subtle glow fill -->
+  <rect x="880" y="0" width="704" height="396" fill="url(#rGlow)"/>
+
+  <!-- ── VERTICAL DIVIDER ── -->
+  <line x1="884" y1="44" x2="884" y2="356"
+        stroke="rgba(255,255,255,0.07)" stroke-width="0.6"/>
+
+  <!-- ── HEADER ROW ── -->
+  <!-- Delta logo mark: filled white triangle -->
+  <polygon points="78,60 96,92 60,92" fill="white"/>
+  <!-- Dark Δ glyph inside -->
+  <text x="78" y="88"
+        font-family="Georgia, serif"
+        font-size="19" font-weight="400"
+        fill="#0a0a0d" text-anchor="middle">Δ</text>
+
+  <!-- Company identifier -->
+  <text x="110" y="84"
+        font-family="'JetBrains Mono', 'Courier New', monospace"
+        font-size="9.5" letter-spacing="3.8"
+        fill="rgba(255,255,255,0.28)">DELTA CAPITAL TRADING</text>
+
+  <!-- Status dot + label (top right of left panel) -->
+  <circle cx="856" cy="76" r="2.4" fill="rgba(255,255,255,0.42)"/>
+  <text x="844" y="81"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7.5" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.18)" text-anchor="end">LIVE</text>
+
+  <!-- ── HORIZONTAL RULE (under header) ── -->
+  <line x1="60" y1="112" x2="884" y2="112"
+        stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- ── NAME ── -->
+  <text x="60" y="237"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="300" font-size="104"
+        fill="rgba(255,255,255,0.93)"
+        letter-spacing="-0.5">Cole Wysopal</text>
+
+  <!-- ── ROLE ── -->
+  <text x="62" y="278"
+        font-family="'JetBrains Mono', 'Courier New', monospace"
+        font-size="10" letter-spacing="3.6"
+        fill="rgba(255,255,255,0.28)">CHIEF EXECUTIVE OFFICER  /  FOUNDER</text>
+
+  <!-- ── RULE (mid) ── -->
+  <line x1="60" y1="304" x2="660" y2="304"
+        stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- ── TAGLINE ── -->
+  <text x="60" y="332"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="300" font-style="italic"
+        font-size="17" fill="rgba(255,255,255,0.38)">Building systems that operate under adversarial conditions.</text>
+
+  <!-- ── BOTTOM RULE ── -->
+  <line x1="60" y1="358" x2="884" y2="358"
+        stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- ── FOOTER METADATA ── -->
+  <text x="60" y="378"
+        font-family="'JetBrains Mono', monospace"
+        font-size="8" letter-spacing="2.4"
+        fill="rgba(255,255,255,0.15)">deltacapitaltrading.com</text>
+  <text x="856" y="378"
+        font-family="'JetBrains Mono', monospace"
+        font-size="8" letter-spacing="2"
+        fill="rgba(255,255,255,0.10)" text-anchor="end">NFC/01</text>
+
+  <!-- ── LEFT EDGE GUARD (keeps bottom-left clean under profile pic) ── -->
+  <rect x="0" y="0" width="96" height="396" fill="url(#leftGuard)"/>
+</svg>

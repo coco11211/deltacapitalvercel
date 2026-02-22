@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LinkedIn Banner Export — Cole Wysopal</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background: #111; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 16px; }
+    .label { font-family: monospace; font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.3); text-transform: uppercase; }
+    .banner-wrap {
+      width: 1584px;
+      height: 396px;
+      overflow: hidden;
+      outline: 1px solid rgba(255,255,255,0.08);
+    }
+    .banner-wrap img { display: block; width: 1584px; height: 396px; }
+    .hint { font-family: monospace; font-size: 10px; letter-spacing: 1.5px; color: rgba(255,255,255,0.18); max-width: 600px; text-align: center; line-height: 1.8; }
+  </style>
+</head>
+<body>
+  <p class="label">LinkedIn Banner · 1584 × 396</p>
+  <div class="banner-wrap">
+    <img src="/img/linkedin-banner.svg" alt="LinkedIn Banner">
+  </div>
+  <p class="hint">
+    To export: open this page in Chrome → zoom to 100% → screenshot the banner above.<br>
+    Or right-click the image and "Save image as…" to get the SVG directly.
+  </p>
+</body>
+</html>

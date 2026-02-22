@@ -1,0 +1,14 @@
+{
+  "name": "deltacapital-newsletter",
+  "version": "1.0.0",
+  "description": "Secure newsletter backend for Delta Capital",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.7",
+    "dotenv": "^16.3.1"
+  }
+}

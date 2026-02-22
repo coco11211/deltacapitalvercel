@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 627" width="1200" height="627">
+  <title>Delta Capital — LinkedIn Post Template</title>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=JetBrains+Mono:wght@300;400&amp;display=swap');
+    </style>
+
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="0.9" fill="rgba(255,255,255,0.052)"/>
+    </pattern>
+
+    <!-- Central glow behind the Δ mark -->
+    <radialGradient id="cGlow" cx="50%" cy="50%" r="38%">
+      <stop offset="0%"   stop-color="rgba(255,255,255,0.03)"/>
+      <stop offset="100%" stop-color="rgba(5,5,8,0)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="627" fill="#050508"/>
+  <rect width="1200" height="627" fill="url(#dots)"/>
+
+  <!-- ── DECORATIVE CONCENTRIC Δ TRIANGLES (background) ── -->
+  <!-- Centered: apex (600, 80), base (130, 580) (1070, 580) -->
+  <polygon points="600,80 1070,580 130,580"
+           fill="none" stroke="rgba(255,255,255,0.040)" stroke-width="1.2"/>
+  <polygon points="600,118 1042,562 158,562"
+           fill="none" stroke="rgba(255,255,255,0.028)" stroke-width="1"/>
+  <polygon points="600,156 1014,544 186,544"
+           fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="1"/>
+  <polygon points="600,194 986,526 214,526"
+           fill="none" stroke="rgba(255,255,255,0.010)" stroke-width="1"/>
+  <polygon points="600,232 958,508 242,508"
+           fill="none" stroke="rgba(255,255,255,0.006)" stroke-width="1"/>
+
+  <!-- Central glow -->
+  <rect width="1200" height="627" fill="url(#cGlow)"/>
+
+  <!-- ── TOP BAR ── -->
+  <line x1="60" y1="52" x2="1140" y2="52"
+        stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- Δ mark top-left -->
+  <polygon points="76,32 90,58 62,58" fill="white"/>
+  <polygon points="76,37 86,55 66,55"
+           fill="none" stroke="#0a0a0c" stroke-width="6" stroke-linejoin="miter"/>
+
+  <!-- Company identifier -->
+  <text x="104" y="51"
+        font-family="'JetBrains Mono', 'Courier New', monospace"
+        font-size="9" letter-spacing="3.5"
+        fill="rgba(255,255,255,0.28)">DELTA CAPITAL</text>
+
+  <!-- Status dot + label top-right -->
+  <circle cx="1116" cy="44" r="2.4" fill="rgba(255,255,255,0.38)"/>
+  <text x="1104" y="49"
+        font-family="'JetBrains Mono', monospace"
+        font-size="7.5" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.18)" text-anchor="end">LIVE</text>
+
+  <!-- ── LARGE CENTER Δ MARK ── -->
+  <!-- Apex (600, 196), base (440, 456) (760, 456) -->
+  <polygon points="600,196 760,456 440,456" fill="white"/>
+  <!-- Inner outlined Δ -->
+  <polygon points="600,240 736,440 464,440"
+           fill="none" stroke="#050508" stroke-width="28" stroke-linejoin="miter"/>
+
+  <!-- ── WORDMARK below Δ ── -->
+  <text x="600" y="520"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-weight="300" font-size="48"
+        fill="rgba(255,255,255,0.88)"
+        text-anchor="middle" letter-spacing="1">Delta Capital</text>
+
+  <!-- ── TAGLINE ── -->
+  <text x="600" y="558"
+        font-family="'JetBrains Mono', monospace"
+        font-size="9.5" letter-spacing="3"
+        fill="rgba(255,255,255,0.26)"
+        text-anchor="middle">BUILDING QUANTITATIVE TRADING SYSTEMS</text>
+
+  <!-- ── BOTTOM RULE ── -->
+  <line x1="60" y1="588" x2="1140" y2="588"
+        stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+  <!-- ── FOOTER ── -->
+  <text x="60" y="608"
+        font-family="'JetBrains Mono', monospace"
+        font-size="8" letter-spacing="2.2"
+        fill="rgba(255,255,255,0.14)">deltacapitaltrading.com</text>
+  <text x="1140" y="608"
+        font-family="'JetBrains Mono', monospace"
+        font-size="8" letter-spacing="2"
+        fill="rgba(255,255,255,0.08)" text-anchor="end">WITH MATHEMATICAL DISCIPLINE</text>
+</svg>

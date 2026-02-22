@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <title>Delta Capital — LinkedIn Company Logo</title>
+  <defs>
+    <!-- Subtle vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="#141416"/>
+      <stop offset="100%" stop-color="#050508"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="300" height="300" fill="#050508"/>
+  <rect width="300" height="300" fill="url(#vignette)" opacity="0.6"/>
+
+  <!-- Outer white filled triangle (the mark) -->
+  <!-- Apex: (150, 44) · Base: (38, 252) to (262, 252) -->
+  <polygon points="150,44 262,252 38,252" fill="white"/>
+
+  <!-- Inner dark outlined Δ — outline triangle, no fill -->
+  <!-- Inset ~26px from outer: apex (150,90) base (84,220) (216,220) -->
+  <polygon points="150,90 216,220 84,220"
+           fill="none" stroke="#0a0a0c" stroke-width="18" stroke-linejoin="miter"/>
+</svg>
