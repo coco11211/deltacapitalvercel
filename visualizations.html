@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Screener &mdash; Delta Capital</title>
-  <meta name="description" content="Delta Capital — Market Screener & Sentiment">
+  <title>Market Visualizations &mdash; Delta Capital</title>
+  <meta name="description" content="Interactive market visualizations for quantitative trading: volatility heatmaps, correlation networks, performance charts, and regime analysis.">
   <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -12,18 +12,18 @@
   <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
   <link rel="manifest" href="/img/manifest.json">
   <meta name="theme-color" content="#111111">
-  <link rel="canonical" href="https://deltacapitaltrading.com/screener">
-  <meta property="og:title" content="Screener — Delta Capital">
-  <meta property="og:description" content="Real-time market data, screening, and sentiment analysis.">
+  <link rel="canonical" href="https://deltacapitaltrading.com/visualizations">
+  <meta property="og:title" content="Market Visualizations — Delta Capital">
+  <meta property="og:description" content="Interactive visualizations for quantitative trading analysis: volatility patterns, correlation networks, and market regime insights.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Delta Capital">
-  <meta property="og:url" content="https://deltacapitaltrading.com/screener.html">
+  <meta property="og:url" content="https://deltacapitaltrading.com/visualizations.html">
   <meta property="og:image" content="https://deltacapitaltrading.com/img/og-default.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Screener — Delta Capital">
-  <meta name="twitter:description" content="Real-time market data, screening, and sentiment analysis.">
+  <meta name="twitter:title" content="Market Visualizations — Delta Capital">
+  <meta name="twitter:description" content="Interactive visualizations for quantitative trading analysis: volatility patterns, correlation networks, and market regime insights.">
   <meta name="twitter:image" content="https://deltacapitaltrading.com/img/og-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,35 +53,111 @@
     <section class="section" style="min-height: auto; padding-bottom: 4vh;">
       <div class="section-inner">
         <div class="reveal">
-          <span class="section-label">Market Data</span>
+          <span class="section-label">Market Analysis</span>
           <div class="divider"></div>
-          <h1>Screener</h1>
+          <h1>Market Visualizations</h1>
           <p style="margin-top: 2vh;">
-            Real-time market overview. Sort, filter, and screen across
-            our monitored universe of equities and indices.
+            Interactive visualizations for quantitative trading analysis. Explore volatility patterns, 
+            correlation networks, and market regime insights to enhance your trading decisions.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Sentiment -->
-    <section class="section section--compact" style="padding-top: 0;">
+    <!-- Volatility Heatmap -->
+    <section class="section">
       <div class="section-inner">
         <div class="reveal">
-          <span class="section-label">Market Sentiment</span>
+          <span class="section-label">Volatility Analysis</span>
           <div class="divider"></div>
         </div>
-        <div id="sentiment-gauge" class="reveal" style="transition-delay: 0.15s;"></div>
+        <div class="reveal" style="margin-top: 3vh;">
+          <div class="card">
+            <div class="card-icon">🌊</div>
+            <h3>Volatility Heatmap</h3>
+            <p>Visualize volatility patterns across different asset classes, timeframes, and market conditions.</p>
+            <div class="visualization-grid">
+              <div class="viz-item">
+                <div class="viz-header">30-Day Rolling Volatility</div>
+                <div class="viz-content">
+                  <canvas id="volatility-heatmap" width="800" height="400"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Screener -->
-    <section class="section section--compact" style="padding-top: 2vh;">
-      <div class="section-inner" style="max-width: 1400px;">
+    <!-- Correlation Networks -->
+    <section class="section section--alt">
+      <div class="section-inner">
         <div class="reveal">
-          <span class="section-label">Equity Screener</span>
+          <span class="section-label">Correlation Analysis</span>
           <div class="divider"></div>
         </div>
+        <div class="reveal" style="margin-top: 3vh;">
+          <div class="card">
+            <div class="card-icon">🔄</div>
+            <h3>Correlation Networks</h3>
+            <p>Interactive network showing relationships between assets and market regimes.</p>
+            <div class="viz-grid">
+              <div class="viz-item">
+                <div class="viz-header">Asset Correlation Matrix</div>
+                <div class="viz-content">
+                  <canvas id="correlation-network" width="800" height="400"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Visualization -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Performance Analysis</span>
+          <div class="divider"></div>
+        </div>
+        <div class="reveal" style="margin-top: 3vh;">
+          <div class="card">
+            <div class="card-icon">📈</div>
+            <h3>Performance Attribution</h3>
+            <p>Detailed breakdown of strategy performance and risk-adjusted returns.</p>
+            <div class="viz-grid">
+              <div class="viz-item">
+                <div class="viz-header">Risk-Adjusted Returns</div>
+                <div class="viz-content">
+                  <canvas id="performance-chart" width="800" height="400"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Market Regimes -->
+    <section class="section section--compact">
+      <div class="section-inner">
+        <div class="reveal">
+          <span class="section-label">Regime Detection</span>
+          <div class="divider"></div>
+        </div>
+        <div class="reveal" style="margin-top: 2vh;">
+          <div class="card card--center">
+            <div class="card-icon">🎯</div>
+            <h3>Market Regime Analysis</h3>
+            <p>Identify current market conditions and historical regime patterns to inform strategy selection.</p>
+            <div class="viz-content">
+              <canvas id="regime-chart" width="800" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
         <div class="screener-controls reveal" style="transition-delay: 0.1s;">
           <div class="screener-search-wrap">
@@ -133,15 +209,20 @@
 
     <footer class="page-footer">
       <nav class="footer-nav">
-        <a href="/">Philosophy</a>
-        <a href="/research">Research</a>
-        <a href="/risk">Risk</a>
-        <a href="/architecture">Architecture</a>
-        <a href="/insights">Insights</a>
+        <a href="/" class="active">Home</a>
         <a href="/principles">Principles</a>
-        <a href="/screener" class="active">Screener</a>
+        <a href="/mission">Mission</a>
+        <a href="/screener">Screener</a>
+        <a href="/tools">Tools</a>
+        <a href="/blog">Blog</a>
+        <a href="/glossary">Glossary</a>
+        <a href="/calculators">Calculators</a>
+        <a href="/simulator">Strategy Simulator</a>
+        <a href="/visualizations">Visualizations</a>
         <a href="/disclosures">Disclosures</a>
         <a href="/faq">Questions</a>
+        <a href="/careers">Careers</a>
+        <a href="/newsletter">Updates</a>
         <a href="/contact">Contact</a>
       </nav>
       <div class="footer-bottom">
