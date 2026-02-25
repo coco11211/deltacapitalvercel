@@ -587,8 +587,8 @@
     // 1. Pick a new passcode
     // 2. Run: sha256("yournewpasscode") and replace the hash below
     // Current passcode hash — change before deploying:
-    const HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
-    // ^ This is the hash of "admin" — change this before deploying
+    const HASH = '322eca89fc86d5e651343bdbfff677f6fffe6ee1b1b5dfb1e20c9378225af441';
+    // ^ This is the hash of "dcap"
 
     async function sha256(str) {
       const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
