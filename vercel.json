@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "hub.deltacapitaltrading.com" }],
+      "destination": "/portal"
+    },
+    {
       "source": "/:path((?!api).*)",
       "destination": "/:path"
     }
