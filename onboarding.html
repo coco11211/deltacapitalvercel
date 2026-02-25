@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Onboarding &mdash; Delta Capital</title>
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="manifest" href="/img/manifest.json">
+  <meta name="theme-color" content="#050508">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #050508;
+      --fg:       rgba(255,255,255,.88);
+      --dim:      rgba(255,255,255,.28);
+      --faint:    rgba(255,255,255,.08);
+      --border:   rgba(255,255,255,.08);
+      --mono:     'JetBrains Mono', 'Courier New', monospace;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { font-size:16px; -webkit-text-size-adjust:100%; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--mono);
+      font-weight: 300;
+      min-height: 100svh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Lock screen ─────────────────────────────────────────────── */
+    #lock {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--bg);
+      z-index: 999;
+      gap: 0;
+      transition: opacity .4s ease;
+    }
+    #lock.fade-out { opacity: 0; pointer-events: none; }
+
+    .lock-delta {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 5rem);
+      color: rgba(255,255,255,.06);
+      margin-bottom: 2.4rem;
+      user-select: none;
+    }
+    .lock-label {
+      font-size: .62rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 1.6rem;
+    }
+    .lock-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem;
+      width: 100%;
+      max-width: 280px;
+    }
+    .lock-input {
+      width: 100%;
+      background: var(--faint);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      font-family: var(--mono);
+      font-size: .8rem;
+      letter-spacing: .08em;
+      padding: .75rem 1rem;
+      outline: none;
+      text-align: center;
+      transition: border-color .2s;
+    }
+    .lock-input:focus { border-color: rgba(255,255,255,.3); }
+    .lock-input.shake {
+      animation: shake .3s ease;
+      border-color: rgba(255,80,80,.5);
+    }
+    .lock-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .75rem 1rem;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .lock-btn:hover { border-color: rgba(255,255,255,.3); color: var(--fg); }
+    .lock-error {
+      font-size: .65rem;
+      color: rgba(255,80,80,.7);
+      letter-spacing: .06em;
+      height: .9rem;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    /* ── Main content ────────────────────────────────────────────── */
+    #main {
+      display: none;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 3rem) 5rem;
+    }
+    #main.visible { display: block; }
+
+    /* Header */
+    .ob-header {
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .ob-eyebrow {
+      font-size: .6rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 1rem;
+    }
+    .ob-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .ob-intro {
+      font-size: .8rem;
+      color: var(--dim);
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    /* Tool sections */
+    .tool-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .tool-section:last-of-type { border-bottom: none; }
+
+    .tool-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .tool-number {
+      font-size: .58rem;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.2);
+      min-width: 1.4rem;
+    }
+    .tool-name {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 300;
+    }
+    .tool-tag {
+      font-size: .58rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid var(--border);
+      padding: .2rem .6rem;
+      margin-left: auto;
+    }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 1.2rem; }
+    .step {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      font-size: .62rem;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,.18);
+      min-width: 1.4rem;
+      padding-top: .1rem;
+    }
+    .step-body { flex: 1; }
+    .step-title {
+      font-size: .78rem;
+      letter-spacing: .04em;
+      color: var(--fg);
+      margin-bottom: .3rem;
+    }
+    .step-desc {
+      font-size: .72rem;
+      color: var(--dim);
+      line-height: 1.75;
+    }
+    .step-desc a {
+      color: rgba(255,255,255,.55);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s, border-color .2s;
+    }
+    .step-desc a:hover { color: var(--fg); border-color: rgba(255,255,255,.4); }
+
+    /* Credential box */
+    .cred-box {
+      margin-top: .8rem;
+      background: var(--faint);
+      border: 1px solid var(--border);
+      padding: .9rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+    .cred-row {
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+      font-size: .68rem;
+    }
+    .cred-key {
+      color: rgba(255,255,255,.25);
+      letter-spacing: .06em;
+      min-width: 60px;
+    }
+    .cred-val { color: rgba(255,255,255,.7); }
+
+    /* Note box */
+    .note {
+      margin-top: 1.4rem;
+      border-left: 2px solid var(--border);
+      padding: .7rem 1rem;
+      font-size: .68rem;
+      color: var(--dim);
+      line-height: 1.75;
+    }
+    .note strong { color: rgba(255,255,255,.5); }
+
+    /* Divider rule */
+    .rule { height: 1px; background: var(--border); margin: 2rem 0; }
+
+    /* Footer */
+    .ob-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: .65rem;
+      color: rgba(255,255,255,.18);
+      letter-spacing: .06em;
+    }
+
+    @media (max-width: 480px) {
+      .tool-tag { display: none; }
+      .step { gap: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Lock Screen ─────────────────────────────────────────────── -->
+  <div id="lock">
+    <div class="lock-delta">&#916;</div>
+    <p class="lock-label">Delta Capital &nbsp;&middot;&nbsp; Internal Access</p>
+    <div class="lock-form">
+      <input
+        id="pw-input"
+        class="lock-input"
+        type="password"
+        placeholder="Enter passcode"
+        autocomplete="off"
+        spellcheck="false"
+      >
+      <div class="lock-error" id="pw-error"></div>
+      <button class="lock-btn" id="pw-btn">Enter &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Main Content ────────────────────────────────────────────── -->
+  <div id="main">
+
+    <div class="ob-header">
+      <p class="ob-eyebrow">Delta Capital &nbsp;&middot;&nbsp; Employee Onboarding</p>
+      <h1 class="ob-title">Welcome to the team.</h1>
+      <p class="ob-intro">
+        This guide walks you through accessing every tool we use day-to-day.
+        Follow each section in order. If anything is unclear or broken,
+        reach out to your manager directly.
+      </p>
+    </div>
+
+    <!-- ── 01 Email ───────────────────────────────────────────────── -->
+    <div class="tool-section">
+      <div class="tool-header">
+        <span class="tool-number">01</span>
+        <h2 class="tool-name">Email</h2>
+        <span class="tool-tag">Mail</span>
+      </div>
+      <div class="steps">
+
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <p class="step-title">Open the Mail app</p>
+            <p class="step-desc">
+              On macOS, open <strong>Mail</strong> (pre-installed). On iPhone or iPad,
+              open the built-in <strong>Mail</strong> app. We use Mail exclusively —
+              no third-party clients.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <p class="step-title">Add your account</p>
+            <p class="step-desc">
+              Go to <strong>Settings &rarr; Mail &rarr; Accounts &rarr; Add Account</strong>
+              (iOS) or <strong>Mail &rarr; Settings &rarr; Accounts &rarr; +</strong>
+              (macOS). Select <strong>Other</strong> when prompted for account type.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <p class="step-title">Enter your credentials</p>
+            <p class="step-desc">
+              Your work email address follows the format below. Your temporary
+              password will be provided separately by your manager.
+            </p>
+            <div class="cred-box">
+              <div class="cred-row">
+                <span class="cred-key">Email</span>
+                <span class="cred-val">yourname@deltacapitaltrading.com</span>
+              </div>
+              <div class="cred-row">
+                <span class="cred-key">Password</span>
+                <span class="cred-val">Provided by your manager</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <p class="step-title">Change your password</p>
+            <p class="step-desc">
+              You will be prompted to set a new password on first login.
+              Use a strong, unique password. Do not reuse passwords across accounts.
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <div class="note">
+        <strong>Why Mail?</strong> We use the native Mail app across all devices.
+        It is secure, integrated, and requires no additional software.
+        All company communications go through your
+        <strong>@deltacapitaltrading.com</strong> address.
+      </div>
+    </div>
+
+    <!-- ── 02 Slack ───────────────────────────────────────────────── -->
+    <div class="tool-section">
+      <div class="tool-header">
+        <span class="tool-number">02</span>
+        <h2 class="tool-name">Slack</h2>
+        <span class="tool-tag">Communications</span>
+      </div>
+      <div class="steps">
+
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <p class="step-title">Download Slack</p>
+            <p class="step-desc">
+              Download the Slack desktop app at
+              <a href="https://slack.com/downloads" target="_blank" rel="noopener">slack.com/downloads</a>.
+              Also install it on your phone. Use the apps — not the browser.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <p class="step-title">Sign in to the workspace</p>
+            <p class="step-desc">
+              Open Slack and click <strong>Sign in to a workspace</strong>.
+              You will receive an invitation link to your work email — click it
+              to join the Delta Capital workspace automatically.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <p class="step-title">Set up your profile</p>
+            <p class="step-desc">
+              Add your full name, job title, and a profile photo. This is how
+              the rest of the team identifies you. Keep it professional.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <p class="step-title">Join your channels</p>
+            <p class="step-desc">
+              You will be added to the relevant channels by your manager.
+              Check <strong>#general</strong> and <strong>#announcements</strong>
+              first. Do not create new channels without approval.
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <div class="note">
+        <strong>Slack is for internal use only.</strong> Do not share workspace
+        links, credentials, or channel contents externally. All company
+        communications are considered confidential.
+      </div>
+    </div>
+
+    <!-- ── 03 Notion ──────────────────────────────────────────────── -->
+    <div class="tool-section">
+      <div class="tool-header">
+        <span class="tool-number">03</span>
+        <h2 class="tool-name">Notion</h2>
+        <span class="tool-tag">Documentation</span>
+      </div>
+      <div class="steps">
+
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <p class="step-title">Create a Notion account</p>
+            <p class="step-desc">
+              Go to <a href="https://notion.so" target="_blank" rel="noopener">notion.so</a>
+              and sign up using your <strong>@deltacapitaltrading.com</strong>
+              email address. Do not use a personal email.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <p class="step-title">Accept the workspace invitation</p>
+            <p class="step-desc">
+              An invitation will be sent to your work email. Click
+              <strong>Accept Invite</strong> to join the Delta Capital workspace.
+              This gives you access to internal documentation, meeting notes,
+              templates, and project tracking.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <p class="step-title">Download the app</p>
+            <p class="step-desc">
+              Download the Notion desktop app at
+              <a href="https://notion.so/desktop" target="_blank" rel="noopener">notion.so/desktop</a>
+              and the mobile app from the App Store or Google Play.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <p class="step-title">Familiarize yourself with the workspace</p>
+            <p class="step-desc">
+              Start with the <strong>Start Here</strong> page pinned in the
+              sidebar. Do not edit or delete pages you did not create.
+              All documentation edits should be intentional and accurate.
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <div class="note">
+        Notion is our knowledge base. Meeting notes, documentation, templates,
+        project tracking, audits, and bookkeeping all live here.
+        Treat it as the source of truth.
+      </div>
+    </div>
+
+    <!-- ── 04 Jira ────────────────────────────────────────────────── -->
+    <div class="tool-section">
+      <div class="tool-header">
+        <span class="tool-number">04</span>
+        <h2 class="tool-name">Jira</h2>
+        <span class="tool-tag">Task Management</span>
+      </div>
+      <div class="steps">
+
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <p class="step-title">Create an Atlassian account</p>
+            <p class="step-desc">
+              Go to <a href="https://id.atlassian.com" target="_blank" rel="noopener">id.atlassian.com</a>
+              and create an account using your
+              <strong>@deltacapitaltrading.com</strong> email address.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <p class="step-title">Accept the Jira invitation</p>
+            <p class="step-desc">
+              An invitation to the Delta Capital Jira project will be sent to
+              your work email. Accept it to gain access to the board.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <p class="step-title">Review your assigned tasks</p>
+            <p class="step-desc">
+              Once in, go to <strong>My Work</strong> to see any tasks already
+              assigned to you. Tasks are assigned by your manager. Do not
+              reassign or close tasks without confirmation.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <p class="step-title">Understand the workflow</p>
+            <p class="step-desc">
+              Tasks move through: <strong>To Do &rarr; In Progress &rarr;
+              In Review &rarr; Done</strong>. Update your task status as you
+              work. Log time if applicable. Ask your manager if anything is
+              unclear before starting.
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <div class="note">
+        <strong>Jira is how work gets tracked.</strong> Every task, every
+        assignment, every deadline lives here. Keep your board current —
+        an accurate Jira is a functional team.
+      </div>
+    </div>
+
+    <!-- ── Footer ─────────────────────────────────────────────────── -->
+    <div class="ob-footer">
+      Delta Capital Trading &nbsp;&middot;&nbsp; Internal Use Only &nbsp;&middot;&nbsp; Do not share this page
+    </div>
+
+  </div>
+
+  <script>
+    // ── Password gate ─────────────────────────────────────────────
+    // SHA-256 hash of the passcode. To change the password:
+    // 1. Pick a new passcode
+    // 2. Run: sha256("yournewpasscode") and replace the hash below
+    // Current passcode hash — change before deploying:
+    const HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+    // ^ This is the hash of "admin" — change this before deploying
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+
+    const lock    = document.getElementById('lock');
+    const main    = document.getElementById('main');
+    const input   = document.getElementById('pw-input');
+    const btn     = document.getElementById('pw-btn');
+    const errEl   = document.getElementById('pw-error');
+
+    // Stay unlocked for the session
+    if (sessionStorage.getItem('dc_onboard') === '1') {
+      lock.style.display = 'none';
+      main.classList.add('visible');
+    }
+
+    async function attempt() {
+      const val = input.value.trim();
+      if (!val) return;
+      const hash = await sha256(val);
+      if (hash === HASH) {
+        sessionStorage.setItem('dc_onboard', '1');
+        lock.classList.add('fade-out');
+        setTimeout(() => {
+          lock.style.display = 'none';
+          main.classList.add('visible');
+        }, 400);
+      } else {
+        errEl.textContent = 'Incorrect passcode.';
+        input.classList.add('shake');
+        input.value = '';
+        setTimeout(() => input.classList.remove('shake'), 350);
+      }
+    }
+
+    btn.addEventListener('click', attempt);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') attempt(); });
+  </script>
+
+</body>
+</html>
