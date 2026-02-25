@@ -661,6 +661,107 @@
         </div>
       </div>
 
+      <!-- ── 05 Self-Hosted Tools (W.I.P.) ───────────────────────── -->
+      <div class="tool-section" style="position:relative;overflow:hidden;">
+
+        <!-- Construction tape borders -->
+        <div style="height:18px;background:repeating-linear-gradient(90deg,#f5c518 0px,#f5c518 20px,#111 20px,#111 40px);margin-bottom:1.2rem;border-radius:3px 3px 0 0;"></div>
+
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;background:#f5c518;color:#111;padding:.3rem .8rem;font-weight:600;text-transform:uppercase;">&#9888; Work in Progress</span>
+          <span style="font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;">Self-Hosted Infrastructure &mdash; Not Yet Deployed</span>
+        </div>
+
+        <h2 class="tool-name" style="display:flex;align-items:center;gap:.6rem;">
+          <span style="font-family:var(--mono);font-size:.7rem;color:var(--muted)">05</span>
+          Internal Hosted Tools
+          <span style="font-family:var(--mono);font-size:.6rem;background:#f5c518;color:#111;padding:.15rem .5rem;margin-left:.4rem;letter-spacing:.08em;font-weight:600;">COMING SOON</span>
+        </h2>
+
+        <p class="tool-desc">
+          The following tools will be self-hosted on Delta Capital's Proxmox infrastructure.
+          They are not yet live. This section will be updated with sign-in URLs, credentials,
+          and setup instructions once each service is deployed. Watch <strong>#announcements</strong>
+          on Slack for deployment updates.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.4rem;">
+
+          <!-- n8n -->
+          <div style="border:1px solid var(--border);border-top:3px solid #f5c518;padding:1.2rem;">
+            <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">Automation</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;">n8n</div>
+            <div style="font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.7rem;">Workflow automation, email triggers, webhook routing, and scheduled tasks. Used to automate internal operations.</div>
+            <div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);">URL: <span style="color:var(--dim)">n8n.deltacapitaltrading.com</span> &mdash; <span style="background:#f5c518;color:#111;padding:.1rem .4rem;font-size:.6rem;">Not Live</span></div>
+          </div>
+
+          <!-- Grafana -->
+          <div style="border:1px solid var(--border);border-top:3px solid #f5c518;padding:1.2rem;">
+            <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">Monitoring</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;">Grafana</div>
+            <div style="font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.7rem;">System and strategy monitoring dashboards. Infrastructure uptime, performance metrics, and trading system health.</div>
+            <div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);">URL: <span style="color:var(--dim)">grafana.deltacapitaltrading.com</span> &mdash; <span style="background:#f5c518;color:#111;padding:.1rem .4rem;font-size:.6rem;">Not Live</span></div>
+          </div>
+
+          <!-- ERPNext -->
+          <div style="border:1px solid var(--border);border-top:3px solid #f5c518;padding:1.2rem;">
+            <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">ERP / Accounting</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;">ERPNext</div>
+            <div style="font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.7rem;">Business operations, accounting, HR records, and vendor management. Replaces spreadsheet-based financial tracking.</div>
+            <div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);">URL: <span style="color:var(--dim)">erp.deltacapitaltrading.com</span> &mdash; <span style="background:#f5c518;color:#111;padding:.1rem .4rem;font-size:.6rem;">Not Live</span></div>
+          </div>
+
+          <!-- Keycloak -->
+          <div style="border:1px solid var(--border);border-top:3px solid #f5c518;padding:1.2rem;">
+            <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">Identity / SSO</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;">Keycloak</div>
+            <div style="font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.7rem;">Single sign-on for all internal systems. Once deployed, one Keycloak login will grant access to Grafana, ERPNext, Nextcloud, and more.</div>
+            <div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);">URL: <span style="color:var(--dim)">auth.deltacapitaltrading.com</span> &mdash; <span style="background:#f5c518;color:#111;padding:.1rem .4rem;font-size:.6rem;">Not Live</span></div>
+          </div>
+
+          <!-- Vaultwarden -->
+          <div style="border:1px solid var(--border);border-top:3px solid #f5c518;padding:1.2rem;">
+            <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">Password Manager</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;">Vaultwarden</div>
+            <div style="font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.7rem;">Self-hosted Bitwarden-compatible vault. All company passwords, API keys, and credentials stored here. Every team member will have an account.</div>
+            <div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);">URL: <span style="color:var(--dim)">vault.deltacapitaltrading.com</span> &mdash; <span style="background:#f5c518;color:#111;padding:.1rem .4rem;font-size:.6rem;">Not Live</span></div>
+          </div>
+
+          <!-- Nextcloud -->
+          <div style="border:1px solid var(--border);border-top:3px solid #f5c518;padding:1.2rem;">
+            <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">File Storage</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;">Nextcloud</div>
+            <div style="font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.7rem;">Self-hosted file storage and sharing. Replaces Google Drive or Dropbox. All company documents, research, and internal files stored here.</div>
+            <div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);">URL: <span style="color:var(--dim)">files.deltacapitaltrading.com</span> &mdash; <span style="background:#f5c518;color:#111;padding:.1rem .4rem;font-size:.6rem;">Not Live</span></div>
+          </div>
+
+          <!-- Openclaw -->
+          <div style="border:1px solid var(--border);border-top:3px solid #f5c518;padding:1.2rem;">
+            <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">AI / Automation</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;">Openclaw</div>
+            <div style="font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.7rem;">AI agent infrastructure used internally by engineering and operations. Handles automated research assistance, document drafting, and workflow automation.</div>
+            <div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);">URL: <span style="color:var(--dim)">Internal workspace</span> &mdash; <span style="background:#f5c518;color:#111;padding:.1rem .4rem;font-size:.6rem;">In Use</span></div>
+          </div>
+
+          <!-- Appflowy -->
+          <div style="border:1px solid var(--border);border-top:3px solid #f5c518;padding:1.2rem;">
+            <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">Wiki / Knowledge Base</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;">Appflowy</div>
+            <div style="font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:.7rem;">Self-hosted wiki and collaborative workspace. Replaces Notion. All internal documentation, meeting notes, and project wikis will live here once deployed.</div>
+            <div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);">URL: <span style="color:var(--dim)">wiki.deltacapitaltrading.com</span> &mdash; <span style="background:#f5c518;color:#111;padding:.1rem .4rem;font-size:.6rem;">Not Live</span></div>
+          </div>
+
+        </div>
+
+        <div style="margin-top:1.4rem;padding:1rem 1.2rem;background:var(--shade);border-left:3px solid #f5c518;font-size:.82rem;color:var(--dim);line-height:1.6;">
+          <strong style="color:var(--fg)">Deployment note:</strong> All self-hosted services require the Proxmox infrastructure build to be complete. Hardware is being procured post-raise. Target deployment window: Q2&ndash;Q3 2026. When each service goes live, this section will be updated with the actual sign-in URL, your username format, and any required setup steps. Watch <strong>#announcements</strong> on Slack.
+        </div>
+
+        <!-- Bottom construction tape -->
+        <div style="height:18px;background:repeating-linear-gradient(90deg,#f5c518 0px,#f5c518 20px,#111 20px,#111 40px);margin-top:1.2rem;border-radius:0 0 3px 3px;"></div>
+
+      </div>
+
       <div class="ob-footer">
         Delta Capital Trading &nbsp;&middot;&nbsp; Internal Use Only &nbsp;&middot;&nbsp; Do not share this page
       </div>
